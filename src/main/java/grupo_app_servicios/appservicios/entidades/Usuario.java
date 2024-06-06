@@ -15,7 +15,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class Usuario {
     @Id
     @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name="uuid", strategy = "uuid2")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String Id;
 
     @Column(unique = true)
@@ -27,6 +27,6 @@ public class Usuario {
     private Integer telefono;
     @Enumerated(EnumType.STRING)
     private Barrios barrios;
-    private boolean alta=true;
+    private boolean alta = true;
 
 }
