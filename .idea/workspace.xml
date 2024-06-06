@@ -5,12 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="168e6a0b-0f94-47ee-ba8d-5e111103ded4" name="Changes" comment="creando proyecto Spring boot">
-      <change afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/grupo_app_servicios/appservicios/entidades/Proveedor.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/grupo_app_servicios/appservicios/entidades/Servicio.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/grupo_app_servicios/appservicios/entidades/Solicitud.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/grupo_app_servicios/appservicios/entidades/Usuario.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/grupo_app_servicios/appservicios/entidades/Valoracion.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/grupo_app_servicios/appservicios/enumeraciones/Barrios.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="Enum" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -43,16 +57,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.AppserviciosApplication.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "Rama-luis",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Luismi/Documents/GitHub/WebApp_Servicios",
-    "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.AppserviciosApplication.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Rama-luis&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Luismi/Documents/GitHub/WebApp_Servicios&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -78,7 +92,15 @@
       <option name="project" value="LOCAL" />
       <updated>1717635117047</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="creando proyecto Spring boot">
+      <option name="closed" value="true" />
+      <created>1717635534604</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1717635534604</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
