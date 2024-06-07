@@ -7,10 +7,11 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 
 @Repository
-public interface UsuarioRepositorio extends JpaRepository<Usuario, String> {
+public interface UsuarioRepositorio extends JpaRepository<Usuario, UUID> {
 
     //busqueda por email
     @Query("SELECT u FROM Usuario u WHERE u.emailUser = :email")

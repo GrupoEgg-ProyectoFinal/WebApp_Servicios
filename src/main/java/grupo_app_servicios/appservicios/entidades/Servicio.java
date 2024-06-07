@@ -1,13 +1,14 @@
 package grupo_app_servicios.appservicios.entidades;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
+
+import java.util.UUID;
 
 @Entity
 @Data
@@ -15,8 +16,7 @@ import org.hibernate.annotations.GenericGenerator;
 @AllArgsConstructor
 public class Servicio {
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name="uuid", strategy = "uuid2")
-    private String Id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
     private String nombre;
 }
