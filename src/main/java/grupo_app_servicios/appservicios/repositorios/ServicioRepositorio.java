@@ -7,9 +7,10 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.UUID;
 
 @Repository
-public interface ServicioRepositorio extends JpaRepository<Servicio, String> {
+public interface ServicioRepositorio extends JpaRepository<Servicio, UUID> {
 
     // Búsqueda por nombre
     @Query("select s from Servicio s where s.nombre like %:nombre%")
