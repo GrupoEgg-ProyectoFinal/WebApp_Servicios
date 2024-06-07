@@ -31,8 +31,8 @@ public class Proveedor {
     private String apellido;
     @Column(nullable = false)
     private Integer telefono;
-    @Column(nullable = false, unique = true)
-    private Integer numeroMatricula;
+    @Column(unique = true)
+    private Integer matricula;
     @Column(nullable = false, unique = true)
     private String email;
     @Column(nullable = false)
@@ -45,8 +45,6 @@ public class Proveedor {
     private ImagenProveedor foto;
     @ManyToOne
     private Servicio servicio;
-    @OneToMany(mappedBy = "id_proveedor")
-    private List<Valoracion> valoraciones;
-    @OneToMany(mappedBy = "id_proveedor")
+    @OneToMany(mappedBy = "idProveedor")
     private List<Solicitud> solicitudes;
 }
