@@ -21,33 +21,33 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Proveedor {
-  @Id
-  @GeneratedValue(strategy = GenerationType.AUTO)
-  private UUID id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private UUID id;
 
-  // Campos que no deben ser nulos
-  @Column(nullable = false)
-  private String nombre;
-  @Column(nullable = false)
-  private String apellido;
-  @Column(nullable = false)
-  private Integer telefono;
-  @Column(nullable = false, unique = true)
-  private Integer numeroMatricula;
-  @Column(nullable = false, unique = true)
-  private String email;
-  @Column(nullable = false)
-  private String contrasena;
+    // Campos que no deben ser nulos
+    @Column(nullable = false)
+    private String nombre;
+    @Column(nullable = false)
+    private String apellido;
+    @Column(nullable = false)
+    private Integer telefono;
+    @Column(nullable = false, unique = true)
+    private Integer numeroMatricula;
+    @Column(nullable = false, unique = true)
+    private String email;
+    @Column(nullable = false)
+    private String contrasena;
 
-  private String descripcion;
-  
-  // Relaciones con entidades
-  @OneToOne
-  private ImagenProveedor foto;
-  @ManyToOne
-  private Servicio servicio;
-  @OneToMany(mappedBy = "id_proveedor")
-  private List<Valoracion> valoraciones;
-  @OneToMany(mappedBy = "id_proveedor")
-  private List<Solicitud> solicitudes;
+    private String descripcion;
+
+    // Relaciones con entidades
+    @OneToOne
+    private ImagenProveedor foto;
+    @ManyToOne
+    private Servicio servicio;
+    @OneToMany(mappedBy = "id_proveedor")
+    private List<Valoracion> valoraciones;
+    @OneToMany(mappedBy = "id_proveedor")
+    private List<Solicitud> solicitudes;
 }
