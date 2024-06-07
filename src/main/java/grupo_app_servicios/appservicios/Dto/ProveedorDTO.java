@@ -13,7 +13,7 @@ public class ProveedorDTO {
     private Integer telefono;
     private Integer matricula;
     private String email;
-    private String contraseña;
+    private String contrasena;
     private String descripcion;
     private ImagenProveedorDTO foto;
 
