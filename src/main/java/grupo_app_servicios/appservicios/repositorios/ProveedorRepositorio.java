@@ -14,7 +14,7 @@ import grupo_app_servicios.appservicios.entidades.Proveedor;
 public interface ProveedorRepositorio extends JpaRepository<Proveedor, UUID>{
 
   @Query("select p from Proveedor p where p.servicio.nombre = ?1")
-  public List<Proveedor> obtenerProveedoresPorServicio(String servicio);
+  public List<Proveedor> buscarProveedoresPorServicio(String servicio);
 
   /* Se repite la comparación que usa el OR ya que el valor de busqueda puede contener:
   solo el nombre, solo el apellido, (por eso los OR)
@@ -24,5 +24,5 @@ public interface ProveedorRepositorio extends JpaRepository<Proveedor, UUID>{
     " and " +
     "(p.nombre like %:busqueda% or p.apellido like %:busqueda%)"
   )
-  public List<Proveedor> obtenerProveedoresPorNombreYOApellido(@Param("busqueda") String busqueda);
+  public List<Proveedor> buscarProveedoresPorNombreYOApellido(@Param("busqueda") String busqueda);
 }
