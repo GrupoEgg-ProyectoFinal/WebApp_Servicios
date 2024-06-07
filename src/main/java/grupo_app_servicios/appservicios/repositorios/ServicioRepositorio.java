@@ -14,4 +14,4 @@ public interface ServicioRepositorio extends JpaRepository<Servicio, String> {
     // Búsqueda por nombre
     @Query("select s from Servicio s where s.nombre like %:nombre%")
     public List<Servicio> buscarPorNombre(@Param("nombre") String nombre);
-    }
+}
