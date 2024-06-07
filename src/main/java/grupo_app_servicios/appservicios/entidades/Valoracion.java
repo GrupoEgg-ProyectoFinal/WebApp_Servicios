@@ -16,9 +16,9 @@ public class Valoracion {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
-    private String comentario;
     @Column(nullable = false)
     private Integer puntaje;
 
+    private String comentario;
 
 }
