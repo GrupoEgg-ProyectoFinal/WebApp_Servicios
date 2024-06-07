@@ -32,7 +32,7 @@ public class Usuario {
     @Column(nullable = false)
     private Integer telefono;
     @Column(nullable = false)
-    private boolean estado;
+    private Boolean estado;
 
     @Enumerated(EnumType.STRING)
     private Rol rol;

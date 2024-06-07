@@ -15,7 +15,7 @@ public interface SolicitudRepositorio extends JpaRepository<Solicitud, UUID> {
     @Query("select p from Solicitud p where p.estado = ?1")
     public List<Solicitud> buscarSolicitudPorEstado(String estado);
 
-    @Query("select p from Solicitud p where p.valoracion.puntaje = ?1")
+    @Query("select p from Solicitud p where p.idValoracion.puntaje = ?1")
     public List<Solicitud> buscarSolicitudPorPuntaje(Integer puntaje);
 
 }
