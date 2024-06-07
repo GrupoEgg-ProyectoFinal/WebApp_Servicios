@@ -1,6 +1,5 @@
 package grupo_app_servicios.appservicios.entidades;
 
-
 import java.util.List;
 import java.util.UUID;
 
