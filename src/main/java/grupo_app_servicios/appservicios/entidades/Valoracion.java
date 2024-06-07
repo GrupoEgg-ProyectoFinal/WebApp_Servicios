@@ -17,13 +17,8 @@ public class Valoracion {
     private UUID id;
 
     private String comentario;
+    @Column(nullable = false)
+    private Integer puntaje;
 
-    @JoinColumn(nullable = false)
-    @ManyToOne
-    private Proveedor id_proveedor;
-
-    @JoinColumn(nullable = false)
-    @ManyToOne
-    private Usuario id_usuario;
 
 }

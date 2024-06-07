@@ -1,6 +1,5 @@
 package grupo_app_servicios.appservicios.entidades;
 
-
 import java.util.List;
 import java.util.UUID;
 
@@ -25,7 +24,6 @@ public class Proveedor {
   @GeneratedValue(strategy = GenerationType.AUTO)
   private UUID id;
 
-  // Campos que no deben ser nulos
   @Column(nullable = false)
   private String nombre;
   @Column(nullable = false)
@@ -33,21 +31,19 @@ public class Proveedor {
   @Column(nullable = false)
   private Integer telefono;
   @Column(nullable = false, unique = true)
-  private Integer numeroMatricula;
-  @Column(nullable = false, unique = true)
   private String email;
   @Column(nullable = false)
   private String contrasena;
 
   private String descripcion;
-  
+
   // Relaciones con entidades
   @OneToOne
   private ImagenProveedor foto;
+
   @ManyToOne
   private Servicio servicio;
-  @OneToMany(mappedBy = "id_proveedor")
-  private List<Valoracion> valoraciones;
-  @OneToMany(mappedBy = "id_proveedor")
+
+  @OneToMany(mappedBy = "idProveedor")
   private List<Solicitud> solicitudes;
 }

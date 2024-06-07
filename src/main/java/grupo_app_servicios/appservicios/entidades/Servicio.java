@@ -1,5 +1,6 @@
 package grupo_app_servicios.appservicios.entidades;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -18,5 +19,8 @@ public class Servicio {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+    
+    @Column(nullable = false)
     private String nombre;
+    private Boolean estado;
 }
