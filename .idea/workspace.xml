@@ -5,8 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="168e6a0b-0f94-47ee-ba8d-5e111103ded4" name="Changes" comment="creando proyecto Spring boot">
+      <change afterPath="$PROJECT_DIR$/src/main/java/grupo_app_servicios/appservicios/controladores/UsuarioControlador.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/grupo_app_servicios/appservicios/servicios/UsuarioServicio.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/grupo_app_servicios/appservicios/entidades/Servicio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/grupo_app_servicios/appservicios/entidades/Servicio.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/grupo_app_servicios/appservicios/entidades/Usuario.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/grupo_app_servicios/appservicios/entidades/Usuario.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,9 +18,9 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Enum" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -112,7 +114,23 @@
       <option name="project" value="LOCAL" />
       <updated>1717699965655</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="creando proyecto Spring boot">
+      <option name="closed" value="true" />
+      <created>1717723213630</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1717723213630</updated>
+    </task>
+    <task id="LOCAL-00007" summary="creando proyecto Spring boot">
+      <option name="closed" value="true" />
+      <created>1717723434219</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1717723434219</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
