@@ -43,7 +43,7 @@ public class OPCIONAL {
         newProveedor.setTelefono(proveedorDTO.getTelefono());
         newProveedor.setMatricula(proveedorDTO.getMatricula());
         newProveedor.setEmail(proveedorDTO.getEmail());
-        newProveedor.setContrasena(proveedorDTO.getContraseña());
+        newProveedor.setContrasena(proveedorDTO.getContrasena());
 
         // Asignar foto si está presente en el DTO
         if (proveedorDTO.getFoto() != null) {
@@ -99,7 +99,7 @@ public class OPCIONAL {
             proveedorExistente.setTelefono(proveedorDTO.getTelefono());
             proveedorExistente.setMatricula(proveedorDTO.getMatricula());
             proveedorExistente.setEmail(proveedorDTO.getEmail());
-            proveedorExistente.setContrasena(proveedorDTO.getContraseña());
+            proveedorExistente.setContrasena(proveedorDTO.getContrasena());
 
             // Asignar foto si está presente en el DTO
             if (proveedorDTO.getFoto() != null) {
