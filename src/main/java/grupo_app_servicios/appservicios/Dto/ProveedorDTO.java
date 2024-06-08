@@ -17,7 +17,7 @@ public class ProveedorDTO {
     private String contrasena;
     private String descripcion;
     private ImagenProveedorDTO foto;
+
     private ServicioDTO servicio;
     private List<SolicitudDTO> solicitudes;
-    
 }
