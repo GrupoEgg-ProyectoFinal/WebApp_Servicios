@@ -30,7 +30,7 @@ public class Usuario {
     @Enumerated(EnumType.STRING)
     private Barrios barrios;
     @Column(nullable = false)
-    private Integer telefono;
+    private Long telefono;
     @Column(nullable = false)
     private Boolean estado;
 

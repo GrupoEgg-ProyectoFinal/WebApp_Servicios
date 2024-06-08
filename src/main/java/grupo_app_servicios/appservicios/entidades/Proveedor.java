@@ -30,7 +30,7 @@ public class Proveedor {
     @Column(nullable = false)
     private String apellido;
     @Column(nullable = false)
-    private Integer telefono;
+    private Long telefono;
     @Column(unique = true)
     private Integer matricula;
     @Column(nullable = false, unique = true)

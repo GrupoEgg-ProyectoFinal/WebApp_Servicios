@@ -11,7 +11,7 @@ public class ProveedorDTO {
     private UUID id;
     private String nombre;
     private String apellido;
-    private Integer telefono;
+    private Long telefono;
     private Integer matricula;
     private String email;
     private String contrasena;
