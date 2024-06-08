@@ -1,5 +1,6 @@
 package grupo_app_servicios.appservicios.Dto;
 
+import java.util.List;
 import java.util.UUID;
 
 import lombok.Data;
@@ -13,8 +14,10 @@ public class ProveedorDTO {
     private Integer telefono;
     private Integer matricula;
     private String email;
-    private String contraseña;
+    private String contrasena;
     private String descripcion;
     private ImagenProveedorDTO foto;
 
+    private ServicioDTO servicio;
+    private List<SolicitudDTO> solicitudes;
 }
