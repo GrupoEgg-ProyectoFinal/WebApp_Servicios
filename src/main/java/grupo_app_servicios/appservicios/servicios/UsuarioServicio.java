@@ -3,6 +3,7 @@ package grupo_app_servicios.appservicios.servicios;
 
 import grupo_app_servicios.appservicios.Dto.UsuarioDTO;
 import grupo_app_servicios.appservicios.entidades.Usuario;
+import grupo_app_servicios.appservicios.enumeraciones.Rol;
 import grupo_app_servicios.appservicios.repositorios.UsuarioRepositorio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,8 +23,8 @@ public class UsuarioServicio {
         usuario.setContrasena(usuarioDTO.getContrasena());
         usuario.setBarrios(usuarioDTO.getBarrios());
         usuario.setTelefono(usuarioDTO.getTelefono());
-        usuario.setEstado(usuarioDTO.getEstado());
-        usuario.setRol(usuarioDTO.getRol());
+        usuario.setEstado(true);
+        usuario.setRol(Rol.USER);
 
         usuarioRepositorio.save(usuario);
     }
