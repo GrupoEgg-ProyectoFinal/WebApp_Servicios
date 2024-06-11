@@ -1,13 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/src/main/resources/static/style.css">
+    <title>Chacras de Coria Service</title>
+    <link rel="stylesheet" href="/estiloscss/style.css">
+    <!-- sript para logos y tipo de letra-->
+    <script src="https://kit.fontawesome.com/yourcode.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
 </head>
 <body>
-    
+
     <header>
         <nav class="navbar">
             <div class="logo-contenedor">
@@ -44,6 +49,8 @@
             </ul>
         </nav>
     </header>
+    <header th:replace ="fragments/navbar :: barraNavegacion"></header>
+    <header th:replace ="fragments/mainPrincipal :: ContenidoPrincipal"></header>
 
     <main>
         <!-- PÁGINA 1 'INICIO'-->
@@ -79,9 +86,6 @@
     <footer>
 
     </footer>
+    <!--correr spring terminal   ./mvnw spring-boot:run  -->
 </body>
 </html>
-
-
-
-
