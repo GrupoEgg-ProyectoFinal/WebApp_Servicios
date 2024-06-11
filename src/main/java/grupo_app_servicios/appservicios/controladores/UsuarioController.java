@@ -1,20 +1,21 @@
 package grupo_app_servicios.appservicios.controladores;
-
+import org.springframework.stereotype.Controller;
+/*
 import grupo_app_servicios.appservicios.Dto.UsuarioDTO;
 import grupo_app_servicios.appservicios.servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.springframework.stereotype.Controller;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import org.springframework.web.bind.annotation.RequestMapping;
-
+ */
 @Controller
 public class UsuarioController {
-
+/* 
     @Autowired
     private UsuarioServicio usuarioServicio;
 
@@ -29,8 +30,9 @@ public class UsuarioController {
         usuarioServicio.crearUsuario(usuarioDTO);
         return "redirect:/formulario";
     }
-}
+*/
 
+}
 
 // @Controller
 // @RequestMapping("/usuario")
