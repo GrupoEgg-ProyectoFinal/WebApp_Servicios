@@ -7,12 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.RequestMapping;
- */
+import java.util.UUID;
+
 @Controller
 public class UsuarioController {
 /* 
@@ -30,9 +28,18 @@ public class UsuarioController {
         usuarioServicio.crearUsuario(usuarioDTO);
         return "redirect:/formulario";
     }
-*/
-
+    @PostMapping("/modificarUsuario/{id}")
+    public String modificarUsuario(@PathVariable UUID id, @ModelAttribute UsuarioDTO usuarioDTO) {
+        usuarioServicio.modificarUsuario(id, usuarioDTO);
+        return "redirect:/formulario";
+    }
+    @PostMapping("/eliminarUsuario/{id}")
+    public String eliminarUsuario(@PathVariable UUID id) {
+        usuarioServicio.eliminarUsuario(id);
+        return "redirect:/formulario";
+    }
 }
+
 
 // @Controller
 // @RequestMapping("/usuario")
@@ -74,3 +81,4 @@ public class UsuarioController {
 
 // return "index.html";
 // }
+*/
