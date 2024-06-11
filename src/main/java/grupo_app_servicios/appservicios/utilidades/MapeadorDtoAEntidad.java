@@ -37,8 +37,6 @@ public class MapeadorDtoAEntidad {
         }
 
         //agregar los mapeos de servicio y solicitudes
-        
-      
 
         return proveedorMapeado;
     }
