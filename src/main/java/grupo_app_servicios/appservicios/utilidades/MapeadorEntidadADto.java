@@ -40,7 +40,7 @@ public class MapeadorEntidadADto {
         ImagenProveedorDTO imagenMapeada = new ImagenProveedorDTO();
         imagenMapeada.setId(imagenProveedor.getId());
         imagenMapeada.setContenido(imagenProveedor.getContenido());
-        imagenMapeada.setFormato(imagenProveedor.getFormato());
+        // imagenMapeada.setFormato(imagenProveedor.getFormato());
         imagenMapeada.setNombre(imagenProveedor.getNombre());
 
         return imagenMapeada;
