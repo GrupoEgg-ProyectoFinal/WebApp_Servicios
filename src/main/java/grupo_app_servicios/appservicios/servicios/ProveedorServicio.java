@@ -1,7 +1,6 @@
 package grupo_app_servicios.appservicios.servicios;
 
 import java.util.List;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,7 +45,7 @@ public class ProveedorServicio {
 
     @Transactional(readOnly = true)
     public List<ProveedorDTO> obtenerProveedoresSegunServicio(String nombreServicio) {
-        List<Proveedor> listaDeEntidades = pRepositorio.buscarProveedoresPorServicio(nombreServicio);
+        List<Proveedor> listaDeEntidades = pRepositorio.obtenerProveedoresPorServicio(nombreServicio);
         List<ProveedorDTO> listaDtosMapeados = mapearListaEntidadesADto(listaDeEntidades);
 
         return listaDtosMapeados;
@@ -54,20 +53,10 @@ public class ProveedorServicio {
 
     @Transactional(readOnly = true)
     public List<ProveedorDTO> obtenerProveedoresSegunNombreYApellido(String valorBusqueda) {
-        List<Proveedor> listaDeEntidades = pRepositorio.buscarProveedoresPorNombreYOApellido(valorBusqueda);
+        List<Proveedor> listaDeEntidades = pRepositorio.obtenerProveedoresPorNombreYOApellido(valorBusqueda);
         List<ProveedorDTO> listaDtosMapeados = mapearListaEntidadesADto(listaDeEntidades);
 
         return listaDtosMapeados;
-    }
-
-    @Transactional(readOnly = true)
-    public ProveedorDTO obtenerProveedorPorId(UUID id) {
-        Proveedor proveedorEncontrado = pRepositorio.findById(id).orElseThrow(
-                () -> new RuntimeException("No se ha encontrado un proveedor con la id " + id.toString())
-        );
-
-        ProveedorDTO proveedorMapeado = MapeadorEntidadADto.mapearProveedor(proveedorEncontrado);
-        return proveedorMapeado;
     }
 
     @Transactional
@@ -75,30 +64,33 @@ public class ProveedorServicio {
         Proveedor dtoMapeadoAEntidad = MapeadorDtoAEntidad.mapearProveedor(proveedorDTO);
         // Asignar servicio si está presente en el DTO
         if (proveedorDTO.getServicio() != null) {
-            Servicio servicio = sRepositorio.findById(proveedorDTO.getServicio().getId()).orElseThrow(
-                    () -> new RuntimeException("Servicio no encontrado con ID: " + proveedorDTO.getServicio().getId())
-            );
+            Servicio servicio = sRepositorio.findById(proveedorDTO.getServicio().getId())
+                    .orElseThrow(() -> new RuntimeException(
+                            "Servicio no encontrado con ID: " + proveedorDTO.getServicio().getId()));
             dtoMapeadoAEntidad.setServicio(servicio);
         }
         pRepositorio.save(dtoMapeadoAEntidad);
     }
 
     @Transactional
-    public void modificar(ProveedorDTO proveedorDTO) {
+    public void modificar(ProveedorDTO proveedor) {
         // El .findById() retorna un Optional<Proveedor> pero al ponerle el
         // .orElseThrow(), con la excepción
         // que corresponda dentro, retornaría directamente la entidad del optional. En
         // caso de que la búsqueda no
         // dé resultado se arrojaría la excepción
 
-        // Verifica si la id pasada en el dto corresponde con alguna entidad existente
-        pRepositorio.findById(proveedorDTO.getId()).orElseThrow(
+        // Una RuntimeException en pocas palabras es una excepción que puede ser lanzada
+        // durante la ejecución solamente, y no necesariamente
+        // frenaría la aplicación. La excepción común controla que el código esté bien y
+        // en caso de ser lanzada (ya sea en compilación o ejecución),
+        // la aplicación se detendría hasta solucionar ese problema.
+        Proveedor dtoMapeadoAEntidad = pRepositorio.findById(proveedor.getId()).orElseThrow(
                 () -> new RuntimeException("No se ha encontrado un proveedor con la id seleccionada")
         // reemplazar la runtimeException por una excepcion personalizada en el futuro
         );
 
-        // si la verificación pasa, entonces realiza el mapeo de lo que se pasó por parametro y lo guarda en la base de datos
-        Proveedor dtoMapeadoAEntidad = MapeadorDtoAEntidad.mapearProveedor(proveedorDTO);
+        // MapeadorDtoAEntidad.mapearProveedor(proveedor);
         pRepositorio.save(dtoMapeadoAEntidad);
     }
 }
