@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,25 +10,25 @@
     <header>
         <nav class="navbar">
             <div class="logo-contenedor">
-                <a href="index.html">
+                <a th:href="@{/index}">
                     <img src="/img/logo.png" alt="Logo" class="logo">
                     <span class="nombreEmpresa">CHACRAS DE CORIA</span>
                 </a>
             </div>
 
             <ul class="nav-list">
-                <li><a href="index.html">INICIO</a></li>
-                <li><a href="#proveedores">PROVEEDORES</a></li>
-                <li><a href="#novedades">NOVEDADES</a></li>
-                <li><a href="#conocenos">CONOCENOS</a></li>
+                <li><a th:href="@{/index}">INICIO</a></li>
+                <li><a th:href="@{/listar}">PROVEEDORES</a></li>
+                <li><a th:href="@{/novedades}">NOVEDADES</a></li>
+                <li><a th:href="@{/sobreNosotros}">CONOCENOS</a></li>
             </ul>
 
             <ul id="redes">
                 <li>
-                    <a href="#iniciarSesion">INICIAR SESIÓN</a>
+                    <a th:href="@{/iniciarSesion}">INICIAR SESIÓN</a>
                 </li>
                 <li>
-                    <a href="#registrarse">REGISTRARSE</a>
+                    <a th:href="@{/registro}">REGISTRARSE</a>
                 </li>
                 <li>
                     <a href="" target="_blank">
@@ -75,17 +75,16 @@
                 </div>
     
                 <div class="form-group">
-                    <input type="tel" id="telefono" name="telefono" pattern="[0-9]{10}" placeholder="Ingrese su teléfono (10 dígitos)" required><br><br>
+                    <input type="tel" id="telefono" name="telefono" pattern="[0-9]{20}" placeholder="Ingrese su teléfono" required><br><br>
                 </div>
     
                 <div class="form-group">
-                    <label for="estado">NO SOY UN ROBOT
-                    </label><br>
+                    <label for="estado"><h3>NO SOY UN ROBOT</h3></label>
                     <input type="checkbox" id="estado" name="estado"><br><br>
                 </div>
     
                 <button type="submit" id="enviarBtn">
-                    <h3>ENVIAR ➝</h4>
+                    <h3>ENVIAR ➝</h3>
                 </button>
             </form>
         </div>
