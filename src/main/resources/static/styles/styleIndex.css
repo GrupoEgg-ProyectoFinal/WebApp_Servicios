@@ -136,6 +136,56 @@ p {
     transform: scale(1.2);
 }
 
+/*ESTILOS PARA BOTON INICIAR SESIÓN (DESPLEGABLE */
+.desplegable {
+    position: relative;
+    display: inline-block;
+}
+
+.desplegable-content {
+    display: none;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.8); 
+    color: black;
+    z-index: 1;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 12px;
+    box-shadow: 0 4px 24px 0px rgba(5, 5, 5, 0.5);
+}
+
+.desplegable-content a {
+    color: black;
+    padding: 12px;
+    text-decoration: none;
+    display: inline-block;
+    width: 150px;
+}
+
+.desplegable-content a:hover {
+    background-color: #06608a93; /* Blanco translúcido con 30% de opacidad */
+}
+
+.desplegable:hover .desplegable-content {
+    display: flex;
+    justify-content: center;
+}
+
+.desplegable:hover .desplegable {
+    background-color: var(--color);
+}
+
+.nav-list, #registro {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.nav-list li, #registro li {
+    margin: 0 10px;
+}
+
 /* ESTILOS PAGINA 1 - INICIO */
 #inicio {
     background: rgb(26, 26, 26);
