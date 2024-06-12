@@ -1,0 +1,258 @@
+
+
+/*barra navegacion*/
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+}
+.navbar {
+    overflow: hidden;
+}
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 20px;
+}
+.navbar-left, .navbar-right {
+    display: flex;
+}
+.nav-item {
+    color: rgb(0, 0, 0);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+.nav-item:hover {
+    background-color:#fffbf4;
+    color: black;
+}
+.navbar-logo{
+    width: 150px;
+    height: 150px;
+    
+}   
+.navbar-logo img{
+    max-width: 100%;
+    height: auto;
+    display: block;
+    padding-bottom: 10px;
+    /*quita fondo img*/
+    filter:brightness(1.1);
+    mix-blend-mode: multiply;
+    /*Animacion logo*/
+    -webkit-animation: scale-up-hor-center 0.7s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: scale-up-hor-center 0.7s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+.icono{
+  padding-left: 7px;
+  width: 12px;
+}
+.icono:hover{
+  -webkit-animation: jello-horizontal 0.9s both;
+	        animation: jello-horizontal 0.9s both;
+}
+
+/*iconos de servicios background-color: var(--green-bg-color);*/
+.eleccion{
+margin-top: 40px;
+background-image: url('/estiloscss/imagenes/lobby-port.jpg');
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+height: 300px;
+width: 100hv;
+display: flex;
+justify-content: center;
+text-align: center;
+font-size: 15px;
+
+-webkit-animation: scale-in-hor-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: scale-in-hor-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+
+}
+.imagenPortada{
+    width: 150px;
+    height: 150px;
+    margin: 60px 100px ; /* Espacio entre las imágenes */ 
+}
+.imagenPortada img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    padding-bottom: 10px;
+    filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.5));
+    border-radius: 8px;
+    /*animacion*/
+    
+}
+.imagenPortada:hover {
+    transform: scale(1.5); 
+}
+span{
+    color: rgb(255, 255, 255);
+    font-size: 15px;
+    font-weight: bold;
+    text-shadow: 2px 2px 5px rgb(23, 0, 0);
+    -webkit-text-stroke: 1px rgba(2, 2, 15, 0.599); /* Para navegadores basados en WebKit */
+    text-stroke: 2px rgb(0, 0, 0); 
+}
+
+/* Estilos para pantallas más pequeñas */
+@media (max-width: 768px) {
+  .navbar-container {
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
+  .navbar-left, .navbar-right {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+  }
+
+  .nav-item {
+      margin: 10px 0;
+  }
+  .navbar-logo{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 40px;
+  }
+  .navbar-logo img {
+   
+    max-width: 50px; /* Tamaño máximo más pequeño del logo en pantallas pequeñas */
+}
+.eleccion{
+  height: 225px;
+  width: 100hv;
+  
+  }
+
+}
+
+
+
+
+
+/*Animista-logo*/
+
+ @-webkit-keyframes scale-up-hor-center {
+    0% {
+      -webkit-transform: scaleX(0.4);
+              transform: scaleX(0.4);
+    }
+    100% {
+      -webkit-transform: scaleX(1);
+              transform: scaleX(1);
+    }
+  }
+  @keyframes scale-up-hor-center {
+    0% {
+      -webkit-transform: scaleX(0.4);
+              transform: scaleX(0.4);
+    }
+    100% {
+      -webkit-transform: scaleX(1);
+              transform: scaleX(1);
+    }
+  }
+  
+ /*Animista portada*/
+@-webkit-keyframes scale-in-hor-left {
+    0% {
+      -webkit-transform: scaleX(0);
+              transform: scaleX(0);
+      -webkit-transform-origin: 0% 0%;
+              transform-origin: 0% 0%;
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: scaleX(1);
+              transform: scaleX(1);
+      -webkit-transform-origin: 0% 0%;
+              transform-origin: 0% 0%;
+      opacity: 1;
+    }
+  }
+  @keyframes scale-in-hor-left {
+    0% {
+      -webkit-transform: scaleX(0);
+              transform: scaleX(0);
+      -webkit-transform-origin: 0% 0%;
+              transform-origin: 0% 0%;
+      opacity: 1;
+    }
+    100% {
+      -webkit-transform: scaleX(1);
+              transform: scaleX(1);
+      -webkit-transform-origin: 0% 0%;
+              transform-origin: 0% 0%;
+      opacity: 1;
+    }
+  }
+  /*animista icono*/
+
+@-webkit-keyframes jello-horizontal {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+            transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+            transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+            transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+            transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+            transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+}
+@keyframes jello-horizontal {
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+            transform: scale3d(1.25, 0.75, 1);
+  }
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+            transform: scale3d(0.75, 1.25, 1);
+  }
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+            transform: scale3d(1.15, 0.85, 1);
+  }
+  65% {
+    -webkit-transform: scale3d(0.95, 1.05, 1);
+            transform: scale3d(0.95, 1.05, 1);
+  }
+  75% {
+    -webkit-transform: scale3d(1.05, 0.95, 1);
+            transform: scale3d(1.05, 0.95, 1);
+  }
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+            transform: scale3d(1, 1, 1);
+  }
+}
