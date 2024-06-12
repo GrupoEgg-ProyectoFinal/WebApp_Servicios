@@ -1,5 +1,6 @@
 package grupo_app_servicios.appservicios.servicios;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -123,6 +124,16 @@ public class OPCIONAL {
 
 
     //ELIMINAR PROVEEDOR
+
+    //LISTAR PROVEEDORES
+    @Transactional(readOnly = true)
+    public List<Proveedor> listarProveedores() {
+        List<Proveedor> proveedores = new ArrayList<>();
+
+        proveedores = pRepositorio.findAll();
+      
+        return proveedores;
+    }
     
 
 }

@@ -1,6 +1,6 @@
 package grupo_app_servicios.appservicios.controladores;
 import org.springframework.stereotype.Controller;
-/*
+
 import grupo_app_servicios.appservicios.Dto.UsuarioDTO;
 import grupo_app_servicios.appservicios.servicios.UsuarioServicio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,20 +13,20 @@ import java.util.UUID;
 
 @Controller
 public class UsuarioController {
-/* 
+
     @Autowired
     private UsuarioServicio usuarioServicio;
 
     @GetMapping("/formulario")
     public String mostrarFormulario(Model model) {
         model.addAttribute("usuarioDTO", new UsuarioDTO());
-        return "formulario";
+        return "registro";
     }
 
     @PostMapping("/guardarUsuario")
     public String guardarUsuario(@ModelAttribute UsuarioDTO usuarioDTO) {
         usuarioServicio.crearUsuario(usuarioDTO);
-        return "redirect:/formulario";
+        return "redirect:/registro";
     }
     @PostMapping("/modificarUsuario/{id}")
     public String modificarUsuario(@PathVariable UUID id, @ModelAttribute UsuarioDTO usuarioDTO) {
@@ -81,4 +81,3 @@ public class UsuarioController {
 
 // return "index.html";
 // }
-*/
