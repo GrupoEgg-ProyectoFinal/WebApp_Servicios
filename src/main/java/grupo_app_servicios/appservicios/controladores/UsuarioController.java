@@ -24,13 +24,13 @@ public class UsuarioController {
     @GetMapping("/formulario")
     public String mostrarFormulario(Model model) {
         model.addAttribute("usuarioDTO", new UsuarioDTO());
-        return "formulario";
+        return "registro";
     }
 
     @PostMapping("/guardarUsuario")
     public String guardarUsuario(@ModelAttribute UsuarioDTO usuarioDTO) {
         usuarioServicio.crearUsuario(usuarioDTO);
-        return "redirect:/formulario";
+        return "redirect:/registro";
     }
 
 
@@ -69,5 +69,3 @@ public class UsuarioController {
     }
 
 }
-
-

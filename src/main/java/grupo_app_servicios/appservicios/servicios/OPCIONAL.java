@@ -1,5 +1,6 @@
 package grupo_app_servicios.appservicios.servicios;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -17,6 +18,7 @@ import grupo_app_servicios.appservicios.repositorios.ImagenProveedorRepositorio;
 import grupo_app_servicios.appservicios.repositorios.ProveedorRepositorio;
 import grupo_app_servicios.appservicios.repositorios.ServicioRepositorio;
 import grupo_app_servicios.appservicios.repositorios.SolicitudRepositorio;
+import grupo_app_servicios.appservicios.utilidades.MapeadorEntidadADto;
 //Metodos
 //CREAR PROVEEDOR
 //BUSCAR PROVEEDOR POR ID
@@ -123,6 +125,17 @@ public class OPCIONAL {
 
 
     //ELIMINAR PROVEEDOR
+
+    //LISTAR PROVEEDORES
+    @Transactional(readOnly = true)
+    public List<ProveedorDTO> listarProveedores() {
+        List<Proveedor> proveedores = new ArrayList<>();
+
+        proveedores = pRepositorio.findAll();
+      
+        return proveedores.stream().map(
+            proveedor -> MapeadorEntidadADto.mapearProveedor(proveedor)).toList();
+    }
     
 
 }
