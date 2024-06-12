@@ -18,6 +18,7 @@ import grupo_app_servicios.appservicios.repositorios.ImagenProveedorRepositorio;
 import grupo_app_servicios.appservicios.repositorios.ProveedorRepositorio;
 import grupo_app_servicios.appservicios.repositorios.ServicioRepositorio;
 import grupo_app_servicios.appservicios.repositorios.SolicitudRepositorio;
+import grupo_app_servicios.appservicios.utilidades.MapeadorEntidadADto;
 //Metodos
 //CREAR PROVEEDOR
 //BUSCAR PROVEEDOR POR ID
@@ -127,12 +128,13 @@ public class OPCIONAL {
 
     //LISTAR PROVEEDORES
     @Transactional(readOnly = true)
-    public List<Proveedor> listarProveedores() {
+    public List<ProveedorDTO> listarProveedores() {
         List<Proveedor> proveedores = new ArrayList<>();
 
         proveedores = pRepositorio.findAll();
       
-        return proveedores;
+        return proveedores.stream().map(
+            proveedor -> MapeadorEntidadADto.mapearProveedor(proveedor)).toList();
     }
     
 
