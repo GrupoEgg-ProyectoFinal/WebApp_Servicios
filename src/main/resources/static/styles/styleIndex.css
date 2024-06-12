@@ -18,11 +18,18 @@ body {
     color: white;
     scroll-behavior: smooth;
     height: -webkit-fill-available;
+    display: grid;
+    grid-template: /* El nombre del área por fila junto con su altura */
+        "header" min-content
+        "main" auto
+        "footer" 80px
+        /auto; /* Ancho de las columnas */
+    min-height: 100vh;
 }
 
 /* ESTILOS PARA LAS DISTINTAS SECCIONES */
 section {
-    height: calc(100vh - 80px);
+    min-height: 100%;
     font-weight: 700;
     display: flex;
     align-items: center;
@@ -72,15 +79,34 @@ p {
 /*Colores*/
 :root {
     --color: #06608a;
+    --color-oscurecido: #03293a;
+}
+
+main {
+    grid-area: main;
+    height: 100%;
+}
+
+/*ESTILO FOOTER*/
+body > footer {
+    grid-area: footer;
+    min-height: 80px;
+    background-color: var(--color-oscurecido);
+    border-top: 5px white solid;
+    color: white;
 }
 
 /*ESTILOS PARA NAVBAR Y CONTENIDO DE LA MISMA */
+body > header {
+    grid-area: header;
+}
+
 .navbar {
     width: 100%;
     min-height: 80px;
     padding: 0 96px;
     background-color: var(--color);
-    position: fixed;
+    position: sticky;
     top: 0;
     z-index: 1000;
     display: flex;
@@ -194,7 +220,6 @@ p {
         rgba(10, 10, 10, 1) 66%
     );
     background-image: url("../img/Background.jpg");
-    height: 100vh;
 }
 
 /* ESTILOS CONTENEDOR Y TARJETA PROVEEDORES */
