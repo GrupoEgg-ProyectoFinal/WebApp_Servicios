@@ -1,11 +1,46 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PROYECTO FINAL EGG</title>
-    <link rel="stylesheet" href="../static/style.css">
+    <link rel="stylesheet" href="../static/styles/styleIndex.css">
+    <style>
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.8); /* Negro translúcido con 80% de opacidad */
+            color: white; /* Color de texto blanco */
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+
+        .dropdown-content a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-content a:hover {
+            background-color: rgba(255, 255, 255, 0.3); /* Blanco translúcido con 30% de opacidad */
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: #3e8e41;
+        }
+    </style>
 </head>
 
 <body>
@@ -13,7 +48,7 @@
         <nav class="navbar">
             <div class="logo-contenedor">
                 <a href="">
-                    <img src="../img/logo.png" alt="Logo" class="logo">
+                    <img src="../static/img/logo.png" alt="Logo" class="logo">
                     <span class="nombreEmpresa">CHACRAS DE CORIA</span>
                 </a>
             </div>
@@ -26,20 +61,24 @@
             </ul>
 
             <ul id="redes">
-                <li>
-                    <a href="#registrarse">INICIAR SESIÓN</a>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" class="dropbtn">INICIAR SESIÓN</a>
+                    <div class="dropdown-content">
+                        <a href="#iniciarSesionUsuario">Como Usuario</a>
+                        <a href="#iniciarSesionAdmin">Como Admin</a>
+                    </div>
                 </li>
                 <li>
-                    <a href="#registrarse">REGISTRARSE</a>
+                    <a href="registro.html">REGISTRARSE</a>
                 </li>
                 <li>
                     <a href="" target="_blank">
-                        <img class="social-logo" src="../img/Instagram.svg" alt="instagram">
+                        <img class="social-logo" src="../static/img/Instagram.svg" alt="instagram">
                     </a>
                 </li>
                 <li>
                     <a href="" target="_blank">
-                        <img class="social-logo" src="../img/Facebook.svg" alt="facebook">
+                        <img class="social-logo" src="../static/img/Facebook.svg" alt="facebook">
                     </a>
                 </li>
             </ul>
@@ -52,7 +91,7 @@
             <div class="proveedores-container">
                 <div class="proveedor-card">
                     <div class="izquierda">
-                        <img src="../img/Gasista.png" alt="Imagen del proveedor Gasista">
+                        <img src="../static/img/Gasista.png" alt="Imagen del proveedor Gasista">
                     </div>
                     <div class="derecha">
                         <div class="dosPalabras">
