@@ -18,6 +18,13 @@ body {
     color: white;
     scroll-behavior: smooth;
     height: -webkit-fill-available;
+    display: grid;
+    grid-template: /* El nombre del área por fila junto con su altura */
+        "header" min-content
+        "main" auto
+        "footer" 80px
+        /auto; /* Ancho de las columnas */
+    min-height: 100vh;
 }
 
 /* ESTILOS PARA LAS DISTINTAS SECCIONES */
@@ -72,15 +79,34 @@ p {
 /*Colores*/
 :root {
     --color: #06608a;
+    --color-oscurecido: #03293a;
+}
+
+main {
+    grid-area: main;
+    min-height: 100%;
+}
+
+/*ESTILO FOOTER*/
+body > footer {
+    grid-area: footer;
+    min-height: 80px;
+    background-color: var(--color-oscurecido);
+    border-top: 5px white solid;
+    color: white;
 }
 
 /*ESTILOS PARA NAVBAR Y CONTENIDO DE LA MISMA */
+body > header {
+    grid-area: header;
+}
+
 .navbar {
     width: 100%;
-    height: 80px;
+    min-height: 80px;
     padding: 0 96px;
     background-color: var(--color);
-    position: fixed;
+    position: sticky;
     top: 0;
     z-index: 1000;
     display: flex;
@@ -136,11 +162,64 @@ p {
     transform: scale(1.2);
 }
 
-/* ESTILOS PAGINA REGISTRO */
+/*ESTILOS PARA BOTON INICIAR SESIÓN (DESPLEGABLE */
+.desplegable {
+    position: relative;
+    display: inline-block;
+}
+
+.desplegable-content {
+    display: none;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.8); 
+    color: black;
+    z-index: 1;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 8px;
+    box-shadow: 0 4px 24px 0px rgba(5, 5, 5, 0.5);
+}
+
+.desplegable-content a {
+    color: black;
+    padding: 12px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.desplegable-content a:hover {
+    background-color: #06608a93; /* Blanco translúcido con 30% de opacidad */
+}
+
+.desplegable:hover .desplegable-content {
+    display: flex;
+    justify-content: center;
+}
+
+.desplegable:hover .desplegable {
+    background-color: var(--color);
+}
+
+.nav-list, #registro {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.nav-list li, #registro li {
+    margin: 0 10px;
+}
+
+/* ESTILOS PAGINA 1 - INICIO */
 #registro {
     background: rgb(26, 26, 26);
+    background: radial-gradient(
+        circle,
+        rgba(26, 26, 26, 1) 0%,
+        rgba(10, 10, 10, 1) 66%
+    );
     background-image: url("../img/Background.jpg");
-    height: 100vh;
 }
 
 /*FORMULARIO DE CONTACTO */
@@ -160,7 +239,7 @@ p {
     border-radius: 50px;
     box-shadow: 0 4px 24px 0px rgba(255, 255, 255, 0.5);
 }
-#formularioUsuario {
+#sesionUsuario {
     width: 66%;
     display: flex;
     flex-direction: column;
@@ -170,6 +249,7 @@ p {
 #barrios {
     margin-top: 8px;
     width: 150px;
+    height: 24px;
 }
 
 input#estado{
@@ -178,7 +258,7 @@ input#estado{
 }
 .form-group input {
     font-family: "Roboto Condensed", sans-serif;
-    width: 100%;
+    width: 300px;
     height: 48px;
     padding: 12px;
     border-radius: 8px;
@@ -227,7 +307,7 @@ input#estado{
     font-weight: 400;
 }
 
-#enviarBtn {
+#enviarBtn{
     font-family: "Roboto Condensed", sans-serif;
     width: 100%;
     height: 64px;
