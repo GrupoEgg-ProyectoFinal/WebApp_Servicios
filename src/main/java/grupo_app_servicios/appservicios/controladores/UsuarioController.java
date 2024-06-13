@@ -36,9 +36,9 @@ public class UsuarioController {
 
 
     @PostMapping("/modificarUsuario/{id}")
-    public String modificarUsuario(@PathVariable UUID id, @ModelAttribute UsuarioDTO usuarioDTO) {
+    public String modificarUsuario(@PathVariable String id, @ModelAttribute UsuarioDTO usuarioDTO) {
         try {
-            usuarioDTO.setId(id);
+            usuarioDTO.setId(UUID.fromString(id));
             usuarioServicio.modificarUsuario(usuarioDTO);
             return "redirect:/formulario";
         } catch (MiExcepcion e) {
@@ -48,8 +48,8 @@ public class UsuarioController {
     }
 
     @PostMapping("/eliminarUsuario/{id}")
-    public String eliminarUsuario(@PathVariable UUID id) {
-        usuarioServicio.eliminarUsuario(id);
+    public String eliminarUsuario(@PathVariable String id) {
+        usuarioServicio.eliminarUsuario(UUID.fromString(id));
         return "redirect:/formulario";
     }
 
