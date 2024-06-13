@@ -1,19 +1,18 @@
 package grupo_app_servicios.appservicios.controladores;
-import grupo_app_servicios.appservicios.excepciones.MiExcepcion;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-
-import grupo_app_servicios.appservicios.Dto.UsuarioDTO;
-import grupo_app_servicios.appservicios.servicios.UsuarioServicio;
-import org.springframework.beans.factory.annotation.Autowired;
-
-
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.UUID;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import grupo_app_servicios.appservicios.Dto.UsuarioDTO;
+import grupo_app_servicios.appservicios.excepciones.MiExcepcion;
+import grupo_app_servicios.appservicios.servicios.UsuarioServicio;
 
 @Controller
 public class UsuarioController {

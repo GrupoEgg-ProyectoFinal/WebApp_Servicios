@@ -1,13 +1,9 @@
 package grupo_app_servicios.appservicios.utilidades;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import grupo_app_servicios.appservicios.Dto.ImagenProveedorDTO;
 import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
 import grupo_app_servicios.appservicios.entidades.ImagenProveedor;
 import grupo_app_servicios.appservicios.entidades.Proveedor;
-import grupo_app_servicios.appservicios.entidades.Servicio;
-import grupo_app_servicios.appservicios.repositorios.ServicioRepositorio;
 
 /* 
  * Esta clase contiene métodos que deben ser estáticos y públicos, para poder ser usados solo los que se necesiten

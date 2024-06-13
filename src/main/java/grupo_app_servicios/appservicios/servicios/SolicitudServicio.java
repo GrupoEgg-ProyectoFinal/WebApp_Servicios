@@ -11,7 +11,6 @@ import grupo_app_servicios.appservicios.Dto.SolicitudDTO;
 import grupo_app_servicios.appservicios.entidades.Proveedor;
 import grupo_app_servicios.appservicios.entidades.Solicitud;
 import grupo_app_servicios.appservicios.entidades.Usuario;
-import grupo_app_servicios.appservicios.entidades.Valoracion;
 import grupo_app_servicios.appservicios.enumeraciones.Estados;
 import grupo_app_servicios.appservicios.repositorios.ProveedorRepositorio;
 import grupo_app_servicios.appservicios.repositorios.SolicitudRepositorio;
