@@ -14,13 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
 import grupo_app_servicios.appservicios.Dto.UsuarioDTO;
-import grupo_app_servicios.appservicios.entidades.Proveedor;
 import grupo_app_servicios.appservicios.entidades.Usuario;
 import grupo_app_servicios.appservicios.servicios.OPCIONAL;
-import grupo_app_servicios.appservicios.servicios.ProveedorServicio;
 import grupo_app_servicios.appservicios.servicios.UsuarioServicio;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller

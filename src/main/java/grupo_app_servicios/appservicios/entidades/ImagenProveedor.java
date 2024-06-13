@@ -2,8 +2,6 @@ package grupo_app_servicios.appservicios.entidades;
 
 import java.util.UUID;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import jakarta.persistence.Basic;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
