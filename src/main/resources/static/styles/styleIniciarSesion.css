@@ -222,7 +222,7 @@ body > header {
     background-image: url("../img/Background.jpg");
 }
 
-#sesionUsuario {
+#formUsuario {
     background-color: var(--color);
     opacity: 0.99;
     margin-top: 80px;
@@ -237,7 +237,7 @@ body > header {
     border-radius: 50px;
     box-shadow: 0 4px 24px 0px rgba(255, 255, 255, 0.5);
 }
-#formUsuario {
+#sesionUsuario {
     width: 66%;
     display: flex;
     flex-direction: column;
@@ -247,7 +247,7 @@ body > header {
 #barrios {
     margin-top: 8px;
     width: 150px;
-    height: 24px;
+    height: 36px;
 }
 
 input#estado{
