@@ -29,7 +29,7 @@ body {
 
 /* ESTILOS PARA LAS DISTINTAS SECCIONES */
 section {
-    height: 100%;
+    height: calc(100vh - 80px);
     font-weight: 700;
     display: flex;
     align-items: center;
