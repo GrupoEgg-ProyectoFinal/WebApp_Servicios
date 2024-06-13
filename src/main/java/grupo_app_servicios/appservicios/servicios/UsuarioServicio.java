@@ -6,26 +6,40 @@ import grupo_app_servicios.appservicios.entidades.Usuario;
 import grupo_app_servicios.appservicios.enumeraciones.Rol;
 import grupo_app_servicios.appservicios.excepciones.MiExcepcion;
 import grupo_app_servicios.appservicios.repositorios.UsuarioRepositorio;
+import jakarta.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
-public class UsuarioServicio {
+public class UsuarioServicio implements UserDetailsService {
     @Autowired
      UsuarioRepositorio usuarioRepositorio;
 
     @Transactional
-    public void  crearUsuario(UsuarioDTO usuarioDTO){
+    public void  crearUsuario(UsuarioDTO usuarioDTO, String contrasena2){
+        //validar que las contraseñas sean iguales 
+        
         Usuario usuario = new Usuario();
         usuario.setNombre(usuarioDTO.getNombre());
         usuario.setApellido(usuarioDTO.getApellido());
         usuario.setEmail(usuarioDTO.getEmail());
-        usuario.setContrasena(usuarioDTO.getContrasena());
+        usuario.setContrasena(new BCryptPasswordEncoder().encode(usuarioDTO.getContrasena()));
         usuario.setBarrios(usuarioDTO.getBarrios());
         usuario.setTelefono(usuarioDTO.getTelefono());
         usuario.setEstado(true);
@@ -91,5 +105,21 @@ public class UsuarioServicio {
         usuarioRepositorio.deleteById(id);
     }
 
+    @Override
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        Usuario user = usuarioRepositorio.buscarPorEmail(email);
 
+        if (user == null) return null;
+
+        List<GrantedAuthority> permisos = new ArrayList<GrantedAuthority>();
+        GrantedAuthority perms = new SimpleGrantedAuthority("ROL_" + user.getRol().toString());
+
+        permisos.add(perms);
+
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        HttpSession session = attr.getRequest().getSession();
+        session.setAttribute("usuarioInSession", user);
+
+        return new User(user.getEmail(), user.getContrasena(), permisos);
+    }
 }
