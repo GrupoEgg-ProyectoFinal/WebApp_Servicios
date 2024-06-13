@@ -21,18 +21,17 @@ public class UsuarioController {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
-    @GetMapping("/formulario")
-    public String mostrarFormulario(Model model) {
-        model.addAttribute("usuarioDTO", new UsuarioDTO());
-        return "registro";
-    }
+//     @GetMapping("/formulario")
+//     public String mostrarFormulario(Model model) {
+//         model.addAttribute("usuarioDTO", new UsuarioDTO());
+//         return "registro";
+//     }
 
-    @PostMapping("/guardarUsuario")
-    public String guardarUsuario(@ModelAttribute UsuarioDTO usuarioDTO) {
-        usuarioServicio.crearUsuario(usuarioDTO);
-        return "redirect:/registro";
-    }
-
+//     @PostMapping("/guardarUsuario")
+//     public String guardarUsuario(@ModelAttribute UsuarioDTO usuarioDTO) {
+//         usuarioServicio.crearUsuario(usuarioDTO);
+//         return "redirect:/registro";
+//     }
 
 
     @PostMapping("/modificarUsuario/{id}")
@@ -53,14 +52,14 @@ public class UsuarioController {
         return "redirect:/formulario";
     }
 
-    //prueba lista de usiarios Postman OK
-//    @GetMapping("/listar")
-//    @ResponseBody
-//    public List<UsuarioDTO> listarUsuarios() {
-//        return usuarioServicio.listarUsuarios();
-//    }
+//     //prueba lista de usiarios Postman OK
+// //    @GetMapping("/listar")
+// //    @ResponseBody
+// //    public List<UsuarioDTO> listarUsuarios() {
+// //        return usuarioServicio.listarUsuarios();
+// //    }
 
-      //HTML
+    //HTML
     @GetMapping("/listar")
     public String listarUsuariosVista(Model model) {
         List<UsuarioDTO> usuarios = usuarioServicio.listarUsuarios();
