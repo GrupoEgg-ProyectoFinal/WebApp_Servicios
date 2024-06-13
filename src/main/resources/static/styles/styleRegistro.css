@@ -211,7 +211,7 @@ body > header {
     margin: 0 10px;
 }
 
-/* ESTILOS PAGINA 1 - INICIO */
+/* ESTILOS PAGINA - REGISTRO */
 #registro {
     background: rgb(26, 26, 26);
     background: radial-gradient(
@@ -239,7 +239,7 @@ body > header {
     border-radius: 50px;
     box-shadow: 0 4px 24px 0px rgba(255, 255, 255, 0.5);
 }
-#sesionUsuario {
+#formularioUsuario {
     width: 66%;
     display: flex;
     flex-direction: column;
@@ -249,7 +249,7 @@ body > header {
 #barrios {
     margin-top: 8px;
     width: 150px;
-    height: 24px;
+    height: 36px;
 }
 
 input#estado{
