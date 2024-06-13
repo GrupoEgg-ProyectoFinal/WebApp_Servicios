@@ -106,8 +106,8 @@ public class UsuarioServicio implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        Usuario user = usuarioRepositorio.buscarPorEmail(email);
+    public UserDetails loadUserByUsername(String emailUsuario) throws UsernameNotFoundException {
+        Usuario user = usuarioRepositorio.buscarPorEmail(emailUsuario);
 
         if (user == null) return null;
 
@@ -118,7 +118,7 @@ public class UsuarioServicio implements UserDetailsService {
 
         ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
         HttpSession session = attr.getRequest().getSession();
-        session.setAttribute("usuarioInSession", user);
+        session.setAttribute("usuarioEnSesion", user);
 
         return new User(user.getEmail(), user.getContrasena(), permisos);
     }

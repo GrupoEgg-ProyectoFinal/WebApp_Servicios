@@ -20,6 +20,8 @@ import grupo_app_servicios.appservicios.servicios.OPCIONAL;
 import grupo_app_servicios.appservicios.servicios.ProveedorServicio;
 import grupo_app_servicios.appservicios.servicios.UsuarioServicio;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @Controller
 @RequestMapping("/")
@@ -50,19 +52,24 @@ public class PortalControlador {
         return "registro.html";
     }
 
+    @GetMapping("/login")
+    public String inicioSesion() {
+        return "iniciarSesion.html";
+    }
+    
     @PostMapping("/guardarUsuario")
     public String guardarUsuario(@ModelAttribute UsuarioDTO usuarioDTO, String contrasena2) {
         uServicio.crearUsuario(usuarioDTO, contrasena2);
         return "redirect:/";
     }
 
-    @GetMapping("/inicio")
+    @GetMapping("/perfil")
     @PreAuthorize("hasAnyRol('ROL_USER', 'ROL_ADMIN')")
     public String inicio(HttpSession session) {
-        Usuario loguedUser = (Usuario) session.getAttribute("usuarioInSession");
+        Usuario loguedUser = (Usuario) session.getAttribute("usuarioEnSesion");
         String role = loguedUser.getRol().toString();
 
-        if (role.equals("Admin")) return "redirect:/dashboard";
-        return "inicio.html";
+        if (role.equals("ADMIN")) return "redirect:/dashboard";
+        return "index.html"; // después cambiarlo por la vista de perfil de usuario
     }
 }
