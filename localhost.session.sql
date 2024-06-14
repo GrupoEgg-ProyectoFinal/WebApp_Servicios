@@ -1,1 +1,5 @@
-CREATE DATABASE appservicios
+CREATE DATABASE appservicios;
+
+USE appservicios;
+
+SELECT * FROM usuario;
