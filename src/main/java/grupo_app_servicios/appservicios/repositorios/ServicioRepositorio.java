@@ -13,6 +13,10 @@ import java.util.UUID;
 public interface ServicioRepositorio extends JpaRepository<ServicioEntidad, UUID> {
 
     // Búsqueda por nombre
-    @Query("select s from Servicio s where s.nombre like %:nombre%")
+    @Query("select s from ServicioEntidad s where s.nombre like %:nombre%")
     public List<ServicioEntidad> buscarPorNombre(@Param("nombre") String nombre);
+
+    // Búsqueda por estado de alta
+    @Query("select s from ServicioEntidad s where s.estado = :estado")
+    public List<ServicioEntidad> buscarPorEstadoDeAlta(@Param("estado") Boolean estado);
 }
