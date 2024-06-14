@@ -12,10 +12,10 @@ import grupo_app_servicios.appservicios.entidades.SolicitudEntidad;
 @Repository
 public interface SolicitudRepositorio extends JpaRepository<SolicitudEntidad, UUID> {
 
-    @Query("select p from Solicitud p where p.estado = ?1")
+    @Query("select p from SolicitudEntidad p where p.estado = ?1")
     public List<SolicitudEntidad> buscarSolicitudPorEstado(String estado);
 
-    @Query("select p from Solicitud p where p.idValoracion.puntaje = ?1")
+    @Query("select p from SolicitudEntidad p where p.idValoracion.puntaje = ?1")
     public List<SolicitudEntidad> buscarSolicitudPorPuntaje(Integer puntaje);
 
 }

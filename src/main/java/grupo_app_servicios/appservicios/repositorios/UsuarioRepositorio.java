@@ -14,15 +14,15 @@ import java.util.UUID;
 public interface UsuarioRepositorio extends JpaRepository<UsuarioEntidad, UUID> {
 
     //busqueda por email
-    @Query("SELECT u FROM Usuario u WHERE u.email = :email")
+    @Query("SELECT u FROM UsuarioEntidad u WHERE u.email = :email")
     public UsuarioEntidad buscarPorEmail(@Param("email") String email);
 
     //busqueda por nombre
-    @Query("select u from Usuario u where u.nombre like %:nombre%")
+    @Query("select u from UsuarioEntidad u where u.nombre like %:nombre%")
     public List<UsuarioEntidad> buscarPorNombre(@Param("nombre") String nombre);
 
     //busqueda por apellido
-    @Query("select u from Usuario u where u.apellido like %:apellido%")
+    @Query("select u from UsuarioEntidad u where u.apellido like %:apellido%")
     public List<UsuarioEntidad> buscarPorApellido(@Param("apellido") String apellido);
 
 }
