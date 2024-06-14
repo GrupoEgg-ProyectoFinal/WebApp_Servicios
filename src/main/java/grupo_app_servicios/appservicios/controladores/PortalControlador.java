@@ -105,6 +105,11 @@ public class PortalControlador {
         return "iniciarSesion.html";
     }
 
+    @GetMapping("/loginProveedor")
+    public String inicioSesionProveedor() {
+        return "sesionProveedor.html";
+    }
+    
     @PostMapping("/guardarUsuario")
     public String guardarUsuario(@ModelAttribute UsuarioDTO usuarioDTO, String contrasena2) {
         uServicio.crearUsuario(usuarioDTO, contrasena2);
