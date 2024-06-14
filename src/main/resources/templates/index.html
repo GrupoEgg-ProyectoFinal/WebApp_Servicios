@@ -20,7 +20,6 @@
 
             <ul class="nav-list">
                 <li><a th:href="@{/index}">INICIO</a></li>
-                <li><a th:href="@{/listar}">PROVEEDORES</a></li>
                 <li><a th:href="@{/novedades}">NOVEDADES</a></li>
                 <li><a th:href="@{/sobreNosotros}">CONOCENOS</a></li>
             </ul>
@@ -34,8 +33,12 @@
                     </div>
                 </li>
             </ul>
-                <li>
-                    <a th:href="@{/registrar}">REGISTRARSE</a>
+            <li class="desplegable">
+                <a href="javascript:void(0)" class="dropbtn">REGISTRARSE</a>
+                <div class="desplegable-content">
+                    <a th:href="@{/login}">USUARIO</a>
+                    <a th:href="@{/loginProveedor}">PROVEEDOR</a>
+                </div>
                 </li>
 
             <ul id="redes">
