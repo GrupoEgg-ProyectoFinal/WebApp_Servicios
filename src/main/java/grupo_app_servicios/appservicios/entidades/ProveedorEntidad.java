@@ -19,7 +19,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Proveedor {
+public class ProveedorEntidad {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -42,9 +42,9 @@ public class Proveedor {
 
     // Relaciones con entidades
     @OneToOne
-    private ImagenProveedor foto;
+    private ImagenProvEntidad foto;
     @ManyToOne
-    private Servicio servicio;
+    private ServicioEntidad servicio;
     @OneToMany(mappedBy = "idProveedor")
-    private List<Solicitud> solicitudes;
+    private List<SolicitudEntidad> solicitudes;
 }

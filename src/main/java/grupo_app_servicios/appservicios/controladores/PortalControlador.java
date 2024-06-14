@@ -16,7 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
 import grupo_app_servicios.appservicios.Dto.UsuarioDTO;
-import grupo_app_servicios.appservicios.entidades.Usuario;
+import grupo_app_servicios.appservicios.entidades.UsuarioEntidad;
 import grupo_app_servicios.appservicios.excepciones.MiExcepcion;
 import grupo_app_servicios.appservicios.servicios.ProveedorServicio2;
 import grupo_app_servicios.appservicios.servicios.UsuarioServicio;
@@ -119,7 +119,7 @@ public class PortalControlador {
     @GetMapping("/perfil")
     @PreAuthorize("hasAnyRol('ROL_USER', 'ROL_ADMIN')")
     public String inicio(HttpSession session) {
-        Usuario loguedUser = (Usuario) session.getAttribute("usuarioEnSesion");
+        UsuarioEntidad loguedUser = (UsuarioEntidad) session.getAttribute("usuarioEnSesion");
         String role = loguedUser.getRol().toString();
 
         if (role.equals("ADMIN"))

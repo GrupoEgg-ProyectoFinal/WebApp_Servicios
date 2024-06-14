@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import grupo_app_servicios.appservicios.Dto.SolicitudDTO;
-import grupo_app_servicios.appservicios.entidades.Proveedor;
-import grupo_app_servicios.appservicios.entidades.Solicitud;
-import grupo_app_servicios.appservicios.entidades.Usuario;
+import grupo_app_servicios.appservicios.entidades.ProveedorEntidad;
+import grupo_app_servicios.appservicios.entidades.SolicitudEntidad;
+import grupo_app_servicios.appservicios.entidades.UsuarioEntidad;
 import grupo_app_servicios.appservicios.enumeraciones.Estados;
 import grupo_app_servicios.appservicios.repositorios.ProveedorRepositorio;
 import grupo_app_servicios.appservicios.repositorios.SolicitudRepositorio;
@@ -30,7 +30,7 @@ public class SolicitudServicio {
 
     // CREAR SOLICITUD
     public void crearSolicitud(SolicitudDTO solicitudDTO) {
-        Solicitud newSolicitud = new Solicitud();
+        SolicitudEntidad newSolicitud = new SolicitudEntidad();
 
         newSolicitud.setComentario(solicitudDTO.getComentario());
         newSolicitud.setEstado(Estados.PENDIENTE);
@@ -46,13 +46,13 @@ public class SolicitudServicio {
         // }
 
         if (solicitudDTO.getIdProveedor() != null) {
-            Proveedor proveedor = pRepositorio.findById(solicitudDTO.getIdProveedor().getId())
+            ProveedorEntidad proveedor = pRepositorio.findById(solicitudDTO.getIdProveedor().getId())
                     .orElseThrow(() -> new RuntimeException(
                             "Proveedor no encontrado con ID: " + solicitudDTO.getIdProveedor().getId()));
             newSolicitud.setIdProveedor(proveedor);
         }
         if (solicitudDTO.getIdUsuario() != null) {
-            Usuario usuario = uRepositorio.findById(solicitudDTO.getIdUsuario().getId()).orElseThrow(
+            UsuarioEntidad usuario = uRepositorio.findById(solicitudDTO.getIdUsuario().getId()).orElseThrow(
                     () -> new RuntimeException("Usuario no encontrado con ID: " + solicitudDTO.getIdUsuario().getId()));
             newSolicitud.setIdUsuario(usuario);
         }
@@ -62,7 +62,7 @@ public class SolicitudServicio {
 
     // BUSCAR SOLICITUD POR ID
     @Transactional(readOnly = true)
-    public Solicitud buscarSolicitud(UUID id) {
+    public SolicitudEntidad buscarSolicitud(UUID id) {
         return sRepositorio.findById(id).orElse(null);
     }
 
@@ -70,12 +70,12 @@ public class SolicitudServicio {
     @Transactional
     public void modificarComentarioSolicitud(SolicitudDTO solicitudDTO) {
         // Se buscar por id y se guarda en un optional
-        Optional<Solicitud> respuesta = sRepositorio.findById(solicitudDTO.getId());
+        Optional<SolicitudEntidad> respuesta = sRepositorio.findById(solicitudDTO.getId());
 
         // Si el opctional tiene presente un resultado
         if (respuesta.isPresent()) {
             // Guardamos el resultado de la solicitud existente
-            Solicitud solicitudExistente = respuesta.get();
+            SolicitudEntidad solicitudExistente = respuesta.get();
             // Se settea el nuevo comentario enviado por dto
             solicitudExistente.setComentario(solicitudDTO.getComentario());
             // Se persiste en la bdd
@@ -88,12 +88,12 @@ public class SolicitudServicio {
     @Transactional
     public void modificarEstadoSolicitud(SolicitudDTO solicitudDTO) {
         // Se buscar por id y se guarda en un optional
-        Optional<Solicitud> respuesta = sRepositorio.findById(solicitudDTO.getId());
+        Optional<SolicitudEntidad> respuesta = sRepositorio.findById(solicitudDTO.getId());
 
         // Si el opctional tiene presente un resultado
         if (respuesta.isPresent()) {
             // Guardamos el resultado de la solicitud existente
-            Solicitud solicitudExistente = respuesta.get();
+            SolicitudEntidad solicitudExistente = respuesta.get();
             // Se settea el nuevo estado enviado por dto
             solicitudExistente.setEstado(solicitudDTO.getEstado());
             // Se persiste en la bdd

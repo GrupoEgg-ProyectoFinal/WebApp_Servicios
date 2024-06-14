@@ -20,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Solicitud {
+public class SolicitudEntidad {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
@@ -33,14 +33,14 @@ public class Solicitud {
     // Relaciones con entidades
     @JoinColumn(nullable = true)
     @OneToOne
-    private Valoracion idValoracion;
+    private ValoracionEntidad idValoracion;
 
     @JoinColumn(nullable = false)
     @ManyToOne
-    private Proveedor idProveedor;
+    private ProveedorEntidad idProveedor;
 
     @JoinColumn(nullable = false)
     @ManyToOne
-    private Usuario idUsuario;
+    private UsuarioEntidad idUsuario;
 
 }

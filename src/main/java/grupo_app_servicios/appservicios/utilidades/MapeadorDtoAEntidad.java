@@ -1,9 +1,9 @@
 package grupo_app_servicios.appservicios.utilidades;
 
-import grupo_app_servicios.appservicios.Dto.ImagenProveedorDTO;
+import grupo_app_servicios.appservicios.Dto.ImagenProvDTO;
 import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
-import grupo_app_servicios.appservicios.entidades.ImagenProveedor;
-import grupo_app_servicios.appservicios.entidades.Proveedor;
+import grupo_app_servicios.appservicios.entidades.ImagenProvEntidad;
+import grupo_app_servicios.appservicios.entidades.ProveedorEntidad;
 
 /* 
  * Esta clase contiene métodos que deben ser estáticos y públicos, para poder ser usados solo los que se necesiten
@@ -12,8 +12,8 @@ import grupo_app_servicios.appservicios.entidades.Proveedor;
 */
 public class MapeadorDtoAEntidad {   
 
-    public static Proveedor mapearProveedor(ProveedorDTO proveedor) {
-        Proveedor proveedorMapeado = new Proveedor();
+    public static ProveedorEntidad mapearProveedor(ProveedorDTO proveedor) {
+        ProveedorEntidad proveedorMapeado = new ProveedorEntidad();
         proveedorMapeado.setId(proveedor.getId());
         proveedorMapeado.setNombre(proveedor.getNombre());
         proveedorMapeado.setApellido(proveedor.getApellido());
@@ -25,9 +25,9 @@ public class MapeadorDtoAEntidad {
         proveedorMapeado.setMatricula(proveedor.getMatricula());
 
         if (proveedor.getFoto() != null) {
-            ImagenProveedorDTO imagenProveedorDTO = proveedor.getFoto();
+            ImagenProvDTO imagenProveedorDTO = proveedor.getFoto();
 
-            ImagenProveedor imagenProveedor = MapeadorDtoAEntidad.mapearImagenProveedor(imagenProveedorDTO);
+            ImagenProvEntidad imagenProveedor = MapeadorDtoAEntidad.mapearImagenProveedor(imagenProveedorDTO);
             // acá se mapearía una entidad de imagenProveedor y se le asignaria al setter
             proveedorMapeado.setFoto(imagenProveedor); 
         }
@@ -39,8 +39,8 @@ public class MapeadorDtoAEntidad {
         return proveedorMapeado;
     }
 
-    public static ImagenProveedor mapearImagenProveedor(ImagenProveedorDTO imagenProveedor) {
-        ImagenProveedor imagenMapeada = new ImagenProveedor();
+    public static ImagenProvEntidad mapearImagenProveedor(ImagenProvDTO imagenProveedor) {
+        ImagenProvEntidad imagenMapeada = new ImagenProvEntidad();
         imagenMapeada.setId(imagenProveedor.getId());
         imagenMapeada.setContenido(imagenProveedor.getContenido());
         // imagenMapeada.setFormato(imagenProveedor.getFormato());
