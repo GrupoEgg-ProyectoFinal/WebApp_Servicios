@@ -20,4 +20,6 @@ public class ProveedorDTO {
 
     private ServicioDTO servicio;
     private List<SolicitudDTO> solicitudes;
+    private String fotoUrl; // Nuevo campo para la URL de la imagen
+
 }

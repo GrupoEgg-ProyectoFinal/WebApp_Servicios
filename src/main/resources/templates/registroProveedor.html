@@ -45,38 +45,38 @@
         <section id="registro">
         <div id="form">
             <h3>REGISTRO DE PROOVEDOR</h2>
-                <form id="formularioProveedor" th:action="@{/guardarProveedor}" method="POST" th:object="${usuarioDTO}">
+                <form id="formularioProveedor" th:action="@{registrarProveedor}" method="POST" th:object="${proveedorDTO}" enctype="multipart/form-data" >
                     <div class="form-row">
                         <div class="form-column">
                             <div class="form-group">
-                                <input type="text" id="nombre" name="nombre" th:field="*{nombreProveedor}" placeholder="Ingrese su nombre" required>
+                                <input type="text" id="nombre" name="nombre" th:field="*{nombre}" placeholder="Ingrese su nombre" required>
                             </div>
                 
                             <div class="form-group">
-                                <input type="tel" id="telefono" name="telefono" th:value="*{telefonoProveedor}" placeholder="Ingrese su teléfono" required>
+                                <input type="tel" id="telefono" name="telefono" th:value="*{telefono}" placeholder="Ingrese su teléfono" required>
                             </div>
                 
                             <div class="form-group">
-                                <input type="email" id="email" name="email" th:value="*{emailProveedor}" placeholder="Ingrese su email" required>
+                                <input type="email" id="email" name="email" th:value="*{email}" placeholder="Ingrese su email" required>
                             </div>
                 
                             <div class="form-group">
                                 <label for="imagenProveedor"><h4>SELECCIONE UNA IMAGEN DE PERFIL</h4></label>
-                                <input type="file" id="imagenProovedor" name="imagen" accept="image/*" placeholder="Cargar una imagen de perfil" required>
+                                <input type="file" id="imagenProovedor" name="imagen" accept="image/*"  placeholder="Cargar una imagen de perfil" required>
                             </div>
                         </div>
                         
                         <div class="form-column">
                             <div class="form-group">
-                                <input type="text" id="apellido" name="apellido" th:value="*{apellidoProveedor}" placeholder="Ingrese su apellido" required>
+                                <input type="text" id="apellido" name="apellido" th:value="*{apellido}" placeholder="Ingrese su apellido" required>
                             </div>
                 
                             <div class="form-group">
-                                <input type="number" id="matricula" name="matricula" th:value="*{matriculaProveedor}" placeholder="Ingrese su matricula" required>
+                                <input type="number" id="matricula" name="matricula" th:value="*{matricula}" placeholder="Ingrese su matricula" required>
                             </div>
                 
                             <div class="form-group">
-                                <input type="password" id="contrasena" name="contrasena" th:value="*{contrasenaProveedor}" placeholder="Ingrese su contraseña" required>
+                                <input type="password" id="contrasena" name="contrasena" th:value="*{contrasena}" placeholder="Ingrese su contraseña" required>
                             </div>
                 
                             <div class="form-group">

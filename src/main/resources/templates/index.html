@@ -36,8 +36,8 @@
             <li class="desplegable">
                 <a href="javascript:void(0)" class="dropbtn">REGISTRARSE</a>
                 <div class="desplegable-content">
-                    <a th:href="@{/login}">USUARIO</a>
-                    <a th:href="@{/loginProveedor}">PROVEEDOR</a>
+                    <a th:href="@{/registrarUsuario}">USUARIO</a>
+                    <a th:href="@{/registrarProveedor}">PROVEEDOR</a>
                 </div>
                 </li>
 
@@ -58,10 +58,10 @@
     <main>
         <!-- PÁGINA 1 'INICIO'-->
         <section id="inicio">
-            <div class="proveedores-container">
-                <div class="proveedor-card">
+            <div class="proveedores-container" th:each="proveedor: ${proveedores}">
+                <div class="proveedor-card" >
                     <div class="izquierda">
-                        <img src="/img/Gasista.png" alt="Imagen del proveedor Gasista">
+                        <img th:src="${proveedor.fotoUrl}" alt="Imagen del proveedor Gasista">
                     </div>
                     <div class="derecha">
                         <div class="dosPalabras">
@@ -69,8 +69,8 @@
                             <h5>Gasista</h5>
                         </div>
                         <div class="dosPalabras">
-                            <h5 class="tituloPintado"><strong>NOMBRE:</strong></h5>  
-                            <h5>Gaston Estalla</h5>
+                            <h5 class="tituloPintado"><strong>NOMBRE Y APELLIDO:</strong></h5>  
+                            <h5 th:text="${proveedor.nombre+ ' ' + proveedor.apellido}">Gaston Estalla</h5>
                         </div>
                             <h5 class="tituloPintado"><strong>DESCRIPCIÓN:</strong></h5>
                             <h5>Profesional matriculado especializado en la instalación, mantenimiento y reparación de sistemas 
