@@ -44,7 +44,7 @@ public class PortalControlador {
     }
 
     // IR A REGISTRO DE USUARIO
-    @GetMapping("/registrar")
+    @GetMapping("/registrarUsuario")
     public String registrar(Model model) {
         // Inicializa un nuevo objeto UsuarioDTO
         UsuarioDTO usuarioDTO = new UsuarioDTO();
@@ -55,7 +55,7 @@ public class PortalControlador {
     }
 
     // IR AL REGISTRO DE PROVEEDOR
-    @GetMapping("/registrar")
+    @GetMapping("/registrarProveedor")
     public String registrarProveedor(Model model) {
         // Inicializa un nuevo objeto UsuarioDTO
         ProveedorDTO proveedorDTO = new ProveedorDTO();
