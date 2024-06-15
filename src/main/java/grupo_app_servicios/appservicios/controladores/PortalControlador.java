@@ -36,8 +36,14 @@ public class PortalControlador {
     // ProveedorServicio pServicio;
 
     @GetMapping("/") // Acá es donde realizamos el mapeo
-    public String index(ModelMap modelo) {
+    public String index(Model modelo) {
         List<ProveedorDTO> proveedores = opcional.listarProveedores();
+
+        // Agregar la URL de la imagen para cada proveedor
+        proveedores.forEach(proveedor -> {
+            String fotoUrl = "/imagen/imagenes/" + proveedor.getId(); // Cambia la ruta según tu configuración
+            proveedor.setFotoUrl(fotoUrl);
+        });
 
         modelo.addAttribute("proveedores", proveedores);
         return "index.html"; // Acá es que retornamos con el método.
@@ -51,7 +57,7 @@ public class PortalControlador {
         // Agrega el objeto usuarioDTO al modelo
         model.addAttribute("usuarioDTO", usuarioDTO);
         model.addAttribute("contrasena2", ""); // verificar que funcione
-        return "registrousuario.html";
+        return "registroUsuario.html";
     }
 
     // IR AL REGISTRO DE PROVEEDOR
@@ -62,13 +68,12 @@ public class PortalControlador {
         // Agrega el objeto usuarioDTO al modelo
         model.addAttribute("proveedorDTO", proveedorDTO);
         model.addAttribute("contrasena2", ""); // verificar que funcione
-        return "registoproveedor.html";
+        return "registroProveedor.html";
     }
 
     // REGISTRAR PROVEEDOR
     @PostMapping("/registrarProveedor")
-    public String registrarProveedor(@ModelAttribute ProveedorDTO proveedorDTO,
-            @RequestParam("imagenFile") MultipartFile imagenFile, Model model) {
+    public String registrarProveedor(@ModelAttribute ProveedorDTO proveedorDTO, MultipartFile imagenFile, Model model) {
         try {
             opcional.crearProveedor(proveedorDTO, imagenFile);
             model.addAttribute("mensaje", "Proveedor registrado exitosamente");

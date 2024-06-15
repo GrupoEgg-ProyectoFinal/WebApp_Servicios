@@ -1,12 +1,16 @@
 package grupo_app_servicios.appservicios.servicios;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import grupo_app_servicios.appservicios.Dto.ImagenProvDTO;
 import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
+import grupo_app_servicios.appservicios.entidades.ImagenProvEntidad;
 import grupo_app_servicios.appservicios.entidades.ProveedorEntidad;
 import grupo_app_servicios.appservicios.entidades.ServicioEntidad;
 import grupo_app_servicios.appservicios.repositorios.ImagenProvRepositorio;
@@ -92,5 +96,23 @@ public class ProveedorServicio {
 
         // MapeadorDtoAEntidad.mapearProveedor(proveedor);
         pRepositorio.save(dtoMapeadoAEntidad);
+    }
+
+
+
+    public ImagenProvDTO obtenerImagenPorId(UUID id) {
+        Optional<ProveedorEntidad> proveedorOptional = pRepositorio.findById(id);
+        if (proveedorOptional.isPresent()) {
+            ProveedorEntidad proveedor = proveedorOptional.get();
+            ImagenProvEntidad imagenProv = proveedor.getFoto();
+            ImagenProvDTO imagenProvDTO = new ImagenProvDTO();
+            imagenProvDTO.setId(imagenProv.getId());
+            imagenProvDTO.setContenido(imagenProv.getContenido());
+            imagenProvDTO.setFormato(imagenProv.getMime());
+            imagenProvDTO.setNombre(imagenProv.getNombre());
+            return imagenProvDTO;
+        } else {
+            throw new RuntimeException("Imagen no encontrada para el proveedor con id: " + id);
+        }
     }
 }

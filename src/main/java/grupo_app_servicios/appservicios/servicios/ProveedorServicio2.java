@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import grupo_app_servicios.appservicios.Dto.ImagenProvDTO;
 import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
 import grupo_app_servicios.appservicios.entidades.ImagenProvEntidad;
 import grupo_app_servicios.appservicios.entidades.ProveedorEntidad;
@@ -122,6 +123,23 @@ public class ProveedorServicio2 {
 
         return proveedores.stream().map(
                 proveedor -> MapeadorEntidadADto.mapearProveedor(proveedor)).toList();
+    }
+
+
+    public ImagenProvDTO obtenerImagenPorId(UUID id) {
+        Optional<ProveedorEntidad> proveedorOptional = pRepositorio.findById(id);
+        if (proveedorOptional.isPresent()) {
+            ProveedorEntidad proveedor = proveedorOptional.get();
+            ImagenProvEntidad imagenProv = proveedor.getFoto();
+            ImagenProvDTO imagenProvDTO = new ImagenProvDTO();
+            imagenProvDTO.setId(imagenProv.getId());
+            imagenProvDTO.setContenido(imagenProv.getContenido());
+            imagenProvDTO.setFormato(imagenProv.getMime());
+            imagenProvDTO.setNombre(imagenProv.getNombre());
+            return imagenProvDTO;
+        } else {
+            throw new RuntimeException("Imagen no encontrada para el proveedor con id: " + id);
+        }
     }
 
 }
