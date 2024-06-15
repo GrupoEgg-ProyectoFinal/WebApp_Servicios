@@ -2,8 +2,10 @@ package grupo_app_servicios.appservicios.utilidades;
 
 import grupo_app_servicios.appservicios.Dto.ImagenProvDTO;
 import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
+import grupo_app_servicios.appservicios.Dto.ServicioDTO;
 import grupo_app_servicios.appservicios.entidades.ImagenProvEntidad;
 import grupo_app_servicios.appservicios.entidades.ProveedorEntidad;
+import grupo_app_servicios.appservicios.entidades.ServicioEntidad;
 
 /* 
  * Esta clase contiene métodos que deben ser estáticos y públicos, para poder ser usados solo los que se necesiten
@@ -26,15 +28,18 @@ public class MapeadorDtoAEntidad {
 
         if (proveedor.getFoto() != null) {
             ImagenProvDTO imagenProveedorDTO = proveedor.getFoto();
-
             ImagenProvEntidad imagenProveedor = MapeadorDtoAEntidad.mapearImagenProveedor(imagenProveedorDTO);
+            
             // acá se mapearía una entidad de imagenProveedor y se le asignaria al setter
             proveedorMapeado.setFoto(imagenProveedor); 
-        }
-
-        //agregar los mapeos de servicio y solicitudes
+        }      
         
-      
+        if (proveedor.getServicio() != null) {
+            ServicioDTO servicioDTO = proveedor.getServicio();
+            ServicioEntidad servicio = MapeadorDtoAEntidad.mapearServicio(servicioDTO);
+
+            proveedorMapeado.setServicio(servicio);
+        }
 
         return proveedorMapeado;
     }
@@ -43,9 +48,18 @@ public class MapeadorDtoAEntidad {
         ImagenProvEntidad imagenMapeada = new ImagenProvEntidad();
         imagenMapeada.setId(imagenProveedor.getId());
         imagenMapeada.setContenido(imagenProveedor.getContenido());
-        // imagenMapeada.setFormato(imagenProveedor.getFormato());
+        imagenMapeada.setMime(imagenProveedor.getMime());
         imagenMapeada.setNombre(imagenProveedor.getNombre());
 
         return imagenMapeada;
+    }
+
+    public static ServicioEntidad mapearServicio(ServicioDTO servicio) {
+        ServicioEntidad servicioMapeado = new ServicioEntidad();
+        servicioMapeado.setId(servicio.getId());
+        servicioMapeado.setNombre(servicio.getNombre());
+        servicioMapeado.setEstado(servicio.getEstado());
+
+        return servicioMapeado;
     }
 }

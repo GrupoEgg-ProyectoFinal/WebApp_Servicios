@@ -29,8 +29,34 @@ import java.util.stream.Collectors;
 @Service
 public class UsuarioServicio implements UserDetailsService {
     @Autowired
-     UsuarioRepositorio usuarioRepositorio;
+    UsuarioRepositorio usuarioRepositorio;
+    
+    // UTILIDADES DE LA CLASE 
+    private void validar(String nombre, String email) throws MiExcepcion {
+        if (nombre == null || nombre.isEmpty()) {
+            throw new MiExcepcion("El nombre no puede estar vacío");
+        }
 
+        if (email == null || email.isEmpty()) {
+            throw new MiExcepcion("El email no puede estar vacío");
+        }
+    }
+
+    private UsuarioDTO convertirADTO(UsuarioEntidad usuario) {
+        UsuarioDTO dto = new UsuarioDTO();
+        dto.setId(usuario.getId());
+        dto.setNombre(usuario.getNombre());
+        dto.setApellido(usuario.getApellido());
+        dto.setEmail(usuario.getEmail());
+        dto.setContrasena(usuario.getContrasena());
+        dto.setBarrios(usuario.getBarrios());
+        dto.setTelefono(usuario.getTelefono());
+        dto.setEstado(usuario.getEstado());
+        dto.setRol(usuario.getRol());
+        return dto;
+    }
+
+    // MÉTODO CREAR
     @Transactional
     public void  crearUsuario(UsuarioDTO usuarioDTO, String contrasena2){
         //validar que las contraseñas sean iguales 
@@ -48,7 +74,16 @@ public class UsuarioServicio implements UserDetailsService {
         usuarioRepositorio.save(usuario);
     }
 
+    // MÉTODOS DE BÚSQUEDA
+    @Transactional(readOnly = true)
+    public List<UsuarioDTO> listarUsuarios() {
+        List<UsuarioEntidad> usuarios = usuarioRepositorio.findAll();
+        return usuarios.stream()
+                .map(this::convertirADTO)
+                .collect(Collectors.toList());
+    }
 
+    // MÉTODO MODIFICAR
     @Transactional
     public void modificarUsuario(UsuarioDTO usuarioDTO) throws MiExcepcion {
         validar(usuarioDTO.getNombre(), usuarioDTO.getEmail());
@@ -67,44 +102,13 @@ public class UsuarioServicio implements UserDetailsService {
         usuarioRepositorio.save(usuario);
     }
 
-    private void validar(String nombre, String email) throws MiExcepcion {
-        if (nombre == null || nombre.isEmpty()) {
-            throw new MiExcepcion("El nombre no puede estar vacío");
-        }
-
-        if (email == null || email.isEmpty()) {
-            throw new MiExcepcion("El email no puede estar vacío");
-        }
-        // Puedes agregar más validaciones aquí según tus requisitos
-    }
-
-    @Transactional(readOnly = true)
-    public List<UsuarioDTO> listarUsuarios() {
-        List<UsuarioEntidad> usuarios = usuarioRepositorio.findAll();
-        return usuarios.stream()
-                .map(this::convertirADTO)
-                .collect(Collectors.toList());
-    }
-
-    private UsuarioDTO convertirADTO(UsuarioEntidad usuario) {
-        UsuarioDTO dto = new UsuarioDTO();
-        dto.setId(usuario.getId());
-        dto.setNombre(usuario.getNombre());
-        dto.setApellido(usuario.getApellido());
-        dto.setEmail(usuario.getEmail());
-        dto.setContrasena(usuario.getContrasena());
-        dto.setBarrios(usuario.getBarrios());
-        dto.setTelefono(usuario.getTelefono());
-        dto.setEstado(usuario.getEstado());
-        dto.setRol(usuario.getRol());
-        return dto;
-    }
-
+    // MÉTODO ELIMINAR
     @Transactional
     public void eliminarUsuario(UUID id) {
         usuarioRepositorio.deleteById(id);
     }
 
+    // MÉTODO PARA CARGAR USUARIO EN SESIÓN
     @Override
     public UserDetails loadUserByUsername(String emailUsuario) throws UsernameNotFoundException {
         UsuarioEntidad user = usuarioRepositorio.buscarPorEmail(emailUsuario);

@@ -2,8 +2,10 @@ package grupo_app_servicios.appservicios.utilidades;
 
 import grupo_app_servicios.appservicios.Dto.ImagenProvDTO;
 import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
+import grupo_app_servicios.appservicios.Dto.ServicioDTO;
 import grupo_app_servicios.appservicios.entidades.ImagenProvEntidad;
 import grupo_app_servicios.appservicios.entidades.ProveedorEntidad;
+import grupo_app_servicios.appservicios.entidades.ServicioEntidad;
 
 /* 
  * Esta clase contiene métodos que deben ser estáticos y públicos, para poder ser usados solo los que se necesiten
@@ -31,7 +33,12 @@ public class MapeadorEntidadADto {
             proveedorMapeado.setFoto(imagenProveedorDTO); 
         }
         
-        //agregar los mapeos de servicio y solicitudes
+        if (proveedor.getServicio() != null) {
+            ServicioEntidad servicioDTO = proveedor.getServicio();
+            ServicioDTO servicio = MapeadorEntidadADto.mapearServicio(servicioDTO);
+
+            proveedorMapeado.setServicio(servicio);
+        }
 
         return proveedorMapeado;
     }
@@ -40,9 +47,18 @@ public class MapeadorEntidadADto {
         ImagenProvDTO imagenMapeada = new ImagenProvDTO();
         imagenMapeada.setId(imagenProveedor.getId());
         imagenMapeada.setContenido(imagenProveedor.getContenido());
-        // imagenMapeada.setFormato(imagenProveedor.getFormato());
+        imagenMapeada.setMime(imagenProveedor.getMime());
         imagenMapeada.setNombre(imagenProveedor.getNombre());
 
         return imagenMapeada;
     } 
+
+    public static ServicioDTO mapearServicio(ServicioEntidad servicio) {
+        ServicioDTO servicioMapeado = new ServicioDTO();
+        servicioMapeado.setId(servicio.getId());
+        servicioMapeado.setNombre(servicio.getNombre());
+        servicioMapeado.setEstado(servicio.getEstado());
+
+        return servicioMapeado;
+    }
 }
