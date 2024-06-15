@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class ImagenProveedor {
+public class ImagenProvEntidad {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private UUID id;

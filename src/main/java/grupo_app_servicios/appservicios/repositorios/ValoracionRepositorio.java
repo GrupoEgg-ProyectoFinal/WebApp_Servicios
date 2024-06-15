@@ -5,10 +5,10 @@ import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import grupo_app_servicios.appservicios.entidades.Valoracion;
+import grupo_app_servicios.appservicios.entidades.ValoracionEntidad;
 
 @Repository
-public interface ValoracionRepositorio extends JpaRepository<Valoracion, UUID>  {
+public interface ValoracionRepositorio extends JpaRepository<ValoracionEntidad, UUID>  {
 
 
 }

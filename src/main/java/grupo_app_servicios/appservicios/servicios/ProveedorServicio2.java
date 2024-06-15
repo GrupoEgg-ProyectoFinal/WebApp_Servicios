@@ -11,11 +11,11 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
-import grupo_app_servicios.appservicios.entidades.ImagenProveedor;
-import grupo_app_servicios.appservicios.entidades.Proveedor;
-import grupo_app_servicios.appservicios.entidades.Servicio;
+import grupo_app_servicios.appservicios.entidades.ImagenProvEntidad;
+import grupo_app_servicios.appservicios.entidades.ProveedorEntidad;
+import grupo_app_servicios.appservicios.entidades.ServicioEntidad;
 import grupo_app_servicios.appservicios.excepciones.MiExcepcion;
-import grupo_app_servicios.appservicios.repositorios.ImagenProveedorRepositorio;
+import grupo_app_servicios.appservicios.repositorios.ImagenProvRepositorio;
 import grupo_app_servicios.appservicios.repositorios.ProveedorRepositorio;
 import grupo_app_servicios.appservicios.repositorios.ServicioRepositorio;
 import grupo_app_servicios.appservicios.repositorios.SolicitudRepositorio;
@@ -31,13 +31,13 @@ public class ProveedorServicio2 {
     @Autowired
     ProveedorRepositorio pRepositorio;
     @Autowired
-    ImagenProveedorRepositorio imgRepositorio;
+    ImagenProvRepositorio imgRepositorio;
     @Autowired
     ServicioRepositorio sRepositorio;
     @Autowired
     SolicitudRepositorio solicitudRepositorio;
     @Autowired
-    ImagenServicio imgServicio;
+    ImagenProvServicio imgServicio;
 
     // CREAR PROVEEDOR
 
@@ -45,7 +45,7 @@ public class ProveedorServicio2 {
     public void crearProveedor(ProveedorDTO proveedorDTO, MultipartFile imagenFile) throws MiExcepcion {
         try {
             // Crear una nueva instancia de Proveedor a partir de ProveedorDTO
-            Proveedor proveedor = new Proveedor();
+            ProveedorEntidad proveedor = new ProveedorEntidad();
             proveedor.setNombre(proveedorDTO.getNombre());
             proveedor.setApellido(proveedorDTO.getApellido());
             proveedor.setTelefono(proveedorDTO.getTelefono());
@@ -55,7 +55,7 @@ public class ProveedorServicio2 {
             proveedor.setDescripcion(proveedorDTO.getDescripcion());
             // Asignar la imagen al proveedor si se proporcionó una en el formulario
             if (imagenFile != null && !imagenFile.isEmpty()) {
-                ImagenProveedor imagen = imgServicio.guardar(imagenFile);
+                ImagenProvEntidad imagen = imgServicio.guardar(imagenFile);
                 proveedor.setFoto(imagen);
             }
             //IMPORTANTE: falta setearle el servicio y las solicitudes cuando las tenga.
@@ -68,7 +68,7 @@ public class ProveedorServicio2 {
     
     // BUSCAR PROVEEDOR POR ID
     @Transactional(readOnly = true)
-    public Proveedor buscaProveedorId(UUID id) {
+    public ProveedorEntidad buscaProveedorId(UUID id) {
         return pRepositorio.findById(id).orElse(null);
     }
 
@@ -76,12 +76,12 @@ public class ProveedorServicio2 {
     @Transactional
     public void modificarProveedor(ProveedorDTO proveedorDTO) {
         // Se buscar por id y se guarda en un optional
-        Optional<Proveedor> respuesta = pRepositorio.findById(proveedorDTO.getId());
+        Optional<ProveedorEntidad> respuesta = pRepositorio.findById(proveedorDTO.getId());
 
         // Si el opctional tiene presente un resultado
         if (respuesta.isPresent()) {
             // Guardamos el resultado de la solicitud existente
-            Proveedor proveedorExistente = respuesta.get();
+            ProveedorEntidad proveedorExistente = respuesta.get();
 
             proveedorExistente.setNombre(proveedorDTO.getNombre());
             proveedorExistente.setApellido(proveedorDTO.getApellido());
@@ -93,7 +93,7 @@ public class ProveedorServicio2 {
 
             // Asignar foto si está presente en el DTO
             if (proveedorDTO.getFoto() != null) {
-                ImagenProveedor imagen = imgRepositorio.findById(proveedorDTO.getFoto().getId())
+                ImagenProvEntidad imagen = imgRepositorio.findById(proveedorDTO.getFoto().getId())
                         .orElseThrow(() -> new RuntimeException(
                                 "Imagen no encontrada con ID: " + proveedorDTO.getFoto().getId()));
                 proveedorExistente.setFoto(imagen);
@@ -101,7 +101,7 @@ public class ProveedorServicio2 {
 
             // Asignar servicio si está presente en el DTO
             if (proveedorDTO.getServicio() != null) {
-                Servicio servicio = sRepositorio.findById(proveedorDTO.getServicio().getId())
+                ServicioEntidad servicio = sRepositorio.findById(proveedorDTO.getServicio().getId())
                         .orElseThrow(() -> new RuntimeException(
                                 "Servicio no encontrado con ID: " + proveedorDTO.getServicio().getId()));
                 proveedorExistente.setServicio(servicio);
@@ -116,7 +116,7 @@ public class ProveedorServicio2 {
     // LISTAR PROVEEDORES
     @Transactional(readOnly = true)
     public List<ProveedorDTO> listarProveedores() {
-        List<Proveedor> proveedores = new ArrayList<>();
+        List<ProveedorEntidad> proveedores = new ArrayList<>();
 
         proveedores = pRepositorio.findAll();
 

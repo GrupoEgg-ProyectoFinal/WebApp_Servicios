@@ -2,7 +2,7 @@ package grupo_app_servicios.appservicios.servicios;
 
 
 import grupo_app_servicios.appservicios.Dto.UsuarioDTO;
-import grupo_app_servicios.appservicios.entidades.Usuario;
+import grupo_app_servicios.appservicios.entidades.UsuarioEntidad;
 import grupo_app_servicios.appservicios.enumeraciones.Rol;
 import grupo_app_servicios.appservicios.excepciones.MiExcepcion;
 import grupo_app_servicios.appservicios.repositorios.UsuarioRepositorio;
@@ -35,7 +35,7 @@ public class UsuarioServicio implements UserDetailsService {
     public void  crearUsuario(UsuarioDTO usuarioDTO, String contrasena2){
         //validar que las contraseñas sean iguales 
         
-        Usuario usuario = new Usuario();
+        UsuarioEntidad usuario = new UsuarioEntidad();
         usuario.setNombre(usuarioDTO.getNombre());
         usuario.setApellido(usuarioDTO.getApellido());
         usuario.setEmail(usuarioDTO.getEmail());
@@ -53,7 +53,7 @@ public class UsuarioServicio implements UserDetailsService {
     public void modificarUsuario(UsuarioDTO usuarioDTO) throws MiExcepcion {
         validar(usuarioDTO.getNombre(), usuarioDTO.getEmail());
 
-        Usuario usuario = usuarioRepositorio.getById(usuarioDTO.getId());
+        UsuarioEntidad usuario = usuarioRepositorio.getById(usuarioDTO.getId());
 
         usuario.setNombre(usuarioDTO.getNombre());
         usuario.setApellido(usuarioDTO.getApellido());
@@ -80,13 +80,13 @@ public class UsuarioServicio implements UserDetailsService {
 
     @Transactional(readOnly = true)
     public List<UsuarioDTO> listarUsuarios() {
-        List<Usuario> usuarios = usuarioRepositorio.findAll();
+        List<UsuarioEntidad> usuarios = usuarioRepositorio.findAll();
         return usuarios.stream()
                 .map(this::convertirADTO)
                 .collect(Collectors.toList());
     }
 
-    private UsuarioDTO convertirADTO(Usuario usuario) {
+    private UsuarioDTO convertirADTO(UsuarioEntidad usuario) {
         UsuarioDTO dto = new UsuarioDTO();
         dto.setId(usuario.getId());
         dto.setNombre(usuario.getNombre());
@@ -107,7 +107,7 @@ public class UsuarioServicio implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String emailUsuario) throws UsernameNotFoundException {
-        Usuario user = usuarioRepositorio.buscarPorEmail(emailUsuario);
+        UsuarioEntidad user = usuarioRepositorio.buscarPorEmail(emailUsuario);
 
         if (user == null) return null;
 

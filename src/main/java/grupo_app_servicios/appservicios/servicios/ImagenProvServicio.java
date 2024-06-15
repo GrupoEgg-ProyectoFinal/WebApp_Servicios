@@ -9,21 +9,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import grupo_app_servicios.appservicios.entidades.ImagenProveedor;
+import grupo_app_servicios.appservicios.entidades.ImagenProvEntidad;
 import grupo_app_servicios.appservicios.excepciones.MiExcepcion;
-import grupo_app_servicios.appservicios.repositorios.ImagenProveedorRepositorio;
+import grupo_app_servicios.appservicios.repositorios.ImagenProvRepositorio;
 
-public class ImagenServicio {
+public class ImagenProvServicio {
     @Autowired
-    private ImagenProveedorRepositorio imgRepositorio;
-
+    private ImagenProvRepositorio imgRepositorio;
 
     //CARGAR FOTO DE PERFIL
     @Transactional
-    public ImagenProveedor guardar(MultipartFile archivo) throws MiExcepcion {
+    public ImagenProvEntidad guardar(MultipartFile archivo) throws MiExcepcion {
         if (archivo != null && !archivo.isEmpty()) {
             try {
-                ImagenProveedor imagen = new ImagenProveedor();
+                ImagenProvEntidad imagen = new ImagenProvEntidad();
                 imagen.setMime(archivo.getContentType());
                 imagen.setNombre(archivo.getOriginalFilename());
                 imagen.setContenido(archivo.getBytes());
@@ -36,15 +35,13 @@ public class ImagenServicio {
         }
     }
 
-
-
     //ACTUALIZAR FOTO DE PERFIL
-    public ImagenProveedor actualizarImg(MultipartFile archivo, UUID idImagen) throws MiExcepcion {
+    public ImagenProvEntidad actualizarImg(MultipartFile archivo, UUID idImagen) throws MiExcepcion {
         if (archivo != null) {
             try {
-                ImagenProveedor imagen = new ImagenProveedor();
+                ImagenProvEntidad imagen = new ImagenProvEntidad();
                 if (idImagen != null) {
-                    Optional<ImagenProveedor> respuesta = imgRepositorio.findById(idImagen);
+                    Optional<ImagenProvEntidad> respuesta = imgRepositorio.findById(idImagen);
                     if (respuesta.isPresent()) {
                         imagen = respuesta.get();
                     }
@@ -62,7 +59,7 @@ public class ImagenServicio {
 
     //LISTAR TODAS LAS FOTOS DE LA BASE DE DATOS.
     @Transactional(readOnly = true)
-    public List<ImagenProveedor> listarTodos() {
+    public List<ImagenProvEntidad> listarTodos() {
         return imgRepositorio.findAll();
     }
 

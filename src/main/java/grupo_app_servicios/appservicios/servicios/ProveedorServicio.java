@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
-import grupo_app_servicios.appservicios.entidades.Proveedor;
-import grupo_app_servicios.appservicios.entidades.Servicio;
-import grupo_app_servicios.appservicios.repositorios.ImagenProveedorRepositorio;
+import grupo_app_servicios.appservicios.entidades.ProveedorEntidad;
+import grupo_app_servicios.appservicios.entidades.ServicioEntidad;
+import grupo_app_servicios.appservicios.repositorios.ImagenProvRepositorio;
 import grupo_app_servicios.appservicios.repositorios.ProveedorRepositorio;
 import grupo_app_servicios.appservicios.repositorios.ServicioRepositorio;
 import grupo_app_servicios.appservicios.utilidades.MapeadorDtoAEntidad;
@@ -20,11 +20,11 @@ public class ProveedorServicio {
     @Autowired
     ProveedorRepositorio pRepositorio;
     @Autowired
-    ImagenProveedorRepositorio imgProveedorRepositorio;
+    ImagenProvRepositorio imgProveedorRepositorio;
     @Autowired
     ServicioRepositorio sRepositorio;
 
-    private List<ProveedorDTO> mapearListaEntidadesADto(List<Proveedor> listaDeEntidades) {
+    private List<ProveedorDTO> mapearListaEntidadesADto(List<ProveedorEntidad> listaDeEntidades) {
         // Se creó este método ya que se utiliza en otros métodos dentro de esta clase,
         // y así hacer más legible el código a través de la reutilización.
 
@@ -37,7 +37,7 @@ public class ProveedorServicio {
 
     @Transactional(readOnly = true)
     public List<ProveedorDTO> obtenerTodos() {
-        List<Proveedor> listaDeEntidades = pRepositorio.findAll();
+        List<ProveedorEntidad> listaDeEntidades = pRepositorio.findAll();
         List<ProveedorDTO> listaDtosMapeados = mapearListaEntidadesADto(listaDeEntidades);
 
         return listaDtosMapeados;
@@ -45,7 +45,7 @@ public class ProveedorServicio {
 
     @Transactional(readOnly = true)
     public List<ProveedorDTO> obtenerProveedoresSegunServicio(String nombreServicio) {
-        List<Proveedor> listaDeEntidades = pRepositorio.obtenerProveedoresPorServicio(nombreServicio);
+        List<ProveedorEntidad> listaDeEntidades = pRepositorio.obtenerProveedoresPorServicio(nombreServicio);
         List<ProveedorDTO> listaDtosMapeados = mapearListaEntidadesADto(listaDeEntidades);
 
         return listaDtosMapeados;
@@ -53,7 +53,7 @@ public class ProveedorServicio {
 
     @Transactional(readOnly = true)
     public List<ProveedorDTO> obtenerProveedoresSegunNombreYApellido(String valorBusqueda) {
-        List<Proveedor> listaDeEntidades = pRepositorio.obtenerProveedoresPorNombreYOApellido(valorBusqueda);
+        List<ProveedorEntidad> listaDeEntidades = pRepositorio.obtenerProveedoresPorNombreYOApellido(valorBusqueda);
         List<ProveedorDTO> listaDtosMapeados = mapearListaEntidadesADto(listaDeEntidades);
 
         return listaDtosMapeados;
@@ -61,10 +61,10 @@ public class ProveedorServicio {
 
     @Transactional
     public void crear(ProveedorDTO proveedorDTO) {
-        Proveedor dtoMapeadoAEntidad = MapeadorDtoAEntidad.mapearProveedor(proveedorDTO);
+        ProveedorEntidad dtoMapeadoAEntidad = MapeadorDtoAEntidad.mapearProveedor(proveedorDTO);
         // Asignar servicio si está presente en el DTO
         if (proveedorDTO.getServicio() != null) {
-            Servicio servicio = sRepositorio.findById(proveedorDTO.getServicio().getId())
+            ServicioEntidad servicio = sRepositorio.findById(proveedorDTO.getServicio().getId())
                     .orElseThrow(() -> new RuntimeException(
                             "Servicio no encontrado con ID: " + proveedorDTO.getServicio().getId()));
             dtoMapeadoAEntidad.setServicio(servicio);
@@ -85,7 +85,7 @@ public class ProveedorServicio {
         // frenaría la aplicación. La excepción común controla que el código esté bien y
         // en caso de ser lanzada (ya sea en compilación o ejecución),
         // la aplicación se detendría hasta solucionar ese problema.
-        Proveedor dtoMapeadoAEntidad = pRepositorio.findById(proveedor.getId()).orElseThrow(
+        ProveedorEntidad dtoMapeadoAEntidad = pRepositorio.findById(proveedor.getId()).orElseThrow(
                 () -> new RuntimeException("No se ha encontrado un proveedor con la id seleccionada")
         // reemplazar la runtimeException por una excepcion personalizada en el futuro
         );
