@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class ImagenProvDTO {
     private UUID id;
-    private byte[] contenido;
-    private String formato;
+    private String mime;
     private String nombre;
+    private byte[] contenido;
 }
