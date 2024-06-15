@@ -60,19 +60,39 @@ public class ProveedorServicio2 {
                 proveedor.setFoto(imagen);
             }
             //IMPORTANTE: falta setearle el servicio y las solicitudes cuando las tenga.
+            // Asignar servicio si está presente en el DTO
+            if (proveedorDTO.getServicio() != null) {
+                ServicioEntidad servicio = sRepositorio.findById(proveedorDTO.getServicio().getId())
+                        .orElseThrow(() -> new RuntimeException(
+                                "Servicio no encontrado con ID: " + proveedorDTO.getServicio().getId()));
+                proveedor.setServicio(servicio);
+            }
+
             // Guardar el proveedor en la base de datos
             pRepositorio.save(proveedor);
         } catch (MiExcepcion e) {
             throw new MiExcepcion("Error al guardar la imagen: " + e.getMessage());
         }
     }
-    
+
+    // MÉTODOS DE BÚSQUEDA (READ)
+    // LISTAR TODOS
+    @Transactional(readOnly = true)
+    public List<ProveedorDTO> listarProveedores() {
+        List<ProveedorEntidad> proveedores = new ArrayList<>();
+
+        proveedores = pRepositorio.findAll();
+
+        return proveedores.stream().map(
+                proveedor -> MapeadorEntidadADto.mapearProveedor(proveedor)).toList();
+    }
     // BUSCAR PROVEEDOR POR ID
     @Transactional(readOnly = true)
-    public ProveedorEntidad buscaProveedorId(UUID id) {
-        return pRepositorio.findById(id).orElse(null);
+    public ProveedorDTO buscaProveedorId(UUID id) {
+        return MapeadorEntidadADto.mapearProveedor(pRepositorio.findById(id).orElse(null));
     }
 
+    //
     // MODIFICAR PROVEEDOR
     @Transactional
     public void modificarProveedor(ProveedorDTO proveedorDTO) {
@@ -114,16 +134,6 @@ public class ProveedorServicio2 {
 
     // ELIMINAR PROVEEDOR
 
-    // LISTAR PROVEEDORES
-    @Transactional(readOnly = true)
-    public List<ProveedorDTO> listarProveedores() {
-        List<ProveedorEntidad> proveedores = new ArrayList<>();
-
-        proveedores = pRepositorio.findAll();
-
-        return proveedores.stream().map(
-                proveedor -> MapeadorEntidadADto.mapearProveedor(proveedor)).toList();
-    }
 
 
     public ImagenProvDTO obtenerImagenPorId(UUID id) {
