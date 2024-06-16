@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
 import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
+import grupo_app_servicios.appservicios.Dto.ServicioDTO;
 import grupo_app_servicios.appservicios.Dto.UsuarioDTO;
 import grupo_app_servicios.appservicios.entidades.UsuarioEntidad;
 import grupo_app_servicios.appservicios.excepciones.MiExcepcion;
 import grupo_app_servicios.appservicios.servicios.ProveedorServicio2;
+import grupo_app_servicios.appservicios.servicios.ServicioServicio;
 import grupo_app_servicios.appservicios.servicios.UsuarioServicio;
 import jakarta.servlet.http.HttpSession;
 
@@ -26,9 +28,10 @@ public class PortalControlador {
 
     @Autowired
     ProveedorServicio2 opcional;
-
     @Autowired
     UsuarioServicio uServicio;
+    @Autowired
+    ServicioServicio sServicio;
 
     // @Autowired
     // ProveedorServicio pServicio;
@@ -37,13 +40,8 @@ public class PortalControlador {
     public String index(Model modelo) {
         List<ProveedorDTO> proveedores = opcional.listarProveedores();
 
-        // Agregar la URL de la imagen para cada proveedor
-        proveedores.forEach(proveedor -> {
-            String fotoUrl = "/imagen/imagenes/" + proveedor.getId(); // Cambia la ruta según tu configuración
-            proveedor.setFotoUrl(fotoUrl);
-        });
-
         modelo.addAttribute("proveedores", proveedores);
+        modelo.addAttribute("servicioDTO", new ServicioDTO());
         return "index.html"; // Acá es que retornamos con el método.
     }
 
@@ -69,8 +67,10 @@ public class PortalControlador {
     public String registrarProveedor(Model model) {
         // Inicializa un nuevo objeto UsuarioDTO
         ProveedorDTO proveedorDTO = new ProveedorDTO();
+        List<ServicioDTO> listaDeServicios = sServicio.listarServicios();
         // Agrega el objeto usuarioDTO al modelo
         model.addAttribute("proveedorDTO", proveedorDTO);
+        model.addAttribute("servicios", listaDeServicios);
         model.addAttribute("contrasena2", ""); // verificar que funcione
         return "registroProveedor.html";
     }

@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -19,4 +20,7 @@ public interface ServicioRepositorio extends JpaRepository<ServicioEntidad, UUID
     // Búsqueda por estado de alta
     @Query("select s from ServicioEntidad s where s.estado = :estado")
     public List<ServicioEntidad> buscarPorEstadoDeAlta(@Param("estado") Boolean estado);
+
+    @Query("select s from ServicioEntidad s where s.nombre = :nombreExacto")
+    public Optional<ServicioEntidad> buscarPorNombreExacto(@Param("nombreExacto") String nombre);
 }
