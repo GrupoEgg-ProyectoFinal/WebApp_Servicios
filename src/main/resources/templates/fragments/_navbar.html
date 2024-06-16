@@ -1,0 +1,47 @@
+<header th:fragment="Navbar (esInicioSesion, esRegistro)">
+    <nav class="navbar">
+        <div class="logo-contenedor">
+            <a th:href="@{/}">
+                <img src="/img/logo.png" alt="Logo" class="logo">
+                <span class="nombreEmpresa">CHACRAS DE CORIA</span>
+            </a>
+        </div>
+
+        <ul class="nav-list">
+            <li><a th:href="@{/}">INICIO</a></li>
+            <li><a th:href="@{/listar}">PROVEEDORES</a></li>
+            <li><a th:href="@{/novedades}">NOVEDADES</a></li>
+            <li><a th:href="@{/sobreNosotros}">CONOCENOS</a></li>
+        </ul>
+
+        <ul class="registro">
+            <li class="desplegable" th:if="${esInicioSesion != true}">
+                <a href="javascript:void(0)" class="dropbtn">INICIAR SESIÓN</a>
+                <div class="desplegable-content">
+                    <a th:href="@{/login}">USUARIO</a>
+                    <a th:href="@{/loginProveedor}">PROVEEDOR</a>
+                </div>
+            </li>
+            <li class="desplegable" th:if="${esRegistro != true}">
+                <a href="javascript:void(0)" class="dropbtn">REGISTRARSE</a>
+                <div class="desplegable-content">
+                    <a th:href="@{/registrarUsuario}">USUARIO</a>
+                    <a th:href="@{/registrarProveedor}">PROVEEDOR</a>
+                </div>
+            </li>
+        </ul>
+
+        <ul id="redes">
+            <li>
+                <a href="" target="_blank">
+                    <img class="social-logo" src="/img/Instagram.svg" alt="instagram">
+                </a>
+            </li>
+            <li>
+                <a href="" target="_blank">
+                    <img class="social-logo" src="/img/Facebook.svg" alt="facebook">
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
