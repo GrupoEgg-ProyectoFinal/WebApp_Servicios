@@ -8,17 +8,17 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-
-import grupo_app_servicios.appservicios.Dto.ImagenProvDTO;
-import grupo_app_servicios.appservicios.entidades.ImagenProvEntidad;
-import grupo_app_servicios.appservicios.entidades.ProveedorEntidad;
-import grupo_app_servicios.appservicios.servicios.ImagenProvServicio;
-import grupo_app_servicios.appservicios.servicios.ProveedorServicio;
-import grupo_app_servicios.appservicios.servicios.ProveedorServicio2;
-
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+
+import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
+import grupo_app_servicios.appservicios.servicios.ImagenProvServicio;
+import grupo_app_servicios.appservicios.servicios.ProveedorServicio2;
 
 @Controller
 @RequestMapping("/imagen")
@@ -30,7 +30,7 @@ public class ImagenProvControlador {
     @PostMapping("/subir")
     public String subirImagen(@RequestParam("archivo") MultipartFile archivo, Model model) {
         try {
-            ImagenProvEntidad imagen = imagenServicio.guardar(archivo);
+            imagenServicio.guardar(archivo);
             model.addAttribute("mensaje", "Imagen subida exitosamente");
         } catch (Exception e) {
             model.addAttribute("error", "Error al subir la imagen: " + e.getMessage());
@@ -41,19 +41,20 @@ public class ImagenProvControlador {
     @Autowired
     ProveedorServicio2 pServicio;
 
-    @GetMapping("/imagenes/{id}")
-    @ResponseBody
-    public ResponseEntity<byte[]> obtenerImagen(@PathVariable UUID id) {
-        ProveedorEntidad proveedor = pServicio.buscaProveedorId(id);
-        if (proveedor != null && proveedor.getFoto() != null) {
-            byte[] imagen = proveedor.getFoto().getContenido();
-            HttpHeaders headers = new HttpHeaders();
-            headers.setContentType(MediaType.IMAGE_PNG);
-    
-            return new ResponseEntity<>(imagen, headers, HttpStatus.OK);
-        } else {
-            // Manejar el caso en que no se encuentre la imagen
-            return ResponseEntity.notFound().build();
-        }
+    @GetMapping("/perfil/{id}")
+    public ResponseEntity<byte[]> imagenUsuario(@PathVariable String id) {
+
+        ProveedorDTO proveedor = pServicio.buscaProveedorId(UUID.fromString(id));
+        // para mostrarlo hay que guardarlo en un arreglo de bytes
+        byte[] imagen = proveedor.getFoto().getContenido();
+
+        //Cabezera del pedido le dice al navegador que lo que estamos devolviendo es una imagen.
+        HttpHeaders headers = new HttpHeaders();
+        //Hay que setearle el contenido y el tipo con el MediaType
+        headers.setContentType(MediaType.IMAGE_PNG);
+        //Estado en el que termina el proceso (404,200,500) para devolverlo
+        //HttpStatus.OK = 200
+        //Respondemos el REntity con esos tres parametros.
+        return new ResponseEntity<>(imagen,headers,HttpStatus.OK);
     }
 }

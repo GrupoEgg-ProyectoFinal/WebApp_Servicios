@@ -144,7 +144,7 @@ public class ProveedorServicio2 {
             ImagenProvDTO imagenProvDTO = new ImagenProvDTO();
             imagenProvDTO.setId(imagenProv.getId());
             imagenProvDTO.setContenido(imagenProv.getContenido());
-            imagenProvDTO.setFormato(imagenProv.getMime());
+            imagenProvDTO.setMime(imagenProv.getMime());
             imagenProvDTO.setNombre(imagenProv.getNombre());
             return imagenProvDTO;
         } else {

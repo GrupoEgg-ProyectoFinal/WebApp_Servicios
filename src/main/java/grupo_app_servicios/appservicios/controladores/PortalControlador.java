@@ -6,12 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
@@ -59,6 +57,12 @@ public class PortalControlador {
         model.addAttribute("contrasena2", ""); // verificar que funcione
         return "registroUsuario.html";
     }
+        
+    @PostMapping("/guardarUsuario")
+    public String guardarUsuario(@ModelAttribute UsuarioDTO usuarioDTO, String contrasena2) {
+        uServicio.crearUsuario(usuarioDTO, contrasena2);
+        return "redirect:/";
+    }
 
     // IR AL REGISTRO DE PROVEEDOR
     @GetMapping("/registrarProveedor")
@@ -79,31 +83,10 @@ public class PortalControlador {
             model.addAttribute("mensaje", "Proveedor registrado exitosamente");
         } catch (MiExcepcion e) {
             model.addAttribute("error", e.getMessage());
+            return "redirect:/registrarProveedor";
         }
-        return "index.html";
+        return "redirect:/";
     }
-    // @PostMapping("/registrarProveedor")
-    // public String registrarProveedor(@ModelAttribute ProveedorDTO
-    // proveedorDTO,@RequestParam("foto") MultipartFile foto,Model model) {
-    // try {
-    // // Crear ImagenProveedorDTO a partir del MultipartFile
-    // ImagenProveedorDTO imagenDTO = new ImagenProveedorDTO();
-    // imagenDTO.setFormato(foto.getContentType());
-    // imagenDTO.setNombre(foto.getOriginalFilename());
-    // imagenDTO.setContenido(foto.getBytes());
-
-    // // Asignar la imagen al ProveedorDTO
-    // proveedorDTO.setFoto(imagenDTO);
-
-    // // Llamar al servicio para registrar el proveedor
-    // opcional.crearProveedor(proveedorDTO);
-    // model.addAttribute("mensaje", "Proveedor registrado exitosamente");
-    // } catch (Exception e) {
-    // model.addAttribute("error", e.getMessage());
-    // }
-    // return "resultado"; // Esta es la vista que se mostrará después de registrar
-    // al proveedor
-    // }
 
     @GetMapping("/login")
     public String inicioSesion() {
@@ -114,21 +97,18 @@ public class PortalControlador {
     public String inicioSesionProveedor() {
         return "sesionProveedor.html";
     }
-    
-    @PostMapping("/guardarUsuario")
-    public String guardarUsuario(@ModelAttribute UsuarioDTO usuarioDTO, String contrasena2) {
-        uServicio.crearUsuario(usuarioDTO, contrasena2);
-        return "redirect:/";
-    }
 
     @GetMapping("/perfil")
     @PreAuthorize("hasAnyRol('ROL_USER', 'ROL_ADMIN')")
     public String inicio(HttpSession session) {
         UsuarioEntidad loguedUser = (UsuarioEntidad) session.getAttribute("usuarioEnSesion");
+        // Ver cómo hacer para que tambien se aplique en el proveedor tambien
+        // ej: con el rol de proveedor en usuario. (Habria que modificar la entidad de proveedor y reveer el tema de inicio de sesion)
+
         String role = loguedUser.getRol().toString();
 
         if (role.equals("ADMIN"))
             return "redirect:/dashboard";
-        return "index.html"; // después cambiarlo por la vista de perfil de usuario
+        return "vistaUsuario.html"; // después cambiarlo por la vista de perfil de usuario
     }
 }
