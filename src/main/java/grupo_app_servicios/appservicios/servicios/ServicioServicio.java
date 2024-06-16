@@ -72,6 +72,7 @@ public class ServicioServicio {
     // CREACIÓN
     @Transactional
     public void crearServicio(ServicioDTO servicio) {
+        servicio.setEstado(true);
         sRepositorio.save(mapearDTOEntidad(servicio));
     }
     
