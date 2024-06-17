@@ -374,3 +374,30 @@ h2 {
     margin-left: 36%; 
 }
 
+#registrarBtn {
+    font-family: "Roboto Condensed", sans-serif;
+    width: 50%;
+    margin-left: 25%;
+    height: 64px;
+    background-color: var(--color);
+    color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+}
+
+#registrarBtn h3 {
+    cursor: pointer;
+}
+
+#registrarBtn:hover {
+    background-color: white;
+}
+
+#registrarBtn:hover h3 {
+    color: var(--color);
+}
