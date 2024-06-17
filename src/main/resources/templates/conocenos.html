@@ -9,55 +9,7 @@
 </head>
 
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="logo-contenedor">
-                <a th:href="@{/index}">
-                    <img src="/img/logoPNG.png" alt="Logo" class="logo">
-                    <span class="nombreEmpresa">DEV SOLUCIONES</span>
-                </a>
-            </div>
-
-            <ul class="nav-list">
-                <li><a th:href="@{/index}">INICIO</a></li>
-            </ul>
-
-            <ul id="redes">
-                <ul class="registro">
-                    <li class="desplegable">
-                        <a href="javascript:void(0)" class="dropbtn">INICIAR SESIÓN</a>
-                        <div class="desplegable-content">
-                            <a th:href="@{/login}">USUARIO</a>
-                            <a th:href="@{/loginProveedor}">PROVEEDOR</a>
-                        </div>
-                    </li>
-                </ul>
-                <li class="desplegable">
-                    <a href="javascript:void(0)" class="dropbtn">REGISTRARSE</a>
-                    <div class="desplegable-content">
-                        <a th:href="@{/login}">USUARIO</a>
-                        <a th:href="@{/loginProveedor}">PROVEEDOR</a>
-                    </div>
-                    </li>
-                <li>
-                    <a href="" target="_blank">
-                        <img class="social-logo" src="/img/Instagram.svg" alt="instagram">
-                    </a>
-                </li>
-                <li>
-                    <a href="" target="_blank">
-                        <img class="social-logo" src="/img/Facebook.svg" alt="facebook">
-                    </a>
-                </li>
-            </ul>
-
-            <div class="marquesina-contenedor">
-                <div class="marquesina">
-                    <p>DEV SOLUCIONES: Conectamos PROFESIONALES con tus necesidades.</p>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <header th:fragment="~{fragments/_navbar :: Navbar(_,_)}"></header>
     <main>
         <!-- PÁGINA 1 'INICIO'-->
         <section id="conocenos">

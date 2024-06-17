@@ -3,35 +3,38 @@
         <div class="logo-contenedor">
             <a th:href="@{/}">
                 <img src="/img/logo.png" alt="Logo" class="logo">
-                <span class="nombreEmpresa">CHACRAS DE CORIA</span>
+                <span class="nombreEmpresa">DEV SOLUCIONES</span>
             </a>
         </div>
 
         <ul class="nav-list">
             <li><a th:href="@{/}">INICIO</a></li>
+            <li><a class="target" th:href="@{/index}">PANEL DE ADMINISTRACION</a></li>
             <li><a th:href="@{/listar}">PROVEEDORES</a></li>
             <li><a th:href="@{/novedades}">NOVEDADES</a></li>
             <li><a th:href="@{/sobreNosotros}">CONOCENOS</a></li>
         </ul>
 
-        <ul class="registro">
-            <li class="desplegable" th:if="${esInicioSesion != true}">
-                <a href="javascript:void(0)" class="dropbtn">INICIAR SESIÓN</a>
+        <ul id="redes">
+            <li class="cerrarSesion">
+                <li><a th:href="@{/index}">CERRAR SESIÓN</a></li>
+            </li>
+            <ul class="registro">
+                <li class="desplegable" th:if="${esInicioSesion != true}">
+                    <a href="javascript:void(0)" class="dropbtn">INICIAR SESIÓN</a>
+                    <div class="desplegable-content">
+                        <a th:href="@{/login}">USUARIO</a>
+                        <a th:href="@{/loginProveedor}">PROVEEDOR</a>
+                    </div>
+                </li>
+            </ul>
+            <li class="desplegable" th:if="${esRegistro != true}">
+                <a href="javascript:void(0)" class="dropbtn">REGISTRARSE</a>
                 <div class="desplegable-content">
                     <a th:href="@{/login}">USUARIO</a>
                     <a th:href="@{/loginProveedor}">PROVEEDOR</a>
                 </div>
-            </li>
-            <li class="desplegable" th:if="${esRegistro != true}">
-                <a href="javascript:void(0)" class="dropbtn">REGISTRARSE</a>
-                <div class="desplegable-content">
-                    <a th:href="@{/registrarUsuario}">USUARIO</a>
-                    <a th:href="@{/registrarProveedor}">PROVEEDOR</a>
-                </div>
-            </li>
-        </ul>
-
-        <ul id="redes">
+                </li>
             <li>
                 <a href="" target="_blank">
                     <img class="social-logo" src="/img/Instagram.svg" alt="instagram">
@@ -43,5 +46,10 @@
                 </a>
             </li>
         </ul>
+        <div class="marquesina-contenedor">
+            <div class="marquesina">
+                <p>DEV SOLUCIONES: Conectamos PROFESIONALES con tus necesidades.</p>
+            </div>
+        </div>
     </nav>
 </header>

@@ -90,6 +90,16 @@ public class ProveedorServicio2 {
         return proveedores.stream().map(
                 proveedor -> MapeadorEntidadADto.mapearProveedor(proveedor)).toList();
     }
+    // LISTAR SEGÚN SERVICIO
+    @Transactional(readOnly = true)
+    public List<ProveedorDTO> listarProveedoresSegunServicio(String nombreServicio) {
+        List<ProveedorEntidad> proveedores = new ArrayList<>();
+
+        proveedores = pRepositorio.obtenerProveedoresPorServicio(nombreServicio);
+
+        return proveedores.stream().map(
+                proveedor -> MapeadorEntidadADto.mapearProveedor(proveedor)).toList();
+    }
     // BUSCAR PROVEEDOR POR ID
     @Transactional(readOnly = true)
     public ProveedorDTO buscaProveedorId(UUID id) {
