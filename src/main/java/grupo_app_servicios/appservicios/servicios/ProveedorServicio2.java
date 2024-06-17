@@ -67,6 +67,10 @@ public class ProveedorServicio2 {
                                 "Servicio no encontrado con ID: " + proveedorDTO.getServicio().getId()));
                 proveedor.setServicio(servicio);
             }
+            /* ServicioEntidad servicio = sRepositorio.buscarPorNombreExacto(nombreServicio).orElseThrow(
+                () -> new MiExcepcion("No se ha encontrado un servicio con el nombre ingresado. " + nombreServicio)
+            );
+            proveedor.setServicio(servicio); */
 
             // Guardar el proveedor en la base de datos
             pRepositorio.save(proveedor);
@@ -144,7 +148,7 @@ public class ProveedorServicio2 {
             ImagenProvDTO imagenProvDTO = new ImagenProvDTO();
             imagenProvDTO.setId(imagenProv.getId());
             imagenProvDTO.setContenido(imagenProv.getContenido());
-            imagenProvDTO.setFormato(imagenProv.getMime());
+            imagenProvDTO.setMime(imagenProv.getMime());
             imagenProvDTO.setNombre(imagenProv.getNombre());
             return imagenProvDTO;
         } else {

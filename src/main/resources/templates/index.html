@@ -9,56 +9,7 @@
 </head>
 
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="logo-contenedor">
-                <a th:href="@{/index}">
-                    <img src="/img/logoPNG.png" alt="Logo" class="logo">
-                    <span class="nombreEmpresa">DEV SOLUCIONES</span>
-                </a>
-            </div>
-
-            <ul class="nav-list">
-                <li><a th:href="@{/index}">INICIO</a></li>
-                <li><a th:href="@{/sobreNosotros}">CONOCENOS</a></li>
-            </ul>
-
-            <ul id="redes">
-                <ul class="registro">
-                    <li class="desplegable">
-                        <a href="javascript:void(0)" class="dropbtn">INICIAR SESIÓN</a>
-                        <div class="desplegable-content">
-                            <a th:href="@{/login}">USUARIO</a>
-                            <a th:href="@{/loginProveedor}">PROVEEDOR</a>
-                        </div>
-                    </li>
-                </ul>
-                <li class="desplegable">
-                    <a href="javascript:void(0)" class="dropbtn">REGISTRARSE</a>
-                    <div class="desplegable-content">
-                        <a th:href="@{/login}">USUARIO</a>
-                        <a th:href="@{/loginProveedor}">PROVEEDOR</a>
-                    </div>
-                    </li>
-                <li>
-                    <a href="" target="_blank">
-                        <img class="social-logo" src="/img/Instagram.svg" alt="instagram">
-                    </a>
-                </li>
-                <li>
-                    <a href="" target="_blank">
-                        <img class="social-logo" src="/img/Facebook.svg" alt="facebook">
-                    </a>
-                </li>
-            </ul>
-            
-            <div class="marquesina-contenedor">
-                <div class="marquesina">
-                    <p>DEV SOLUCIONES: Conectamos PROFESIONALES con tus necesidades.</p>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <header th:replace="~{fragments/_navbar :: Navbar(esInicioSesion = false, esRegistro=false)}"></header>
     <main>
         <!-- PÁGINA 1 'INICIO'-->
         <section id="inicio">
@@ -68,18 +19,13 @@
                         <div class="izquierda">
                             <img src="/img/gasistaLogo.PNG" alt="Imagen del proveedor Gasista">
                         </div>
-                        <div class="derecha">
-                            <div class="dosPalabras">
-                                <h2 class="tituloPintado">SERVICIO:</h2> 
-                                <h2>GAS</h2>
-                            </div>
-                            <h4 class="tituloPintado">DESCRIPCIÓN:</h4>
-                            <h5>Contamos con profesionales matriculados especializados en la instalación, mantenimiento y reparación de sistemas de gas en hogares, comercios e industrias.</h5>
-                            <div class="saber-mas-btn">
-                                <a href="registro" target="_blank">
-                                    <h5>Saber más ➝</h5>
-                                </a>
-                            </div>
+                        <h4 class="tituloPintado">DESCRIPCIÓN:</h4>
+                        <h5>Contamos con profesionales matriculados especializados en la instalación, mantenimiento y
+                            reparación de sistemas de gas en hogares, comercios e industrias.</h5>
+                        <div class="saber-mas-btn">
+                            <a href="registro" target="_blank">
+                                <h5>Saber más ➝</h5>
+                            </a>
                         </div>
                     </div>
             
@@ -87,42 +33,56 @@
                         <div class="izquierda centro">
                             <img src="/img/plomeroLogo.png" alt="Imagen del proveedor Plomero">
                         </div>
-                        <div class="derecha">
-                            <div class="dosPalabras">
-                                <h2 class="tituloPintado">SERVICIO:</h2> 
-                                <h2>PLOMERÍA</h2>
-                            </div>
-                            <h3 class="tituloPintado">DESCRIPCIÓN:</h3>
-                            <h5>Expertos en la instalación, reparación y mantenimiento de sistemas de plomería en viviendas y empresas.</h5>
-                            <div class="saber-mas-btn">
-                                <a href="registro" target="_blank">
-                                    <h5>Saber más ➝</h5>
-                                </a>
-                            </div>
+                        <h3 class="tituloPintado">DESCRIPCIÓN:</h3>
+                        <h5>Expertos en la instalación, reparación y mantenimiento de sistemas de plomería en viviendas
+                            y empresas.</h5>
+                        <div class="saber-mas-btn">
+                            <a href="registro" target="_blank">
+                                <h5>Saber más ➝</h5>
+                            </a>
                         </div>
                     </div>
-            
+
                     <div class="proveedor-card">
                         <div class="izquierda derecha">
                             <img src="/img/electricistaLogo.png" alt="Imagen del proveedor Electricista">
                         </div>
-                        <div class="derecha">
-                            <div class="dosPalabras">
-                                <h3 class="tituloPintado">SERVICIO:</h3> 
-                                <h3>ELECTRICIDAD</h3>
-                            </div>
-                            <h4 class="tituloPintado">DESCRIPCIÓN:</h4>
-                            <h5>Profesionales especializados en instalaciones eléctricas, reparaciones y mantenimiento para hogares y negocios.</h5>
+                        <h4 class="tituloPintado">DESCRIPCIÓN:</h4>
+                        <h5>Profesionales especializados en instalaciones eléctricas, reparaciones y mantenimiento para
+                            hogares y negocios.</h5>
 
-                            <div class="saber-mas-btn">
-                                <a href="registro" target="_blank">
-                                    <h5>Saber más ➝</h5>
-                                </a>
-                            </div>
+                        <div class="saber-mas-btn">
+                            <a href="registro" target="_blank">
+                                <h5>Saber más ➝</h5>
+                            </a>
                         </div>
                     </div>
-                </div>               
+                </div>
+            </div>
+            <div class="proveedores-container">
+                <div class="proveedor-card"  th:each="proveedor : ${proveedores}" th:object="${proveedor}">
+                    <div class="izquierda">
+                        <img th:src="@{'/imagen/perfil/' + *{id.toString()}}"
+                            alt="Foto del proveedor">
+                    </div>
+                    <div class="derecha">
+                        <div class="dosPalabras">
+                            <h3 th:text="*{nombre}"></h3>
+                            <h3 th:text="*{apellido}"></h3>
+                        </div>
+                        <p>Telefono: <span th:text="*{telefono}"></span></p>
+                        <p>Número de matricula: <span th:text="*{matricula}"></span></p>
+                    </div>
+                </div>
+            </div>    
         </section>
+        <article>
+            <h2 style="color: black;">Formulario de registro de Servicios (llevar al panel de admin)</h2>
+            <form th:action="@{/servicio}" method="post" th:object="${servicioDTO}">
+                <input type="text" name="nombre" placeholder="Ingrese el nombre del servicio">
+                <button type="submit">Enviar</button>
+            </form>
+        </article>
     </main>
 
     <footer>
@@ -130,4 +90,5 @@
     </footer>
     <!--correr spring terminal   ./mvnw spring-boot:run  -->
 </body>
+
 </html>

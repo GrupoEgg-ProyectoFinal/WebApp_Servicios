@@ -7,7 +7,6 @@ import lombok.Data;
 
 @Data
 public class ProveedorDTO {
-
     private UUID id;
     private String nombre;
     private String apellido;
@@ -20,6 +19,4 @@ public class ProveedorDTO {
 
     private ServicioDTO servicio;
     private List<SolicitudDTO> solicitudes;
-    private String fotoUrl; // Nuevo campo para la URL de la imagen
-
 }

@@ -7,50 +7,7 @@
     <link rel="stylesheet" href="/styles/styleRegistroProveedor.css">
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="logo-contenedor">
-                <a th:href="@{/index}">
-                    <img src="/img/logoPNG.png" alt="Logo" class="logo">
-                    <span class="nombreEmpresa">DEV SOLUCIONES</span>
-                </a>
-            </div>
-
-            <ul class="nav-list">
-                <li><a th:href="@{/index}">INICIO</a></li>
-                <li><a th:href="@{/sobreNosotros}">CONOCENOS</a></li>
-            </ul>
-
-            <ul id="redes">
-                <ul class="registro">
-                    <li class="desplegable">
-                        <a href="javascript:void(0)" class="dropbtn">INICIAR SESIÓN</a>
-                        <div class="desplegable-content">
-                            <a th:href="@{/login}">USUARIO</a>
-                            <a th:href="@{/loginProveedor}">PROVEEDOR</a>
-                        </div>
-                    </li>
-                </ul>
-                <li>
-                    <a href="" target="_blank">
-                        <img class="social-logo" src="/img/Instagram.svg" alt="instagram">
-                    </a>
-                </li>
-                <li>
-                    <a href="" target="_blank">
-                        <img class="social-logo" src="/img/Facebook.svg" alt="facebook">
-                    </a>
-                </li>
-            </ul>
-
-            <div class="marquesina-contenedor">
-                <div class="marquesina">
-                    <p>DEV SOLUCIONES: Conectamos PROFESIONALES con tus necesidades.</p>
-                </div>
-            </div>
-        </nav>
-    </header>
-
+    <header th:replace="~{fragments/_navbar :: Navbar(_,true)}"></header>
     <main>
         <section id="registro">
             <div id="form">
@@ -69,7 +26,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="imagenProveedor"><h2>SELECCIONE UNA IMAGEN DE PERFIL</h2></label>
-                                <input type="file" id="imagenProveedor" name="imagen" accept="image/*" placeholder="Cargar una imagen de perfil" required>
+                                <input type="file" id="imagenProveedor" name="imagenFile" accept="image/*" placeholder="Cargar una imagen de perfil" required>
                             </div>
                         </div>
                         <div class="form-column">
@@ -91,6 +48,12 @@
                                 </select>
                             </div>
                         </div>
+                    </div>
+                    <div class="form-row full-width">
+                        <select name="servicio" id="servicio">
+                            Seleccione el servicio que brinda
+                            <option th:each="servicio : ${servicios}" th:value="${servicio}" th:text="${servicio.nombre}"></option>
+                        </select>
                     </div>
                     <div class="form-row full-width">
                         <div class="form-group">
