@@ -6,8 +6,16 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import grupo_app_servicios.appservicios.Dto.ImagenProvDTO;
@@ -21,6 +29,7 @@ import grupo_app_servicios.appservicios.repositorios.ProveedorRepositorio;
 import grupo_app_servicios.appservicios.repositorios.ServicioRepositorio;
 import grupo_app_servicios.appservicios.repositorios.SolicitudRepositorio;
 import grupo_app_servicios.appservicios.utilidades.MapeadorEntidadADto;
+import jakarta.servlet.http.HttpSession;
 
 //Metodos
 //CREAR PROVEEDOR
@@ -28,7 +37,7 @@ import grupo_app_servicios.appservicios.utilidades.MapeadorEntidadADto;
 //ACTUALIZAR PROVEEDOR
 //ELIMINAR PROVEEDOR
 @Service
-public class ProveedorServicio2 {
+public class ProveedorServicio2 implements UserDetailsService{
     @Autowired
     ProveedorRepositorio pRepositorio;
     @Autowired
@@ -164,6 +173,25 @@ public class ProveedorServicio2 {
         } else {
             throw new RuntimeException("Imagen no encontrada para el proveedor con id: " + id);
         }
+    }
+
+    // MÉTODO PARA CARGAR USUARIO EN SESIÓN
+    @Override
+    public UserDetails loadUserByUsername(String emailProveedor) throws UsernameNotFoundException {
+        ProveedorEntidad user = pRepositorio.buscarPorEmail(emailProveedor);
+
+        if (user == null) return null;
+
+        List<GrantedAuthority> permisos = new ArrayList<GrantedAuthority>();
+        GrantedAuthority perms = new SimpleGrantedAuthority("ROL_" + user.getRol().toString());
+
+        permisos.add(perms);
+
+        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+        HttpSession session = attr.getRequest().getSession();
+        session.setAttribute("usuarioEnSesion", user);
+
+        return new User(user.getEmail(), user.getContrasena(), permisos);
     }
 
 }

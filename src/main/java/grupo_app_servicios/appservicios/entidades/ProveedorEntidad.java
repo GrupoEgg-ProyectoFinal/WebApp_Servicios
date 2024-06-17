@@ -3,8 +3,11 @@ package grupo_app_servicios.appservicios.entidades;
 import java.util.List;
 import java.util.UUID;
 
+import grupo_app_servicios.appservicios.enumeraciones.Rol;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -37,6 +40,9 @@ public class ProveedorEntidad {
     private String email;
     @Column(nullable = false)
     private String contrasena;
+    @Enumerated(EnumType.STRING)
+    private Rol rol;
+
 
     private String descripcion;
 
