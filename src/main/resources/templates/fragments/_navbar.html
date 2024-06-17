@@ -16,8 +16,8 @@
         </ul>
 
         <ul id="redes">
-            <li class="cerrarSesion">
-                <li><a th:href="@{/index}">CERRAR SESIÓN</a></li>
+            <li class="cerrarSesion" th:if="${session.usuarioEnSession != null}">
+                <li><a href="/logout">CERRAR SESIÓN</a></li>
             </li>
             <ul class="registro">
                 <li class="desplegable" th:if="${esInicioSesion != true}">

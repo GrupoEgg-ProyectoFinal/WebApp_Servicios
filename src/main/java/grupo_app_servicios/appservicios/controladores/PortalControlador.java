@@ -116,4 +116,10 @@ public class PortalControlador {
             return "redirect:/dashboard";
         return "vistaUsuario.html"; // después cambiarlo por la vista de perfil de usuario
     }
+
+    @GetMapping("/dashboard")
+    @PreAuthorize("hasRole('ROL_ADMIN')")
+    public String panelAdministrativo(HttpSession session) {
+        return "vistaAdmin.html";
+    }
 }
