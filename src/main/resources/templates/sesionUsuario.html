@@ -7,41 +7,7 @@
     <link rel="stylesheet" href="/styles/styleSesionUsuario&Proveedor.css">
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="logo-contenedor">
-                <a th:href="@{/index}">
-                    <img src="/img/logoPNG.png" alt="Logo" class="logo">
-                    <span class="nombreEmpresa">DEV SOLUCIONES</span>
-                </a>
-            </div>
-
-            <ul class="nav-list">
-                <li><a th:href="@{/index}">VOLVER AL INICIO</a></li>
-
-                <li><a th:href="@{/sobreNosotros}">CONOCENOS</a></li>
-            </ul>
-
-            <ul id="redes">
-                <li>
-                    <a href="" target="_blank">
-                        <img class="social-logo" src="/img/Instagram.svg" alt="instagram">
-                    </a>
-                </li>
-                <li>
-                    <a href="" target="_blank">
-                        <img class="social-logo" src="/img/Facebook.svg" alt="facebook">
-                    </a>
-                </li>
-            </ul>
-            <div class="marquesina-contenedor">
-                <div class="marquesina">
-                    <p>DEV SOLUCIONES: Conectamos PROFESIONALES con tus necesidades.</p>
-                </div>
-            </div>
-        </nav>
-    </header>
-
+    <header th:fragment="~{fragments/navbar Navbar(true,_)}"></header>
     <main>
         <section id="inicioSesion">
         <div id="formUsuario">
