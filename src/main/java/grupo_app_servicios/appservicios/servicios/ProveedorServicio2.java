@@ -67,6 +67,10 @@ public class ProveedorServicio2 {
                                 "Servicio no encontrado con ID: " + proveedorDTO.getServicio().getId()));
                 proveedor.setServicio(servicio);
             }
+            /* ServicioEntidad servicio = sRepositorio.buscarPorNombreExacto(nombreServicio).orElseThrow(
+                () -> new MiExcepcion("No se ha encontrado un servicio con el nombre ingresado. " + nombreServicio)
+            );
+            proveedor.setServicio(servicio); */
 
             // Guardar el proveedor en la base de datos
             pRepositorio.save(proveedor);
@@ -82,6 +86,16 @@ public class ProveedorServicio2 {
         List<ProveedorEntidad> proveedores = new ArrayList<>();
 
         proveedores = pRepositorio.findAll();
+
+        return proveedores.stream().map(
+                proveedor -> MapeadorEntidadADto.mapearProveedor(proveedor)).toList();
+    }
+    // LISTAR SEGÚN SERVICIO
+    @Transactional(readOnly = true)
+    public List<ProveedorDTO> listarProveedoresSegunServicio(String nombreServicio) {
+        List<ProveedorEntidad> proveedores = new ArrayList<>();
+
+        proveedores = pRepositorio.obtenerProveedoresPorServicio(nombreServicio);
 
         return proveedores.stream().map(
                 proveedor -> MapeadorEntidadADto.mapearProveedor(proveedor)).toList();
@@ -144,7 +158,7 @@ public class ProveedorServicio2 {
             ImagenProvDTO imagenProvDTO = new ImagenProvDTO();
             imagenProvDTO.setId(imagenProv.getId());
             imagenProvDTO.setContenido(imagenProv.getContenido());
-            imagenProvDTO.setFormato(imagenProv.getMime());
+            imagenProvDTO.setMime(imagenProv.getMime());
             imagenProvDTO.setNombre(imagenProv.getNombre());
             return imagenProvDTO;
         } else {

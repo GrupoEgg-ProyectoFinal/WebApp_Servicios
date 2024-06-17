@@ -88,7 +88,9 @@ public class UsuarioServicio implements UserDetailsService {
     public void modificarUsuario(UsuarioDTO usuarioDTO) throws MiExcepcion {
         validar(usuarioDTO.getNombre(), usuarioDTO.getEmail());
 
-        UsuarioEntidad usuario = usuarioRepositorio.getById(usuarioDTO.getId());
+        UsuarioEntidad usuario = usuarioRepositorio.findById(usuarioDTO.getId()).orElseThrow(
+            () -> new MiExcepcion("No se encontró el usuario con el id ingresado.")
+        );
 
         usuario.setNombre(usuarioDTO.getNombre());
         usuario.setApellido(usuarioDTO.getApellido());

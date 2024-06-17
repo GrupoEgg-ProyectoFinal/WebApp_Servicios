@@ -1,130 +1,66 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registro de Usuario</title>
     <link rel="stylesheet" href="/styles/styleRegistroUsuario.css">
 </head>
+
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="logo-contenedor">
-                <a th:href="@{/index}">
-                    <img src="/img/logo.png" alt="Logo" class="logo">
-                    <span class="nombreEmpresa">CHACRAS DE CORIA</span>
-                </a>
-            </div>
-
-            <ul class="nav-list">
-                <li><a th:href="@{/index}">INICIO</a></li>
-                <li><a th:href="@{/listar}">PROVEEDORES</a></li>
-                <li><a th:href="@{/novedades}">NOVEDADES</a></li>
-                <li><a th:href="@{/sobreNosotros}">CONOCENOS</a></li>
-            </ul>
-
-            <ul id="redes">
-                <li>
-                    <a th:href="@{/iniciarSesion}">INICIAR SESIÓN</a>
-                </li>
-                <li>
-                    <a href="" target="_blank">
-                        <img class="social-logo" src="/img/Instagram.svg" alt="instagram">
-                    </a>
-                </li>
-                <li>
-                    <a href="" target="_blank">
-                        <img class="social-logo" src="/img/Facebook.svg" alt="facebook">
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </header>
-
+    <header th:fragment="~{fragments/_navbar :: Navbar(_,true)}"></header>
     <main>
         <section id="registro">
-        <div id="form">
-            <h3>Registro de Usuario</h2>
+            <div id="form">
+                <h2>REGISTRO DE USUARIO</h2>
                 <form id="formularioUsuario" th:action="@{/guardarUsuario}" method="POST" th:object="${usuarioDTO}">
-                    <div class="form-group">
-                        <input type="text" id="nombre" name="nombre" th:field="*{nombre}" placeholder="Ingrese su nombre" required><br><br>
+                    <div class="form-row">
+                        <div class="form-column">
+                            <div class="form-group">
+                                <input type="text" id="nombre" name="nombre" th:field="*{nombre}" placeholder="Ingrese su nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" id="telefono" name="telefono" th:field="*{telefono}" placeholder="Ingrese su teléfono" required>
+                            </div>
+                            <div class="form-group">
+                                <h2>SELECCIONE SU BARRIO</h2>
+                                <select id="barrios" name="barrios" required th:field="*{barrios}">
+                                    <option value="NORTE">NORTE</option>
+                                    <option value="CENTRO">CENTRO</option>
+                                    <option value="SUR">SUR</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-column">
+                            <div class="form-group">
+                                <input type="text" id="apellido" name="apellido" th:field="*{apellido}" placeholder="Ingrese su apellido" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" th:field="*{email}" placeholder="Ingrese su email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="contrasena" name="contrasena" th:field="*{contrasena}" placeholder="Ingrese su contraseña" required>
+                            </div>
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <input type="text" id="apellido" name="apellido" th:value="*{apellido}" placeholder="Ingrese su apellido" required><br><br>
+                    <div class="form-row full-width center-content">
+                        <div class="form-group">
+                            <label for="estado">
+                                <h2>NO SOY UN ROBOT</h2>
+                            </label>
+                            <input type="checkbox" id="estado" name="estado">
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <input type="email" id="email" name="email" th:value="*{email}" placeholder="Ingrese su email" required><br><br>
+                    <div class="form-row full-width">
+                        <button type="submit" id="enviarBtn">
+                            <h3>REGISTRARSE</h3>
+                        </button>
                     </div>
-
-                    <div class="form-group">
-                        <input type="password" id="contrasena" name="contrasena" th:value="*{contrasena}" placeholder="Ingrese su contraseña" required><br><br>
-                    </div>
-
-                    <div class="form-group">
-                        <h3>Seleccione su barrio</h3>
-                        <select id="barrios" name="barrios" required th:value="*{barrios}">
-                            <option value="NORTE">Norte</option>
-                            <option value="CENTRO">Centro</option>
-                            <option value="SUR">Sur</option>
-                        </select><br><br>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="tel" id="telefono" name="telefono" th:value="*{telefono}" placeholder="Ingrese su teléfono" required><br><br>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="estado"><h3>NO SOY UN ROBOT</h3></label>
-                        <input type="checkbox" id="estado" name="estado"><br><br>
-                    </div>
-
-                    <button type="submit" id="enviarBtn">
-                        <h3>ENVIAR ➝</h3>
-                    </button>
                 </form>
-            <!-- <form id="formularioUsuario" th:action="@{/guardarUsuario}"  method="POST" th:object="${usuarioDTO}">
-                <div class="form-group">
-                    <input type="text" id="nombre" name="nombre"  th:value="*{nombre}" placeholder="Ingrese su nombre" required><br><br>
-                </div>
-    
-                <div class="form-group">
-                    <input type="text" id="apellido" name="apellido" th:value="*{apellido}" placeholder="Ingrese su apellido" required><br><br>
-                </div>
-    
-                <div class="form-group">
-                    <input type="email" id="email" name="email" th:value="*{email}" placeholder="Ingrese su email" required><br><br>
-                </div>
-    
-                <div class="form-group">
-                    <input type="password" id="contrasena" name="contrasena" th:value="*{contrasena}" placeholder="Ingrese su contraseña" required><br><br>
-                </div>
-                
-                <div class="form-group">
-                    <h3>Seleccione su barrio</h3>
-                    <select id="barrios" name="barrios" required th:value="*{barrios}">
-                        <option value="BARRIO1">NORTE</option>
-                        <option value="BARRIO2">CENTRO</option>
-                        <option value="BARRIO3">SUR</option>
-                    </select><br><br>
-                </div>
-    
-                <div class="form-group">
-                    <input type="tel" id="telefono" name="telefono" pattern="[0-9]{20}" th:value="*{telefono}"  placeholder="Ingrese su teléfono" required><br><br>
-                </div>
-    
-                <div class="form-group">
-                    <label for="estado"><h3>NO SOY UN ROBOT</h3></label>
-                    <input type="checkbox" id="estado" name="estado"><br><br>
-                </div>
-    
-                <button type="submit" id="enviarBtn">
-                    <h3>ENVIAR ➝</h3>
-                </button>
-            </form> -->
-        </div>
-        </section>
-    </main> 
+            </div>
+        </section>        
+    </main>
 </body>
+
 </html>

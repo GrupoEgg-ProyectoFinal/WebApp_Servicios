@@ -19,11 +19,11 @@ body {
     scroll-behavior: smooth;
     height: -webkit-fill-available;
     display: grid;
-    grid-template: /* El nombre del área por fila junto con su altura */
+    grid-template: 
         "header" min-content
         "main" auto
         "footer" 80px
-        /auto; /* Ancho de las columnas */
+        /auto; 
     min-height: 100vh;
 }
 
@@ -78,9 +78,10 @@ p {
 
 /*Colores*/
 :root {
-    --color: rgb(6, 96, 138);
+    --color: #06608a;
     --color-oscurecido: #03293a;
-    --color-trasparente: rgb(6, 96, 138, 0.9); 
+    --color-trasparente: rgb(6, 96, 138, 0.9);
+    --titulo-pintado: #e4e299;
 }
 
 main {
@@ -106,7 +107,7 @@ body > header {
     width: 100%;
     min-height: 80px;
     padding: 0 96px;
-    background-color: var(--color);
+    background-color: black;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -127,13 +128,15 @@ body > header {
 }
 
 .logo {
-    height: 64px;
+    height: 84px;
 }
 
 .nombreEmpresa {
-    color: white;
-    font-size: 48px;
+    color: rgb(241, 241, 124);
+    text-shadow: 0 0 20px rgba(241, 241, 107, 0.8);
+    font-size: 36px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 /*NAVEGACIÓN*/
@@ -142,6 +145,7 @@ body > header {
     gap: 48px;
     justify-content: center;
     font-weight: bold;
+    cursor: pointer;
 }
 .nav-list a:hover {
     transform: scale(1.1);
@@ -151,6 +155,7 @@ body > header {
 }
 
 #redes {
+    cursor: pointer;
     display: flex;
     gap: 24px;
 }
@@ -163,6 +168,42 @@ body > header {
     transform: scale(1.2);
 }
 
+/* ESTILOS PARA MARQUESINA */
+@keyframes marquee {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+.marquesina-contenedor {
+    position: fixed;
+    margin: 0 96px 0 0;
+    top: 80px;
+    right: 0;
+    width: 344px;
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: 1000;
+    color: white;
+}
+.marquesina {
+    display: inline-block;
+    padding: 12px 0;
+    animation: marquee 8s linear infinite;
+}
+.marquesina p {
+    cursor: default;
+}
+
+.marquesina p {
+    display: inline;
+    font-size: 16px;
+    color: white;
+}
+
+
 /* ESTILOS PAGINA 1 - VISTA USUARIO */
 #vistaUsuario {
     background: rgb(26, 26, 26);
@@ -171,7 +212,7 @@ body > header {
         rgba(26, 26, 26, 1) 0%,
         rgba(10, 10, 10, 1) 66%
     );
-    background-image: url("../img/Background.jpg");
+    background-image: url("../img/background4.png");
 }
 
 /* ESTILOS CONTENEDOR Y TARJETA PROVEEDORES */
@@ -234,6 +275,13 @@ body > header {
     margin-top: 10px;
 }
 
+.column-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
 .proveedor {
     display: flex;
     justify-content: space-between;
@@ -241,13 +289,41 @@ body > header {
     margin-bottom: 10px;
 }
 
+.col-avatar,
+.col-nombre,
+.col-puntuacion,
+.col-contratar {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.col-avatar {
+    justify-content: flex-start;
+    max-width: 50px;
+    height: 50px;
+}
+
+.col-nombre {
+    justify-content: flex-start;
+   
+}
+
+.col-puntuacion {
+    justify-content: center;
+}
+
+.col-contratar {
+    justify-content: flex-end;
+}
+
+
 .proveedor img.avatar {
     border-radius: 50%;
-    margin-right: 10px;
 }
 
 .puntuacion {
-    margin: 0 15px;
+
     font-size: 1rem;
 }
 

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/styleVistaAdmin.css">
+    <title>Vista ADMIN</title>
+</head>
+
+<body>
+    <header th:fragment="~{fragments/_navbar :: Navbar(true,true)}"></header>
+    <main>
+        <section id="admin-vista">
+            <div id="admin-contenedor">
+                <div class="admin-row">
+                    <!-- Lista de Usuarios -->
+                    <div class="admin-column">
+                        <h2>USUARIOS REGISTRADOS</h2>
+                        <table id="usuariosTable">
+                            <thead>
+                                <tr>
+                                    <th>NOMBRE</th>
+                                    <!-- <th>FOTO DE PERFIL</th> -->
+                                    <th>E-MAIL</th>
+                                    <th>ROL</th>
+                                    <th>ACCIONES</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="usuario : ${usuarios}">
+                                    <td th:text="${usuario.nombre}">Aver Gaspar</td>
+                                    <!-- <td>
+                                        <img th:src="@{${usuario.fotoPerfil}}" alt="Foto de perfil" width="50" height="50" src="/img/usuarioLogo.png">
+                                    </td> -->
+                                    <td th:text="${usuario.email}">Avergaspar@gmail.com</td>
+                                    <td th:text="${usuario.rol}">USUARIO</td>
+                                    <td>
+                                        <button class="modificar">Modificar</button>
+                                        <button class="modificar-rol">Modificar Rol</button>
+                                        <button class="eliminar">Eliminar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Lista de Proveedores -->
+                    <div class="admin-column">
+                        <h2>PROVEEDORES REGISTRADOS</h2>
+                        <table id="proveedoresTable">
+                            <thead>
+                                <tr>
+                                    <th>NOMBRE</th>
+                                    <th>FOTO DE PERFIL</th>
+                                    <th>E-MAIL</th>
+                                    <th>ROL</th>
+                                    <th>ACCIONES</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="proveedor : ${proveedores}">
+                                    <td th:text="${proveedor.nombre}">Señor Solución</td>
+                                    <td>
+                                        <img th:src="@{'/imagen/perfil/' + ${proveedor.id.toString()}}" alt="Foto de perfil" width="50" height="50" src="/img/plomero1.png">
+                                    </td>
+                                    <td th:text="${proveedor.email}">Tedestapo24-7@gmail.com</td>
+                                    <td th:text="${proveedor.servicio.nombre}">PLOMERIA</td>
+                                    <td>
+                                        <button class="modificar">Modificar</button>
+                                        <button class="modificar-rol">Modificar Rol</button>
+                                        <button class="eliminar">Eliminar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>

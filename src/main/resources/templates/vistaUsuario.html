@@ -4,44 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>USUARIO</title>
+    <title>Usuario</title>
     <link rel="stylesheet" href="/styles/styleVistaUsuario.css">
 </head>
 
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="logo-contenedor">
-                <a th:href="@{/index}">
-                    <img src="/img/logo.png" alt="Logo" class="logo">
-                    <span class="nombreEmpresa">CHACRAS DE CORIA</span>
-                </a>
-            </div>
-
-            <ul class="nav-list">
-                <li><a th:href="@{/index}">INICIO</a></li>
-                <li><a th:href="@{/novedades}">NOVEDADES</a></li>
-                <li><a th:href="@{/sobreNosotros}">CONOCENOS</a></li>
-            </ul>
-
-            <li class="cerrarSesion">
-                <li><a th:href="@{/index}">CERRAR SESIÓN</a></li>
-                </li>
-
-            <ul id="redes">
-                <li>
-                    <a href="" target="_blank">
-                        <img class="social-logo" src="/img/Instagram.svg" alt="instagram">
-                    </a>
-                </li>
-                <li>
-                    <a href="" target="_blank">
-                        <img class="social-logo" src="/img/Facebook.svg" alt="facebook">
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+    <header th:replace="~{fragments/_navbar :: Navbar(true,true)}"></header>
     <main>
         <!-- PÁGINA 1 'INICIO SESION'-->
         <section id="vistaUsuario">
@@ -51,15 +19,24 @@
                     <h2 class="titulo-lista"><strong>LISTA DE GASISTAS</strong></h2>
                     <div class="contenido">
                         <div class="lista-proveedores">
-                            <h3>NOMBRE | PUNTUACIÓN</h3>
+                            <div class="column-header">
+                                <div class="col-avatar"></div>
+                                <div class="col-nombre"><h3>NOMBRE</h3></div>
+                                <div class="col-puntuacion"><h3>PUNTUACIÓN</h3></div>
+                                <div class="col-contratar"></div>
+                            </div>
                             <!-- Aquí irán los nombres de los gasistas traídos desde la base de datos -->
                             <div class="proveedor">
-                                <img src="/img/gasista1.png" alt="Perfil de Gaston Estalla" class="avatar" height="50px" width="50px">
-                                <h4>Gaston Estalla</h4>
-                                <div class="puntuacion">
+                                <div class="col-avatar">
+                                    <img src="/img/gasista1.png" alt="Perfil de Gaston Estalla" class="avatar" height="50px" width="50px">
+                                </div>
+                                <div class="col-nombre">
+                                    <h4>Gaston Estalla</h4>
+                                </div>
+                                <div class="col-puntuacion">
                                     ⭐⭐⭐⭐⭐
                                 </div>
-                                <div class="contratar-btn">
+                                <div class="col-contratar">
                                     <a href="contratar" target="_blank">
                                         <h5>Contratar ➝</h5>
                                     </a>
@@ -69,20 +46,29 @@
                         </div>
                     </div>
                 </div>
-    
+        
+                <!-- Repite la misma estructura para plomeros y electricistas -->
                 <div class="proveedor-card" style="--bg-image: url('/img/Plomero.png');">
                     <h2 class="titulo-lista"><strong>LISTA DE PLOMEROS</strong></h2>
                     <div class="contenido">
                         <div class="lista-proveedores">
-                            <h3>NOMBRE | PUNTUACIÓN</h3>
-                            <!-- Aquí irán los nombres de los plomeros traídos desde la base de datos -->
+                            <div class="column-header">
+                                <div class="col-avatar"></div>
+                                <div class="col-nombre"><h3>NOMBRE</h3></div>
+                                <div class="col-puntuacion"><h3>PUNTUACIÓN</h3></div>
+                                <div class="col-contratar"></div>
+                            </div>
                             <div class="proveedor">
-                                <img src="/img/plomero1.png" alt="Perfil de Pedro PicaPiedra" class="avatar" height="50px" width="50px">
-                                <h4>Pedro PicaPiedra</h4>
-                                <div class="puntuacion">
+                                <div class="col-avatar">
+                                    <img src="/img/plomero1.png" alt="Perfil de Pedro PicaPiedra" class="avatar" height="50px" width="50px">
+                                </div>
+                                <div class="col-nombre">
+                                    <h4>Pedro PicaPiedra</h4>
+                                </div>
+                                <div class="col-puntuacion">
                                     ⭐⭐⭐⭐☆
                                 </div>
-                                <div class="contratar-btn">
+                                <div class="col-contratar">
                                     <a href="contratar" target="_blank">
                                         <h5>Contratar ➝</h5>
                                     </a>
@@ -92,20 +78,28 @@
                         </div>
                     </div>
                 </div>
-    
+        
                 <div class="proveedor-card" style="--bg-image: url('/img/Electricista.png');">
                     <h2 class="titulo-lista"><strong>LISTA DE ELECTRICISTAS</strong></h2>
                     <div class="contenido">
                         <div class="lista-proveedores">
-                            <h3>NOMBRE | PUNTUACIÓN</h3>
-                            <!-- Aquí irán los nombres de los electricistas traídos desde la base de datos -->
+                            <div class="column-header">
+                                <div class="col-avatar"></div>
+                                <div class="col-nombre"><h3>NOMBRE</h3></div>
+                                <div class="col-puntuacion"><h3>PUNTUACIÓN</h3></div>
+                                <div class="col-contratar"></div>
+                            </div>
                             <div class="proveedor">
-                                <img src="/img/electricista1.png" alt="Perfil de Elena Chispa" class="avatar" height="50px" width="50px">
-                                <h4>Elena Chispa</h4>
-                                <div class="puntuacion">
+                                <div class="col-avatar">
+                                    <img src="/img/electricista1.png" alt="Perfil de Elena Chispa" class="avatar" height="50px" width="50px">
+                                </div>
+                                <div class="col-nombre">
+                                    <h4>Elena Chispa</h4>
+                                </div>
+                                <div class="col-puntuacion">
                                     ⭐⭐⭐☆☆
                                 </div>
-                                <div class="contratar-btn">
+                                <div class="col-contratar">
                                     <a href="contratar" target="_blank">
                                         <h5>Contratar ➝</h5>
                                     </a>

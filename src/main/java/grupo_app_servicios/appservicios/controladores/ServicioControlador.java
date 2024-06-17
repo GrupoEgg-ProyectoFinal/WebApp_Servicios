@@ -26,18 +26,18 @@ public class ServicioControlador {
         return "(ruta de la vista de listado)";
     }
     
-    @GetMapping("/registrar")
+    /* @GetMapping("/registrar") 
     public String registrarServicioVista(Model map) {
         map.addAttribute("servicioDTO", new ServicioDTO());
         return "(ruta de la vista de creacion)";
-    }
+    } */
     
-    @PostMapping("/registrarAccion")
+    @PostMapping("")
     public String registrarServicioAccion(@ModelAttribute ServicioDTO servicioDTO, Model model) {
         try {
             sServicio.crearServicio(servicioDTO);
             model.addAttribute("mensaje", "Servicio " + servicioDTO.getNombre() + " creado exitosamente.");
-            return "(ruta del panel de admin)";
+            return "index.html"; // cambiar por panel de admin
         } catch (Exception e) {
             model.addAttribute("error", "Ocurrió un error al intentar crear el servicio.");
             return "redirect:/registrar";
