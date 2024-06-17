@@ -19,7 +19,7 @@
                 <li><a th:href="@{/index}">CERRAR SESIÓN</a></li>
             </li>
             <ul class="registro">
-                <li class="desplegable">
+                <li class="desplegable" th:if="${esInicioSesion != true}">
                     <a href="javascript:void(0)" class="dropbtn">INICIAR SESIÓN</a>
                     <div class="desplegable-content">
                         <a th:href="@{/login}">USUARIO</a>
@@ -27,7 +27,7 @@
                     </div>
                 </li>
             </ul>
-            <li class="desplegable">
+            <li class="desplegable" th:if="${esRegistro != true}">
                 <a href="javascript:void(0)" class="dropbtn">REGISTRARSE</a>
                 <div class="desplegable-content">
                     <a th:href="@{/login}">USUARIO</a>
