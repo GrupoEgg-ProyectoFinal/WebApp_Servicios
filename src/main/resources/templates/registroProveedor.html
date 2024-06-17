@@ -10,62 +10,71 @@
     <header th:replace="~{fragments/_navbar :: Navbar(_,true)}"></header>
     <main>
         <section id="registro">
-        <div id="form">
-            <h3>REGISTRO DE PROOVEDOR</h2>
-                <form id="formularioProveedor" th:action="@{registrarProveedor}" method="POST" th:object="${proveedorDTO}" enctype="multipart/form-data" >
+            <div id="form">
+                <h2>REGISTRO DE PROVEEDOR</h2>
+                <form id="formularioProveedor" th:action="@{/guardarProveedor}" method="POST" th:object="${usuarioDTO}">
                     <div class="form-row">
                         <div class="form-column">
                             <div class="form-group">
-                                <input type="text" id="nombre" name="nombre" th:field="*{nombre}" placeholder="Ingrese su nombre" required>
+                                <input type="text" id="nombre" name="nombre" th:field="*{nombreProveedor}" placeholder="Ingrese su nombre" required>
                             </div>
-                
                             <div class="form-group">
-                                <input type="tel" id="telefono" name="telefono" th:value="*{telefono}" placeholder="Ingrese su teléfono" required>
+                                <input type="tel" id="telefono" name="telefono" th:value="*{telefonoProveedor}" placeholder="Ingrese su teléfono" required>
                             </div>
-                
                             <div class="form-group">
-                                <input type="email" id="email" name="email" th:value="*{email}" placeholder="Ingrese su email" required>
+                                <input type="email" id="email" name="email" th:value="*{emailProveedor}" placeholder="Ingrese su email" required>
                             </div>
-                
                             <div class="form-group">
-                                <label for="imagenProveedor"><h4>SELECCIONE UNA IMAGEN DE PERFIL</h4></label>
-                                <input type="file" id="imagenProovedor" name="imagenFile" accept="image/*"  placeholder="Cargar una imagen de perfil" required>
+                                <label for="imagenProveedor"><h2>SELECCIONE UNA IMAGEN DE PERFIL</h2></label>
+                                <input type="file" id="imagenProveedor" name="imagenFile" accept="image/*" placeholder="Cargar una imagen de perfil" required>
                             </div>
                         </div>
-                        
                         <div class="form-column">
                             <div class="form-group">
-                                <input type="text" id="apellido" name="apellido" th:value="*{apellido}" placeholder="Ingrese su apellido" required>
+                                <input type="text" id="apellido" name="apellido" th:value="*{apellidoProveedor}" placeholder="Ingrese su apellido" required>
                             </div>
-                
                             <div class="form-group">
-                                <input type="number" id="matricula" name="matricula" th:value="*{matricula}" placeholder="Ingrese su matricula" required>
+                                <input type="number" id="matricula" name="matricula" th:value="*{matriculaProveedor}" placeholder="Ingrese su matricula" required>
                             </div>
-                
                             <div class="form-group">
-                                <input type="password" id="contrasena" name="contrasena" th:value="*{contrasena}" placeholder="Ingrese su contraseña" required>
+                                <input type="password" id="contrasena" name="contrasena" th:value="*{contrasenaProveedor}" placeholder="Ingrese su contraseña" required>
                             </div>
-                
                             <div class="form-group">
-                                <label for="estado"><h4>NO SOY UN ROBOT</h4></label>
-                                <input type="checkbox" id="estado" name="estado">
+                                <h2>SELECCIONE UN SERVICIO</h2>
+                                <select id="servicios" name="servicios" required th:value="*{servicios}">
+                                    <option value="GAS">GAS</option>
+                                    <option value="PLOMERIA">PLOMERIA</option>
+                                    <option value="ELECTRICISTA">ELECTRICISTA</option>
+                                </select>
                             </div>
                         </div>
                     </div>
-
-                    <div class="form-group">
+                    <div class="form-row full-width">
                         <select name="servicio" id="servicio">
                             Seleccione el servicio que brinda
                             <option th:each="servicio : ${servicios}" th:value="${servicio}" th:text="${servicio.nombre}"></option>
                         </select>
                     </div>
-                
-                    <button type="submit" id="enviarBtn">
-                        <h3>ENVIAR ➝</h3>
-                    </button>
+                    <div class="form-row full-width">
+                        <div class="form-group">
+                            <label for="descripcion"><h2>INGRESE DESCRIPCIÓN A REALIZAR</h2></label>
+                            <textarea id="descripcion" name="descripcion" th:field="*{descripcionProveedor}" placeholder="Ingrese una descripción del rol o servicio que provee" required></textarea>
+                        </div>
+                    </div>
+                    <div class="form-row full-width center-content">
+                        <div class="form-group">
+                            <label for="estado"><h2>NO SOY UN ROBOT</h2></label>
+                            <input type="checkbox" id="estado" name="estado">
+                        </div>
+                    </div>
+                    <div class="form-row full-width">
+                        <button type="submit" id="enviarBtn">
+                            <h3>ENVIAR ➝</h3>
+                        </button>
+                    </div>
                 </form>
-        </div>
-        </section>
+            </div>
+        </section>                 
     </main> 
 </body>
 </html>

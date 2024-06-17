@@ -3,23 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro de Usuario</title>
-    <link rel="stylesheet" href="/styles/styleIniciarSesion.css">
+    <title>Inicio Sesión Usuario</title>
+    <link rel="stylesheet" href="/styles/styleSesionUsuario&Proveedor.css">
 </head>
 <body>
     <header>
         <nav class="navbar">
             <div class="logo-contenedor">
                 <a th:href="@{/index}">
-                    <img src="/img/logo.png" alt="Logo" class="logo">
-                    <span class="nombreEmpresa">CHACRAS DE CORIA</span>
+                    <img src="/img/logoPNG.png" alt="Logo" class="logo">
+                    <span class="nombreEmpresa">DEV SOLUCIONES</span>
                 </a>
             </div>
 
             <ul class="nav-list">
-                <li><a th:href="@{/index}">INICIO</a></li>
-                <li><a th:href="@{/listar}">PROVEEDORES</a></li>
-                <li><a th:href="@{/novedades}">NOVEDADES</a></li>
+                <li><a th:href="@{/index}">VOLVER AL INICIO</a></li>
+
                 <li><a th:href="@{/sobreNosotros}">CONOCENOS</a></li>
             </ul>
 
@@ -41,7 +40,7 @@
     <main>
         <section id="inicioSesion">
         <div id="formUsuario">
-            <h3>INGRESE CON SU CUENTA</h2>
+            <h3>INGRESE CON SU CUENTA</h3>
             <form id="sesionUsuario" th:action="@{/logincheck}" method="POST">
                 <div class="form-group">
                     <input type="email" id="email" name="email" th:value="${email}" placeholder="Ingrese su email" required><br><br>
@@ -57,10 +56,10 @@
                 </div>
 
                 <button type="submit" id="enviarBtn">
-                    <h3>INICIAR SESIÓN</h3>
+                    <h4>INICIAR SESIÓN</h4>
                 </button></br>
                 <button type="submit" id="enviarBtn">
-                    <a th:href="@{/registrar}">REGISTRARSE</a>
+                    <h4><a th:href="@{/registrar}">REGISTRARSE</a></h4>
                 </button>
             </form>
         </div>
