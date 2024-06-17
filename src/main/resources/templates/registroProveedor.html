@@ -11,22 +11,26 @@
         <nav class="navbar">
             <div class="logo-contenedor">
                 <a th:href="@{/index}">
-                    <img src="/img/logo.png" alt="Logo" class="logo">
-                    <span class="nombreEmpresa">CHACRAS DE CORIA</span>
+                    <img src="/img/logoPNG.png" alt="Logo" class="logo">
+                    <span class="nombreEmpresa">DEV SOLUCIONES</span>
                 </a>
             </div>
 
             <ul class="nav-list">
                 <li><a th:href="@{/index}">INICIO</a></li>
-                <li><a th:href="@{/listar}">PROVEEDORES</a></li>
-                <li><a th:href="@{/novedades}">NOVEDADES</a></li>
                 <li><a th:href="@{/sobreNosotros}">CONOCENOS</a></li>
             </ul>
 
             <ul id="redes">
-                <li>
-                    <a th:href="@{/iniciarSesion}">INICIAR SESIÓN</a>
-                </li>
+                <ul class="registro">
+                    <li class="desplegable">
+                        <a href="javascript:void(0)" class="dropbtn">INICIAR SESIÓN</a>
+                        <div class="desplegable-content">
+                            <a th:href="@{/login}">USUARIO</a>
+                            <a th:href="@{/loginProveedor}">PROVEEDOR</a>
+                        </div>
+                    </li>
+                </ul>
                 <li>
                     <a href="" target="_blank">
                         <img class="social-logo" src="/img/Instagram.svg" alt="instagram">
@@ -44,7 +48,7 @@
     <main>
         <section id="registro">
             <div id="form">
-                <h3>REGISTRO DE PROVEEDOR</h3>
+                <h2>REGISTRO DE PROVEEDOR</h2>
                 <form id="formularioProveedor" th:action="@{/guardarProveedor}" method="POST" th:object="${usuarioDTO}">
                     <div class="form-row">
                         <div class="form-column">
@@ -58,7 +62,7 @@
                                 <input type="email" id="email" name="email" th:value="*{emailProveedor}" placeholder="Ingrese su email" required>
                             </div>
                             <div class="form-group">
-                                <label for="imagenProveedor"><h3>SELECCIONE UNA IMAGEN DE PERFIL</h3></label>
+                                <label for="imagenProveedor"><h2>SELECCIONE UNA IMAGEN DE PERFIL</h2></label>
                                 <input type="file" id="imagenProveedor" name="imagen" accept="image/*" placeholder="Cargar una imagen de perfil" required>
                             </div>
                         </div>
@@ -73,7 +77,7 @@
                                 <input type="password" id="contrasena" name="contrasena" th:value="*{contrasenaProveedor}" placeholder="Ingrese su contraseña" required>
                             </div>
                             <div class="form-group">
-                                <h3>SELECCIONE UN SERVICIO</h3>
+                                <h2>SELECCIONE UN SERVICIO</h2>
                                 <select id="servicios" name="servicios" required th:value="*{servicios}">
                                     <option value="GAS">GAS</option>
                                     <option value="PLOMERIA">PLOMERIA</option>
@@ -84,13 +88,13 @@
                     </div>
                     <div class="form-row full-width">
                         <div class="form-group">
-                            <label for="descripcion"><h3>INGRESE DESCRIPCIÓN A REALIZAR</h3></label>
+                            <label for="descripcion"><h2>INGRESE DESCRIPCIÓN A REALIZAR</h2></label>
                             <textarea id="descripcion" name="descripcion" th:field="*{descripcionProveedor}" placeholder="Ingrese una descripción del rol o servicio que provee" required></textarea>
                         </div>
                     </div>
                     <div class="form-row full-width center-content">
                         <div class="form-group">
-                            <label for="estado"><h3>NO SOY UN ROBOT</h3></label>
+                            <label for="estado"><h2>NO SOY UN ROBOT</h2></label>
                             <input type="checkbox" id="estado" name="estado">
                         </div>
                     </div>

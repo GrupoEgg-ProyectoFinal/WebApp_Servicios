@@ -19,11 +19,11 @@ body {
     scroll-behavior: smooth;
     height: -webkit-fill-available;
     display: grid;
-    grid-template: /* El nombre del área por fila junto con su altura */
+    grid-template: 
         "header" min-content
         "main" auto
         "footer" 80px
-        /auto; /* Ancho de las columnas */
+        /auto; 
     min-height: 100vh;
 }
 
@@ -80,6 +80,8 @@ p {
 :root {
     --color: #06608a;
     --color-oscurecido: #03293a;
+    --color-trasparente: rgb(6, 96, 138, 0.9);
+    --titulo-pintado: #e4e299;
 }
 
 main {
@@ -105,7 +107,7 @@ body > header {
     width: 100%;
     min-height: 80px;
     padding: 0 96px;
-    background-color: var(--color);
+    background-color: black;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -126,13 +128,15 @@ body > header {
 }
 
 .logo {
-    height: 64px;
+    height: 84px;
 }
 
 .nombreEmpresa {
-    color: white;
-    font-size: 48px;
+    color: rgb(241, 241, 124);
+    text-shadow: 0 0 20px rgba(241, 241, 107, 0.8);
+    font-size: 36px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 /*NAVEGACIÓN*/
@@ -141,6 +145,7 @@ body > header {
     gap: 48px;
     justify-content: center;
     font-weight: bold;
+    cursor: pointer;
 }
 .nav-list a:hover {
     transform: scale(1.1);
@@ -149,7 +154,46 @@ body > header {
     color: var(--color);
 }
 
+/*ESTILOS PARA BOTON INICIAR SESIÓN (DESPLEGABLE */
+.desplegable {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.desplegable-content {
+    display: none;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.8); 
+    color: black;
+    z-index: 1;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 4px 24px 0px rgba(5, 5, 5, 0.5);
+}
+
+.desplegable-content a {
+    color: black;
+    padding: 12px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.desplegable-content a:hover {
+    background-color: var(--titulo-pintado);
+}
+
+.desplegable:hover .desplegable-content {
+    display: flex;
+    justify-content: center;
+}
+
+.desplegable:hover .desplegable {
+    background-color: var(--color-oscurecido);
+}
+
 #redes {
+    cursor: pointer;
     display: flex;
     gap: 24px;
 }
@@ -162,169 +206,113 @@ body > header {
     transform: scale(1.2);
 }
 
-/*ESTILOS PARA BOTON INICIAR SESIÓN (DESPLEGABLE */
-.desplegable {
-    position: relative;
-    display: inline-block;
-}
 
-.desplegable-content {
-    display: none;
-    position: absolute;
-    background-color: rgba(255, 255, 255, 0.8); 
-    color: black;
-    z-index: 1;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 8px;
-    box-shadow: 0 4px 24px 0px rgba(5, 5, 5, 0.5);
-}
-
-.desplegable-content a {
-    color: black;
-    padding: 12px;
-    text-decoration: none;
-    display: inline-block;
-}
-
-.desplegable-content a:hover {
-    background-color: #06608a93; /* Blanco translúcido con 30% de opacidad */
-}
-
-.desplegable:hover .desplegable-content {
-    display: flex;
-    justify-content: center;
-}
-
-.desplegable:hover .desplegable {
-    background-color: var(--color);
-}
-
-.nav-list, #registro {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-}
-
-.nav-list li, #registro li {
-    margin: 0 10px;
-}
-
-/* ESTILOS PAGINA | SESION ADMIN */
-#inicioSesion {
+/* ESTILOS PAGINA 1 - VISTA ADMIN */
+main {
     background: rgb(26, 26, 26);
     background: radial-gradient(
         circle,
         rgba(26, 26, 26, 1) 0%,
         rgba(10, 10, 10, 1) 66%
     );
-    background-image: url("../img/Background.jpg");
+    background-image: url("../img/background4.png");
+    height: calc(100vh - 80px);
 }
 
-#formAdmin {
+/* ESTILOS PAGINA - vista ADMIN */
+
+#admin-vista {
     background-color: var(--color);
     opacity: 0.99;
-    margin-top: 80px;
-    padding: 25px 0px;
-    display: flex;
-    margin-top: 24px;
-    gap: 24px;
-    flex-direction: column;
-    align-items: center;
-    border: 2px solid #ccc;
-    width: 30%;
-    border-radius: 50px;
-    box-shadow: 0 4px 24px 0px rgba(255, 255, 255, 0.5);
-}
-
-#sesionAdmin {
-    width: 66%;
-    display: flex;
-    flex-direction: column;
+    padding: 24px 36px;
     gap: 12px;
-}
-
-input#estado{
-    margin-top: 24px;
-    width: 50px;
-}
-
-.form-group input {
-    font-family: "Roboto Condensed", sans-serif;
-    width: 300px;
-    height: 48px;
-    padding: 12px;
-    border-radius: 8px;
-    box-sizing: border-box;
-    font-size: 16px;
-    border: none;
-    outline: none;
-    transition: none;
-}
-.form-group input::placeholder {
-    color: black;
-    font-weight: 300;
-}
-.form-group input:focus {
-    border: 4px solid var(--color);
-    transition: none;
-}
-.form-group input:focus::placeholder {
-    color: var(--color);
-    font-weight: 400;
-}
-.form-group textarea {
-    font-family: "Roboto Condensed", sans-serif;
-    width: 100%;
-    height: 192px;
-    padding: 12px;
-    border-radius: 8px;
-    box-sizing: border-box;
-    font-size: 16px;
-    border: none;
-    outline: none;
-    resize: none;
-    transition: none;
-}
-.form-group textarea::placeholder {
-    background-color: black;
-    color: white;
-    font-weight: 300;
-}
-.form-group textarea:focus {
-    border: 4px solid var(--color);
-    transition: none;
-}
-.form-group textarea:focus::placeholder {
-    color: var(--color);
-    font-weight: 400;
-}
-
-#enviarBtn{
-    font-family: "Roboto Condensed", sans-serif;
-    width: 100%;
-    height: 64px;
-    background-color: var(--color);
-    color: #fff;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    transition: background-color 0.3s;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    height: auto;
 }
 
-#enviarBtn h3 {
-    cursor: pointer;
+#admin-contenedor {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    background-color: var(--color-trasparente);
 }
 
-#enviarBtn:hover {
+.admin-row {
+    display: flex;
+    width: 100%;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.admin-column {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 24px;
+    border-right: 2px solid white;
+    border-left: 2px solid white;
+    border-top: 2px solid white;;
+}
+
+h4 {
+    color: var(--titulo-pintado);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+}
+
+thead {
+    background-color: var(--color-oscurecido);
+}
+
+thead th {
+    color: var(--titulo-pintado);
+    padding: 16px;
+    font-size: 16px;
+}
+
+tbody td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+button {
+    padding: 8px 12px;
+    margin: 0 4px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button.modificar, button.modificar-rol, button.eliminar {
+    background-color: var(--color-oscurecido);
+    color: white;
+}
+
+button.modificar:hover, button.modificar-rol:hover {
     background-color: white;
-    color: var(--color)
+    color: var(--color-oscurecido);
 }
 
-#estado {
-    cursor: pointer;
+button.eliminar {
+    background-color: red;
+    color: white;
+}
+
+button.eliminar:hover {
+    background-color: white;
+    color: red;
 }
