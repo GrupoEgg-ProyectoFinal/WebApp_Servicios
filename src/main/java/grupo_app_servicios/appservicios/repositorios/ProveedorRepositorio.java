@@ -25,4 +25,8 @@ public interface ProveedorRepositorio extends JpaRepository<ProveedorEntidad, UU
             "(p.nombre like %:busqueda% or p.apellido like %:busqueda%)"
     )
     public List<ProveedorEntidad> obtenerProveedoresPorNombreYOApellido(@Param("busqueda") String busqueda);
+
+    //busqueda por email
+    @Query("SELECT u FROM ProveedorEntidad u WHERE u.email = :email")
+    public ProveedorEntidad buscarPorEmail(@Param("email") String email);
 }

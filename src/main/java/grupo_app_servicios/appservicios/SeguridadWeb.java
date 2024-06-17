@@ -31,7 +31,7 @@ public class SeguridadWeb {
             .logout(
                 (logout) -> logout
                     .logoutUrl("/logout")
-                    .logoutSuccessUrl("/index")
+                    .logoutSuccessUrl("/")
                     .permitAll()
             )
             .csrf(csrf -> csrf.disable());

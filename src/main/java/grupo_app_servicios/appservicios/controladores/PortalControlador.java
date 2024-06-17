@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
 import grupo_app_servicios.appservicios.Dto.ServicioDTO;
 import grupo_app_servicios.appservicios.Dto.UsuarioDTO;
+import grupo_app_servicios.appservicios.entidades.ProveedorEntidad;
 import grupo_app_servicios.appservicios.entidades.UsuarioEntidad;
 import grupo_app_servicios.appservicios.servicios.ProveedorServicio2;
 import grupo_app_servicios.appservicios.servicios.ServicioServicio;
@@ -106,15 +107,24 @@ public class PortalControlador {
     @GetMapping("/perfil")
     @PreAuthorize("hasAnyRol('ROL_USER', 'ROL_PROVEEDOR','ROL_ADMIN')")
     public String inicio(HttpSession session) {
-        UsuarioEntidad loguedUser = (UsuarioEntidad) session.getAttribute("usuarioEnSesion");
+        String role =" ";
+
+        if (session.getAttribute("usuarioEnSesion") instanceof UsuarioEntidad) {
+            UsuarioEntidad loguedUser = (UsuarioEntidad) session.getAttribute("usuarioEnSesion");
+            role = loguedUser.getRol().toString();
+            return "vistaUsuario.html";
+        }
+        if (session.getAttribute("usuarioEnSesion") instanceof ProveedorEntidad) {
+            ProveedorEntidad loguedUser = (ProveedorEntidad) session.getAttribute("usuarioEnSesion");
+             role = loguedUser.getRol().toString();
+             return "vistaProveedor.html";
+        }
+       
         // Ver cómo hacer para que tambien se aplique en el proveedor tambien
         // ej: con el rol de proveedor en usuario. (Habria que modificar la entidad de proveedor y reveer el tema de inicio de sesion)
 
-        String role = loguedUser.getRol().toString();
-
-        if (role.equals("ADMIN"))
             return "redirect:/dashboard";
-        return "vistaUsuario.html"; // después cambiarlo por la vista de perfil de usuario
+        
     }
 
     @GetMapping("/dashboard")
