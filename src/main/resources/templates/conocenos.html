@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio</title>
+    <link rel="stylesheet" href="/styles/conocenos.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo-contenedor">
+                <a th:href="@{/index}">
+                    <img src="/img/logoPNG.png" alt="Logo" class="logo">
+                    <span class="nombreEmpresa">DEV SOLUCIONES</span>
+                </a>
+            </div>
+
+            <ul class="nav-list">
+                <li><a th:href="@{/index}">INICIO</a></li>
+            </ul>
+
+            <ul id="redes">
+                <ul class="registro">
+                    <li class="desplegable">
+                        <a href="javascript:void(0)" class="dropbtn">INICIAR SESIÓN</a>
+                        <div class="desplegable-content">
+                            <a th:href="@{/login}">USUARIO</a>
+                            <a th:href="@{/loginProveedor}">PROVEEDOR</a>
+                        </div>
+                    </li>
+                </ul>
+                <li class="desplegable">
+                    <a href="javascript:void(0)" class="dropbtn">REGISTRARSE</a>
+                    <div class="desplegable-content">
+                        <a th:href="@{/login}">USUARIO</a>
+                        <a th:href="@{/loginProveedor}">PROVEEDOR</a>
+                    </div>
+                    </li>
+                <li>
+                    <a href="" target="_blank">
+                        <img class="social-logo" src="/img/Instagram.svg" alt="instagram">
+                    </a>
+                </li>
+                <li>
+                    <a href="" target="_blank">
+                        <img class="social-logo" src="/img/Facebook.svg" alt="facebook">
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <!-- PÁGINA 1 'INICIO'-->
+        <section id="conocenos">
+            <div class="textoConocenos">
+            <h1>En DEV SOLUCIONES, facilitamos el acceso a información de proveedores calificados 
+                en servicios esenciales como gas, electricidad y plomería. Nos especializamos en 
+                conectar a los usuarios con profesionales confiables, asegurando que encuentres la 
+                ayuda que necesitas de manera rápida y eficiente.</h1></div>
+        </section>
+    </main>
+
+    <footer>
+
+    </footer>
+    <!--correr spring terminal   ./mvnw spring-boot:run  -->
+</body>
+</html>
