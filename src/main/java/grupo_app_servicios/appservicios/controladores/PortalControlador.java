@@ -122,4 +122,10 @@ public class PortalControlador {
     public String panelAdministrativo(HttpSession session) {
         return "vistaAdmin.html";
     }
+
+    //CONOCENOS
+    @GetMapping("/conocenos")
+    public String conocenos(){
+        return "conocenos.html";
+    }
 }

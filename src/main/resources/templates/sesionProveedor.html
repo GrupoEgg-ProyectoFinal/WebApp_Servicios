@@ -10,18 +10,21 @@
     <header>
         <nav class="navbar">
             <div class="logo-contenedor">
-                <a th:href="@{/index}">
+                <a th:href="@{/}">
                     <img src="/img/logoPNG.png" alt="Logo" class="logo">
                     <span class="nombreEmpresa">DEV SOLUCIONES</span>
                 </a>
             </div>
 
             <ul class="nav-list">
-                <li><a th:href="@{/index}">INICIO</a></li>
-                <li><a th:href="@{/sobreNosotros}">CONOCENOS</a></li>
+                <li><a th:href="@{/}">INICIO</a></li>
+                <li><a th:href="@{/conocenos}">CONOCENOS</a></li>
             </ul>
 
             <ul id="redes">
+                <button  id="registrarBtn">
+                    <h4><a th:href="@{/registrarProveedor}">REGISTRARSE</a></h4>
+                </button>
                 <li>
                     <a href="" target="_blank">
                         <img class="social-logo" src="/img/Instagram.svg" alt="instagram">
@@ -44,7 +47,7 @@
     <main>
         <section id="inicioSesion">
         <div id="formUsuario">
-            <h3>INGRESE CON SU CUENTA</h3>
+            <h3>INGRESE CON SU CUENTA DE PROVEEDOR</h3>
             <form id="sesionUsuario" th:action="@{/logincheck}" method="POST">
                 <div class="form-group">
                     <input type="email" id="email" name="email" th:value="${email}" placeholder="Ingrese su email" required><br><br>
@@ -62,9 +65,7 @@
                 <button type="submit" id="enviarBtn">
                     <h4>INICIAR SESIÓN</h4>
                 </button></br>
-                <button type="submit" id="enviarBtn">
-                    <h4><a th:href="@{/registrar}">REGISTRARSE</a></h4>
-                </button>
+                
             </form>
         </div>
         </section>
