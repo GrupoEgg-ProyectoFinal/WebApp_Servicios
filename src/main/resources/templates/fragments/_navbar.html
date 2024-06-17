@@ -16,8 +16,8 @@
         </ul>
 
         <ul id="redes">
-            <li class="cerrarSesion">
-                <li><a th:href="@{/index}">CERRAR SESIÓN</a></li>
+            <li class="cerrarSesion" th:if="${session.usuarioEnSession != null}">
+                <li><a href="/logout">CERRAR SESIÓN</a></li>
             </li>
             <ul class="registro">
                 <li class="desplegable" th:if="${esInicioSesion != true}">
@@ -31,8 +31,8 @@
             <li class="desplegable" th:if="${esRegistro != true}">
                 <a href="javascript:void(0)" class="dropbtn">REGISTRARSE</a>
                 <div class="desplegable-content">
-                    <a th:href="@{/login}">USUARIO</a>
-                    <a th:href="@{/loginProveedor}">PROVEEDOR</a>
+                    <a th:href="@{/registrarUsuario}">USUARIO</a>
+                    <a th:href="@{/registrarProveedor}">PROVEEDOR</a>
                 </div>
                 </li>
             <li>
