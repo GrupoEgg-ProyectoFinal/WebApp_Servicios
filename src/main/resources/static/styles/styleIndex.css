@@ -291,15 +291,15 @@ body > header {
 }
 
 .proveedor-card:hover .izquierda img {
-    content: url("/img/GasistaLogoBlanco.png");
+    content: url("../img/GasistaLogoBlanco.png");
 }
 
 .proveedor-card:hover .centro img {
-    content: url("/img/plomeroLogoBlanco.png");
+    content: url("../img/plomeroLogoBlanco.png");
 }
 
 .proveedor-card:hover .derecha img {
-    content: url("/img/electricistaLogoBlanco.png");
+    content: url("../img/electricistaLogoBlanco.png");
 }
 
 .derecha {
