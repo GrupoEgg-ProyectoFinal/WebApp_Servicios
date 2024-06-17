@@ -19,11 +19,11 @@ body {
     scroll-behavior: smooth;
     height: -webkit-fill-available;
     display: grid;
-    grid-template: /* El nombre del área por fila junto con su altura */
+    grid-template: 
         "header" min-content
         "main" auto
         "footer" 80px
-        /auto; /* Ancho de las columnas */
+        /auto; 
     min-height: 100vh;
 }
 
@@ -79,6 +79,7 @@ p {
 /*Colores*/
 :root {
     --color: #06608a;
+    --color-medio: #05435f;
     --color-oscurecido: #03293a;
     --color-trasparente: rgb(6, 96, 138, 0.9);
     --titulo-pintado: #e4e299;
@@ -107,7 +108,7 @@ body > header {
     width: 100%;
     min-height: 80px;
     padding: 0 96px;
-    background-color: var(--color);
+    background-color: black;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -128,13 +129,15 @@ body > header {
 }
 
 .logo {
-    height: 64px;
+    height: 84px;
 }
 
 .nombreEmpresa {
-    color: white;
-    font-size: 48px;
+    color: rgb(241, 241, 124);
+    text-shadow: 0 0 20px rgba(241, 241, 107, 0.8);
+    font-size: 36px;
     font-weight: bold;
+    cursor: pointer;
 }
 
 /*NAVEGACIÓN*/
@@ -143,6 +146,7 @@ body > header {
     gap: 48px;
     justify-content: center;
     font-weight: bold;
+    cursor: pointer;
 }
 .nav-list a:hover {
     transform: scale(1.1);
@@ -151,7 +155,46 @@ body > header {
     color: var(--color);
 }
 
+/*ESTILOS PARA BOTON INICIAR SESIÓN (DESPLEGABLE */
+.desplegable {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.desplegable-content {
+    display: none;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.8); 
+    color: black;
+    z-index: 1;
+    left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 4px 24px 0px rgba(5, 5, 5, 0.5);
+}
+
+.desplegable-content a {
+    color: black;
+    padding: 12px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.desplegable-content a:hover {
+    background-color: var(--titulo-pintado);
+}
+
+.desplegable:hover .desplegable-content {
+    display: flex;
+    justify-content: center;
+}
+
+.desplegable:hover .desplegable {
+    background-color: var(--color-oscurecido);
+}
+
 #redes {
+    cursor: pointer;
     display: flex;
     gap: 24px;
 }
@@ -164,53 +207,39 @@ body > header {
     transform: scale(1.2);
 }
 
-/*ESTILOS PARA BOTON INICIAR SESIÓN (DESPLEGABLE */
-.desplegable {
-    position: relative;
+/* ESTILOS PARA MARQUESINA */
+@keyframes marquee {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+.marquesina-contenedor {
+    position: fixed;
+    margin: 0 96px 0 0;
+    top: 80px;
+    right: 0;
+    width: 344px;
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: 1000;
+    color: white;
+}
+.marquesina {
     display: inline-block;
+    padding: 12px 0;
+    animation: marquee 8s linear infinite;
+}
+.marquesina p {
+    cursor: default;
 }
 
-.desplegable-content {
-    display: none;
-    position: absolute;
-    background-color: rgba(255, 255, 255, 0.8); 
-    color: black;
-    z-index: 1;
-    left: 50%;
-    transform: translateX(-50%);
-    border-radius: 8px;
-    box-shadow: 0 4px 24px 0px rgba(5, 5, 5, 0.5);
-}
-
-.desplegable-content a {
-    color: black;
-    padding: 12px;
-    text-decoration: none;
-    display: inline-block;
-}
-
-.desplegable-content a:hover {
-    background-color: #06608a93; /* Blanco translúcido con 30% de opacidad */
-}
-
-.desplegable:hover .desplegable-content {
-    display: flex;
-    justify-content: center;
-}
-
-.desplegable:hover .desplegable {
-    background-color: var(--color);
-}
-
-.nav-list, #registro {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-}
-
-.nav-list li, #registro li {
-    margin: 0 10px;
+.marquesina p {
+    display: inline;
+    font-size: 16px;
+    color: white;
 }
 
 /* ESTILOS PAGINA 1 - INICIO */
@@ -221,7 +250,7 @@ body > header {
         rgba(26, 26, 26, 1) 0%,
         rgba(10, 10, 10, 1) 66%
     );
-    background-image: url("../img/Background.jpg");
+    background-image: url("../img/background4.png");
 }
 
 /* ESTILOS CONTENEDOR Y TARJETA PROVEEDORES */
@@ -247,6 +276,7 @@ body > header {
     transform: scale(1.15);
     cursor: pointer;
     box-shadow: 0 4px 24px 0px var(--titulo-pintado);
+    background-color: var(--color-medio);
 }
 
 .izquierda {
@@ -258,6 +288,18 @@ body > header {
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+.proveedor-card:hover .izquierda img {
+    content: url("/img/GasistaLogoBlanco.png");
+}
+
+.proveedor-card:hover .centro img {
+    content: url("/img/plomeroLogoBlanco.png");
+}
+
+.proveedor-card:hover .derecha img {
+    content: url("/img/electricistaLogoBlanco.png");
 }
 
 .derecha {
@@ -304,6 +346,9 @@ body > header {
 }
 
 .saber-mas-btn:hover {
-    background-color: black;
+    background-color: var(--color);
 }
+
+
+
 

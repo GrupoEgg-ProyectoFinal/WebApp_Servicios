@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -48,48 +48,17 @@
 </head>
 
 <body>
-<div class="container">
-    <h1 class="mt-5">Lista de Usuarios</h1>
-    <table class="table table-striped mt-3">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Email</th>
-            <th>Contraseña</th>
-            <th>Barrios</th>
-            <th>Teléfono</th>
-            <th>Estado</th>
-            <th>Rol</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="usuario : ${usuarios}">
-            <td th:text="${usuario.id}">ID</td>
-            <td th:text="${usuario.nombre}">Nombre</td>
-            <td th:text="${usuario.apellido}">Apellido</td>
-            <td th:text="${usuario.email}">Email</td>
-            <td th:text="${usuario.contrasena}">Contraseña</td>
-            <td th:text="${usuario.barrios}">Barrios</td>
-            <td th:text="${usuario.telefono}">Teléfono</td>
-            <td th:text="${usuario.estado}">Estado</td>
-            <td th:text="${usuario.rol}">Rol</td>
-        </tr>
-        </tbody>
-    </table>
-</div>
 
-<!--    <div class="carta">-->
-<!--        <img th:src="@{${proveedor.foto.url}}" alt="Foto de Proveedor" />-->
-<!--        <h2 th:text="${proveedor.nombre + ' ' + proveedor.apellido}">COSME FULANITO</h2>-->
-<!--        <p><strong>Descripción:</strong> <span th:text="${proveedor.descripcion}">AKFDLKJFALKFJDLJFAFJASDFJKLAJFLAKSJFLKASJFLKASDJFLKAF</span></p>-->
-<!--        <div class="servicio">-->
-<!--            <h3>Servicio Proporcionado</h3>-->
-<!--            <p><strong>Nombre del Servicio:</strong> <span th:text="${proveedor.servicio.nombre}"></span></p>-->
-<!--            <p><strong>Descripción del Servicio:</strong> <span th:text="${proveedor.servicio.descripcion}"></span></p>-->
-<!--        </div>-->
-<!--    </div>-->
+    <div class="carta">
+        <img th:src="@{${proveedor.foto.url}}" alt="Foto de Proveedor" />
+        <h2 th:text="${proveedor.nombre + ' ' + proveedor.apellido}">COSME FULANITO</h2>
+        <p><strong>Descripción:</strong> <span th:text="${proveedor.descripcion}">AKFDLKJFALKFJDLJFAFJASDFJKLAJFLAKSJFLKASJFLKASDJFLKAF</span></p>
+        <div class="servicio">
+            <h3>Servicio Proporcionado</h3>
+            <p><strong>Nombre del Servicio:</strong> <span th:text="${proveedor.servicio.nombre}"></span></p>
+            <p><strong>Descripción del Servicio:</strong> <span th:text="${proveedor.servicio.descripcion}"></span></p>
+        </div>
+    </div>
 </body>
 
 </html>
