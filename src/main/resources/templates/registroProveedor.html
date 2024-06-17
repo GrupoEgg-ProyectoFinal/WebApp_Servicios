@@ -7,42 +7,87 @@
     <link rel="stylesheet" href="/styles/styleRegistroProveedor.css">
 </head>
 <body>
-    <header th:replace="~{fragments/_navbar :: Navbar(_,true)}"></header>
+    <header>
+        <nav class="navbar">
+            <div class="logo-contenedor">
+                <a th:href="@{/index}">
+                    <img src="/img/logoPNG.png" alt="Logo" class="logo">
+                    <span class="nombreEmpresa">DEV SOLUCIONES</span>
+                </a>
+            </div>
+
+            <ul class="nav-list">
+                <li><a th:href="@{/index}">INICIO</a></li>
+                <li><a th:href="@{/sobreNosotros}">CONOCENOS</a></li>
+            </ul>
+
+            <ul id="redes">
+                <ul class="registro">
+                    <li class="desplegable">
+                        <a href="javascript:void(0)" class="dropbtn">INICIAR SESIÓN</a>
+                        <div class="desplegable-content">
+                            <a th:href="@{/login}">USUARIO</a>
+                            <a th:href="@{/loginProveedor}">PROVEEDOR</a>
+                        </div>
+                    </li>
+                </ul>
+                <li>
+                    <a href="" target="_blank">
+                        <img class="social-logo" src="/img/Instagram.svg" alt="instagram">
+                    </a>
+                </li>
+                <li>
+                    <a href="" target="_blank">
+                        <img class="social-logo" src="/img/Facebook.svg" alt="facebook">
+                    </a>
+                </li>
+            </ul>
+
+            <div class="marquesina-contenedor">
+                <div class="marquesina">
+                    <p>DEV SOLUCIONES: Conectamos PROFESIONALES con tus necesidades.</p>
+                </div>
+            </div>
+        </nav>
+    </header>
+
     <main>
         <section id="registro">
             <div id="form">
                 <h2>REGISTRO DE PROVEEDOR</h2>
-                <form id="formularioProveedor" th:action="@{/guardarProveedor}" method="POST" th:object="${proveedorDTO}">
+                <form id="formularioProveedor" th:action="@{/guardarProveedor}" method="POST" th:object="${usuarioDTO}">
                     <div class="form-row">
                         <div class="form-column">
                             <div class="form-group">
-                                <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre" required>
+                                <input type="text" id="nombre" name="nombre" th:field="*{nombreProveedor}" placeholder="Ingrese su nombre" required>
                             </div>
                             <div class="form-group">
-                                <input type="tel" id="telefono" name="telefono" placeholder="Ingrese su teléfono" required>
+                                <input type="tel" id="telefono" name="telefono" th:value="*{telefonoProveedor}" placeholder="Ingrese su teléfono" required>
                             </div>
                             <div class="form-group">
-                                <input type="email" id="email" name="email" placeholder="Ingrese su email" required>
+                                <input type="email" id="email" name="email" th:value="*{emailProveedor}" placeholder="Ingrese su email" required>
                             </div>
                             <div class="form-group">
                                 <label for="imagenProveedor"><h2>SELECCIONE UNA IMAGEN DE PERFIL</h2></label>
-                                <input type="file" id="imagenProveedor" name="imagenFile" accept="image/*" placeholder="Cargar una imagen de perfil" required>
+                                <input type="file" id="imagenProveedor" name="imagen" accept="image/*" placeholder="Cargar una imagen de perfil" required>
                             </div>
                         </div>
                         <div class="form-column">
                             <div class="form-group">
-                                <input type="text" id="apellido" name="apellido" placeholder="Ingrese su apellido" required>
+                                <input type="text" id="apellido" name="apellido" th:value="*{apellidoProveedor}" placeholder="Ingrese su apellido" required>
                             </div>
                             <div class="form-group">
-                                <input type="number" id="matricula" name="matricula" placeholder="Ingrese su matricula">
+                                <input type="number" id="matricula" name="matricula" th:value="*{matriculaProveedor}" placeholder="Ingrese su matricula" required>
                             </div>
                             <div class="form-group">
-                                <input type="password" id="contrasena" name="contrasena" placeholder="Ingrese su contraseña" required>
+                                <input type="password" id="contrasena" name="contrasena" th:value="*{contrasenaProveedor}" placeholder="Ingrese su contraseña" required>
                             </div>
                             <div class="form-group">
                                 <h2>SELECCIONE UN SERVICIO</h2>
-                                <select name="idServicio" id="servicios" required>
-                                    <option th:each="servicio : ${servicios}" th:value="${servicio.id.toString()}" th:text="${servicio.nombre}"></option>
+                                <select id="servicios" name="servicios" required th:value="*{servicios}">
+                                    <option value="GAS">GAS</option>
+                                    <option value="PLOMERIA">PLOMERIA</option>
+                                    <option value="ELECTRICISTA">ELECTRICISTA</option>
                                 </select>
                             </div>
                         </div>
@@ -50,13 +95,13 @@
                     <div class="form-row full-width">
                         <div class="form-group">
                             <label for="descripcion"><h2>INGRESE DESCRIPCIÓN A REALIZAR</h2></label>
-                            <textarea id="descripcion" name="descripcion" placeholder="Ingrese una descripción del rol o servicio que provee"></textarea>
+                            <textarea id="descripcion" name="descripcion" th:field="*{descripcionProveedor}" placeholder="Ingrese una descripción del rol o servicio que provee" required></textarea>
                         </div>
                     </div>
                     <div class="form-row full-width center-content">
                         <div class="form-group">
                             <label for="estado"><h2>NO SOY UN ROBOT</h2></label>
-                            <input type="checkbox" id="estado">
+                            <input type="checkbox" id="estado" name="estado">
                         </div>
                     </div>
                     <div class="form-row full-width">

@@ -9,7 +9,43 @@
 </head>
 
 <body>
-    <header th:replace="~{fragments/_navbar :: Navbar(true,true)}"></header>
+    <header>
+        <nav class="navbar">
+            <div class="logo-contenedor">
+                <a th:href="@{/index}">
+                    <img src="/img/logoPNG.png" alt="Logo" class="logo">
+                    <span class="nombreEmpresa">DEV SOLUCIONES</span>
+                </a>
+            </div>
+
+            <ul class="nav-list">
+                <li><a class="target" th:href="@{/index}">INICIO</a></li>
+                <li><a th:href="@{/sobreNosotros}">CONOCENOS</a></li>
+            </ul>
+
+            <ul id="redes">
+                <li class="cerrarSesion">
+                    <li><a th:href="@{/index}">CERRAR SESIÓN</a></li>
+                    </li>
+                <li>
+                    <a href="" target="_blank">
+                        <img class="social-logo" src="/img/Instagram.svg" alt="instagram">
+                    </a>
+                </li>
+                <li>
+                    <a href="" target="_blank">
+                        <img class="social-logo" src="/img/Facebook.svg" alt="facebook">
+                    </a>
+                </li>
+            </ul>
+            
+            <div class="marquesina-contenedor">
+                <div class="marquesina">
+                    <p>DEV SOLUCIONES: Conectamos PROFESIONALES con tus necesidades.</p>
+                </div>
+            </div>
+        </nav>
+    </header>
     <main>
         <!-- PÁGINA 1 'INICIO SESION'-->
         <section id="vistaUsuario">
