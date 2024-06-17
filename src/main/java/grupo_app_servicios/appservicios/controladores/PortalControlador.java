@@ -1,6 +1,7 @@
 package grupo_app_servicios.appservicios.controladores;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,7 +17,6 @@ import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
 import grupo_app_servicios.appservicios.Dto.ServicioDTO;
 import grupo_app_servicios.appservicios.Dto.UsuarioDTO;
 import grupo_app_servicios.appservicios.entidades.UsuarioEntidad;
-import grupo_app_servicios.appservicios.excepciones.MiExcepcion;
 import grupo_app_servicios.appservicios.servicios.ProveedorServicio2;
 import grupo_app_servicios.appservicios.servicios.ServicioServicio;
 import grupo_app_servicios.appservicios.servicios.UsuarioServicio;
@@ -75,13 +75,17 @@ public class PortalControlador {
         return "registroProveedor.html";
     }
 
-    @PostMapping("/registrarProveedor")
-    public String registrarProveedor(@ModelAttribute ProveedorDTO proveedorDTO, MultipartFile imagenFile, Model model) {
+    @PostMapping("/guardarProveedor")
+    public String registrarProveedor(@ModelAttribute ProveedorDTO proveedorDTO, MultipartFile imagenFile, Model model, String idServicio) {
         try {
+            proveedorDTO.setServicio(
+                sServicio.buscarServicioPorId(UUID.fromString(idServicio))
+            );
             opcional.crearProveedor(proveedorDTO, imagenFile);
             model.addAttribute("mensaje", "Proveedor registrado exitosamente");
-        } catch (MiExcepcion e) {
+        } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
+            System.out.println(e.getMessage());
             return "redirect:/registrarProveedor";
         }
         return "redirect:/";
