@@ -45,7 +45,7 @@ public class PortalControlador {
         return "index.html"; // Acá es que retornamos con el método.
     }
 
-    // IR A REGISTRO DE USUARIO
+    // REGISTRO DE USUARIO
     @GetMapping("/registrarUsuario")
     public String registrar(Model model) {
         // Inicializa un nuevo objeto UsuarioDTO
@@ -62,7 +62,7 @@ public class PortalControlador {
         return "redirect:/";
     }
 
-    // IR AL REGISTRO DE PROVEEDOR
+    // REGISTRO DE PROVEEDOR
     @GetMapping("/registrarProveedor")
     public String registrarProveedor(Model model) {
         // Inicializa un nuevo objeto UsuarioDTO
@@ -75,7 +75,6 @@ public class PortalControlador {
         return "registroProveedor.html";
     }
 
-    // REGISTRAR PROVEEDOR
     @PostMapping("/registrarProveedor")
     public String registrarProveedor(@ModelAttribute ProveedorDTO proveedorDTO, MultipartFile imagenFile, Model model) {
         try {
@@ -88,18 +87,20 @@ public class PortalControlador {
         return "redirect:/";
     }
 
+    // LOGIN DE USUARIO
     @GetMapping("/login")
     public String inicioSesion() {
-        return "iniciarSesion.html";
+        return "sesionUsuario.html";
     }
 
+    // LOGIN DE PROVEEDOR
     @GetMapping("/loginProveedor")
     public String inicioSesionProveedor() {
         return "sesionProveedor.html";
     }
 
     @GetMapping("/perfil")
-    @PreAuthorize("hasAnyRol('ROL_USER', 'ROL_ADMIN')")
+    @PreAuthorize("hasAnyRol('ROL_USER', 'ROL_PROVEEDOR','ROL_ADMIN')")
     public String inicio(HttpSession session) {
         UsuarioEntidad loguedUser = (UsuarioEntidad) session.getAttribute("usuarioEnSesion");
         // Ver cómo hacer para que tambien se aplique en el proveedor tambien
