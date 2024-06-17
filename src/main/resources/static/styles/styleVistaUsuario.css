@@ -168,6 +168,42 @@ body > header {
     transform: scale(1.2);
 }
 
+/* ESTILOS PARA MARQUESINA */
+@keyframes marquee {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+.marquesina-contenedor {
+    position: fixed;
+    margin: 0 96px 0 0;
+    top: 80px;
+    right: 0;
+    width: 344px;
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: 1000;
+    color: white;
+}
+.marquesina {
+    display: inline-block;
+    padding: 12px 0;
+    animation: marquee 8s linear infinite;
+}
+.marquesina p {
+    cursor: default;
+}
+
+.marquesina p {
+    display: inline;
+    font-size: 16px;
+    color: white;
+}
+
+
 /* ESTILOS PAGINA 1 - VISTA USUARIO */
 #vistaUsuario {
     background: rgb(26, 26, 26);
