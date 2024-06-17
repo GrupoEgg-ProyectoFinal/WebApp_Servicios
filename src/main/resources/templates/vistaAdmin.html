@@ -9,7 +9,36 @@
 </head>
 
 <body>
-    <header th:fragment="~{fragments/_navbar :: Navbar(true,true)}"></header>
+    <header>
+        <nav class="navbar">
+            <div class="logo-contenedor">
+                <a th:href="@{/index}">
+                    <img src="/img/logoPNG.png" alt="Logo" class="logo">
+                    <span class="nombreEmpresa">DEV SOLUCIONES</span>
+                </a>
+            </div>
+
+            <ul class="nav-list">
+                <li><a class="target" th:href="@{/index}">PANEL DE ADMINISTRACION</a></li>
+            </ul>
+
+            <ul id="redes">
+                <li class="cerrarSesion">
+                    <li><a th:href="@{/index}">CERRAR SESIÓN</a></li>
+                    </li>
+                <li>
+                    <a href="" target="_blank">
+                        <img class="social-logo" src="/img/Instagram.svg" alt="instagram">
+                    </a>
+                </li>
+                <li>
+                    <a href="" target="_blank">
+                        <img class="social-logo" src="/img/Facebook.svg" alt="facebook">
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
     <main>
         <section id="admin-vista">
             <div id="admin-contenedor">
@@ -21,7 +50,7 @@
                             <thead>
                                 <tr>
                                     <th>NOMBRE</th>
-                                    <!-- <th>FOTO DE PERFIL</th> -->
+                                    <th>FOTO DE PERFIL</th>
                                     <th>E-MAIL</th>
                                     <th>ROL</th>
                                     <th>ACCIONES</th>
@@ -30,9 +59,9 @@
                             <tbody>
                                 <tr th:each="usuario : ${usuarios}">
                                     <td th:text="${usuario.nombre}">Aver Gaspar</td>
-                                    <!-- <td>
+                                    <td>
                                         <img th:src="@{${usuario.fotoPerfil}}" alt="Foto de perfil" width="50" height="50" src="/img/usuarioLogo.png">
-                                    </td> -->
+                                    </td>
                                     <td th:text="${usuario.email}">Avergaspar@gmail.com</td>
                                     <td th:text="${usuario.rol}">USUARIO</td>
                                     <td>
@@ -58,13 +87,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="proveedor : ${proveedores}">
-                                    <td th:text="${proveedor.nombre}">Señor Solución</td>
+                                <tr th:each="usuario : ${usuarios}">
+                                    <td th:text="${usuario.nombre}">Señor Solución</td>
                                     <td>
-                                        <img th:src="@{'/imagen/perfil/' + ${proveedor.id.toString()}}" alt="Foto de perfil" width="50" height="50" src="/img/plomero1.png">
+                                        <img th:src="@{${usuario.fotoPerfil}}" alt="Foto de perfil" width="50" height="50" src="/img/plomero1.png">
                                     </td>
-                                    <td th:text="${proveedor.email}">Tedestapo24-7@gmail.com</td>
-                                    <td th:text="${proveedor.servicio.nombre}">PLOMERIA</td>
+                                    <td th:text="${usuario.email}">Tedestapo24-7@gmail.com</td>
+                                    <td th:text="${usuario.rol}">PLOMERIA</td>
                                     <td>
                                         <button class="modificar">Modificar</button>
                                         <button class="modificar-rol">Modificar Rol</button>
@@ -77,13 +106,6 @@
                 </div>
             </div>
         </section>
-        <!-- <article>
-            <h2 style="color: black;">Formulario de registro de Servicios (llevar al panel de admin)</h2>
-            <form th:action="@{/servicio}" method="post" th:object="${servicioDTO}">
-                <input type="text" name="nombre" placeholder="Ingrese el nombre del servicio">
-                <button type="submit">Enviar</button>
-            </form>
-        </article> -->
     </main>
 </body>
 
