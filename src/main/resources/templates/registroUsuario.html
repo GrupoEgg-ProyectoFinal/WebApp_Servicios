@@ -17,33 +17,35 @@
                     <span class="nombreEmpresa">DEV SOLUCIONES</span>
                 </a>
             </div>
-
+        
             <ul class="nav-list">
                 <li><a th:href="@{/}">VOLVER AL INICIO</a></li>
                 <li><a th:href="@{/conocenos}">CONOCENOS</a></li>
             </ul>
-
+        
+            <ul class="account-options">
+                <li class="desplegable">
+                    <a href="javascript:void(0)" class="dropbtn">REGISTRARSE</a>
+                    <div class="desplegable-content">
+                        <a th:href="@{/registrarUsuario}">USUARIO</a>
+                        <a th:href="@{/registrarProveedor}">PROVEEDOR</a>
+                    </div>
+                </li>
+            </ul>
+        
             <ul id="redes">
-                <ul class="registro">
-                    <li class="desplegable">
-                        <a href="javascript:void(0)" class="dropbtn">INICIAR SESIÓN</a>
-                        <div class="desplegable-content">
-                            <a th:href="@{/login}">USUARIO</a>
-                            <a th:href="@{/loginProveedor}">PROVEEDOR</a>
-                        </div>
-                    </li>
-                </ul>
                 <li>
                     <a href="" target="_blank">
-                        <img class="social-logo" src="/img/Instagram.svg" alt="instagram">
+                        <img class="social-logo" src="/img/Instagram.svg" alt="Instagram">
                     </a>
                 </li>
                 <li>
                     <a href="" target="_blank">
-                        <img class="social-logo" src="/img/Facebook.svg" alt="facebook">
+                        <img class="social-logo" src="/img/Facebook.svg" alt="Facebook">
                     </a>
                 </li>
             </ul>
+        
             <div class="marquesina-contenedor">
                 <div class="marquesina">
                     <p>DEV SOLUCIONES: Conectamos PROFESIONALES con tus necesidades.</p>
@@ -55,7 +57,7 @@
     <main>
         <section id="registro">
             <div id="form">
-                <h2>REGISTRO DE USUARIO</h2>
+                <h3>REGISTRO DE USUARIO</h3>
                 <form id="formularioUsuario" th:action="@{/guardarUsuario}" method="POST" th:object="${usuarioDTO}">
                     <div class="form-row">
                         <div class="form-column">
@@ -66,7 +68,7 @@
                                 <input type="tel" id="telefono" name="telefono" th:field="*{telefono}" placeholder="Ingrese su teléfono" required>
                             </div>
                             <div class="form-group">
-                                <h2>SELECCIONE SU BARRIO</h2>
+                                <h3>SELECCIONE SU BARRIO</h3>
                                 <select id="barrios" name="barrios" required th:field="*{barrios}">
                                     <option value="NORTE">NORTE</option>
                                     <option value="CENTRO">CENTRO</option>
@@ -89,7 +91,7 @@
                     <div class="form-row full-width center-content">
                         <div class="form-group">
                             <label for="estado">
-                                <h2>NO SOY UN ROBOT</h2>
+                                <h3>NO SOY UN ROBOT</h3>
                             </label>
                             <input type="checkbox" id="estado" name="estado">
                         </div>

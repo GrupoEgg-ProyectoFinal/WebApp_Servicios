@@ -79,6 +79,7 @@ p {
 /*Colores*/
 :root {
     --color: #06608a;
+    --color-medio: #05435f;
     --color-oscurecido: #03293a;
     --color-trasparente: rgb(6, 96, 138, 0.9);
     --titulo-pintado: #e4e299;
@@ -142,10 +143,11 @@ body > header {
 /*NAVEGACIÓN*/
 .nav-list {
     display: flex;
-    gap: 48px;
+    gap: 22px;
     justify-content: center;
     font-weight: bold;
     cursor: pointer;
+    flex-grow: 1;
 }
 .nav-list a:hover {
     transform: scale(1.1);
@@ -154,8 +156,20 @@ body > header {
     color: var(--color);
 }
 
-/*ESTILOS PARA BOTON INICIAR SESIÓN (DESPLEGABLE */
-.desplegable {
+ul.nav-list {
+    min-width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.account-options {
+    display: flex;
+    gap: 24px;
+    margin-right: 20px; /* Añadido para separar los botones de redes sociales */
+}
+
+.account-options .desplegable {
     position: relative;
     display: inline-block;
     cursor: pointer;
@@ -193,9 +207,10 @@ body > header {
 }
 
 #redes {
-    cursor: pointer;
     display: flex;
     gap: 24px;
+    justify-content: flex-end;
+    align-items: center;
 }
 .social-logo {
     height: 24px;
@@ -216,11 +231,10 @@ body > header {
     }
 }
 .marquesina-contenedor {
-    position: fixed;
-    margin: 0 96px 0 0;
+    margin: 0 12px 0 0;
     top: 80px;
     right: 0;
-    width: 344px;
+    width: 168px;
     overflow: hidden;
     white-space: nowrap;
     z-index: 1000;
