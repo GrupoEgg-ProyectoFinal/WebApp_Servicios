@@ -3,62 +3,74 @@ package grupo_app_servicios.appservicios.utilidades;
 import grupo_app_servicios.appservicios.Dto.ImagenProvDTO;
 import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
 import grupo_app_servicios.appservicios.Dto.ServicioDTO;
+import grupo_app_servicios.appservicios.Dto.UsuarioDTO;
 import grupo_app_servicios.appservicios.entidades.ImagenProvEntidad;
 import grupo_app_servicios.appservicios.entidades.ProveedorEntidad;
 import grupo_app_servicios.appservicios.entidades.ServicioEntidad;
+import grupo_app_servicios.appservicios.entidades.UsuarioEntidad;
 
 /* 
  * Esta clase contiene métodos que deben ser estáticos y públicos, para poder ser usados solo los que se necesiten
  * y sin necesidad de instanciar la clase. 
  * Sirve para mapear los DTO y retornar la entidad que corresponda.
 */
-public class MapeadorDtoAEntidad {   
+public class MapeadorDtoAEntidad {
 
-    public static ProveedorEntidad mapearProveedor(ProveedorDTO proveedor) {
+    public static UsuarioEntidad mapearUsuario(UsuarioDTO usuarioDTO) {
+        UsuarioEntidad usuarioMapeado = new UsuarioEntidad();
+        usuarioMapeado.setNombre(usuarioDTO.getNombre());
+        usuarioMapeado.setApellido(usuarioDTO.getApellido());
+        usuarioMapeado.setTelefono(usuarioDTO.getTelefono());
+        usuarioMapeado.setEmail(usuarioDTO.getEmail());
+        usuarioMapeado.setContrasena(usuarioDTO.getContrasena());
+        usuarioMapeado.setRol(usuarioDTO.getRol());
+        usuarioMapeado.setBarrios(usuarioDTO.getBarrios());
+        usuarioMapeado.setEstado(usuarioDTO.getEstado());
+
+        return usuarioMapeado;
+    }
+
+    public static ProveedorEntidad mapearProveedor(ProveedorDTO proveedorDTO) {
         ProveedorEntidad proveedorMapeado = new ProveedorEntidad();
-        proveedorMapeado.setId(proveedor.getId());
-       /*  proveedorMapeado.setNombre(proveedor.getNombre());
-        proveedorMapeado.setApellido(proveedor.getApellido());
-        proveedorMapeado.setEmail(proveedor.getEmail());
-        proveedorMapeado.setContrasena(proveedor.getContrasena());
+        proveedorMapeado.setId(proveedorDTO.getId());
+        proveedorMapeado.setMatricula(proveedorDTO.getMatricula());
+        proveedorMapeado.setDescripcion(proveedorDTO.getDescripcion());
 
-        proveedorMapeado.setDescripcion(proveedor.getDescripcion());
-        proveedorMapeado.setTelefono(proveedor.getTelefono()); */
-        proveedorMapeado.setMatricula(proveedor.getMatricula());
+        if (proveedorDTO.getUsuario() != null) {
+            UsuarioEntidad usuario = MapeadorDtoAEntidad.mapearUsuario(proveedorDTO.getUsuario());
+            proveedorMapeado.setUsuario(usuario);
+        }
 
-        if (proveedor.getFoto() != null) {
-            ImagenProvDTO imagenProveedorDTO = proveedor.getFoto();
-            ImagenProvEntidad imagenProveedor = MapeadorDtoAEntidad.mapearImagenProveedor(imagenProveedorDTO);
-            
-            // acá se mapearía una entidad de imagenProveedor y se le asignaria al setter
-            proveedorMapeado.setFoto(imagenProveedor); 
-        }      
-        
-        if (proveedor.getServicio() != null) {
-            ServicioDTO servicioDTO = proveedor.getServicio();
-            ServicioEntidad servicio = MapeadorDtoAEntidad.mapearServicio(servicioDTO);
+        if (proveedorDTO.getFoto() != null) {
+            ImagenProvEntidad imagenProveedor = MapeadorDtoAEntidad.mapearImagenProveedor(proveedorDTO.getFoto());
+            proveedorMapeado.setFoto(imagenProveedor);
+        }
 
+        if (proveedorDTO.getServicio() != null) {
+            ServicioEntidad servicio = MapeadorDtoAEntidad.mapearServicio(proveedorDTO.getServicio());
             proveedorMapeado.setServicio(servicio);
         }
+
+        //mapear solicitudes
 
         return proveedorMapeado;
     }
 
-    public static ImagenProvEntidad mapearImagenProveedor(ImagenProvDTO imagenProveedor) {
+    public static ImagenProvEntidad mapearImagenProveedor(ImagenProvDTO imagenProveedorDTO) {
         ImagenProvEntidad imagenMapeada = new ImagenProvEntidad();
-        imagenMapeada.setId(imagenProveedor.getId());
-        imagenMapeada.setContenido(imagenProveedor.getContenido());
-        imagenMapeada.setMime(imagenProveedor.getMime());
-        imagenMapeada.setNombre(imagenProveedor.getNombre());
+        imagenMapeada.setId(imagenProveedorDTO.getId());
+        imagenMapeada.setContenido(imagenProveedorDTO.getContenido());
+        imagenMapeada.setMime(imagenProveedorDTO.getMime());
+        imagenMapeada.setNombre(imagenProveedorDTO.getNombre());
 
         return imagenMapeada;
     }
 
-    public static ServicioEntidad mapearServicio(ServicioDTO servicio) {
+    public static ServicioEntidad mapearServicio(ServicioDTO servicioDTO) {
         ServicioEntidad servicioMapeado = new ServicioEntidad();
-        servicioMapeado.setId(servicio.getId());
-        servicioMapeado.setNombre(servicio.getNombre());
-        servicioMapeado.setEstado(servicio.getEstado());
+        servicioMapeado.setId(servicioDTO.getId());
+        servicioMapeado.setNombre(servicioDTO.getNombre());
+        servicioMapeado.setEstado(servicioDTO.getEstado());
 
         return servicioMapeado;
     }
