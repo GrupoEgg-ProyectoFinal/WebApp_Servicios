@@ -16,9 +16,8 @@ import org.springframework.web.multipart.MultipartFile;
 import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
 import grupo_app_servicios.appservicios.Dto.ServicioDTO;
 import grupo_app_servicios.appservicios.Dto.UsuarioDTO;
-import grupo_app_servicios.appservicios.entidades.ProveedorEntidad;
 import grupo_app_servicios.appservicios.entidades.UsuarioEntidad;
-import grupo_app_servicios.appservicios.enumeraciones.Rol;
+import grupo_app_servicios.appservicios.excepciones.MiExcepcion;
 import grupo_app_servicios.appservicios.servicios.ProveedorServicio2;
 import grupo_app_servicios.appservicios.servicios.ServicioServicio;
 import grupo_app_servicios.appservicios.servicios.UsuarioServicio;
@@ -69,6 +68,9 @@ public class PortalControlador {
     public String registrarProveedor(Model model) {
         // Inicializa un nuevo objeto UsuarioDTO
         ProveedorDTO proveedorDTO = new ProveedorDTO();
+        UsuarioDTO usuarioDTO = new UsuarioDTO();
+        proveedorDTO.setUsuario(usuarioDTO);
+
         List<ServicioDTO> listaDeServicios = sServicio.listarServicios();
         // Agrega el objeto usuarioDTO al modelo
         model.addAttribute("proveedorDTO", proveedorDTO);
@@ -80,12 +82,14 @@ public class PortalControlador {
     @PostMapping("/guardarProveedor")
     public String registrarProveedor(@ModelAttribute ProveedorDTO proveedorDTO, MultipartFile imagenFile, Model model,
             String idServicio) {
+        System.out.println(proveedorDTO.toString());
         try {
-            proveedorDTO.setServicio(
-                    sServicio.buscarServicioPorId(UUID.fromString(idServicio)));
+            
+            proveedorDTO.setServicio(sServicio.buscarServicioPorId(UUID.fromString(idServicio)));
+
             pServicio.crearProveedor(proveedorDTO, imagenFile);
             model.addAttribute("mensaje", "Proveedor registrado exitosamente");
-        } catch (Exception e) {
+        } catch (MiExcepcion e) {
             model.addAttribute("error", e.getMessage());
             System.out.println(e.getMessage());
             return "redirect:/registrarProveedor";
@@ -106,27 +110,6 @@ public class PortalControlador {
     }
 
     // PERFIL USUARIO
-    // @GetMapping("/perfil")
-    // @PreAuthorize("hasAnyRol('ROL_USER', 'ROL_PROVEEDOR','ROL_ADMIN')")
-    // public String inicio(HttpSession session) {
-    // String role = " ";
-
-    // if (session.getAttribute("usuarioEnSesion") instanceof UsuarioEntidad) {
-    // UsuarioEntidad loguedUser = (UsuarioEntidad)
-    // session.getAttribute("usuarioEnSesion");
-    // role = loguedUser.getRol().toString();
-    // return "vistaUsuario.html";
-    // }
-
-    // // Ver cómo hacer para que tambien se aplique en el proveedor tambien
-    // // ej: con el rol de proveedor en usuario. (Habria que modificar la entidad
-    // de
-    // // proveedor y reveer el tema de inicio de sesion)
-
-    // return "redirect:/dashboard";
-
-    // }
-
     @GetMapping("/perfil")
     @PreAuthorize("hasAnyRol('ROL_USER', 'ROL_PROVEEDOR','ROL_ADMIN')")
     public String inicio(HttpSession session, Model modelo) {

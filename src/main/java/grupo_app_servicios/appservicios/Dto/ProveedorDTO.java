@@ -8,13 +8,9 @@ import lombok.Data;
 @Data
 public class ProveedorDTO {
     private UUID id;
-    private String nombre;
-    private String apellido;
-    private Long telefono;
     private Integer matricula;
-    private String email;
-    private String contrasena;
     private String descripcion;
+    private UsuarioDTO usuario;
     private ImagenProvDTO foto;
 
     private ServicioDTO servicio;

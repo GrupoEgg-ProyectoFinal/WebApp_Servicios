@@ -3,6 +3,7 @@ package grupo_app_servicios.appservicios.utilidades;
 import grupo_app_servicios.appservicios.Dto.ImagenProvDTO;
 import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
 import grupo_app_servicios.appservicios.Dto.ServicioDTO;
+import grupo_app_servicios.appservicios.Dto.UsuarioDTO;
 import grupo_app_servicios.appservicios.entidades.ImagenProvEntidad;
 import grupo_app_servicios.appservicios.entidades.ProveedorEntidad;
 import grupo_app_servicios.appservicios.entidades.ServicioEntidad;
@@ -16,14 +17,16 @@ public class MapeadorEntidadADto {
     
     public static ProveedorDTO mapearProveedor(ProveedorEntidad proveedor) {
         ProveedorDTO proveedorMapeado = new ProveedorDTO();
+        UsuarioDTO usuarioDTO = new UsuarioDTO();
         proveedorMapeado.setId(proveedor.getId());
-        proveedorMapeado.setNombre(proveedor.getNombre());
-        proveedorMapeado.setApellido(proveedor.getApellido());
-        proveedorMapeado.setEmail(proveedor.getEmail());
-        proveedorMapeado.setContrasena(proveedor.getContrasena());
+
+        usuarioDTO.setNombre(proveedor.getUsuario().getNombre());
+        usuarioDTO.setApellido(proveedor.getUsuario().getApellido());
+        usuarioDTO.setEmail(proveedor.getUsuario().getEmail());
+        usuarioDTO.setContrasena(proveedor.getUsuario().getContrasena());
+        usuarioDTO.setTelefono(proveedor.getUsuario().getTelefono());
 
         proveedorMapeado.setDescripcion(proveedor.getDescripcion());
-        proveedorMapeado.setTelefono(proveedor.getTelefono());
         proveedorMapeado.setMatricula(proveedor.getMatricula());
 
         if (proveedor.getFoto() != null) {

@@ -17,13 +17,13 @@ public class MapeadorDtoAEntidad {
     public static ProveedorEntidad mapearProveedor(ProveedorDTO proveedor) {
         ProveedorEntidad proveedorMapeado = new ProveedorEntidad();
         proveedorMapeado.setId(proveedor.getId());
-        proveedorMapeado.setNombre(proveedor.getNombre());
+       /*  proveedorMapeado.setNombre(proveedor.getNombre());
         proveedorMapeado.setApellido(proveedor.getApellido());
         proveedorMapeado.setEmail(proveedor.getEmail());
         proveedorMapeado.setContrasena(proveedor.getContrasena());
 
         proveedorMapeado.setDescripcion(proveedor.getDescripcion());
-        proveedorMapeado.setTelefono(proveedor.getTelefono());
+        proveedorMapeado.setTelefono(proveedor.getTelefono()); */
         proveedorMapeado.setMatricula(proveedor.getMatricula());
 
         if (proveedor.getFoto() != null) {
