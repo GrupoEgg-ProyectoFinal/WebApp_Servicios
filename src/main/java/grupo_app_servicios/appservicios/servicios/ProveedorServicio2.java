@@ -6,32 +6,27 @@ import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.multipart.MultipartFile;
 
 import grupo_app_servicios.appservicios.Dto.ImagenProvDTO;
 import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
+import grupo_app_servicios.appservicios.Dto.UsuarioDTO;
 import grupo_app_servicios.appservicios.entidades.ImagenProvEntidad;
 import grupo_app_servicios.appservicios.entidades.ProveedorEntidad;
 import grupo_app_servicios.appservicios.entidades.ServicioEntidad;
+import grupo_app_servicios.appservicios.entidades.UsuarioEntidad;
+import grupo_app_servicios.appservicios.enumeraciones.Barrios;
 import grupo_app_servicios.appservicios.enumeraciones.Rol;
 import grupo_app_servicios.appservicios.excepciones.MiExcepcion;
 import grupo_app_servicios.appservicios.repositorios.ImagenProvRepositorio;
 import grupo_app_servicios.appservicios.repositorios.ProveedorRepositorio;
 import grupo_app_servicios.appservicios.repositorios.ServicioRepositorio;
 import grupo_app_servicios.appservicios.repositorios.SolicitudRepositorio;
+import grupo_app_servicios.appservicios.repositorios.UsuarioRepositorio;
 import grupo_app_servicios.appservicios.utilidades.MapeadorEntidadADto;
-import jakarta.servlet.http.HttpSession;
 
 //Metodos
 //CREAR PROVEEDOR
@@ -42,6 +37,8 @@ import jakarta.servlet.http.HttpSession;
 public class ProveedorServicio2 {
     @Autowired
     ProveedorRepositorio pRepositorio;
+    @Autowired
+    UsuarioRepositorio uRepositorio;
     @Autowired
     ImagenProvRepositorio imgRepositorio;
     @Autowired
@@ -54,24 +51,35 @@ public class ProveedorServicio2 {
     // CREAR PROVEEDOR
 
     @Transactional
-    public void crearProveedor(ProveedorDTO proveedorDTO, MultipartFile imagenFile) throws MiExcepcion {
+    public void crearProveedor(ProveedorDTO proveedorDTO, MultipartFile imagenFile)
+            throws MiExcepcion {
         try {
             // Crear una nueva instancia de Proveedor a partir de ProveedorDTO
             ProveedorEntidad proveedor = new ProveedorEntidad();
-            proveedor.setNombre(proveedorDTO.getNombre());
-            proveedor.setApellido(proveedorDTO.getApellido());
-            proveedor.setTelefono(proveedorDTO.getTelefono());
+            
+            UsuarioDTO usuarioDTO = proveedorDTO.getUsuario();
+            UsuarioEntidad datosDeUsuario = new UsuarioEntidad();
+            datosDeUsuario.setNombre(usuarioDTO.getNombre());
+            datosDeUsuario.setApellido(usuarioDTO.getApellido());
+            datosDeUsuario.setTelefono(usuarioDTO.getTelefono());
+            datosDeUsuario.setEmail(usuarioDTO.getEmail());
+            datosDeUsuario.setContrasena(new BCryptPasswordEncoder().encode(usuarioDTO.getContrasena()));
+            datosDeUsuario.setRol(Rol.PROVEEDOR);
+            datosDeUsuario.setBarrios(Barrios.PROVEEDOR);
+            datosDeUsuario.setEstado(true);
+            uRepositorio.save(datosDeUsuario);
+
+            proveedor.setUsuario(datosDeUsuario);
+
             proveedor.setMatricula(proveedorDTO.getMatricula());
-            proveedor.setEmail(proveedorDTO.getEmail());
-            proveedor.setContrasena(new BCryptPasswordEncoder().encode(proveedorDTO.getContrasena()));
             proveedor.setDescripcion(proveedorDTO.getDescripcion());
-            proveedor.setRol(Rol.PROVEEDOR);
             // Asignar la imagen al proveedor si se proporcionó una en el formulario
             if (imagenFile != null && !imagenFile.isEmpty()) {
                 ImagenProvEntidad imagen = imgServicio.guardar(imagenFile);
                 proveedor.setFoto(imagen);
+                // <img th:src="@{'/imagen/perfil/' + *{id.toString()}}" alt="Foto del proveedor">
             }
-            //IMPORTANTE: falta setearle el servicio y las solicitudes cuando las tenga.
+            // IMPORTANTE: falta setearle el servicio y las solicitudes cuando las tenga.
             // Asignar servicio si está presente en el DTO
             if (proveedorDTO.getServicio() != null) {
                 ServicioEntidad servicio = sRepositorio.findById(proveedorDTO.getServicio().getId())
@@ -79,10 +87,6 @@ public class ProveedorServicio2 {
                                 "Servicio no encontrado con ID: " + proveedorDTO.getServicio().getId()));
                 proveedor.setServicio(servicio);
             }
-            /* ServicioEntidad servicio = sRepositorio.buscarPorNombreExacto(nombreServicio).orElseThrow(
-                () -> new MiExcepcion("No se ha encontrado un servicio con el nombre ingresado. " + nombreServicio)
-            );
-            proveedor.setServicio(servicio); */
 
             // Guardar el proveedor en la base de datos
             pRepositorio.save(proveedor);
@@ -102,16 +106,18 @@ public class ProveedorServicio2 {
         return proveedores.stream().map(
                 proveedor -> MapeadorEntidadADto.mapearProveedor(proveedor)).toList();
     }
+
     // LISTAR SEGÚN SERVICIO
     @Transactional(readOnly = true)
     public List<ProveedorDTO> listarProveedoresSegunServicio(String nombreServicio) {
         List<ProveedorEntidad> proveedores = new ArrayList<>();
 
-        proveedores = pRepositorio.obtenerProveedoresPorServicio(nombreServicio);
+        proveedores = pRepositorio.buscarProveedoresPorServicio(nombreServicio);
 
         return proveedores.stream().map(
                 proveedor -> MapeadorEntidadADto.mapearProveedor(proveedor)).toList();
     }
+
     // BUSCAR PROVEEDOR POR ID
     @Transactional(readOnly = true)
     public ProveedorDTO buscaProveedorId(UUID id) {
@@ -121,46 +127,40 @@ public class ProveedorServicio2 {
     //
     // MODIFICAR PROVEEDOR
     @Transactional
-    public void modificarProveedor(ProveedorDTO proveedorDTO) {
+    public void modificarProveedor(ProveedorDTO proveedorDTO, UsuarioDTO usuarioDTO, MultipartFile imagenFile) throws MiExcepcion {
         // Se buscar por id y se guarda en un optional
-        Optional<ProveedorEntidad> respuesta = pRepositorio.findById(proveedorDTO.getId());
+        ProveedorEntidad proveedor = pRepositorio.findById(proveedorDTO.getId()).orElse(null);
+        UsuarioEntidad datosDeUsuario = new UsuarioEntidad();
 
-        // Si el opctional tiene presente un resultado
-        if (respuesta.isPresent()) {
-            // Guardamos el resultado de la solicitud existente
-            ProveedorEntidad proveedorExistente = respuesta.get();
+        datosDeUsuario.setNombre(usuarioDTO.getNombre());
+        datosDeUsuario.setApellido(usuarioDTO.getApellido());
+        datosDeUsuario.setTelefono(usuarioDTO.getTelefono());
+        datosDeUsuario.setEmail(usuarioDTO.getEmail());
+        datosDeUsuario.setContrasena(new BCryptPasswordEncoder().encode(usuarioDTO.getContrasena()));
 
-            proveedorExistente.setNombre(proveedorDTO.getNombre());
-            proveedorExistente.setApellido(proveedorDTO.getApellido());
-            proveedorExistente.setDescripcion(proveedorDTO.getDescripcion());
-            proveedorExistente.setTelefono(proveedorDTO.getTelefono());
-            proveedorExistente.setMatricula(proveedorDTO.getMatricula());
-            proveedorExistente.setEmail(proveedorDTO.getEmail());
-            proveedorExistente.setContrasena(proveedorDTO.getContrasena());
+        proveedor.setMatricula(proveedorDTO.getMatricula());
+        proveedor.setDescripcion(proveedorDTO.getDescripcion());
+        datosDeUsuario.setRol(Rol.PROVEEDOR);
 
-            // Asignar foto si está presente en el DTO
-            if (proveedorDTO.getFoto() != null) {
-                ImagenProvEntidad imagen = imgRepositorio.findById(proveedorDTO.getFoto().getId())
-                        .orElseThrow(() -> new RuntimeException(
-                                "Imagen no encontrada con ID: " + proveedorDTO.getFoto().getId()));
-                proveedorExistente.setFoto(imagen);
-            }
-
-            // Asignar servicio si está presente en el DTO
-            if (proveedorDTO.getServicio() != null) {
-                ServicioEntidad servicio = sRepositorio.findById(proveedorDTO.getServicio().getId())
-                        .orElseThrow(() -> new RuntimeException(
-                                "Servicio no encontrado con ID: " + proveedorDTO.getServicio().getId()));
-                proveedorExistente.setServicio(servicio);
-            }
-
+        // Asignar la imagen al proveedor si se proporcionó una en el formulario
+        if (imagenFile != null && !imagenFile.isEmpty()) {
+            ImagenProvEntidad imagen = imgServicio.guardar(imagenFile);
+            proveedor.setFoto(imagen);
         }
+        // IMPORTANTE: falta setearle el servicio y las solicitudes cuando las tenga.
+        // Asignar servicio si está presente en el DTO
+        if (proveedorDTO.getServicio() != null) {
+            ServicioEntidad servicio = sRepositorio.findById(proveedorDTO.getServicio().getId())
+                    .orElseThrow(() -> new RuntimeException(
+                            "Servicio no encontrado con ID: " + proveedorDTO.getServicio().getId()));
+            proveedor.setServicio(servicio);
+        }
+
+        
 
     }
 
     // ELIMINAR PROVEEDOR
-
-
 
     public ImagenProvDTO obtenerImagenPorId(UUID id) {
         Optional<ProveedorEntidad> proveedorOptional = pRepositorio.findById(id);
@@ -177,24 +177,4 @@ public class ProveedorServicio2 {
             throw new RuntimeException("Imagen no encontrada para el proveedor con id: " + id);
         }
     }
-
-    // MÉTODO PARA CARGAR USUARIO EN SESIÓN
-    // @Override
-    // public UserDetails loadUserByUsername(String emailProveedor) throws UsernameNotFoundException {
-    //     ProveedorEntidad user = pRepositorio.buscarPorEmail(emailProveedor);
-
-    //     if (user == null) return null;
-
-    //     List<GrantedAuthority> permisos = new ArrayList<GrantedAuthority>();
-    //     GrantedAuthority perms = new SimpleGrantedAuthority("ROL_" + user.getRol().toString());
-
-    //     permisos.add(perms);
-
-    //     ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-    //     HttpSession session = attr.getRequest().getSession();
-    //     session.setAttribute("usuarioEnSesion", user);
-
-    //     return new User(user.getEmail(), user.getContrasena(), permisos);
-    // }
-
 }
