@@ -94,12 +94,12 @@
                                 <div class="col-puntuacion"><h3>PUNTUACIÓN</h3></div>
                                 <div class="col-contratar"></div>
                             </div>
-                            <div class="proveedor">
+                            <div class="proveedor"  th:each="proveedor : ${proveedores}">
                                 <div class="col-avatar">
                                     <img src="/img/plomero1.png" alt="Perfil de Pedro PicaPiedra" class="avatar" height="50px" width="50px">
                                 </div>
                                 <div class="col-nombre">
-                                    <h4>Pedro PicaPiedra</h4>
+                                <h4 th:text="${proveedor.nombre + ' '+ proveedor.apellido}">Pedro PicaPiedra</h4>
                                 </div>
                                 <div class="col-puntuacion">
                                     ⭐⭐⭐⭐☆

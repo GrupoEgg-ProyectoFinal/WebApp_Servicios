@@ -18,6 +18,7 @@ import grupo_app_servicios.appservicios.Dto.ServicioDTO;
 import grupo_app_servicios.appservicios.Dto.UsuarioDTO;
 import grupo_app_servicios.appservicios.entidades.ProveedorEntidad;
 import grupo_app_servicios.appservicios.entidades.UsuarioEntidad;
+import grupo_app_servicios.appservicios.enumeraciones.Rol;
 import grupo_app_servicios.appservicios.servicios.ProveedorServicio2;
 import grupo_app_servicios.appservicios.servicios.ServicioServicio;
 import grupo_app_servicios.appservicios.servicios.UsuarioServicio;
@@ -28,7 +29,7 @@ import jakarta.servlet.http.HttpSession;
 public class PortalControlador {
 
     @Autowired
-    ProveedorServicio2 opcional;
+    ProveedorServicio2 pServicio;
     @Autowired
     UsuarioServicio uServicio;
     @Autowired
@@ -39,7 +40,7 @@ public class PortalControlador {
 
     @GetMapping("/") // Acá es donde realizamos el mapeo
     public String index(Model modelo) {
-        List<ProveedorDTO> proveedores = opcional.listarProveedores();
+        List<ProveedorDTO> proveedores = pServicio.listarProveedores();
 
         modelo.addAttribute("proveedores", proveedores);
         modelo.addAttribute("servicioDTO", new ServicioDTO());
@@ -56,7 +57,7 @@ public class PortalControlador {
         model.addAttribute("contrasena2", ""); // verificar que funcione
         return "registroUsuario.html";
     }
-        
+
     @PostMapping("/guardarUsuario")
     public String guardarUsuario(@ModelAttribute UsuarioDTO usuarioDTO, String contrasena2) {
         uServicio.crearUsuario(usuarioDTO, contrasena2);
@@ -77,19 +78,19 @@ public class PortalControlador {
     }
 
     @PostMapping("/guardarProveedor")
-    public String registrarProveedor(@ModelAttribute ProveedorDTO proveedorDTO, MultipartFile imagenFile, Model model, String idServicio) {
+    public String registrarProveedor(@ModelAttribute ProveedorDTO proveedorDTO, MultipartFile imagenFile, Model model,
+            String idServicio) {
         try {
             proveedorDTO.setServicio(
-                sServicio.buscarServicioPorId(UUID.fromString(idServicio))
-            );
-            opcional.crearProveedor(proveedorDTO, imagenFile);
+                    sServicio.buscarServicioPorId(UUID.fromString(idServicio)));
+            pServicio.crearProveedor(proveedorDTO, imagenFile);
             model.addAttribute("mensaje", "Proveedor registrado exitosamente");
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
             System.out.println(e.getMessage());
             return "redirect:/registrarProveedor";
         }
-        return "redirect:/";
+        return "index.html";
     }
 
     // LOGIN DE USUARIO
@@ -104,38 +105,82 @@ public class PortalControlador {
         return "sesionProveedor.html";
     }
 
+    // PERFIL USUARIO
+    // @GetMapping("/perfil")
+    // @PreAuthorize("hasAnyRol('ROL_USER', 'ROL_PROVEEDOR','ROL_ADMIN')")
+    // public String inicio(HttpSession session) {
+    // String role = " ";
+
+    // if (session.getAttribute("usuarioEnSesion") instanceof UsuarioEntidad) {
+    // UsuarioEntidad loguedUser = (UsuarioEntidad)
+    // session.getAttribute("usuarioEnSesion");
+    // role = loguedUser.getRol().toString();
+    // return "vistaUsuario.html";
+    // }
+
+    // // Ver cómo hacer para que tambien se aplique en el proveedor tambien
+    // // ej: con el rol de proveedor en usuario. (Habria que modificar la entidad
+    // de
+    // // proveedor y reveer el tema de inicio de sesion)
+
+    // return "redirect:/dashboard";
+
+    // }
+
     @GetMapping("/perfil")
     @PreAuthorize("hasAnyRol('ROL_USER', 'ROL_PROVEEDOR','ROL_ADMIN')")
-    public String inicio(HttpSession session) {
-        String role =" ";
-
-        if (session.getAttribute("usuarioEnSesion") instanceof UsuarioEntidad) {
-            UsuarioEntidad loguedUser = (UsuarioEntidad) session.getAttribute("usuarioEnSesion");
-            role = loguedUser.getRol().toString();
-            return "vistaUsuario.html";
-        }
-        if (session.getAttribute("usuarioEnSesion") instanceof ProveedorEntidad) {
-            ProveedorEntidad loguedUser = (ProveedorEntidad) session.getAttribute("usuarioEnSesion");
-             role = loguedUser.getRol().toString();
-             return "vistaProveedor.html";
-        }
-       
+    public String inicio(HttpSession session, Model modelo) {
+        UsuarioEntidad loguedUser = (UsuarioEntidad) session.getAttribute("usuarioEnSesion");
         // Ver cómo hacer para que tambien se aplique en el proveedor tambien
-        // ej: con el rol de proveedor en usuario. (Habria que modificar la entidad de proveedor y reveer el tema de inicio de sesion)
+        // ej: con el rol de proveedor en usuario. (Habria que modificar la entidad de
+        // proveedor y reveer el tema de inicio de sesion)
 
+        String role = loguedUser.getRol().toString();
+        List<ProveedorDTO> proveedores = pServicio.listarProveedoresSegunServicio("Plomeria");
+        modelo.addAttribute("proveedores", proveedores);
+        if (role.equals("ADMIN")) {
+
+            List<ProveedorDTO> proveedores2 = pServicio.listarProveedores();
+            modelo.addAttribute("proveedores", proveedores2);
+
+            List<UsuarioDTO> usuarios = uServicio.listarUsuarios();
+            modelo.addAttribute("usuarios", usuarios);
             return "redirect:/dashboard";
-        
+        }
+
+        return "vistaUsuario.html"; // después cambiarlo por la vista de perfil de usuario
     }
+
+    // // PERFIL PROVEEDOR
+    // @GetMapping("/perfilProveedor")
+    // @PreAuthorize("hasAnyRol('ROL_USER', 'ROL_PROVEEDOR','ROL_ADMIN')")
+    // public String inicioProveedor(HttpSession session) {
+
+    // ProveedorEntidad loguedUser = (ProveedorEntidad)
+    // session.getAttribute("usuarioEnSesion");
+    // String role = loguedUser.getRol().toString();
+    // if (role.equals(Rol.PROVEEDOR)) {
+    // return "vistaProveedor.html";
+    // }
+    // return "index.html";
+
+    // }
 
     @GetMapping("/dashboard")
     @PreAuthorize("hasRole('ROL_ADMIN')")
-    public String panelAdministrativo(HttpSession session) {
+    public String panelAdministrativo(HttpSession session,Model modelo) {
+        List<ProveedorDTO> proveedores2 = pServicio.listarProveedores();
+        modelo.addAttribute("proveedores", proveedores2);
+
+        List<UsuarioDTO> usuarios = uServicio.listarUsuarios();
+        modelo.addAttribute("usuarios", usuarios);
+
         return "vistaAdmin.html";
     }
 
-    //CONOCENOS
+    // CONOCENOS
     @GetMapping("/conocenos")
-    public String conocenos(){
+    public String conocenos() {
         return "conocenos.html";
     }
 }

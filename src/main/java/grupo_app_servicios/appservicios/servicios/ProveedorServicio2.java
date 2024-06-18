@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.context.request.RequestContextHolder;
@@ -23,6 +24,7 @@ import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
 import grupo_app_servicios.appservicios.entidades.ImagenProvEntidad;
 import grupo_app_servicios.appservicios.entidades.ProveedorEntidad;
 import grupo_app_servicios.appservicios.entidades.ServicioEntidad;
+import grupo_app_servicios.appservicios.enumeraciones.Rol;
 import grupo_app_servicios.appservicios.excepciones.MiExcepcion;
 import grupo_app_servicios.appservicios.repositorios.ImagenProvRepositorio;
 import grupo_app_servicios.appservicios.repositorios.ProveedorRepositorio;
@@ -37,7 +39,7 @@ import jakarta.servlet.http.HttpSession;
 //ACTUALIZAR PROVEEDOR
 //ELIMINAR PROVEEDOR
 @Service
-public class ProveedorServicio2 implements UserDetailsService{
+public class ProveedorServicio2 {
     @Autowired
     ProveedorRepositorio pRepositorio;
     @Autowired
@@ -61,8 +63,9 @@ public class ProveedorServicio2 implements UserDetailsService{
             proveedor.setTelefono(proveedorDTO.getTelefono());
             proveedor.setMatricula(proveedorDTO.getMatricula());
             proveedor.setEmail(proveedorDTO.getEmail());
-            proveedor.setContrasena(proveedorDTO.getContrasena());
+            proveedor.setContrasena(new BCryptPasswordEncoder().encode(proveedorDTO.getContrasena()));
             proveedor.setDescripcion(proveedorDTO.getDescripcion());
+            proveedor.setRol(Rol.PROVEEDOR);
             // Asignar la imagen al proveedor si se proporcionó una en el formulario
             if (imagenFile != null && !imagenFile.isEmpty()) {
                 ImagenProvEntidad imagen = imgServicio.guardar(imagenFile);
@@ -176,22 +179,22 @@ public class ProveedorServicio2 implements UserDetailsService{
     }
 
     // MÉTODO PARA CARGAR USUARIO EN SESIÓN
-    @Override
-    public UserDetails loadUserByUsername(String emailProveedor) throws UsernameNotFoundException {
-        ProveedorEntidad user = pRepositorio.buscarPorEmail(emailProveedor);
+    // @Override
+    // public UserDetails loadUserByUsername(String emailProveedor) throws UsernameNotFoundException {
+    //     ProveedorEntidad user = pRepositorio.buscarPorEmail(emailProveedor);
 
-        if (user == null) return null;
+    //     if (user == null) return null;
 
-        List<GrantedAuthority> permisos = new ArrayList<GrantedAuthority>();
-        GrantedAuthority perms = new SimpleGrantedAuthority("ROL_" + user.getRol().toString());
+    //     List<GrantedAuthority> permisos = new ArrayList<GrantedAuthority>();
+    //     GrantedAuthority perms = new SimpleGrantedAuthority("ROL_" + user.getRol().toString());
 
-        permisos.add(perms);
+    //     permisos.add(perms);
 
-        ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
-        HttpSession session = attr.getRequest().getSession();
-        session.setAttribute("usuarioEnSesion", user);
+    //     ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
+    //     HttpSession session = attr.getRequest().getSession();
+    //     session.setAttribute("usuarioEnSesion", user);
 
-        return new User(user.getEmail(), user.getContrasena(), permisos);
-    }
+    //     return new User(user.getEmail(), user.getContrasena(), permisos);
+    // }
 
 }
