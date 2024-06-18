@@ -66,25 +66,25 @@ public class PortalControlador {
     // REGISTRO DE PROVEEDOR
     @GetMapping("/registrarProveedor")
     public String registrarProveedor(Model model) {
-        // Inicializa un nuevo objeto UsuarioDTO
+        // Inicializa un nuevo objeto ProveedorDTO y le asigno un UsuarioDTO vacío
         ProveedorDTO proveedorDTO = new ProveedorDTO();
         UsuarioDTO usuarioDTO = new UsuarioDTO();
         proveedorDTO.setUsuario(usuarioDTO);
 
         List<ServicioDTO> listaDeServicios = sServicio.listarServicios();
-        // Agrega el objeto usuarioDTO al modelo
+        // Agrega el objeto proveedorDTO al modelo,
+        // junto con la lista de servicios disponibles para que se pueda asignar uno desde el front
         model.addAttribute("proveedorDTO", proveedorDTO);
         model.addAttribute("servicios", listaDeServicios);
-        model.addAttribute("contrasena2", ""); // verificar que funcione
         return "registroProveedor.html";
     }
 
     @PostMapping("/guardarProveedor")
     public String registrarProveedor(@ModelAttribute ProveedorDTO proveedorDTO, MultipartFile imagenFile, Model model,
             String idServicio) {
-        System.out.println(proveedorDTO.toString());
+        // System.out.println(proveedorDTO.toString());
         try {
-            
+            // busca el servicio seleccionado y se asigno al proveedor DTO
             proveedorDTO.setServicio(sServicio.buscarServicioPorId(UUID.fromString(idServicio)));
 
             pServicio.crearProveedor(proveedorDTO, imagenFile);

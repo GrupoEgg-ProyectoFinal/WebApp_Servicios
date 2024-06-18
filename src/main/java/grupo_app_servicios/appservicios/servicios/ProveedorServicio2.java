@@ -49,7 +49,6 @@ public class ProveedorServicio2 {
     ImagenProvServicio imgServicio;
 
     // CREAR PROVEEDOR
-
     @Transactional
     public void crearProveedor(ProveedorDTO proveedorDTO, MultipartFile imagenFile)
             throws MiExcepcion {
@@ -57,6 +56,8 @@ public class ProveedorServicio2 {
             // Crear una nueva instancia de Proveedor a partir de ProveedorDTO
             ProveedorEntidad proveedor = new ProveedorEntidad();
             
+            // Obtiene el usuarioDTO que se le asignó desde el controlador y el front,
+            // y después mapea un usuarioEntidad en base a ese
             UsuarioDTO usuarioDTO = proveedorDTO.getUsuario();
             UsuarioEntidad datosDeUsuario = new UsuarioEntidad();
             datosDeUsuario.setNombre(usuarioDTO.getNombre());
@@ -67,8 +68,9 @@ public class ProveedorServicio2 {
             datosDeUsuario.setRol(Rol.PROVEEDOR);
             datosDeUsuario.setBarrios(Barrios.PROVEEDOR);
             datosDeUsuario.setEstado(true);
-            uRepositorio.save(datosDeUsuario);
 
+            //guarda esta entidad de usuario y despues lo setea en la entidad de proveedor que se está haciendo
+            uRepositorio.save(datosDeUsuario);
             proveedor.setUsuario(datosDeUsuario);
 
             proveedor.setMatricula(proveedorDTO.getMatricula());
@@ -79,7 +81,6 @@ public class ProveedorServicio2 {
                 proveedor.setFoto(imagen);
                 // <img th:src="@{'/imagen/perfil/' + *{id.toString()}}" alt="Foto del proveedor">
             }
-            // IMPORTANTE: falta setearle el servicio y las solicitudes cuando las tenga.
             // Asignar servicio si está presente en el DTO
             if (proveedorDTO.getServicio() != null) {
                 ServicioEntidad servicio = sRepositorio.findById(proveedorDTO.getServicio().getId())
@@ -104,7 +105,8 @@ public class ProveedorServicio2 {
         proveedores = pRepositorio.findAll();
 
         return proveedores.stream().map(
-                proveedor -> MapeadorEntidadADto.mapearProveedor(proveedor)).toList();
+            proveedor -> MapeadorEntidadADto.mapearProveedor(proveedor)
+        ).toList();
     }
 
     // LISTAR SEGÚN SERVICIO
@@ -115,7 +117,8 @@ public class ProveedorServicio2 {
         proveedores = pRepositorio.buscarProveedoresPorServicio(nombreServicio);
 
         return proveedores.stream().map(
-                proveedor -> MapeadorEntidadADto.mapearProveedor(proveedor)).toList();
+            proveedor -> MapeadorEntidadADto.mapearProveedor(proveedor)
+        ).toList();
     }
 
     // BUSCAR PROVEEDOR POR ID
@@ -155,13 +158,12 @@ public class ProveedorServicio2 {
                             "Servicio no encontrado con ID: " + proveedorDTO.getServicio().getId()));
             proveedor.setServicio(servicio);
         }
-
-        
-
     }
 
     // ELIMINAR PROVEEDOR
 
+
+    // metodo que por el momento no se utiliza (cuándo se pueda aplicar la visualizacion de imagenes ver si hace falta)
     public ImagenProvDTO obtenerImagenPorId(UUID id) {
         Optional<ProveedorEntidad> proveedorOptional = pRepositorio.findById(id);
         if (proveedorOptional.isPresent()) {
