@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/styles/styleVistaAdmin.css">
+    <title>Vista PROVEEDOR</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo-contenedor">
+                <a th:href="@{/index}">
+                    <img src="/img/logoPNG.png" alt="Logo" class="logo">
+                    <span class="nombreEmpresa">DEV SOLUCIONES</span>
+                </a>
+            </div>
+
+            <ul class="nav-list">
+                <li><a class="target" th:href="@{/}">VOLVER AL INICIO</a></li>
+                <li><a>SOLICITUDES DE TRABAJO</li></a>
+            </ul>
+
+            <ul id="redes">
+                <li class="cerrarSesion">
+                    <a th:href="@{/index}">CERRAR SESIÓN</a>
+                </li>
+                <li>
+                    <a href="" target="_blank">
+                        <img class="social-logo" src="/img/Instagram.svg" alt="instagram">
+                    </a>
+                </li>
+                <li>
+                    <a href="" target="_blank">
+                        <img class="social-logo" src="/img/Facebook.svg" alt="facebook">
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="admin-vista">
+            <div id="admin-contenedor">
+                <div class="admin-row">
+                    <!-- Pedidos de Trabajo -->
+                    <div class="admin-column">
+                        <h2>PEDIDOS DE TRABAJO</h2>
+                        <table id="pedidosTable">
+                            <thead>
+                                <tr>
+                                    <th>NOMBRE</th>
+                                    <th>APELLIDO</th>
+                                    <th>TELÉFONO</th>
+                                    <th>BARRIO</th>
+                                    <th>SELECCIÓN</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Aquí va la iteración de los pedidos de trabajo -->
+                                <tr th:each="pedido : ${pedidos}">
+                                    <td th:text="${pedido.nombre}">Alejandro</td>
+                                    <td th:text="${pedido.apellido}">Perez</td>
+                                    <td th:text="${pedido.telefono}">2948737238</td>
+                                    <td th:text="${pedido.barrio}">NORTE</td>
+                                    <td>
+                                        <button class="aceptar">Aceptar</button>
+                                        <button class="rechazar">Rechazar</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Trabajos en Curso -->
+                    <div class="admin-column">
+                        <h2>TRABAJOS EN CURSO</h2>
+                        <table id="cursosTable">
+                            <thead>
+                                <tr>
+                                    <th>NOMBRE</th>
+                                    <th>APELLIDO</th>
+                                    <th>TELÉFONO</th>
+                                    <th>BARRIO</th>
+                                    <th>SELECCIÓN</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Aquí va la iteración de los trabajos en curso -->
+                                <tr th:each="trabajo : ${trabajosCurso}">
+                                    <td th:text="${trabajo.nombre}">Juan</td>
+                                    <td th:text="${trabajo.apellido}">López</td>
+                                    <td th:text="${trabajo.telefono}">2987654321</td>
+                                    <td th:text="${trabajo.barrio}">SUR</td>
+                                    <td>EN CURSO</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- Trabajos Finalizados -->
+                    <div class="admin-column">
+                        <h2>TRABAJOS FINALIZADOS</h2>
+                        <table id="finalizadosTable">
+                            <thead>
+                                <tr>
+                                    <th>NOMBRE</th>
+                                    <th>APELLIDO</th>
+                                    <th>TELÉFONO</th>
+                                    <th>BARRIO</th>
+                                    <th>SELECCIÓN</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Aquí va la iteración de los trabajos finalizados -->
+                                <tr th:each="trabajo : ${trabajosFinalizados}">
+                                    <td th:text="${trabajo.nombre}">María</td>
+                                    <td th:text="${trabajo.apellido}">Gómez</td>
+                                    <td th:text="${trabajo.telefono}">2955555555</td>
+                                    <td th:text="${trabajo.barrio}">CENTRO</td>
+                                    <td>FINALIZADO</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
+
+
