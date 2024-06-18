@@ -60,13 +60,13 @@
                     <div class="form-row">
                         <div class="form-column">
                             <div class="form-group">
-                                <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre" required>
+                                <input type="text" id="nombre" th:field="*{usuario.nombre}" placeholder="Ingrese su nombre" required>
                             </div>
                             <div class="form-group">
-                                <input type="tel" id="telefono" name="telefono"  placeholder="Ingrese su teléfono" required>
+                                <input type="tel" id="telefono" th:field="*{usuario.telefono}"  placeholder="Ingrese su teléfono" required>
                             </div>
                             <div class="form-group">
-                                <input type="email" id="email" name="email"  placeholder="Ingrese su email" required>
+                                <input type="email" id="email" th:field="*{usuario.email}"  placeholder="Ingrese su email" required>
                             </div>
                             <div class="form-group">
                                 <label for="imagenProveedor"><h3>SELECCIONE UNA IMAGEN DE PERFIL</h3></label>
@@ -75,13 +75,13 @@
                         </div>
                         <div class="form-column">
                             <div class="form-group">
-                                <input type="text" id="apellido" name="apellido"  placeholder="Ingrese su apellido" required>
+                                <input type="text" id="apellido" th:field="*{usuario.apellido}"  placeholder="Ingrese su apellido" required>
                             </div>
                             <div class="form-group">
                                 <input type="number" id="matricula" name="matricula"  placeholder="Ingrese su matricula" required>
                             </div>
                             <div class="form-group">
-                                <input type="password" id="contrasena" name="contrasena"  placeholder="Ingrese su contraseña" required>
+                                <input type="password" id="contrasena" th:field="*{usuario.contrasena}"  placeholder="Ingrese su contraseña" required>
                             </div>
                             <div class="form-group">
                                 <h3>SELECCIONE UN SERVICIO</h3>

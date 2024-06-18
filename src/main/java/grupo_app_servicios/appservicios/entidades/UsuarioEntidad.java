@@ -27,13 +27,13 @@ public class UsuarioEntidad {
     @Column(nullable = false)
     private String contrasena;
     @Column(nullable = false)
-    @Enumerated(EnumType.STRING)
-    private Barrios barrios;
-    @Column(nullable = false)
     private Long telefono;
     @Column(nullable = false)
     private Boolean estado;
-
+    @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Barrios barrios;
+    
     @Enumerated(EnumType.STRING)
     private Rol rol;
 
