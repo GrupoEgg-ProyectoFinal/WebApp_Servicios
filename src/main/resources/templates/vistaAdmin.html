@@ -50,7 +50,7 @@
                             <thead>
                                 <tr>
                                     <th>NOMBRE</th>
-                                    <th>FOTO DE PERFIL</th>
+                                    <!-- <th>FOTO DE PERFIL</th> -->
                                     <th>E-MAIL</th>
                                     <th>ROL</th>
                                     <th>ACCIONES</th>
@@ -58,15 +58,17 @@
                             </thead>
                             <tbody>
                                 <tr th:each="usuario : ${usuarios}">
-                                    <td th:text="${usuario.nombre}">Aver Gaspar</td>
-                                    <td>
+                                    <td th:text="${usuario.nombre+' '+usuario.apellido}">Aver Gaspar</td>
+                                    <!-- <td>
                                         <img th:src="@{${usuario.fotoPerfil}}" alt="Foto de perfil" width="50" height="50" src="/img/usuarioLogo.png">
-                                    </td>
+                                    </td> -->
                                     <td th:text="${usuario.email}">Avergaspar@gmail.com</td>
                                     <td th:text="${usuario.rol}">USUARIO</td>
                                     <td>
-                                        <button class="modificar">Modificar</button>
-                                        <button class="modificar-rol">Modificar Rol</button>
+                                        <!-- <button class="modificar">Modificar</button> -->
+                                        <a th:href= "@{/modificarUsuarioS/__${usuario.id.toString()}__}"><i class="fas fa-feather-alt">  </i> Modificar </a>
+                                      
+                                        <button class="modificar-rol">ModificarRol</button>
                                         <button class="eliminar">Eliminar</button>
                                     </td>
                                 </tr>
@@ -87,7 +89,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="usuario : ${usuarios}">
+                                <!-- <tr th:each="usuario : ${usuarios}">
                                     <td th:text="${usuario.nombre}">Señor Solución</td>
                                     <td>
                                         <img th:src="@{${usuario.fotoPerfil}}" alt="Foto de perfil" width="50" height="50" src="/img/plomero1.png">
@@ -99,7 +101,7 @@
                                         <button class="modificar-rol">Modificar Rol</button>
                                         <button class="eliminar">Eliminar</button>
                                     </td>
-                                </tr>
+                                </tr> -->
                             </tbody>
                         </table>
                     </div>

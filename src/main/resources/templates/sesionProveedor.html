@@ -56,7 +56,7 @@
         <section id="inicioSesion">
         <div id="formUsuario">
             <h3>INGRESE CON SU CUENTA DE PROVEEDOR</h3>
-            <form id="sesionUsuario" th:action="@{/logincheck}" method="POST">
+            <form id="sesionUsuario" th:action="@{/logincheckProveedor}" method="POST">
                 <div class="form-group">
                     <input type="email" id="email" name="email" th:value="${email}" placeholder="Ingrese su email" required><br><br>
                 </div>

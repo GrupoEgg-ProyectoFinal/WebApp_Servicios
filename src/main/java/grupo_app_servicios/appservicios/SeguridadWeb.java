@@ -19,6 +19,7 @@ public class SeguridadWeb {
                     .requestMatchers("/css/", "/js/", "/img/", "/**").permitAll()
                     .anyRequest().permitAll()
             )
+            //Login usuario
             .formLogin(
                 (form) -> form
                     .loginPage("/login")
@@ -28,6 +29,17 @@ public class SeguridadWeb {
                     .defaultSuccessUrl("/perfil", true)
                     .permitAll()
             )
+            // //Login Proveedor
+            // .formLogin(
+            //     (form) -> form
+            //         .loginPage("/loginProveedor")
+            //         .loginProcessingUrl("/logincheckProveedor")
+            //         .usernameParameter("email")
+            //         .passwordParameter("contrasena")
+            //         .defaultSuccessUrl("/perfilProveedor", true)
+            //         .permitAll()
+            // )
+
             .logout(
                 (logout) -> logout
                     .logoutUrl("/logout")

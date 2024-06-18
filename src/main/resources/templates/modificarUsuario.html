@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro de Usuario</title>
+    <link rel="stylesheet" href="/styles/styleRegistroUsuario.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo-contenedor">
+                <a th:href="@{/}">
+                    <img src="/img/logoPNG.png" alt="Logo" class="logo">
+                    <span class="nombreEmpresa">DEV SOLUCIONES</span>
+                </a>
+            </div>
+
+            <!-- <ul class="nav-list">
+                <li><a th:href="@{/}">VOLVER AL INICIO</a></li>
+                <li><a th:href="@{/conocenos}">CONOCENOS</a></li>
+            </ul> -->
+
+            <!-- <ul id="redes">
+                <ul class="registro">
+                    <li class="desplegable">
+                        <a href="javascript:void(0)" class="dropbtn">INICIAR SESIÓN</a>
+                        <div class="desplegable-content">
+                            <a th:href="@{/login}">USUARIO</a>
+                            <a th:href="@{/loginProveedor}">PROVEEDOR</a>
+                        </div>
+                    </li>
+                </ul> -->
+                <!-- <li>
+                    <a href="" target="_blank">
+                        <img class="social-logo" src="/img/Instagram.svg" alt="instagram">
+                    </a>
+                </li>
+                <li>
+                    <a href="" target="_blank">
+                        <img class="social-logo" src="/img/Facebook.svg" alt="facebook">
+                    </a>
+                </li>
+            </ul> -->
+            <div class="marquesina-contenedor">
+                <div class="marquesina">
+                    <p>DEV SOLUCIONES: Conectamos PROFESIONALES con tus necesidades.</p>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="registro">
+            <div id="form">
+                <h2>MODIFICAR USUARIO</h2>
+                <form id="formularioUsuario" th:action="@{/modificarUsuario/{id}(id=${usuarioDTO.id})}" method="POST" th:object="${usuarioDTO}">
+                    <div class="form-row">
+                        <div class="form-column">
+                            <div class="form-group">
+                                <input type="text" id="nombre" name="nombre" th:field="*{nombre}" placeholder="Ingrese su nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="tel" id="telefono" name="telefono" th:field="*{telefono}" placeholder="Ingrese su teléfono" required>
+                            </div>
+                            <div class="form-group">
+                                <h2>SELECCIONE SU BARRIO</h2>
+                                <select id="barrios" name="barrios" required th:field="*{barrios}">
+                                    <option value="NORTE">NORTE</option>
+                                    <option value="CENTRO">CENTRO</option>
+                                    <option value="SUR">SUR</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-column">
+                            <div class="form-group">
+                                <input type="text" id="apellido" name="apellido" th:field="*{apellido}" placeholder="Ingrese su apellido" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="email" name="email" th:field="*{email}" placeholder="Ingrese su email" required>
+                            </div>
+                            <div class="form-group">
+                                <input type="password" id="contrasena" name="contrasena" th:field="*{contrasena}" placeholder="Ingrese su contraseña" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row full-width center-content">
+                        <div class="form-group">
+                            <label for="estado">
+                                <h2>NO SOY UN ROBOT</h2>
+                            </label>
+                            <input type="checkbox" id="estado" name="estado">
+                        </div>
+                    </div>
+                    <div class="form-row full-width">
+                        <button type="submit" id="enviarBtn">
+                            <h3>REGISTRARSE</h3>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>        
+    </main>
+</body>
+
+</html>
