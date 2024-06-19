@@ -270,7 +270,7 @@ ul.nav-list {
 /* ESTILOS CONTENEDOR Y TARJETA PROVEEDORES */
 
 #inicio {
-    display: flex;
+    display: column;
     flex-direction: row;
 }
 
@@ -293,10 +293,11 @@ ul.nav-list {
 .proveedores-right {
     width: 100%;
     height: calc(100vh - 104px);
-    display: column;
+    display: flex;
     padding-bottom: 48px;
 }
 .proveedores-container {
+    height: calc(100vh - 104px);
     display: column;
     gap: 24px;
     flex-direction: row;
