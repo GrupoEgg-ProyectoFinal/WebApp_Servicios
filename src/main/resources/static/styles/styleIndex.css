@@ -299,11 +299,12 @@ ul.nav-list {
 .proveedores-container {
     height: calc(100vh - 104px);
     display: column;
-    gap: 24px;
+    gap: 48px;
     flex-direction: row;
 }
 
 .proveedor-card {
+    margin-top: 10%;
     display: flex;
     border: 2px solid #ccc;
     border-radius: 12px;
