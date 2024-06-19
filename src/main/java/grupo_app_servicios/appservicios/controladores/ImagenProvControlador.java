@@ -57,4 +57,6 @@ public class ImagenProvControlador {
         //Respondemos el REntity con esos tres parametros.
         return new ResponseEntity<>(imagen,headers,HttpStatus.OK);
     }
+
+    
 }

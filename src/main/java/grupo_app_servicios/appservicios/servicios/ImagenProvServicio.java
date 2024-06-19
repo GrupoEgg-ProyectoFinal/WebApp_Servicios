@@ -26,16 +26,22 @@ public class ImagenProvServicio {
             try {
                 ImagenProvEntidad imagen = new ImagenProvEntidad();
                 imagen.setMime(archivo.getContentType());
-                imagen.setNombre(archivo.getOriginalFilename());
+                imagen.setNombre(archivo.getName());
                 imagen.setContenido(archivo.getBytes());
                 return imgRepositorio.save(imagen);
             } catch (IOException e) {
-                throw new MiExcepcion("Error al obtener los bytes de la imagen: " + e.getMessage());
+                System.err.println(e.getMessage());
+                return null;
+                
             }
         } else {
+            System.out.println("No se cargo la imagen pana");
             throw new MiExcepcion("El archivo proporcionado es nulo o está vacío");
+          
         }
     }
+
+ 
 
     //ACTUALIZAR FOTO DE PERFIL
     public ImagenProvEntidad actualizarImg(MultipartFile archivo, UUID idImagen) throws MiExcepcion {
