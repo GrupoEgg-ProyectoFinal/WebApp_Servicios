@@ -64,7 +64,7 @@
                             <!-- Aquí irán los nombres de los gasistas traídos desde la base de datos -->
                             <div class="proveedor" th:each="gasista : ${gasistas}">
                                 <div class="col-avatar">
-                                    <img src="/img/gasista1.png" alt="Perfil de Gaston Estalla" class="avatar" height="50px" width="50px">
+                                    <img th:src="@{/imagen/perfil/__${gasista.id.toString}__}"  alt="Perfil de Gaston Estalla" class="avatar" height="50px" width="50px">
                                 </div>
                                 <div class="col-nombre">
                                     <h4 th:text="${gasista.usuario.nombre} + ' ' + ${gasista.usuario.apellido}">Gaston Estalla</h4>
@@ -96,7 +96,7 @@
                             </div>
                             <div class="proveedor"  th:each="plomero : ${plomeros}">
                                 <div class="col-avatar">
-                                    <img src="/img/plomero1.png" alt="Perfil de Pedro PicaPiedra" class="avatar" height="50px" width="50px">
+                                    <img th:src="@{/imagen/perfil/__${plomero.id.toString}__}" alt="Perfil de Pedro PicaPiedra" class="avatar" height="50px" width="50px">
                                 </div>
                                 <div class="col-nombre">
                                 <h4 th:text="${plomero.usuario.nombre} + ' ' + ${plomero.usuario.apellido}">Pedro PicaPiedra</h4>
