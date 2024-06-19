@@ -264,14 +264,42 @@ ul.nav-list {
         rgba(26, 26, 26, 1) 0%,
         rgba(10, 10, 10, 1) 66%
     );
-    background-image: url("../img/background4.png");
+    background-image: url("../img/background3.png");
 }
 
 /* ESTILOS CONTENEDOR Y TARJETA PROVEEDORES */
-.proveedores-container {
+
+#inicio {
     display: flex;
-    flex-wrap: wrap;
-    gap: 16px; /* Espacio entre tarjetas */
+    flex-direction: row;
+}
+
+#inicio section {
+    min-height: 0;
+}
+
+#inicio h4 {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.75);
+}
+
+.proveedores-left {
+    width: 100%;
+    height: calc(100vh - 104px);
+    display: flex;
+    gap: 24px;
+    padding-bottom: 48px;
+}
+
+.proveedores-right {
+    width: 100%;
+    height: calc(100vh - 104px);
+    display: column;
+    padding-bottom: 48px;
+}
+.proveedores-container {
+    display: column;
+    gap: 24px;
+    flex-direction: row;
 }
 
 .proveedor-card {
