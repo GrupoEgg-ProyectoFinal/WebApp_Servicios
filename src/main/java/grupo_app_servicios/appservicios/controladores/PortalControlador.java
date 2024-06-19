@@ -122,32 +122,18 @@ public class PortalControlador {
         List<ProveedorDTO> proveedores = pServicio.listarProveedoresSegunServicio("Plomeria");
         modelo.addAttribute("proveedores", proveedores);
         if (role.equals("ADMIN")) {
-
-            List<ProveedorDTO> proveedores2 = pServicio.listarProveedores();
-            modelo.addAttribute("proveedores", proveedores2);
-
-            List<UsuarioDTO> usuarios = uServicio.listarUsuarios();
-            modelo.addAttribute("usuarios", usuarios);
             return "redirect:/dashboard";
+        }
+        
+        if (role.equals("PROVEEDOR")) {
+
+            
+            return "vistaProveedor.html";
         }
 
         return "vistaUsuario.html"; // después cambiarlo por la vista de perfil de usuario
     }
 
-    // // PERFIL PROVEEDOR
-    // @GetMapping("/perfilProveedor")
-    // @PreAuthorize("hasAnyRol('ROL_USER', 'ROL_PROVEEDOR','ROL_ADMIN')")
-    // public String inicioProveedor(HttpSession session) {
-
-    // ProveedorEntidad loguedUser = (ProveedorEntidad)
-    // session.getAttribute("usuarioEnSesion");
-    // String role = loguedUser.getRol().toString();
-    // if (role.equals(Rol.PROVEEDOR)) {
-    // return "vistaProveedor.html";
-    // }
-    // return "index.html";
-
-    // }
 
     @GetMapping("/dashboard")
     @PreAuthorize("hasRole('ROL_ADMIN')")
