@@ -119,8 +119,13 @@ public class PortalControlador {
         // proveedor y reveer el tema de inicio de sesion)
 
         String role = loguedUser.getRol().toString();
-        List<ProveedorDTO> proveedores = pServicio.listarProveedoresSegunServicio("Plomeria");
-        modelo.addAttribute("proveedores", proveedores);
+        List<ProveedorDTO> plomeros = pServicio.listarProveedoresSegunServicio("Plomeria");
+        List<ProveedorDTO> electricistas = pServicio.listarProveedoresSegunServicio("Electricista");
+        List<ProveedorDTO> gasistas = pServicio.listarProveedoresSegunServicio("Gasista");
+        modelo.addAttribute("plomeros", plomeros);
+        modelo.addAttribute("electricistas", electricistas);
+        modelo.addAttribute("gasistas", gasistas);
+
         if (role.equals("ADMIN")) {
             return "redirect:/dashboard";
         }
