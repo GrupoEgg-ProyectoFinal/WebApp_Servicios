@@ -178,11 +178,12 @@ ul.nav-list {
 .desplegable-content {
     display: none;
     position: absolute;
+    margin-top: -30px;
     background-color: rgba(255, 255, 255, 0.8); 
     color: black;
     z-index: 1;
-    left: 50%;
-    transform: translateX(-50%);
+    min-width: 160px;
+    top: 100%; 
     box-shadow: 0 4px 24px 0px rgba(5, 5, 5, 0.5);
 }
 
@@ -198,8 +199,7 @@ ul.nav-list {
 }
 
 .desplegable:hover .desplegable-content {
-    display: flex;
-    justify-content: center;
+    display: block;
 }
 
 .desplegable:hover .desplegable {
@@ -264,17 +264,47 @@ ul.nav-list {
         rgba(26, 26, 26, 1) 0%,
         rgba(10, 10, 10, 1) 66%
     );
-    background-image: url("../img/background4.png");
+    background-image: url("../img/background3.png");
 }
 
 /* ESTILOS CONTENEDOR Y TARJETA PROVEEDORES */
-.proveedores-container {
+
+#inicio {
+    display: column;
+    flex-direction: row;
+}
+
+#inicio section {
+    min-height: 0;
+}
+
+#inicio h4 {
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.75);
+}
+
+.proveedores-left {
+    width: 100%;
+    height: calc(100vh - 104px);
     display: flex;
-    flex-wrap: wrap;
-    gap: 16px; /* Espacio entre tarjetas */
+    gap: 24px;
+    padding-bottom: 48px;
+}
+
+.proveedores-right {
+    width: 100%;
+    height: calc(100vh - 104px);
+    display: flex;
+    padding-bottom: 48px;
+}
+.proveedores-container {
+    height: calc(100vh - 104px);
+    display: column;
+    gap: 48px;
+    flex-direction: row;
 }
 
 .proveedor-card {
+    margin-top: 10%;
     display: flex;
     border: 2px solid #ccc;
     border-radius: 12px;
