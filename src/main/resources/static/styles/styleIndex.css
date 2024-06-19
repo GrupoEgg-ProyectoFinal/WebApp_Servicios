@@ -80,7 +80,7 @@ p {
 :root {
     --color: #06608a;
     --color-medio: #05435f;
-    --color-oscurecido: #03293a;
+    --color-oscurecido: rgb(3, 41, 58);
     --color-trasparente: rgb(6, 96, 138, 0.9);
     --titulo-pintado: #e4e299;
 }
@@ -102,6 +102,10 @@ body > footer {
 /*ESTILOS PARA NAVBAR Y CONTENIDO DE LA MISMA */
 body > header {
     grid-area: header;
+}
+
+footer {
+    height: calc(100vh - 104px);
 }
 
 .navbar {
@@ -286,8 +290,40 @@ ul.nav-list {
     width: 100%;
     height: calc(100vh - 104px);
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 24px;
-    padding-bottom: 48px;
+ 
+}
+
+/*SECCION IZQUIERDA */
+
+.textoConocenos {
+    width: 80%;
+    height: auto;
+    background-color: rgb(3, 41, 58, 0.8); 
+    box-shadow: 4px 4px 24px 4px rgba(0, 0, 0, 0.8);
+    border: 1px solid #020202;
+    border-radius: 24px; 
+    padding: 36px;
+    display: column;
+    justify-content: center;
+    align-items: center; 
+}
+
+.textoConocenos h4 {
+    text-align: left; 
+    color: white; 
+    text-shadow: 2px 4px 12px rgba(0, 0, 0, 0.7);
+}
+
+.textoConocenos strong {
+    color: var(--titulo-pintado);
+}
+
+.textoConocenos:hover {
+    cursor: pointer; 
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 .proveedores-right {
@@ -303,6 +339,8 @@ ul.nav-list {
     flex-direction: row;
 }
 
+/*TODO PROVEEDOR CARD */
+
 .proveedor-card {
     margin-top: 10%;
     display: flex;
@@ -311,7 +349,7 @@ ul.nav-list {
     overflow: hidden;
     width: 100%;
     max-width: 550px;
-    background-color: var(--color);
+    background-color: rgb(3, 41, 58, 0.8);
     box-shadow: 0px 4px 24px 0px rgba(255, 255, 255, 0.5);
     transition: transform 0.3s ease;
 }
@@ -325,7 +363,7 @@ ul.nav-list {
 
 .izquierda {
     flex: 1;
-    max-width: 250px; /* Ajusta según sea necesario */
+    max-width: 250px;
 }
 
 .izquierda img {
@@ -352,8 +390,8 @@ ul.nav-list {
     display: flex;
     gap: 10px;
     flex-direction: column;
-    justify-content: flex-start; /* Alinea los elementos al inicio del eje principal */
-    align-items: flex-start; /* Alinea los elementos al inicio del eje transversal */
+    justify-content: flex-start; 
+    align-items: flex-start; 
 }
 
 .derecha h3 {
