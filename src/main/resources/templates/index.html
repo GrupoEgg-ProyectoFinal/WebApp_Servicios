@@ -66,13 +66,34 @@
         <!-- PÁGINA 1 'INICIO'-->
         <section id="inicio">
             <div class="proveedores-left">
-
+                <div class="textoConocenos">
+                    <h1><strong>Bienvenido a DEV Soluciones</strong></h1><br><br>
+                        <h4>Somos una empresa dedicada a conectar a nuestros clientes con los mejores 
+                            profesionales en el área de servicios esenciales para el hogar y la 
+                            industria. Nos especializamos en encontrar y recomendar proveedores de 
+                            confianza en tres campos clave: gasistas, electricistas y plomeros. <br><br>
+                        
+                        ¿Qué Ofrecemos?<br><br>
+                        <strong>Gasistas Profesionales</strong> certificados para instalar, mantener y reparar sistemas 
+                        de gas, asegurando su seguridad y eficiencia.<br><br>
+                        <strong>Electricistas Expertos</strong> en instalaciones eléctricas, mantenimiento y resolución de problemas, 
+                        garantizando un suministro eléctrico seguro y confiable. <br><br>
+                        <strong>Plomeros Matriculados</strong> cualificados para solucionar cualquier necesidad de plomería, desde 
+                        instalaciones y reparaciones hasta emergencias imprevistas.<br><br>
+                        En <strong>DEV Soluciones</strong>, entendemos la importancia de contar con servicios confiables y de alta calidad. 
+                        Por eso, nuestro compromiso es proporcionarle acceso a los mejores profesionales del sector, 
+                        seleccionados rigurosamente por su experiencia, profesionalismo y reputación.<br><br>
+                        
+                        Confíe en <strong>DEV Soluciones</strong> para todas sus necesidades de gas, electricidad y plomería. 
+                        Estamos aquí para ofrecerle tranquilidad y soluciones efectivas, respaldadas por los mejores en el negocio.
+                        <br><br>
+                        <strong>¡Bienvenido a una nueva era de soluciones prácticas y de confianza!</strong></h4></div>
             </div>
             <div class="proveedores-right">
                 <div class="proveedores-container">
                     <div class="proveedor-card">
                         <div class="izquierda">
-                            <img src="/img/gasistaLogo.PNG" alt="Imagen del proveedor Gasista">
+                            <img src="/img/gasistaLogo2.PNG" alt="Imagen del proveedor Gasista">
                         </div>
                         <div class="derecha">
                             <div class="dosPalabras">
@@ -91,7 +112,7 @@
             
                     <div class="proveedor-card">
                         <div class="izquierda centro">
-                            <img src="/img/plomeroLogo.png" alt="Imagen del proveedor Plomero">
+                            <img src="/img/plomeroLogo2.png" alt="Imagen del proveedor Plomero">
                         </div>
                         <div class="derecha">
                             <div class="dosPalabras">
@@ -110,7 +131,7 @@
             
                     <div class="proveedor-card">
                         <div class="izquierda derecha">
-                            <img src="/img/electricistaLogo.png" alt="Imagen del proveedor Electricista">
+                            <img src="/img/electricistaLogoblanco2.png" alt="Imagen del proveedor Electricista">
                         </div>
                         <div class="derecha">
                             <div class="dosPalabras">
@@ -130,14 +151,12 @@
                 </div>               
         </section>
     </main>
-    <!-- <form th:action="@{/servicio}" method="post" th:object="${servicioDTO}">
-        <input type="text" name="nombre" placeholder="Ingrese el nombre del servicio">
-        <button type="submit">Enviar</button>
-    </form> -->
     <footer>
-        <form th:action="@{/servicio}" method="post" th:object="${servicioDTO}">
+        <section class="footer">        
+            <form th:action="@{/servicio}" method="post" th:object="${servicioDTO}">
             <input type="text" name="nombre" placeholder="Ingrese el nombre del servicio">
             <button type="submit">Enviar</button>
+        </section>
         </form>
     </footer>
     <!--correr spring terminal   ./mvnw spring-boot:run  -->
