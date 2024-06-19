@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+    
 
 <head>
     <meta charset="UTF-8">
@@ -9,7 +10,7 @@
 </head>
 
 <body>
-    <header>
+    <!-- <header>
         <nav class="navbar">
             <div class="logo-contenedor">
                 <a th:href="@{/}">
@@ -24,8 +25,8 @@
             </ul>
         
             <ul class="account-options">
-                <li class="desplegable">
-                    <a href="javascript:void(0)" class="dropbtn">INICIAR SESIÓN</a>
+                <li class="desplegable" th:if="${session.usuarioEnSesion == null}" >
+                    <a href="javascript:void(0)" class="dropbtn" >INICIAR SESIÓN</a>
                     <div class="desplegable-content">
                         <a th:href="@{/login}">USUARIO</a>
                         <a th:href="@{/loginProveedor}">PROVEEDOR</a>
@@ -59,7 +60,8 @@
                 </div>
             </div>
         </nav>
-    </header>
+    </header> -->
+    <header th:replace="~{/fragments/_navbar :: Navbar}"></header>
     <main>
         <!-- PÁGINA 1 'INICIO'-->
         <section id="inicio">

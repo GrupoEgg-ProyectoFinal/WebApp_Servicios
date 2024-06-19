@@ -56,7 +56,7 @@
         <section id="registro">
             <div id="form">
                 <h3>REGISTRO DE PROVEEDOR</h3>
-                <form id="formularioProveedor" th:action="@{/guardarProveedor}" method="POST" th:object="${proveedorDTO}">
+                <form id="formularioProveedor" th:action="@{/guardarProveedor}" method="POST" th:object="${proveedorDTO}" enctype="multipart/form-data">
                     <div class="form-row">
                         <div class="form-column">
                             <div class="form-group">
