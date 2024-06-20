@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayuda - DEV Soluciones</title>
+    <link rel="stylesheet" href="/styles/styleAyuda.css">
+</head>
+<body>
+    <header th:replace="~{/fragments/_navbar :: Navbar}"></header>
+    <!-- Sección AYUDA -->
+    <section id="ayuda">
+        <h2>Preguntas Frecuentes</h2>
+        <div class="faq-container">
+            <div class="faq">
+                <h3>Servicios de Gas</h3>
+                <div class="faq-item">
+                    <button class="faq-question">¿Cómo puedo solicitar un gasista?</button>
+                    <div class="faq-answer">
+                        <p>Puedes solicitar un gasista a través de nuestro formulario en la sección de servicios o llamando a nuestro número de atención al cliente.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">¿Qué tipo de trabajos realizan los gasistas?</button>
+                    <div class="faq-answer">
+                        <p>Los gasistas realizan trabajos de instalación, mantenimiento y reparación de sistemas de gas en hogares e industrias.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="faq">
+                <h3>Servicios de Electricidad</h3>
+                <div class="faq-item">
+                    <button class="faq-question">¿Cómo puedo solicitar un electricista?</button>
+                    <div class="faq-answer">
+                        <p>Puedes solicitar un electricista completando el formulario en nuestra página web o contactándonos por teléfono.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">¿Qué servicios ofrecen los electricistas?</button>
+                    <div class="faq-answer">
+                        <p>Nuestros electricistas están capacitados para realizar instalaciones eléctricas, mantenimiento y reparaciones de sistemas eléctricos.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="faq">
+                <h3>Servicios de Plomería</h3>
+                <div class="faq-item">
+                    <button class="faq-question">¿Cómo puedo contactar a un plomero?</button>
+                    <div class="faq-answer">
+                        <p>Puedes contactar a un plomero a través de nuestra página web o llamando a nuestra línea de atención al cliente.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">¿Qué tipo de problemas resuelven los plomeros?</button>
+                    <div class="faq-answer">
+                        <p>Los plomeros pueden solucionar problemas de tuberías, instalaciones de agua, desagües y emergencias relacionadas con plomería.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="faq">
+                <h3>Problemas de Inicio de Sesión</h3>
+                <div class="faq-item">
+                    <button class="faq-question">¿Qué hago si no puedo iniciar sesión?</button>
+                    <div class="faq-answer">
+                        <p>Si no puedes iniciar sesión, intenta restablecer tu contraseña usando la opción 'Olvidé mi contraseña' en la página de inicio de sesión.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">¿Cómo puedo cambiar mi contraseña?</button>
+                    <div class="faq-answer">
+                        <p>Puedes cambiar tu contraseña desde la sección de configuración de tu cuenta después de iniciar sesión.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="faq">
+                <h3>Problemas de Registro</h3>
+                <div class="faq-item">
+                    <button class="faq-question">¿Cómo me registro en DEV Soluciones?</button>
+                    <div class="faq-answer">
+                        <p>Para registrarte, visita la página de registro, completa el formulario con tus datos y sigue las instrucciones que se enviarán a tu correo electrónico.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">¿Qué hago si no recibo el correo de confirmación?</button>
+                    <div class="faq-answer">
+                        <p>Si no recibes el correo de confirmación, revisa tu carpeta de spam o intenta registrarte nuevamente con una dirección de correo electrónico válida.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer th:replace="~{/fragments/_footer :: Footer}">
+        
+    </footer>
+</body>
+<script src="/script/script.js"></script>
+</html>

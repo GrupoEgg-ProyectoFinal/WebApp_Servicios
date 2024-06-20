@@ -152,7 +152,7 @@
                 </div>               
         </section>
     </main>
-    <footer>
+    <footer th:replace="~{/fragments/_footer :: Footer}">
         <section class="footer">        
             <form th:action="@{/servicio}" method="post" th:object="${servicioDTO}">
             <input type="text" name="nombre" placeholder="Ingrese el nombre del servicio">

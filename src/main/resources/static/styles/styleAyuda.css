@@ -259,194 +259,76 @@ ul.nav-list {
     color: white;
 }
 
+/* SECCION AYUDA ESTILOS */ 
 
-/* ESTILOS PAGINA 1 - INICIO */
-#inicio {
-    background: rgb(26, 26, 26);
-    background: radial-gradient(
-        circle,
-        rgba(26, 26, 26, 1) 0%,
-        rgba(10, 10, 10, 1) 66%
-    );
+/* ESTILOS PAGINA 1 - AYUDA */
+#ayuda {
+    width: 100%;
+    padding: 20px;
+    height: calc(100vh - 104px);
     background-image: url("../img/background.png");
 }
 
-/* ESTILOS CONTENEDOR Y TARJETA PROVEEDORES */
-
-#inicio {
-    display: column;
-    flex-direction: row;
-}
-
-#inicio section {
-    min-height: 0;
-}
-
-#inicio h4 {
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.75);
-}
-
-.proveedores-left {
+/* ESTILOS PAGINA 1 - AYUDA */
+#ayuda {
     width: 100%;
-    height: calc(100vh - 104px);
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+#ayuda h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.faq-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
- 
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
-.proveedores-left:hover {
-    background-image: url('../img/back2.png');
+.faq {
+    width: 48%;
+    margin-bottom: 20px;
 }
 
-/*SECCION IZQUIERDA */
-
-.textoConocenos {
-    width: 80%;
-    height: auto;
-    background-color: rgb(3, 41, 58, 0.8); 
-    box-shadow: 4px 4px 24px 4px rgba(0, 0, 0, 0.8);
-    border: 1px solid #020202;
-    border-radius: 24px; 
-    padding: 36px;
-    display: column;
-    justify-content: center;
-    align-items: center; 
-}
-
-.textoConocenos h4 {
-    text-align: left; 
-    color: white; 
-    text-shadow: 2px 4px 12px rgba(0, 0, 0, 0.7);
-}
-
-.textoConocenos strong {
-    color: var(--titulo-pintado);
-}
-
-.textoConocenos:hover {
-    cursor: pointer; 
-    background-color: var(--color-oscurecido);
-}
-
-.proveedores-right {
-    width: 100%;
-    height: calc(100vh - 104px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.proveedores-right:hover {
-    background-image: url('../img/back3.png');
-}
-.proveedores-container {
-    height: calc(100vh - 104px);
-    display: column;
-    gap: 48px;
-    justify-content: center;
-    align-items: center;
-}
-
-/*TODO PROVEEDOR CARD */
-.seleccion {
-    margin-top: 3%;
-    color: var(--titulo-pintado);
-}
-
-.proveedor-card {
-    display: flex;
-    border: 2px solid var(--color-oscurecido);
-    border-radius: 12px;
-    overflow: hidden;
-    width: 100%;
-    margin-top: 5%;
-    max-width: 550px;
-    background-color: rgb(3, 41, 58, 0.9);
-    box-shadow: 4px 4px 24px 4px rgba(0, 0, 0, 0.8);
-    border: 2px solid black;
-    transition: transform 0.3s ease;
-}
-
-.proveedor-card:hover {
-    transform: scale(1.15);
-    cursor: pointer;
-    box-shadow: 0 0 20px rgba(245, 241, 13, 0.8);
-    background-color: var(--color-medio);
-}
-
-.izquierda {
-    flex: 1;
-    max-width: 250px;
-}
-
-.izquierda img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.proveedor-card:hover .izquierda img {
-    content: url("../img/GasistaLogoBlanco.png");
-}
-
-.proveedor-card:hover .centro img {
-    content: url("../img/plomeroLogoBlanco.png");
-}
-
-.proveedor-card:hover .derecha img {
-    content: url("../img/electricistaLogoBlanco.png");
-}
-
-.derecha {
-    flex: 2;
-    padding: 16px;
-    display: flex;
-    gap: 10px;
-    flex-direction: column;
-    justify-content: flex-start; 
-    align-items: flex-start; 
-}
-
-.derecha h3 {
-    margin: 0 0 8px;
-}
-
-.dosPalabras {
-    display: flex;
-    gap: 8px;
-}
-
-.tituloPintado {
-    color: var(--titulo-pintado);
-}
-
-.saber-mas-btn {
-    text-decoration: none;
-    align-self: flex-end;
-    align-items: center;
-    justify-content: center;
-    padding: 6px;
-    background-color: rgb(38, 107, 17);
-    border-radius: 12px;
-    transition: background-color 0.3s ease;
-    cursor: pointer;
-}
-
-.saber-mas-btn h5{
-    cursor: pointer;
-    color: rgb(255, 255, 255);
-}
-
-.saber-mas-btn h5:hover {
+.faq h3 {
+    background-color: #007BFF;
     color: white;
+    padding: 10px;
+    border-radius: 5px;
 }
 
-.saber-mas-btn:hover {
-    background-color: var(--color);
+.faq-item {
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
 }
 
+.faq-question {
+    width: 100%;
+    padding: 15px;
+    text-align: left;
+    background-color: #f1f1f1;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
 
+.faq-question:hover {
+    background-color: #e1e1e1;
+}
 
+.faq-answer {
+    padding: 15px;
+    display: none;
+    background-color: white;
+}
 
+.faq-item.active .faq-answer {
+    display: block;
+}

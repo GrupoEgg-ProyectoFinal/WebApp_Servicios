@@ -1,4 +1,84 @@
 <html xmlns:th="http://www.thymeleaf.org/" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/styleFooter.css">
+    <title>Footer</title>
+</head>
+
+<body>
     <footer>
-        
+        <section class="footerDev">
+            <p>© 2024 DEV SOLUCIONES - Todos los derechos reservados</p>
+            <div class="footer-columns">
+                <!-- Desarrolladores -->
+                <div class="footer-column">
+                    <h4>DESARROLLADORES</h4>
+                    <div class="dev-container">
+                        <div class="dev">
+                            <a href="https://www.linkedin.com/in/federicopch/" target="_blank">
+                                <img src="/img/Linkedin.svg" alt="linkedin">
+                            </a>
+                            <h4>Federico Peche</h4>
+                            <h5>Front-End Web Dev</h5>
+                        </div>
+                        <div class="dev">
+                            <a href="" target="_blank">
+                                <img src="/img/Linkedin.svg" alt="linkedin">
+                            </a>
+                            <h4>Leandro Muro</h4>
+                            <h5>Full-Stack Dev</h5>
+                        </div>
+                        <div class="dev">
+                            <a href="" target="_blank">
+                                <img src="/img/Linkedin.svg" alt="linkedin">
+                            </a>
+                            <h4>Nahuel Gahn</h4>
+                            <h5>Full-Stack Dev</h5>
+                        </div>
+                        <div class="dev">
+                            <a href="" target="_blank">
+                                <img src="/img/Linkedin.svg" alt="linkedin">
+                            </a>
+                            <h4>Luis Miguel Gómez</h4>
+                            <h5>Full-Stack Dev</h5>
+                        </div>
+                    </div>
+                </div>
+                <!-- Información de Contacto -->
+                <div class="footer-column">
+                    <h4>CONTACTO</h4>
+                    <p><strong>Email:</strong> contacto@devsoluciones.com</p>
+                    <p><strong>Teléfono:</strong> +54 11 1234 5678</p>
+                    <p><strong>Dirección:</strong> Av. Flores 1234, Piso 5, CABA, Buenos Aires, Argentina</p>
+                </div>
+                <!-- Enlaces Útiles -->
+                <div class="footer-column">
+                    <h4>ENLACES ÚTILES</h4>
+                    <ul>
+                        <li><a th:href="@{/}">INICIO</a></li>
+                        <li><a th:href="@{/servicios}">SERVICIOS</a></li>
+                        <li><a th:href="@{/conocenos}">CONOCENOS</a></li>
+                        <li><a th:href="@{/ayuda}">AYUDA</a></li>
+                        <li><a th:href="@{/conocenos}"">CONTACTO</a></li>
+                        <li><a th:href="@{/}">Política de Privacidad</a></li>
+                        <li><a class="target" th:href="@{/dashboard}" sec:authorize="hasRole('ADMIN')">PANEL DE ADMINISTRACION</a></li>
+                    </ul>
+                </div>
+                <!-- Redes Sociales -->
+                <div class="footer-column">
+                    <h4>SÍGUENOS</h4>
+                    <div class="social-icons">
+                        <a href="https://facebook.com" target="_blank"><img src="/img/Facebook.svg" alt="Facebook"></a>
+                        <a href="https://linkedin.com" target="_blank"><img src="/img/Linkedin.svg" alt="LinkedIn"></a>
+                        <a href="https://instagram.com" target="_blank"><img src="/img/Facebook.svg"alt="Instagram"></a>
+                    </div>
+                </div>
+            </div>
+        </section>
     </footer>
+</body>
+
+</html>
