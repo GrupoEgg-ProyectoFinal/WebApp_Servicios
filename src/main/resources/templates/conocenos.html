@@ -9,64 +9,11 @@
 </head>
 
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="logo-contenedor">
-                <a th:href="@{/}">
-                    <img src="/img/logoPNG.png" alt="Logo" class="logo">
-                    <span class="nombreEmpresa">DEV SOLUCIONES</span>
-                </a>
-            </div>
-
-            <ul class="nav-list">
-                <li><a th:href="@{/}">VOLVER AL INICIO</a></li>
-                <li><a th:href="@{/conocenos}">CONOCENOS</a></li>
-            </ul>
-
-            <ul id="redes">
-                <ul class="registro">
-                    <li class="desplegable">
-                        <a href="javascript:void(0)" class="dropbtn">INICIAR SESIÓN</a>
-                        <div class="desplegable-content">
-                            <a th:href="@{/login}">USUARIO</a>
-                            <a th:href="@{/loginProveedor}">PROVEEDOR</a>
-                        </div>
-                    </li>
-                </ul>
-                <li class="desplegable">
-                    <a href="javascript:void(0)" class="dropbtn">REGISTRARSE</a>
-                    <div class="desplegable-content">
-                        <a th:href="@{/registrarUsuario}">USUARIO</a>
-                        <a th:href="@{/registrarProveedor}">PROVEEDOR</a>
-                    </div>
-                    </li>
-                <li>
-                    <a href="" target="_blank">
-                        <img class="social-logo" src="/img/Instagram.svg" alt="instagram">
-                    </a>
-                </li>
-                <li>
-                    <a href="" target="_blank">
-                        <img class="social-logo" src="/img/Facebook.svg" alt="facebook">
-                    </a>
-                </li>
-            </ul>
-
-            <div class="marquesina-contenedor">
-                <div class="marquesina">
-                    <p>DEV SOLUCIONES: Conectamos PROFESIONALES con tus necesidades.</p>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <header th:replace="~{/fragments/_navbar :: Navbar}"></header>
     <main>
         <!-- PÁGINA 1 'INICIO'-->
         <section id="conocenos">
             <div class="textoConocenos">
-            <h2>En DEV SOLUCIONES, facilitamos el acceso a información de proveedores calificados 
-                en servicios esenciales como gas, electricidad y plomería. Nos especializamos en 
-                conectar a los usuarios con profesionales confiables, asegurando que encuentres la 
-                ayuda que necesitas de manera rápida y eficiente.</h2></div>
         </section>
     </main>
 

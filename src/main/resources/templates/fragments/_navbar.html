@@ -11,6 +11,8 @@
             <li><a th:href="@{/}">INICIO</a></li>
             <li><a class="target" th:href="@{/dashboard}" sec:authorize="hasRole('ADMIN')">PANEL DE ADMINISTRACION</a></li>
             <li><a th:href="@{/conocenos}">CONOCENOS</a></li>
+            <li><a th:href="@{/ayuda}">AYUDA</a></li>
+            <li><a th:href="@{/servicios}">SERVICIOS SOLO VISTA USUARIO</a></li>
         </ul>
 
         <ul id="redes">
@@ -18,12 +20,11 @@
                 <li sec:authorize="hasAnyRole('ROL_USER', 'ROL_PROVEEDOR', 'ROL_ADMIN')"><a href="/logout">CERRAR SESIÓN</a></li>
             </li>
             <ul class="registro">
-                <li class="desplegable" th:if="${session.usuarioEnSesion == null}">
+                <li th:if="${session.usuarioEnSesion == null}">
                     <a href="javascript:void(0)" class="dropbtn">INICIAR SESIÓN</a>
-                    <div class="desplegable-content">
-                        <a th:href="@{/login}">USUARIO</a>
-                        <a th:href="@{/loginProveedor}">PROVEEDOR</a>
-                    </div>
+                </li>
+                <li th:if="${session.usuarioEnSesion == null}">
+                    <a href="javascript:void(0)" class="dropbtn">CERRAR SESIÓN</a>
                 </li>
             </ul>
             <li class="desplegable" th:if="${session.usuarioEnSesion == null}">
