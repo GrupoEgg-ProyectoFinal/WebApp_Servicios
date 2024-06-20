@@ -364,14 +364,14 @@ ul.nav-list {
     margin-top: 5%;
     max-width: 550px;
     background-color: rgb(3, 41, 58, 0.8);
-    box-shadow: 0 0 20px rgba(241, 241, 107, 0.8);
+    box-shadow: 0 4px 24px 0px var(--color-medio);
     transition: transform 0.3s ease;
 }
 
 .proveedor-card:hover {
     transform: scale(1.15);
     cursor: pointer;
-    box-shadow: 0 4px 24px 0px var(--color-medio);
+    box-shadow: 0 0 20px rgba(241, 241, 107, 0.8);
     background-color: var(--color-medio);
 }
 
