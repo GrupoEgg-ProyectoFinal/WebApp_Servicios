@@ -363,15 +363,16 @@ ul.nav-list {
     width: 100%;
     margin-top: 5%;
     max-width: 550px;
-    background-color: rgb(3, 41, 58, 0.8);
-    box-shadow: 0 4px 24px 0px var(--color-medio);
+    background-color: rgb(3, 41, 58, 0.9);
+    box-shadow: 4px 4px 24px 4px rgba(0, 0, 0, 0.8);
+    border: 2px solid black;
     transition: transform 0.3s ease;
 }
 
 .proveedor-card:hover {
     transform: scale(1.15);
     cursor: pointer;
-    box-shadow: 0 0 20px rgba(241, 241, 107, 0.8);
+    box-shadow: 0 0 20px rgba(245, 241, 13, 0.8);
     background-color: var(--color-medio);
 }
 
@@ -422,11 +423,12 @@ ul.nav-list {
 }
 
 .saber-mas-btn {
+    text-decoration: none;
     align-self: flex-end;
     align-items: center;
     justify-content: center;
     padding: 6px;
-    background-color: white;
+    background-color: rgb(38, 107, 17);
     border-radius: 12px;
     transition: background-color 0.3s ease;
     cursor: pointer;
@@ -434,7 +436,7 @@ ul.nav-list {
 
 .saber-mas-btn h5{
     cursor: pointer;
-    color: black;
+    color: rgb(255, 255, 255);
 }
 
 .saber-mas-btn h5:hover {
