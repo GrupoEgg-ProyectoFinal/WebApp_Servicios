@@ -266,7 +266,7 @@ ul.nav-list {
     width: 100%;
     padding: 20px;
     height: calc(100vh - 104px);
-    background-image: url("/src/main/resources/static/img/background.png");
+    background-image: url("../img/background.png");
 }
 
 /* ESTILOS PAGINA 1 - AYUDA */
