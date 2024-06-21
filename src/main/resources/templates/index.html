@@ -152,11 +152,12 @@
                 </div>               
         </section>
     </main>
-        <section class="footer">        
+    <footer th:replace="~{/fragments/footer :: footerFragment}">
+        <!-- <section class="footer">        
             <form th:action="@{/servicio}" method="post" th:object="${servicioDTO}">
             <input type="text" name="nombre" placeholder="Ingrese el nombre del servicio">
             <button type="submit">Enviar</button>
-        </section>
+        </section> -->
         </form>
     </footer>
     <!--correr spring terminal   ./mvnw spring-boot:run  -->
