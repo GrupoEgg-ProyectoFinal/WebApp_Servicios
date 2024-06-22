@@ -157,4 +157,10 @@ public class PortalControlador {
     public String conocenos() {
         return "conocenos.html";
     }
+
+    //AYUDA
+    @GetMapping("/ayuda")
+    public String ayuda(){
+        return "ayuda.html";
+    }
 }
