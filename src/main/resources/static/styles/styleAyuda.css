@@ -1,0 +1,361 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    transition: 0.5s ease;
+}
+
+html,
+body {
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: -0.5px;
+    color: white;
+    scroll-behavior: smooth;
+    height: -webkit-fill-available;
+    display: grid;
+    grid-template: 
+        "header" min-content
+        "main" auto
+        "footer" 80px
+        /auto; 
+    min-height: 100vh;
+}
+
+/* ESTILOS PARA LAS DISTINTAS SECCIONES */
+section {
+    height: calc(100vh - 104px);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+/*Títulos*/
+h1 {
+    font-size: 48px;
+    cursor: default;
+    transition: none;
+}
+h2 {
+    font-size: 32px;
+    cursor: default;
+    transition: none;
+}
+h3 {
+    font-size: 24px;
+    cursor: default;
+    transition: none;
+}
+h4 {
+    font-size: 20px;
+    cursor: default;
+    transition: none;
+}
+h5 {
+    font-size: 16px;
+    cursor: default;
+    font-weight: 400;
+    transition: none;
+}
+a {
+    color: white;
+    font-size: 20px;
+    transition: none;
+}
+p {
+    font-size: 20px;
+    cursor: default;
+    font-weight: 400;
+    transition: none;
+}
+
+/*Colores*/
+:root {
+    --color: #06608a;
+    --color-medio: #05435f;
+    --color-oscurecido: rgb(3, 41, 58);
+    --color-trasparente: rgb(6, 96, 138, 0.9);
+    --titulo-pintado: #e4e299;
+}
+
+main {
+    grid-area: main;
+    min-height: 100%;
+}
+
+/*ESTILO FOOTER*/
+body > footer {
+    grid-area: footer;
+    min-height: 80px;
+    background-color: var(--color-oscurecido);
+    border-top: 5px white solid;
+    color: white;
+}
+
+/*ESTILOS PARA NAVBAR Y CONTENIDO DE LA MISMA */
+body > header {
+    grid-area: header;
+}
+
+footer {
+    height: calc(100vh - 104px);
+}
+
+.navbar {
+    width: 100%;
+    min-height: 80px;
+    padding: 0 96px;
+    background-color: black;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo-contenedor {
+    display: flex;
+    align-items: center;
+}
+
+.logo-contenedor a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    height: 84px;
+}
+
+.nombreEmpresa {
+    color: rgb(241, 241, 124);
+    text-shadow: 0 0 20px rgba(241, 241, 107, 0.8);
+    font-size: 36px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/*NAVEGACIÓN*/
+.nav-list {
+    display: flex;
+    gap: 22px;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer;
+    flex-grow: 1;
+}
+.nav-list a:hover {
+    transform: scale(1.1);
+}
+.nav-list li a.active {
+    color: var(--color);
+}
+
+ul.nav-list {
+    min-width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.account-options {
+    display: flex;
+    gap: 24px;
+    margin-right: 20px; /* Añadido para separar los botones de redes sociales */
+}
+
+.account-options .desplegable {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.desplegable-content {
+    display: none;
+    position: absolute;
+    margin-top: -30px;
+    background-color: rgba(255, 255, 255, 0.8); 
+    color: black;
+    z-index: 1;
+    min-width: 160px;
+    top: 100%; 
+    box-shadow: 0 4px 24px 0px rgba(5, 5, 5, 0.5);
+}
+
+.desplegable-content a {
+    color: black;
+    padding: 12px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.desplegable-content a:hover {
+    background-color: var(--titulo-pintado);
+}
+
+.desplegable:hover .desplegable-content {
+    display: block;
+}
+
+.desplegable:hover .desplegable {
+    background-color: var(--color-oscurecido);
+}
+
+#redes {
+    display: flex;
+    gap: 24px;
+    justify-content: flex-end;
+    align-items: center;
+}
+.social-logo {
+    height: 24px;
+    display: flex;
+}
+.social-logo:hover {
+    color: var(--color);
+    transform: scale(1.2);
+}
+
+/* ESTILOS PARA MARQUESINA */
+@keyframes marquee {
+    0% {
+        transform: translateX(100%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}
+.marquesina-contenedor {
+    margin: 0 12px 0 0;
+    top: 80px;
+    right: 0;
+    width: 168px;
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: 1000;
+    color: white;
+}
+.marquesina {
+    display: inline-block;
+    padding: 12px 0;
+    animation: marquee 8s linear infinite;
+}
+.marquesina p {
+    cursor: default;
+}
+
+.marquesina p {
+    display: inline;
+    font-size: 16px;
+    color: white;
+}
+
+/* Estilos para la sección de Ayuda */
+#ayuda {
+    width: 100%;
+    padding: 20px;
+    background-image: url('../img/background.png');
+}
+
+#ayuda h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: var(--titulo-pintado);
+}
+
+.faq-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.faq {
+    width: 48%;
+    margin-bottom: 20px;
+}
+
+.faq h3 {
+    background-color: var(--color-trasparente);
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.faq-item {
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.faq-question {
+    width: 100%;
+    padding: 15px;
+    text-align: left;
+    background-color: #f1f1f1;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    font-size: 24px;
+    transition: background-color 0.3s;
+}
+
+.faq-question:hover {
+    background-color: #e1e1e1;
+}
+
+.faq-answer {
+    padding: 15px;
+    display: none;
+    background-color: white;
+}
+
+/* Estilos para el Modal de Respuesta */
+#modal-bg {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 2000;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: var(--color-oscurecido);
+    box-shadow: 0 0 20px rgba(241, 241, 107, 0.8);
+    padding: 40px;
+    border-radius: 10px;
+    max-width: 1000px;
+    width: 90%;
+    text-align: left;
+    position: relative;
+    color: rgb(255, 252, 252); 
+    font-size: 36px;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 36px;
+    color: #ffffff; /* Color del botón de cerrar */
+}
+
+/* Mostrar el modal cuando está activo */
+.body.modal-open {
+    overflow: hidden;
+}

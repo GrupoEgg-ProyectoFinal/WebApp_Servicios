@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayuda - DEV Soluciones</title>
+    <link rel="stylesheet" href="/styles/styleAyuda.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo-contenedor">
+                <a th:href="@{/}">
+                    <img src="/img/logoPNG.png" alt="Logo" class="logo">
+                    <span class="nombreEmpresa">DEV SOLUCIONES</span>
+                </a>
+            </div>
+        
+            <ul class="nav-list">
+                <li><a th:href="@{/}">VOLVER AL INICIO</a></li>
+                <li><a th:href="@{/conocenos}">CONOCENOS</a></li>
+            </ul>
+        
+            <ul class="account-options">
+                <li class="desplegable">
+                    <a href="javascript:void(0)" class="dropbtn">REGISTRARSE</a>
+                    <div class="desplegable-content">
+                        <a th:href="@{/registrarUsuario}">USUARIO</a>
+                        <a th:href="@{/registrarProveedor}">PROVEEDOR</a>
+                    </div>
+                </li>
+            </ul>
+        
+            <ul id="redes">
+                <li>
+                    <a href="" target="_blank">
+                        <img class="social-logo" src="/img/Instagram.svg" alt="Instagram">
+                    </a>
+                </li>
+                <li>
+                    <a href="" target="_blank">
+                        <img class="social-logo" src="/img/Facebook.svg" alt="Facebook">
+                    </a>
+                </li>
+            </ul>
+        
+            <div class="marquesina-contenedor">
+                <div class="marquesina">
+                    <p>DEV SOLUCIONES: Conectamos PROFESIONALES con tus necesidades.</p>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <!-- Sección AYUDA -->
+    <section id="ayuda">
+        <h1>Preguntas Frecuentes</h1>
+        <div class="faq-container">
+            <div class="faq">
+                <h3>Servicios de Gas</h3>
+                <div class="faq-item">
+                    <button class="faq-question">¿Cómo puedo solicitar un gasista?</button>
+                    <div class="faq-answer">
+                        <h1>Puedes solicitar un gasista a través de nuestro formulario en la sección de servicios o llamando a nuestro número de atención al cliente.</h1>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">¿Qué tipo de trabajos realizan los gasistas?</button>
+                    <div class="faq-answer">
+                        <h1>Los gasistas realizan trabajos de instalación, mantenimiento y reparación de sistemas de gas en hogares e industrias.</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="faq">
+                <h3>Servicios de Electricidad</h3>
+                <div class="faq-item">
+                    <button class="faq-question">¿Cómo puedo solicitar un electricista?</button>
+                    <div class="faq-answer">
+                        <h1>Puedes solicitar un electricista completando el formulario en nuestra página web o contactándonos por teléfono.</h1>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">¿Qué servicios ofrecen los electricistas?</button>
+                    <div class="faq-answer">
+                        <h1>Nuestros electricistas están capacitados para realizar instalaciones eléctricas, mantenimiento y reparaciones de sistemas eléctricos.</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="faq">
+                <h3>Servicios de Plomería</h3>
+                <div class="faq-item">
+                    <button class="faq-question">¿Cómo puedo contactar a un plomero?</button>
+                    <div class="faq-answer">
+                        <h1>Puedes contactar a un plomero a través de nuestra página web o llamando a nuestra línea de atención al cliente.</h1>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">¿Qué tipo de problemas resuelven los plomeros?</button>
+                    <div class="faq-answer">
+                        <h1>Los plomeros pueden solucionar problemas de tuberías, instalaciones de agua, desagües y emergencias relacionadas con plomería.</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="faq">
+                <h3>Problemas de Inicio de Sesión</h3>
+                <div class="faq-item">
+                    <button class="faq-question">¿Qué hago si no puedo iniciar sesión?</button>
+                    <div class="faq-answer">
+                        <h1>Si no puedes iniciar sesión, intenta restablecer tu contraseña usando la opción 'Olvidé mi contraseña' en la página de inicio de sesión.</h1>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">¿Cómo puedo cambiar mi contraseña?</button>
+                    <div class="faq-answer">
+                        <h1>Puedes cambiar tu contraseña desde la sección de configuración de tu cuenta después de iniciar sesión.</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="faq">
+                <h3>Problemas de Registro</h3>
+                <div class="faq-item">
+                    <button class="faq-question">¿Cómo me registro en DEV Soluciones?</button>
+                    <div class="faq-answer">
+                        <h1>Para registrarte, visita la página de registro, completa el formulario con tus datos y sigue las instrucciones que se enviarán a tu correo electrónico.</h1>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <button class="faq-question">¿Qué hago si no recibo el correo de confirmación?</button>
+                    <div class="faq-answer">
+                        <h1>Si no recibes el correo de confirmación, revisa tu carpeta de spam o intenta registrarte nuevamente con una dirección de correo electrónico válida.</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer th:replace="~{/fragments/_footer :: Footer}">
+        
+    </footer>
+    <div id="modal-bg">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div id="modal-text"></div>
+        </div>
+</body>
+<script src="/script/script.js"></script>
+</html>
