@@ -6,6 +6,7 @@ import grupo_app_servicios.appservicios.entidades.UsuarioEntidad;
 import grupo_app_servicios.appservicios.enumeraciones.Rol;
 import grupo_app_servicios.appservicios.excepciones.MiExcepcion;
 import grupo_app_servicios.appservicios.repositorios.UsuarioRepositorio;
+import grupo_app_servicios.appservicios.utilidades.MapeadorEntidadADto;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -128,4 +129,10 @@ public class UsuarioServicio implements UserDetailsService {
 
         return new User(user.getEmail(), user.getContrasena(), permisos);
     }
+
+    //BUSCAR POR MAIL 
+    // Método para buscar usuario por email
+    public UsuarioDTO buscarPorEmail(String email) {
+        return MapeadorEntidadADto.mapearUsuario(usuarioRepositorio.buscarPorEmail(email));
+    } 
 }
