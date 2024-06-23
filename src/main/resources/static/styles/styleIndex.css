@@ -447,6 +447,116 @@ ul.nav-list {
     background-color: var(--color);
 }
 
+/* ESTILOS PARA EL FOOTER */
+footer {
+    background-color: black;
+    width: 100%;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: auto;
+}
+
+.footerDev {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.footerDev p {
+    margin: 0;
+    padding: 10px 0;
+    border-top: 1px solid #444;
+}
+
+.footer-columns {
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+
+
+
+.footer-column {
+    flex: 1 1 220px;
+    margin: 10px;
+}
+
+.footer-column h4 {
+    margin-bottom: 10px;
+    color: var(--titulo-pintado);
+}
+
+.footer-column p,
+.footer-column ul,
+.footer-column a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 10px;
+}
+
+.footer-column ul li a:hover {
+    text-decoration: underline;
+}
+
+.dev-container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.dev {
+    text-align: center;
+    margin-bottom: 10px;
+    flex: 1 1 calc(25% - 20px);
+    margin: 10px;
+}
+
+.dev a img {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 5px;
+}
+
+.social-icons a img {
+    width: 24px;
+    height: 24px;
+    margin: 0 10px;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .footer-columns {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .footer-column {
+        max-width: 100%;
+    }
+
+    .dev-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .dev {
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+}
+
 
 
 
