@@ -1,5 +1,4 @@
-<footer th:fragment="footerFragment">
-    <section class="footerDev">
+<footer th:fragment="footerFragment" class="footerDev">
         <p>© 2024 DEV SOLUCIONES - Todos los derechos reservados</p>
         <div class="footer-columns">
             <h4>DESARROLLADORES</h4>
@@ -32,13 +31,6 @@
                     <h4>Luis Miguel Gómez</h4>
                     <h5>Full-Stack Dev</h5>
                 </div>
-                <div class="dev">
-                    <a href="" target="_blank">
-                        <img src="/img/Linkedin.svg" alt="linkedin">
-                    </a>
-                    <h4>Katherine</h4>
-                    <h5>Full-Stack Dev</h5>
-                </div>
             </div>
         </div>
         <!-- Información de Contacto -->
@@ -56,10 +48,8 @@
                 <li><a th:href="@{/servicios}">SERVICIOS</a></li>
                 <li><a th:href="@{/conocenos}">CONOCENOS</a></li>
                 <li><a th:href="@{/ayuda}">AYUDA</a></li>
-                <li><a th:href="@{/conocenos}"">CONTACTO</a></li>
-                        <li><a th:href=" @{/}">Política de Privacidad</a></li>
-                <li><a class="target" th:href="@{/dashboard}" sec:authorize="hasRole('ADMIN')">PANEL DE
-                        ADMINISTRACION</a></li>
+                <li><a th:href="@{/conocenos}">CONTACTO</a></li>
+                <li><a class="target" th:href="@{/dashboard}" sec:authorize="hasRole('ADMIN')">PANEL DE ADMINISTRACION</a></li>
             </ul>
         </div>
         <!-- Redes Sociales -->
@@ -72,5 +62,4 @@
             </div>
         </div>
         </div>
-    </section>
 </footer>
