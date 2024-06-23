@@ -9,15 +9,17 @@
 
         <ul class="nav-list">
             <li><a th:href="@{/}">INICIO</a></li>
-            <li><a class="target" th:href="@{/dashboard}" sec:authorize="hasRole('ADMIN')">PANEL DE ADMINISTRACION</a></li>
+            <li><a class="target" th:href="@{/dashboard}" sec:authorize="hasRole('ADMIN')">PANEL DE ADMINISTRACION</a>
+            </li>
             <li><a th:href="@{/conocenos}">CONOCENOS</a></li>
             <li><a th:href="@{/ayuda}">AYUDA</a></li>
             <li><a th:href="@{/servicios}">SERVICIOS SOLO VISTA USUARIO</a></li>
         </ul>
 
-        <ul id="redes">
-            <li class="cerrarSesion" >
-                <li sec:authorize="hasAnyRole('ROL_USER', 'ROL_PROVEEDOR', 'ROL_ADMIN')"><a href="/logout">CERRAR SESIÓN</a></li>
+        <ul id="sesion">
+            <li class="cerrarSesion">
+            <li sec:authorize="hasAnyRole('ROL_USER', 'ROL_PROVEEDOR', 'ROL_ADMIN')"><a href="/logout">CERRAR SESIÓN</a>
+            </li>
             </li>
             <ul class="registro">
                 <li th:if="${session.usuarioEnSesion != null}">
@@ -33,22 +35,6 @@
                     <a th:href="@{/registrarUsuario}">USUARIO</a>
                     <a th:href="@{/registrarProveedor}">PROVEEDOR</a>
                 </div>
-                </li>
-            <li>
-                <a href="" target="_blank">
-                    <img class="social-logo" src="/img/Instagram.svg" alt="instagram">
-                </a>
             </li>
-            <li>
-                <a href="" target="_blank">
-                    <img class="social-logo" src="/img/Facebook.svg" alt="facebook">
-                </a>
-            </li>
-        </ul>
-        <div class="marquesina-contenedor">
-            <div class="marquesina">
-                <p>DEV SOLUCIONES: Conectamos PROFESIONALES con tus necesidades.</p>
-            </div>
-        </div>
     </nav>
 </header>

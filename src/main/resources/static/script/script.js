@@ -60,3 +60,30 @@ const closeModalBtn = document.querySelector('.close-modal');
 if (closeModalBtn) {
     closeModalBtn.addEventListener('click', closeModal);
 }
+
+
+// SCRIPT PARA FILTRAR PALABRAS EN LA SECCIÓN 'AYUDA' 
+
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('search-input');
+    const faqs = document.querySelectorAll('.faq-item');
+
+    // Función para eliminar tildes
+    function removeAccents(str) {
+        return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+    }
+
+    searchInput.addEventListener('input', function() {
+        const filter = removeAccents(searchInput.value.toLowerCase());
+        faqs.forEach(faq => {
+            const question = removeAccents(faq.querySelector('.faq-question').textContent.toLowerCase());
+            const answer = removeAccents(faq.querySelector('.faq-answer h1').textContent.toLowerCase());
+            if (question.includes(filter) || answer.includes(filter)) {
+                faq.style.display = '';
+            } else {
+                faq.style.display = 'none';
+            }
+        });
+    });
+});
+

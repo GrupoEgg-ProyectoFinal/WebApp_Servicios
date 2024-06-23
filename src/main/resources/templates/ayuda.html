@@ -5,55 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ayuda - DEV Soluciones</title>
     <link rel="stylesheet" href="/styles/styleAyuda.css">
+    <link rel="stylesheet" href="/styles/styleFooter.css">
+    
 </head>
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="logo-contenedor">
-                <a th:href="@{/}">
-                    <img src="/img/logoPNG.png" alt="Logo" class="logo">
-                    <span class="nombreEmpresa">DEV SOLUCIONES</span>
-                </a>
-            </div>
-        
-            <ul class="nav-list">
-                <li><a th:href="@{/}">VOLVER AL INICIO</a></li>
-                <li><a th:href="@{/conocenos}">CONOCENOS</a></li>
-            </ul>
-        
-            <ul class="account-options">
-                <li class="desplegable">
-                    <a href="javascript:void(0)" class="dropbtn">REGISTRARSE</a>
-                    <div class="desplegable-content">
-                        <a th:href="@{/registrarUsuario}">USUARIO</a>
-                        <a th:href="@{/registrarProveedor}">PROVEEDOR</a>
-                    </div>
-                </li>
-            </ul>
-        
-            <ul id="redes">
-                <li>
-                    <a href="" target="_blank">
-                        <img class="social-logo" src="/img/Instagram.svg" alt="Instagram">
-                    </a>
-                </li>
-                <li>
-                    <a href="" target="_blank">
-                        <img class="social-logo" src="/img/Facebook.svg" alt="Facebook">
-                    </a>
-                </li>
-            </ul>
-        
-            <div class="marquesina-contenedor">
-                <div class="marquesina">
-                    <p>DEV SOLUCIONES: Conectamos PROFESIONALES con tus necesidades.</p>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <header th:replace="~{/fragments/_navbar :: Navbar}"></header>
     <!-- Sección AYUDA -->
     <section id="ayuda">
         <h1>Preguntas Frecuentes</h1>
+        <input type="text" id="search-input" placeholder="¿Cómo podemos ayudarte?.." class="search-with-icon">
         <div class="faq-container">
             <div class="faq">
                 <h3>Servicios de Gas</h3>
@@ -143,3 +103,4 @@
 </body>
 <script src="/script/script.js"></script>
 </html>
+

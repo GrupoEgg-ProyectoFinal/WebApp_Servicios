@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio Sesion de Proveedor</title>
     <link rel="stylesheet" href="/styles/styleSesionUsuario&Proveedor.css">
+    <link rel="stylesheet" href="/styles/styleFooter.css">
+
 </head>
 <body>
     <header th:replace="~{/fragments/_navbar :: Navbar}"></header>
@@ -35,7 +37,7 @@
         </div>
         </section>
     </main> 
-    <footer>
+    <footer th:replace="~{/fragments/footer :: footerFragment}">
         
     </footer>
 </body>

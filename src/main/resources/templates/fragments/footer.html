@@ -1,6 +1,7 @@
 <footer th:fragment="footerFragment" class="footerDev">
-        <p>© 2024 DEV SOLUCIONES - Todos los derechos reservados</p>
-        <div class="footer-columns">
+    <p>© 2024 DEV SOLUCIONES - Todos los derechos reservados</p>
+    <div class="footer-columns">
+        <div class="footer-column dev-column">
             <h4>DESARROLLADORES</h4>
             <div class="dev-container">
                 <div class="dev">
@@ -21,7 +22,7 @@
                     <a href="" target="_blank">
                         <img src="/img/Linkedin.svg" alt="linkedin">
                     </a>
-                    <h4>Nahuel Gahn</h4>
+                    <h4>Nahuel Gómez Gahn</h4>
                     <h5>Full-Stack Dev</h5>
                 </div>
                 <div class="dev">
@@ -33,14 +34,12 @@
                 </div>
             </div>
         </div>
-        <!-- Información de Contacto -->
         <div class="footer-column">
             <h4>CONTACTO</h4>
             <p><strong>Email:</strong> contacto@devsoluciones.com</p>
             <p><strong>Teléfono:</strong> +54 11 1234 5678</p>
             <p><strong>Dirección:</strong> Av. Flores 1234, Piso 5, CABA, Buenos Aires, Argentina</p>
         </div>
-        <!-- Enlaces Útiles -->
         <div class="footer-column">
             <h4>ENLACES ÚTILES</h4>
             <ul>
@@ -52,14 +51,19 @@
                 <li><a class="target" th:href="@{/dashboard}" sec:authorize="hasRole('ADMIN')">PANEL DE ADMINISTRACION</a></li>
             </ul>
         </div>
-        <!-- Redes Sociales -->
-        <div class="footer-column">
+        <div class="footer-column social-column">
             <h4>SÍGUENOS</h4>
             <div class="social-icons">
                 <a href="https://facebook.com" target="_blank"><img src="/img/Facebook.svg" alt="Facebook"></a>
                 <a href="https://linkedin.com" target="_blank"><img src="/img/Linkedin.svg" alt="LinkedIn"></a>
                 <a href="https://instagram.com" target="_blank"><img src="/img/Instagram.svg" alt="Instagram"></a>
             </div>
+            <div class="marquesina-contenedor">
+                <div class="marquesina">
+                    <p>DEV SOLUCIONES: Conectamos PROFESIONALES con tus necesidades.</p>
+                </div>
+            </div>
         </div>
-        </div>
+    </div>
 </footer>
+
