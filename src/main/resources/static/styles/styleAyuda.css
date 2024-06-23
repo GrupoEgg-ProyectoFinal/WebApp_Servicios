@@ -18,12 +18,6 @@ body {
     color: white;
     scroll-behavior: smooth;
     height: -webkit-fill-available;
-    display: grid;
-    grid-template: 
-        "header" min-content
-        "main" auto
-        "footer" 80px
-        /auto; 
     min-height: 100vh;
 }
 
@@ -85,34 +79,11 @@ p {
     --titulo-pintado: #e4e299;
 }
 
-main {
-    grid-area: main;
-    min-height: 100%;
-}
-
-/*ESTILO FOOTER*/
-body > footer {
-    grid-area: footer;
-    min-height: 80px;
-    background-color: var(--color-oscurecido);
-    border-top: 5px white solid;
-    color: white;
-}
-
-/*ESTILOS PARA NAVBAR Y CONTENIDO DE LA MISMA */
-body > header {
-    grid-area: header;
-}
-
-footer {
-    height: calc(100vh - 104px);
-}
-
 .navbar {
     width: 100%;
     min-height: 80px;
     padding: 0 96px;
-    background-color: black;
+    background-color: rgb(0, 0, 0);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -154,7 +125,7 @@ footer {
     flex-grow: 1;
 }
 .nav-list a:hover {
-    transform: scale(1.1);
+    transform: scale(1.5);
 }
 .nav-list li a.active {
     color: var(--color);
@@ -170,7 +141,7 @@ ul.nav-list {
 .account-options {
     display: flex;
     gap: 24px;
-    margin-right: 20px; /* Añadido para separar los botones de redes sociales */
+    margin-right: 20px;
 }
 
 .account-options .desplegable {
@@ -183,23 +154,26 @@ ul.nav-list {
     display: none;
     position: absolute;
     margin-top: -30px;
-    background-color: rgba(255, 255, 255, 0.8); 
-    color: black;
+    background-color: var(--titulo-pintado);
     z-index: 1;
-    min-width: 160px;
+    max-width: 124px;
     top: 100%; 
     box-shadow: 0 4px 24px 0px rgba(5, 5, 5, 0.5);
+    border-radius: 12px;
 }
 
 .desplegable-content a {
+    border-radius: 10px;
     color: black;
     padding: 12px;
-    text-decoration: none;
+    width: 100%;
     display: inline-block;
+    transition: background-color 0.5s ease;
 }
 
 .desplegable-content a:hover {
-    background-color: var(--titulo-pintado);
+    background-color: black;
+    color: white;
 }
 
 .desplegable:hover .desplegable-content {
@@ -210,60 +184,18 @@ ul.nav-list {
     background-color: var(--color-oscurecido);
 }
 
-#redes {
+#sesion {
     display: flex;
     gap: 24px;
     justify-content: flex-end;
     align-items: center;
-}
-.social-logo {
-    height: 24px;
-    display: flex;
-}
-.social-logo:hover {
-    color: var(--color);
-    transform: scale(1.2);
-}
-
-/* ESTILOS PARA MARQUESINA */
-@keyframes marquee {
-    0% {
-        transform: translateX(100%);
-    }
-    100% {
-        transform: translateX(-100%);
-    }
-}
-.marquesina-contenedor {
-    margin: 0 12px 0 0;
-    top: 80px;
-    right: 0;
-    width: 168px;
-    overflow: hidden;
-    white-space: nowrap;
-    z-index: 1000;
-    color: white;
-}
-.marquesina {
-    display: inline-block;
-    padding: 12px 0;
-    animation: marquee 8s linear infinite;
-}
-.marquesina p {
-    cursor: default;
-}
-
-.marquesina p {
-    display: inline;
-    font-size: 16px;
-    color: white;
 }
 
 /* Estilos para la sección de Ayuda */
 #ayuda {
     width: 100%;
     padding: 20px;
-    background-image: url('../img/background.png');
+    background-image: url('../img/background2.png');
 }
 
 #ayuda h1 {
@@ -275,17 +207,17 @@ ul.nav-list {
 .faq-container {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
 }
 
 .faq {
-    width: 48%;
+    width: 40%;
     margin-bottom: 20px;
 }
 
 .faq h3 {
     background-color: var(--color-trasparente);
-    color: white;
+    color: var(--titulo-pintado);
     padding: 10px;
     border-radius: 5px;
 }
@@ -310,7 +242,8 @@ ul.nav-list {
 }
 
 .faq-question:hover {
-    background-color: #e1e1e1;
+    background-color: var(--color-oscurecido);
+    color: white;
 }
 
 .faq-answer {
@@ -359,3 +292,13 @@ ul.nav-list {
 .body.modal-open {
     overflow: hidden;
 }
+
+#search-input {
+    width: 50%;
+    padding: 12px;
+    margin: 20px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
