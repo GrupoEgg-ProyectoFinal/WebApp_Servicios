@@ -19,11 +19,13 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
@@ -135,4 +137,23 @@ public class UsuarioServicio implements UserDetailsService {
     public UsuarioDTO buscarPorEmail(String email) {
         return MapeadorEntidadADto.mapearUsuario(usuarioRepositorio.buscarPorEmail(email));
     } 
+
+    // CAMBIAR ROL
+    @Transactional
+    public void cambiarRol(@PathVariable UUID id) {
+
+        Optional<UsuarioEntidad> usuario = usuarioRepositorio.findById(id);
+
+        if (usuario.isPresent()) {
+            UsuarioEntidad respuestaUsuario = usuario.get();
+            if (respuestaUsuario.getRol().equals(Rol.USER)) {
+                respuestaUsuario.setRol(Rol.PROVEEDOR);
+            } else if (respuestaUsuario.getRol().equals(Rol.PROVEEDOR)) {
+                respuestaUsuario.setRol(Rol.USER);
+            }
+
+            usuarioRepositorio.save(respuestaUsuario);
+        }
+
+    }
 }
