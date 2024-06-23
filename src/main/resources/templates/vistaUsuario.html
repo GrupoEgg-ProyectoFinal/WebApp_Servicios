@@ -21,6 +21,8 @@
             <ul class="nav-list">
                 <li><a class="target" th:href="@{/}">INICIO</a></li>
                 <li><a th:href="@{/conocenos}">CONOCENOS</a></li>
+                <li><a th:href="@{/ayuda}">AYUDA</a></li>
+                <li><a th:href="@{/servicios}">SERVICIOS SOLO VISTA USUARIO</a></li>
             </ul>
 
             <ul id="redes">
@@ -72,8 +74,10 @@
                                 <div class="col-puntuacion">
                                     ⭐⭐⭐⭐⭐
                                 </div>
-                                <div class="col-contratar">
-                                    <a href="contratar" target="_blank">
+                                <div class="col-contratar">                                    
+                                    <a th:href="@{/contratar/crearSolicitud/{id}(id=${gasista.id.toString()})}" >
+
+                                    <!-- <a th:href="@{/contratar/solicitud/__${gasista.id.toString}__}" target="_blank"> -->
                                         <h5>Contratar ➝</h5>
                                     </a>
                                 </div>
