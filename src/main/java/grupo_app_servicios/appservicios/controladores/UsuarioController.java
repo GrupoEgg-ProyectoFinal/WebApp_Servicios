@@ -22,25 +22,16 @@ public class UsuarioController {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
-    // @GetMapping("/formulario")
-    // public String mostrarFormulario(Model model) {
-    // model.addAttribute("usuarioDTO", new UsuarioDTO());
-    // return "registro";
-    // }
 
-    // @PostMapping("/guardarUsuario")
-    // public String guardarUsuario(@ModelAttribute UsuarioDTO usuarioDTO) {
-    // usuarioServicio.crearUsuario(usuarioDTO);
-    // return "redirect:/registro";
-    // }
-
+    //MODIFICAR USUARIO GET
     @GetMapping("/modificarUsuarioS/{id}")
     public String modificarUsuario(@PathVariable String id, Model modelo) {
 
         modelo.addAttribute("usuarioDTO", new UsuarioDTO());
         return "modificarUsuario.html";
     }
-
+    
+   //MODIFICAR USUARIO POST
     @PostMapping("/modificarUsuario/{id}")
     public String modificarUsuario(@PathVariable String id, @ModelAttribute UsuarioDTO usuarioDTO) {
         try {
@@ -59,19 +50,21 @@ public class UsuarioController {
         return "redirect:/formulario";
     }
 
-    // //prueba lista de usiarios Postman OK
-    // // @GetMapping("/listar")
-    // // @ResponseBody
-    // // public List<UsuarioDTO> listarUsuarios() {
-    // // return usuarioServicio.listarUsuarios();
-    // // }
-
-    // HTML
     @GetMapping("/listar")
     public String listarUsuariosVista(ModelMap model) {
         List<UsuarioDTO> usuarios = usuarioServicio.listarUsuarios();
         model.addAttribute("usuarios", usuarios);
         return "listar.html";
     }
+
+    // MODIFICAR ROL 
+    @GetMapping("/modificarRol/{id}")
+    public String cambiarRol(@PathVariable String id) {
+        usuarioServicio.cambiarRol(UUID.fromString(id));
+        return "redirect:/dashboard";
+    }
+
+
+
 
 }
