@@ -102,7 +102,6 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setBarrios(usuarioDTO.getBarrios());
         usuario.setTelefono(usuarioDTO.getTelefono());
         usuario.setEstado(usuarioDTO.getEstado());
-        usuario.setRol(usuarioDTO.getRol());
 
         usuarioRepositorio.save(usuario);
     }
@@ -154,6 +153,10 @@ public class UsuarioServicio implements UserDetailsService {
 
             usuarioRepositorio.save(respuestaUsuario);
         }
+    }
 
+    @Transactional
+    public UsuarioDTO encontrarPorId(UUID id) {
+        return convertirADTO(usuarioRepositorio.findById(id).orElse(null));
     }
 }
