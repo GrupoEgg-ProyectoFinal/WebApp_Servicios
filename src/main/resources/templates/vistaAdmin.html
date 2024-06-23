@@ -68,7 +68,8 @@
                                         <!-- <button class="modificar">Modificar</button> -->
                                         <a th:href= "@{/modificarUsuarioS/__${usuario.id.toString()}__}"><i class="fas fa-feather-alt">  </i> Modificar </a>
                                       
-                                        <button class="modificar-rol">ModificarRol</button>
+                                        <a th:href="@{/modificarRol/__${usuario.id.toString()}__}"> <button class="modificar-rol">ModificarRol</button></a>
+
                                         <button class="eliminar">Eliminar</button>
                                     </td>
                                 </tr>
