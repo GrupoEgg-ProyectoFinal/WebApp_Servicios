@@ -221,6 +221,10 @@ ul.nav-list {
     box-shadow: 0 0 20px var(--titulo-pintado);
 }
 
+#form:hover {
+    background-color: var(--color-medio);
+}
+
 #formularioUsuario {
     display: flex;
     flex-direction: column;

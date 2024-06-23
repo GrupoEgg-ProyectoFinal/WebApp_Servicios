@@ -202,6 +202,10 @@ ul.nav-list {
     background-image: url("../img/background2.png");
 }
 
+#inicioSesion strong {
+    color: var(--titulo-pintado);
+}
+
 #formUsuario {
     background-color: var(--color);
     opacity: 0.99;
@@ -218,6 +222,11 @@ ul.nav-list {
     background-color: var(--color-trasparente);
     box-shadow: 0 4px 24px 0px rgba(255, 255, 255, 0.5);
 }
+
+#formUsuario:hover {
+    background-color: var(--color-medio);
+}
+
 #sesionUsuario {
     width: 66%;
     display: flex;
