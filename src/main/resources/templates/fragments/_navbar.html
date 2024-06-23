@@ -20,7 +20,7 @@
                 <li sec:authorize="hasAnyRole('ROL_USER', 'ROL_PROVEEDOR', 'ROL_ADMIN')"><a href="/logout">CERRAR SESIÓN</a></li>
             </li>
             <ul class="registro">
-                <li th:if="${session.usuarioEnSesion == null}">
+                <li th:if="${session.usuarioEnSesion != null}">
                     <a href="javascript:void(0)" class="dropbtn">INICIAR SESIÓN</a>
                 </li>
                 <li th:if="${session.usuarioEnSesion == null}">

@@ -22,12 +22,13 @@ public class UsuarioController {
     @Autowired
     private UsuarioServicio usuarioServicio;
 
-
     //MODIFICAR USUARIO GET
     @GetMapping("/modificarUsuarioS/{id}")
     public String modificarUsuario(@PathVariable String id, Model modelo) {
-
-        modelo.addAttribute("usuarioDTO", new UsuarioDTO());
+        /* UsuarioDTO usuarioDTO = new UsuarioDTO();
+        usuarioDTO.setId(UUID.fromString(id)); */
+        UsuarioDTO usuarioDTO = usuarioServicio.encontrarPorId(UUID.fromString(id));
+        modelo.addAttribute("usuarioDTO", usuarioDTO);
         return "modificarUsuario.html";
     }
     
@@ -37,7 +38,7 @@ public class UsuarioController {
         try {
             usuarioDTO.setId(UUID.fromString(id));
             usuarioServicio.modificarUsuario(usuarioDTO);
-            return "vistaAdmin.html";
+            return "redirect:/dashboard";
         } catch (MiExcepcion e) {
             // Manejo de excepción si es necesario
             return "redirect:/error"; // Redirigir a una página de error
