@@ -6,48 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Usuario</title>
     <link rel="stylesheet" href="/styles/styleVistaUsuario.css">
+    <link rel="stylesheet" href="/styles/styleFooter.css">
 </head>
 
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="logo-contenedor">
-                <a th:href="@{/}">
-                    <img src="/img/logoPNG.png" alt="Logo" class="logo">
-                    <span class="nombreEmpresa">DEV SOLUCIONES</span>
-                </a>
-            </div>
-
-            <ul class="nav-list">
-                <li><a class="target" th:href="@{/}">INICIO</a></li>
-                <li><a th:href="@{/conocenos}">CONOCENOS</a></li>
-                <li><a th:href="@{/ayuda}">AYUDA</a></li>
-                <li><a th:href="@{/servicios}">SERVICIOS SOLO VISTA USUARIO</a></li>
-            </ul>
-
-            <ul id="redes">
-                <li class="cerrarSesion">
-                    <li><a href="/logout">CERRAR SESIÓN</a></li>
-                    </li>
-                <li>
-                    <a href="" target="_blank">
-                        <img class="social-logo" src="/img/Instagram.svg" alt="instagram">
-                    </a>
-                </li>
-                <li>
-                    <a href="" target="_blank">
-                        <img class="social-logo" src="/img/Facebook.svg" alt="facebook">
-                    </a>
-                </li>
-            </ul>
-            
-            <div class="marquesina-contenedor">
-                <div class="marquesina">
-                    <p>DEV SOLUCIONES: Conectamos PROFESIONALES con tus necesidades.</p>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <header th:replace="~{/fragments/_navbar :: Navbar}"></header>
     <main>
         <!-- PÁGINA 1 'INICIO SESION'-->
         <section id="vistaUsuario">
@@ -154,7 +117,7 @@
         </section>
     </main>
 
-    <footer>
+    <footer th:replace="~{/fragments/footer :: footerFragment}">
 
     </footer>
     <!--correr spring terminal   ./mvnw spring-boot:run  -->

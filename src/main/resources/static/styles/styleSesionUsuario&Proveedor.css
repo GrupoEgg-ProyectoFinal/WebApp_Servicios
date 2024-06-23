@@ -18,18 +18,12 @@ body {
     color: white;
     scroll-behavior: smooth;
     height: -webkit-fill-available;
-    display: grid;
-    grid-template: 
-        "header" min-content
-        "main" auto
-        "footer" 80px
-        /auto; 
     min-height: 100vh;
 }
 
 /* ESTILOS PARA LAS DISTINTAS SECCIONES */
 section {
-    height: calc(100vh - 80px);
+    height: calc(100vh - 104px);
     font-weight: 700;
     display: flex;
     align-items: center;
@@ -80,35 +74,16 @@ p {
 :root {
     --color: #06608a;
     --color-medio: #05435f;
-    --color-oscurecido: #03293a;
+    --color-oscurecido: rgb(3, 41, 58);
     --color-trasparente: rgb(6, 96, 138, 0.9);
     --titulo-pintado: #e4e299;
-}
-
-main {
-    grid-area: main;
-    min-height: 100%;
-}
-
-/*ESTILO FOOTER*/
-body > footer {
-    grid-area: footer;
-    min-height: 80px;
-    background-color: var(--color-oscurecido);
-    border-top: 5px white solid;
-    color: white;
-}
-
-/*ESTILOS PARA NAVBAR Y CONTENIDO DE LA MISMA */
-body > header {
-    grid-area: header;
 }
 
 .navbar {
     width: 100%;
     min-height: 80px;
     padding: 0 96px;
-    background-color: black;
+    background-color: rgb(0, 0, 0);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -150,7 +125,7 @@ body > header {
     flex-grow: 1;
 }
 .nav-list a:hover {
-    transform: scale(1.1);
+    transform: scale(1.5);
 }
 .nav-list li a.active {
     color: var(--color);
@@ -166,7 +141,7 @@ ul.nav-list {
 .account-options {
     display: flex;
     gap: 24px;
-    margin-right: 20px; /* Añadido para separar los botones de redes sociales */
+    margin-right: 20px;
 }
 
 .account-options .desplegable {
@@ -178,84 +153,43 @@ ul.nav-list {
 .desplegable-content {
     display: none;
     position: absolute;
-    background-color: rgba(255, 255, 255, 0.8); 
-    color: black;
+    margin-top: -30px;
+    background-color: var(--titulo-pintado);
     z-index: 1;
-    left: 50%;
-    transform: translateX(-50%);
+    max-width: 124px;
+    top: 100%; 
     box-shadow: 0 4px 24px 0px rgba(5, 5, 5, 0.5);
+    border-radius: 12px;
 }
 
 .desplegable-content a {
+    border-radius: 10px;
     color: black;
     padding: 12px;
-    text-decoration: none;
+    width: 100%;
     display: inline-block;
+    transition: background-color 0.5s ease;
 }
 
 .desplegable-content a:hover {
-    background-color: var(--titulo-pintado);
+    background-color: black;
+    color: white;
 }
 
 .desplegable:hover .desplegable-content {
-    display: flex;
-    justify-content: center;
+    display: block;
 }
 
 .desplegable:hover .desplegable {
     background-color: var(--color-oscurecido);
 }
 
-#redes {
+#sesion {
     display: flex;
     gap: 24px;
     justify-content: flex-end;
     align-items: center;
 }
-.social-logo {
-    height: 24px;
-    display: flex;
-}
-.social-logo:hover {
-    color: var(--color);
-    transform: scale(1.2);
-}
-
-/* ESTILOS PARA MARQUESINA */
-@keyframes marquee {
-    0% {
-        transform: translateX(100%);
-    }
-    100% {
-        transform: translateX(-100%);
-    }
-}
-.marquesina-contenedor {
-    margin: 0 12px 0 0;
-    top: 80px;
-    right: 0;
-    width: 168px;
-    overflow: hidden;
-    white-space: nowrap;
-    z-index: 1000;
-    color: white;
-}
-.marquesina {
-    display: inline-block;
-    padding: 12px 0;
-    animation: marquee 8s linear infinite;
-}
-.marquesina p {
-    cursor: default;
-}
-
-.marquesina p {
-    display: inline;
-    font-size: 16px;
-    color: white;
-}
-
-
 
 /* ESTILOS PAGINA | INICIAR SESIÓN */
 #inicioSesion {
@@ -265,7 +199,7 @@ ul.nav-list {
         rgba(26, 26, 26, 1) 0%,
         rgba(10, 10, 10, 1) 66%
     );
-    background-image: url("../img/background.png");
+    background-image: url("../img/background2.png");
 }
 
 #formUsuario {

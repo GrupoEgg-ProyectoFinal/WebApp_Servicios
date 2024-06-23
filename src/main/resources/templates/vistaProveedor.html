@@ -4,42 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/styles/styleVistaAdmin.css">
     <title>Vista PROVEEDOR</title>
+    <link rel="stylesheet" href="/styles/styleVistaAdmin.css">
+    <link rel="stylesheet" href="/styles/styleFooter.css">
+
 </head>
-
 <body>
-    <header>
-        <nav class="navbar">
-            <div class="logo-contenedor">
-                <a th:href="@{/index}">
-                    <img src="/img/logoPNG.png" alt="Logo" class="logo">
-                    <span class="nombreEmpresa">DEV SOLUCIONES</span>
-                </a>
-            </div>
-
-            <ul class="nav-list">
-                <li><a class="target" th:href="@{/}">VOLVER AL INICIO</a></li>
-                <li><a>SOLICITUDES DE TRABAJO</li></a>
-            </ul>
-
-            <ul id="redes">
-                <li class="cerrarSesion">
-                    <a href="/logout">CERRAR SESIÓN</a>
-                </li>
-                <li>
-                    <a href="" target="_blank">
-                        <img class="social-logo" src="/img/Instagram.svg" alt="instagram">
-                    </a>
-                </li>
-                <li>
-                    <a href="" target="_blank">
-                        <img class="social-logo" src="/img/Facebook.svg" alt="facebook">
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </header>
+    <header th:replace="~{/fragments/_navbar :: Navbar}"></header>
     <main>
         <section id="admin-vista">
             <div id="admin-contenedor">
@@ -126,7 +97,7 @@
             </div>
         </section>
     </main>
-    <footer>
+    <footer th:replace="~{/fragments/footer :: footerFragment}">
         
     </footer>
 </body>

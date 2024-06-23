@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/styles/styleVistaAdmin.css">
+    <link rel="stylesheet" href="/styles/styleFooter.css">
     <title>Vista ADMIN</title>
 </head>
 
@@ -22,20 +23,9 @@
                 <li><a class="target" th:href="@{/dashboard}">PANEL DE ADMINISTRACION</a></li>
             </ul>
 
-            <ul id="redes">
+            <ul id="sesion">
                 <li class="cerrarSesion">
                     <li><a th:href="@{/}">CERRAR SESIÓN</a></li>
-                    </li>
-                <li>
-                    <a href="" target="_blank">
-                        <img class="social-logo" src="/img/Instagram.svg" alt="instagram">
-                    </a>
-                </li>
-                <li>
-                    <a href="" target="_blank">
-                        <img class="social-logo" src="/img/Facebook.svg" alt="facebook">
-                    </a>
-                </li>
             </ul>
         </nav>
     </header>
@@ -66,9 +56,9 @@
                                     <td th:text="${usuario.rol}">USUARIO</td>
                                     <td>
                                         <!-- <button class="modificar">Modificar</button> -->
-                                        <a th:href= "@{/modificarUsuarioS/__${usuario.id.toString()}__}"><i class="fas fa-feather-alt">  </i> Modificar </a>
+                                        <a th:href= "@{/modificarUsuarioS/__${usuario.id.toString()}__}"><button class="fas fa-feather-alt">Modificar</button></a>
                                       
-                                        <a th:href="@{/modificarRol/__${usuario.id.toString()}__}"> <button class="modificar-rol">ModificarRol</button></a>
+                                        <a th:href="@{/modificarRol/__${usuario.id.toString()}__}"> <button class="modificar-rol">Modificar Rol</button></a>
 
                                         <button class="eliminar">Eliminar</button>
                                     </td>
@@ -110,7 +100,7 @@
             </div>
         </section>
     </main>
-    <footer>
+    <footer th:replace="~{/fragments/footer :: footerFragment}">
         
     </footer>
 </body>
