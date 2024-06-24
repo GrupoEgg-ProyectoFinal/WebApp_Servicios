@@ -25,7 +25,7 @@
 
             <ul id="sesion">
                 <li class="cerrarSesion">
-                    <li><a th:href="@{/}">CERRAR SESIÓN</a></li>
+                    <li><a th:href="@{/logout}">CERRAR SESIÓN</a></li>
             </ul>
         </nav>
     </header>
@@ -60,7 +60,12 @@
                                       
                                         <a th:href="@{/modificarRol/__${usuario.id.toString()}__}"> <button class="modificar-rol">Modificar Rol</button></a>
 
-                                        <button class="eliminar">Eliminar</button>
+                                        <a th:if="${usuario.rol.toString() == 'USER'}" th:href="@{/eliminarUsuario/__${usuario.id.toString()}__}">
+                                            <button class="eliminar">Eliminar</button>
+                                        </a>
+                                        <a th:if="${usuario.rol.toString() == 'PROVEEDOR'}" th:href="@{/proveedor/eliminar/__${usuario.id.toString()}__}">
+                                            <button class="eliminar">Eliminar</button>
+                                        </a>
                                     </td>
                                 </tr>
                             </tbody>

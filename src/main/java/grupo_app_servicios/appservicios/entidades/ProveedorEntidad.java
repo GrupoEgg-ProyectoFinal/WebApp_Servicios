@@ -3,6 +3,7 @@ package grupo_app_servicios.appservicios.entidades;
 import java.util.List;
 import java.util.UUID;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -30,7 +31,7 @@ public class ProveedorEntidad {
     private String descripcion;
 
     // Relaciones con entidades
-    @OneToOne
+    @OneToOne(cascade = CascadeType.REMOVE)
     private UsuarioEntidad usuario;
     @OneToOne
     private ImagenProvEntidad foto;

@@ -161,6 +161,11 @@ public class ProveedorServicio2 {
     }
 
     // ELIMINAR PROVEEDOR
+    @Transactional
+    public void eliminarProveedorPorIdDeUsuario(UUID usuarioId) {
+        ProveedorEntidad proveedor = pRepositorio.buscarPorIdUsuario(usuarioId);
+        pRepositorio.deleteById(proveedor.getId());
+    }
 
 
     // metodo que por el momento no se utiliza (cuándo se pueda aplicar la visualizacion de imagenes ver si hace falta)

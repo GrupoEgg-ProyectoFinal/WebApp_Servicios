@@ -1,6 +1,6 @@
 package grupo_app_servicios.appservicios.controladores;
 
-import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -27,8 +27,18 @@ public class ProveedorControlador {
     
     // agregar metodo de obtencion por servicio / o agregarlo a una vista a traves de modelmap
     // prueba de metodo para llamar a traves de un fetch y javascript
-    @GetMapping("/servicio/{servicio}")
-    public List<ProveedorDTO> obtenerProveedoresSegunServicio(@PathVariable String nombreServicio) {
-        return pServicio.listarProveedoresSegunServicio(nombreServicio);
+    // @GetMapping("/servicio/{servicio}")
+    // public List<ProveedorDTO> obtenerProveedoresSegunServicio(@PathVariable String nombreServicio) {
+    //     return pServicio.listarProveedoresSegunServicio(nombreServicio);
+    // }
+
+    @GetMapping("/eliminar/{id}")
+    public String eliminarProveedor(@PathVariable String id) {
+        try {
+            pServicio.eliminarProveedorPorIdDeUsuario(UUID.fromString(id));
+        } catch (Exception e) {
+            System.out.println(e.getLocalizedMessage());
+        }
+        return "redirect:/dashboard";
     }
 }

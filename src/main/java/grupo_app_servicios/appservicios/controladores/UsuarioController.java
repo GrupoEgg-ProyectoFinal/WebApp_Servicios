@@ -45,10 +45,10 @@ public class UsuarioController {
         }
     }
 
-    @PostMapping("/eliminarUsuario/{id}")
+    @GetMapping("/eliminarUsuario/{id}")
     public String eliminarUsuario(@PathVariable String id) {
         usuarioServicio.eliminarUsuario(UUID.fromString(id));
-        return "redirect:/formulario";
+        return "redirect:/dashboard";
     }
 
     @GetMapping("/listar")
