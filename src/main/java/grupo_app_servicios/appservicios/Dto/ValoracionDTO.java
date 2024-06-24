@@ -14,6 +14,4 @@ public class ValoracionDTO {
    private UUID id;
    private String comentario;
    private Integer puntaje;
-
-
 }

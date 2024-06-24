@@ -13,5 +13,4 @@ public class SolicitudDTO {
     private ValoracionDTO idValoracion;
     private ProveedorDTO idProveedor;
     private UsuarioDTO idUsuario;
-
 }
