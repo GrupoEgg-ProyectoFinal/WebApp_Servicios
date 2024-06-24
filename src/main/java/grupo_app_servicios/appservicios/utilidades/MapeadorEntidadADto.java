@@ -1,13 +1,19 @@
 package grupo_app_servicios.appservicios.utilidades;
 
+import java.util.List;
+
 import grupo_app_servicios.appservicios.Dto.ImagenProvDTO;
 import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
 import grupo_app_servicios.appservicios.Dto.ServicioDTO;
+import grupo_app_servicios.appservicios.Dto.SolicitudDTO;
 import grupo_app_servicios.appservicios.Dto.UsuarioDTO;
+import grupo_app_servicios.appservicios.Dto.ValoracionDTO;
 import grupo_app_servicios.appservicios.entidades.ImagenProvEntidad;
 import grupo_app_servicios.appservicios.entidades.ProveedorEntidad;
 import grupo_app_servicios.appservicios.entidades.ServicioEntidad;
+import grupo_app_servicios.appservicios.entidades.SolicitudEntidad;
 import grupo_app_servicios.appservicios.entidades.UsuarioEntidad;
+import grupo_app_servicios.appservicios.entidades.ValoracionEntidad;
 
 /* 
  * Esta clase contiene métodos que deben ser estáticos y públicos, para poder ser usados solo los que se necesiten
@@ -35,23 +41,24 @@ public class MapeadorEntidadADto {
         proveedorMapeado.setId(proveedorEntidad.getId());
         proveedorMapeado.setDescripcion(proveedorEntidad.getDescripcion());
         proveedorMapeado.setMatricula(proveedorEntidad.getMatricula());
-
         if (proveedorEntidad.getUsuario() != null) {
-            UsuarioDTO usuarioDTO = MapeadorEntidadADto.mapearUsuario(proveedorEntidad.getUsuario());
+            UsuarioDTO usuarioDTO = mapearUsuario(proveedorEntidad.getUsuario());
             proveedorMapeado.setUsuario(usuarioDTO);
         }
-
         if (proveedorEntidad.getFoto() != null) {
-            ImagenProvDTO imagenProveedorDTO = MapeadorEntidadADto.mapearImagenProveedor(proveedorEntidad.getFoto());
+            ImagenProvDTO imagenProveedorDTO = mapearImagenProveedor(proveedorEntidad.getFoto());
             proveedorMapeado.setFoto(imagenProveedorDTO); 
         }
-        
         if (proveedorEntidad.getServicio() != null) {
-            ServicioDTO servicio = MapeadorEntidadADto.mapearServicio(proveedorEntidad.getServicio());
+            ServicioDTO servicio = mapearServicio(proveedorEntidad.getServicio());
             proveedorMapeado.setServicio(servicio);
         }
-
-        // mapear solicitudes
+        if (proveedorEntidad.getSolicitudes() != null) {
+            List<SolicitudDTO> listaSolicitudes = proveedorEntidad.getSolicitudes().stream().map(
+                solicitudEntidad -> mapearSolicitud(solicitudEntidad)
+            ).toList();
+            proveedorMapeado.setSolicitudes(listaSolicitudes);
+        }
 
         return proveedorMapeado;
     }
@@ -73,5 +80,35 @@ public class MapeadorEntidadADto {
         servicioMapeado.setEstado(servicioEntidad.getEstado());
 
         return servicioMapeado;
+    }
+
+    public static ValoracionDTO mapearValoracion(ValoracionEntidad valoracionEntidad) {
+        ValoracionDTO valoracionMapeada = new ValoracionDTO();
+        valoracionMapeada.setId(valoracionEntidad.getId());
+        valoracionMapeada.setComentario(valoracionEntidad.getComentario());
+        valoracionMapeada.setPuntaje(valoracionEntidad.getPuntaje());
+
+        return valoracionMapeada;
+    }
+
+    public static SolicitudDTO mapearSolicitud(SolicitudEntidad solicitudEntidad) {
+        SolicitudDTO solicitudMapeada = new SolicitudDTO();
+        solicitudMapeada.setId(solicitudEntidad.getId());
+        solicitudMapeada.setComentario(solicitudEntidad.getComentario());
+        solicitudMapeada.setEstado(solicitudEntidad.getEstado());
+        if (solicitudEntidad.getIdValoracion() != null) {
+            ValoracionDTO valoracion = mapearValoracion(solicitudEntidad.getIdValoracion());
+            solicitudMapeada.setIdValoracion(valoracion);
+        }
+        if (solicitudEntidad.getIdUsuario() != null) {
+            UsuarioDTO usuario = mapearUsuario(solicitudEntidad.getIdUsuario());
+            solicitudMapeada.setIdUsuario(usuario);
+        }
+        if (solicitudEntidad.getIdProveedor() != null) {
+            ProveedorDTO proveedor = mapearProveedor(solicitudEntidad.getIdProveedor());
+            solicitudMapeada.setIdProveedor(proveedor);
+        }
+
+        return solicitudMapeada;
     }
 }

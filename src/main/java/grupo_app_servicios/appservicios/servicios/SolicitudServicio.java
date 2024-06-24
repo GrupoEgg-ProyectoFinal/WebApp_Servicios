@@ -1,5 +1,6 @@
 package grupo_app_servicios.appservicios.servicios;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -16,6 +17,7 @@ import grupo_app_servicios.appservicios.repositorios.ProveedorRepositorio;
 import grupo_app_servicios.appservicios.repositorios.SolicitudRepositorio;
 import grupo_app_servicios.appservicios.repositorios.UsuarioRepositorio;
 import grupo_app_servicios.appservicios.repositorios.ValoracionRepositorio;
+import grupo_app_servicios.appservicios.utilidades.MapeadorEntidadADto;
 
 @Service
 public class SolicitudServicio {
@@ -60,6 +62,14 @@ public class SolicitudServicio {
         sRepositorio.save(newSolicitud);
     }
 
+    @Transactional(readOnly = true)
+    public List<SolicitudDTO> listarTodas() {
+        List<SolicitudEntidad> list = sRepositorio.findAll();
+        return list.stream().map(
+            solicitudEntidad -> MapeadorEntidadADto.mapearSolicitud(solicitudEntidad)
+        ).toList();
+    }
+
     // BUSCAR SOLICITUD POR ID
     @Transactional(readOnly = true)
     public SolicitudEntidad buscarSolicitud(UUID id) {
@@ -98,8 +108,12 @@ public class SolicitudServicio {
             solicitudExistente.setEstado(solicitudDTO.getEstado());
             // Se persiste en la bdd
             sRepositorio.save(solicitudExistente);
-
         }
+    }
+
+    @Transactional
+    public void eliminarSolicitud(UUID id) {
+        sRepositorio.deleteById(id);
     }
 }
 
