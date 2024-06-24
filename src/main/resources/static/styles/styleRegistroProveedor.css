@@ -220,6 +220,10 @@ ul.nav-list {
     box-shadow: 0 4px 24px 0px rgba(216, 208, 97, 0.5);
 }
 
+#form:hover {
+    background-color: var(--color-medio);
+}
+
 #formularioProveedor {
     display: flex;
     flex-direction: column;
