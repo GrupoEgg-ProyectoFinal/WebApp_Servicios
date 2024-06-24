@@ -17,16 +17,16 @@
         </ul>
 
         <ul id="sesion">
-            <li class="cerrarSesion">
+            <!-- <li class="cerrarSesion">
             <li sec:authorize="hasAnyRole('ROL_USER', 'ROL_PROVEEDOR', 'ROL_ADMIN')"><a href="/logout">CERRAR SESIÓN</a>
             </li>
-            </li>
+            </li> -->
             <ul class="registro">
-                <li th:if="${session.usuarioEnSesion != null}">
-                    <a href="javascript:void(0)" class="dropbtn">INICIAR SESIÓN</a>
-                </li>
                 <li th:if="${session.usuarioEnSesion == null}">
-                    <a href="javascript:void(0)" class="dropbtn">CERRAR SESIÓN</a>
+                    <a th:href="@{/login}" class="dropbtn">INICIAR SESIÓN</a>
+                </li>
+                <li th:if="${session.usuarioEnSesion != null}">
+                    <a th:href="@{/logout}" class="dropbtn">CERRAR SESIÓN</a>
                 </li>
             </ul>
             <li class="desplegable" th:if="${session.usuarioEnSesion == null}">

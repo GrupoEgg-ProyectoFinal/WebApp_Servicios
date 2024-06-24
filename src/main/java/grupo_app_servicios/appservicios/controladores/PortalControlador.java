@@ -141,7 +141,7 @@ public class PortalControlador {
 
 
     @GetMapping("/dashboard")
-    @PreAuthorize("hasRole('ROL_ADMIN')")
+    @PreAuthorize("hasAnyRol('ROL_ADMIN')")
     public String panelAdministrativo(HttpSession session,Model modelo) {
         List<ProveedorDTO> proveedores2 = pServicio.listarProveedores();
         modelo.addAttribute("proveedores", proveedores2);
