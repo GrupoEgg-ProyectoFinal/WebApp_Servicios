@@ -1,6 +1,8 @@
 package grupo_app_servicios.appservicios.controladores;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -117,13 +119,17 @@ public class PortalControlador {
         // Guarda todos los servicios en una lista
         List<ServicioDTO> servicios = sServicio.listarServicios();
         modelo.addAttribute("servicios", servicios);
-        // Por cada servicio de la lista se crea en el modelo que se le pasa al front una lista de proveedores que estén asociados a ese servicio
+
+        // Crear un mapa para asociar cada servicio con su lista de proveedores
+        Map<String, List<ProveedorDTO>> proveedoresPorServicio = new HashMap<>();
         servicios.forEach(servicio -> {
-            // la lista que contendrá los proveedores tendrá el nombre del servicio con el prefijo de "proveedores_". Ej: proveedores_plomeria
+            // Por cada servicio de la lista se crea en el modelo que se le pasa al front una lista de proveedores que estén asociados a ese servicio
             List<ProveedorDTO> listaProveedor = pServicio.listarProveedoresSegunServicio(servicio.getNombre());
-            modelo.addAttribute("proveedores_" + servicio.getNombre(), listaProveedor);
+            // Se asigna esa lista como una propiedad al mapa creado antes
+            proveedoresPorServicio.put(servicio.getNombre(), listaProveedor);
         });
-        System.out.println(modelo.toString());
+        // se coloca en el modelo el mapa con las listas de proveedores por servicio
+        modelo.addAttribute("proveedoresPorServicio", proveedoresPorServicio);
         
         if (role.equals("ADMIN")) {
             return "redirect:/dashboard";
