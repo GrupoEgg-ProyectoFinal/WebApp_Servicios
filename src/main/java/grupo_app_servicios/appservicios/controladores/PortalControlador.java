@@ -111,17 +111,17 @@ public class PortalControlador {
     @PreAuthorize("hasAnyRol('ROL_USER', 'ROL_PROVEEDOR','ROL_ADMIN')")
     public String inicio(HttpSession session, Model modelo) {
         UsuarioEntidad loguedUser = (UsuarioEntidad) session.getAttribute("usuarioEnSesion");
-        // Ver cómo hacer para que tambien se aplique en el proveedor tambien
-        // ej: con el rol de proveedor en usuario. (Habria que modificar la entidad de
-        // proveedor y reveer el tema de inicio de sesion)
 
         String role = loguedUser.getRol().toString();
-        List<ProveedorDTO> plomeros = pServicio.listarProveedoresSegunServicio("Plomeria");
-        List<ProveedorDTO> electricistas = pServicio.listarProveedoresSegunServicio("Electricista");
-        List<ProveedorDTO> gasistas = pServicio.listarProveedoresSegunServicio("Gasista");
-        modelo.addAttribute("plomeros", plomeros);
-        modelo.addAttribute("electricistas", electricistas);
-        modelo.addAttribute("gasistas", gasistas);
+
+        // Guarda todos los servicios en una lista
+        List<ServicioDTO> servicios = sServicio.listarServicios();
+        modelo.addAttribute("servicios", servicios);
+        // Por cada servicio de la lista se crea en el modelo que se le pasa al front una lista de proveedores que estén asociados a ese servicio
+        servicios.forEach(servicio -> {
+            // la lista que contendrá los proveedores tendrá el nombre del servicio con el prefijo de "proveedores_". Ej: proveedores_plomeria
+            modelo.addAttribute("proveedores_" + servicio.getNombre(), pServicio.listarProveedoresSegunServicio(servicio.getNombre()));
+        });
 
         if (role.equals("ADMIN")) {
             return "redirect:/dashboard";
