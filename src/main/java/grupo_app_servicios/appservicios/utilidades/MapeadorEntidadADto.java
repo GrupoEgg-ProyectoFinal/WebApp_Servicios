@@ -24,6 +24,7 @@ public class MapeadorEntidadADto {
 
     public static UsuarioDTO mapearUsuario(UsuarioEntidad usuarioEntidad) {
         UsuarioDTO usuarioMapeado = new UsuarioDTO();
+        usuarioEntidad.setId(usuarioEntidad.getId());
         usuarioMapeado.setNombre(usuarioEntidad.getNombre());
         usuarioMapeado.setApellido(usuarioEntidad.getApellido());
         usuarioMapeado.setTelefono(usuarioEntidad.getTelefono());
