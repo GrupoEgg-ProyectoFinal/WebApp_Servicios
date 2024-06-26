@@ -29,7 +29,7 @@
                             <!-- Aquí irán los nombres de los proveedores traídos desde la base de datos -->
                             <div class="proveedor" th:each="proveedor : ${'proveedores_' + servicio.nombre}">
                                 <div class="col-avatar">
-                                    <img th:src="@{/imagen/perfil/__${proveedor.id.toString()}__}"  alt="Perfil de Gaston Estalla" class="avatar" height="50px" width="50px">
+                                    <img th:src="@{/imagen/perfil/__${proveedor.getId().toString()}__}"  alt="Perfil de Gaston Estalla" class="avatar" height="50px" width="50px">
                                 </div>
                                 <div class="col-nombre">
                                     <h4 th:text="${proveedor.usuario.nombre} + ' ' + ${proveedor.usuario.apellido}">Gaston Estalla</h4>
