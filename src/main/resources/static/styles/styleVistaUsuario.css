@@ -205,8 +205,8 @@ ul.nav-list {
 
 /* ESTILOS CONTENEDOR Y TARJETA PROVEEDORES */
 .proveedores-container {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 16px; /* Espacio entre tarjetas */
     width: 90%;
     height: 80%;
@@ -218,7 +218,6 @@ ul.nav-list {
     border: 2px solid #ccc;
     border-radius: 12px;
     overflow: hidden;
-    width: 30%;
     padding: 24px;
     background-color: var(--color-trasparente);
     background-size: cover;
@@ -231,6 +230,7 @@ ul.nav-list {
 .proveedor-card:hover {
     transform: scale(1.15);
     cursor: pointer;
+    z-index: 1;
 }
 
 .titulo-lista {
