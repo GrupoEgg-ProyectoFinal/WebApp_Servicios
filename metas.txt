@@ -1,0 +1,166 @@
+REALIZADO:
+☑ Registro y Login con Spring Security.
+☑ Crear al menos DOS roles distintos para los usuarios.
+☑ Incluir tabla html en alguna vista.
+☑ Carga de imagen.
+☑ Crear un CRUD.
+☑ Que haya al menos un formulario.
+☑ Crear al menos 3 vistas distintas.
+☑ Diagrama UML de entidades.
+☑ Generar por lo menos 5 vistas distintas que implementen th:fragments.
+☑ Generar un dashboard de administración de la app (el rol Administrador tendrá acceso a información que un rol User o Guest no tendría)
+☑ Añadir diagrama de casos de uso en UML.
+☑ La app debe contar inicialmente con la posibilidad de crear un perfil de USUARIO y PROVEEDOR.
+☑ Un PROVEEDOR (gasista, plomero, etc) genera un perfil propio, con foto, contacto y descripción del servicio que ofrece.
+☑ Un ADMIN puede cambiar roles.
+☑ Un ADMIN crear nuevos servicios.
+☑ Crear una Query de búsqueda personalizada.
+☑ Un GUEST puede ver los servicios pero no puede ver la información de contacto.
+
+---------------------------------------------------------------------------------------------------------------------------------------
+FALTANTE:
+
+ADIMN:
+● Un ADMIN puede otorgar permisos,eliminar/censurar comentarios ofensivos, pero dejando la calificación.
+● Poder borrar servicio.
+SUPER-ADMIN:
+● Utilizar atributos booleanos de alta y baja de usuarios (y poder modificarlos).
+
+
+SOLICITUD:
+● El proveedor puede aceptar un trabajo o cancelarlo. También puede marcarlo como finalizado una vez que el trabajo haya sido aceptado.
+● El usuario puede pedir un servicio o cancelarlo. Una vez aceptado el trabajo puede cancelarlo o darlo por finalizado.
+● Una vez que el trabajo fue finalizado el usuario está habilitado a calificar el servicio, calificación que se agregará al perfil del proveedor.
+● El usuario puede contactar al proveedor, calcular un estimativo de los honorarios del proveedor por horas y calificarlo luego de prestado el servicio.
+● Cada PROVEEDOR puede ser calificado por quienes hayan utilizado su servicio.
+● Un USER puede acceder a la app, navegar en los servicios que quiera, y seleccionar a un proveedor de servicios para contactarlo o para calificarlo.
+
+
+MODIFICACIONES DE USUARIO/PROVEEDORES:
+● Actualización de imagen.(carga de imagen por defecto)
+● Tabla con opciones de agregar / modificar y eliminar registros.(***Consultar***)
+● Opcionalmente un USER puede elegir pasar su perfil a PROVEEDOR.
+(Plantearlo en el formulario de modificacion/o manejarlo en un boton que lleve a otro formulario de proveedor).
+
+
+BUSQUEDA Y FILTROS:
+● Motor de búsqueda.
+● Listado en tabla por filtro (por nombre, fechas, altas o bajas, etc).
+● Los USER deben poder encontrar fácilmente a un proveedor por rubro y ordenarlo bajo distintos criterios.
+
+
+
+LIMPIEZA:
+● Aplicar principios de código limpio y buenas prácticas.
+
+
+INFO. A MOSTRAR: 
+● Mostrar cada perfil con la cantidad de usuarios que lo contactaron y la cantidad de reseñas/puntaje/calificación que corresponde.
+● Listar proveedores (servicio, calificacion, cantidad solicitudes).
+
+
+DEVOLUCIONES DE LA DEMO:
+● Interfaz solicitud proveedor.
+● Mostrar tickets de solicitudes de trabajo.
+● Lista de proveedores en ADMIN.
+● Verificacion de cambio de contraseña.()
+
+
+
+PUESTA EN COMUN DE LO QUE FALTA:
+Ordenar el codigo.
+SOLICITUDES.
+Icono de notificaciones - Usuario/Proveedor. (Avisos).
+************VALIDACIONES Y MENSAJES DE ERROR (MODELOS).************
+Opcional: 
+cambiar nombre de los brarrios por algo mas lindo.
+mostrar miniatura de foto seleccionada para perfil/modificar.
+ARREGLAR ENLACES.
+
+
+
+VISTAS:
+
+● Index: 
+Front:
+- Eliminar boton (SERVICIOS SOLO VISTA USUARIO).
+- Modificar (NUESTROS PROVEEDORES) por SERVICIOS.
+
+Back:
+- Linkear enlaces del footer.
+
+● Registrar Usuario:
+Front:
+- Agregar boton de carga de imagen.
+- Doble factor de autenticacion de contraseña.
+
+Back:
+- Modificar servicios para que pueda recibir imagen y cargar una predefinida en caso de ser null.
+
+● Registro Proveedor:
+Front:
+- Doble factor de autenticacion de contraseña.
+
+Back:
+- Modificar servicios para que pueda recibir imagen y cargar una predefinida en caso de ser null.
+
+● Vista Usuario:
+Front: 
+- Unificar listas de proveedores con datos de los mismos (Foto de perfil/Nombre y apellido - Matricula - descripción - promedio -Servicio - Boton de contratar).
+- Boton de filtro(servicio, calificacion, cantidad solicitudes).
+- Boton "Mis solicitudes"(Nueva Vista) -> nueva vista que muestre un listado de las solicitudes/trabajos que haya solicitado el usario a los proveedores.
+
+Back:
+- Manejar listas con la información requerida.
+- Manejar filtros(servicio, calificacion, cantidad solicitudes).
+
+
+● Vista Proveedor:
+Front:
+ - Mostrar listas horizontalmente de SOLICITU DE TRABAJO.
+ - Columnas (Nombre y apellido(usuario), Barrio, descripción, contacto(tel), Estado, ACEPTAR(Si el estado es pendiente))
+ - Columnas (Nombre y apellido(usuario), Barrio, descripción, contacto(tel), Estado,CANCELAR(Si el estado es aceptado))
+
+ - Lista de valoraciones.(con promedio).
+
+Back: 
+  - Mostrar lista.
+  - Cambiar mediante boton de acptar el estado de la solicitud.
+  - Listar solicitudes y calcular promedio del proveedor.
+
+● Vista Admin:
+Front: 
+ - Confirmacion de boton eliminar("Seguro que desea elemenar el usuario/proveedor").
+ Nav: VISTAS (USUARIOS / SERVICIOS / COMENTRAIOS)
+ Usuarios: enlace de la vista principal.
+ Servicios: Muestra una lista de servicios con el boton "Elimiar" y debajo el formulario para poder crearlos(ingresando nombre del servicio).
+ Comentarios: Lista de comentarios de valoraciones con "Nombre y apellido del usuario" y una seccion de comentario con un boton "Eliminar".
+
+Back:
+ - Confirmar eliminacion.
+ - Mapear vistas (Lista de usarios y lista de proovedores).
+ - Mapear lista de servicios con funcion de eliminar y crear.  
+ - Mapear comentarios para poder remplazar/eliminar el por la leyenda "ⓘ 𝘌𝘴𝘵𝘦 𝘤𝘰𝘮𝘦𝘯𝘵𝘢𝘳𝘪𝘰 𝘩𝘢 𝘴𝘪𝘥𝘰 𝘦𝘭𝘪𝘮𝘪𝘯𝘢𝘥𝘰 por no respetar reglamento."
+
+
+
+MIERCOLES BACK:
+CREAR SOLICITUD Y CONTROLAR SOLICITUD POR PARTE DEL PROVEEDOR.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -98,7 +98,7 @@ public class UsuarioServicio implements UserDetailsService {
         usuario.setNombre(usuarioDTO.getNombre());
         usuario.setApellido(usuarioDTO.getApellido());
         usuario.setEmail(usuarioDTO.getEmail());
-        usuario.setContrasena(usuarioDTO.getContrasena());
+        usuario.setContrasena(new BCryptPasswordEncoder().encode(usuarioDTO.getContrasena()));
         usuario.setBarrios(usuarioDTO.getBarrios());
         usuario.setTelefono(usuarioDTO.getTelefono());
         usuario.setEstado(usuarioDTO.getEstado());
