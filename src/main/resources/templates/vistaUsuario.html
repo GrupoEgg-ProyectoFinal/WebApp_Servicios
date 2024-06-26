@@ -16,7 +16,7 @@
         <section id="vistaUsuario">
             <h3></h3>
             <div class="proveedores-container" th:each="servicio : ${servicios}">
-                <div class="proveedor-card" style="--bg-image: url('/img/Gasista.png');">
+                <div class="proveedor-card">
                     <h2 class="titulo-lista"><strong th:text="${'PROVEEDORES DEL SERVICIO ' + servicio.nombre.toUpperCase()}"></strong></h2>
                     <div class="contenido">
                         <div class="lista-proveedores">
@@ -27,9 +27,9 @@
                                 <div class="col-contratar"></div>
                             </div>
                             <!-- Aquí irán los nombres de los proveedores traídos desde la base de datos -->
-                            <div class="proveedor" th:each="proveedor : ${'proveedores_' + servicio.nombre}">
+                            <div class="proveedor" th:each="proveedor : ${proveedoresPorServicio[servicio.nombre]}">
                                 <div class="col-avatar">
-                                    <img th:src="@{/imagen/perfil/__${proveedor.getId().toString()}__}"  alt="Perfil de Gaston Estalla" class="avatar" height="50px" width="50px">
+                                    <img th:src="@{/imagen/perfil/__${proveedor.id.toString()}__}"  alt="Perfil de Gaston Estalla" class="avatar" height="50px" width="50px">
                                 </div>
                                 <div class="col-nombre">
                                     <h4 th:text="${proveedor.usuario.nombre} + ' ' + ${proveedor.usuario.apellido}">Gaston Estalla</h4>
@@ -38,7 +38,7 @@
                                     ⭐⭐⭐⭐⭐
                                 </div>
                                 <div class="col-contratar">                                    
-                                    <a th:href="@{/contratar/crearSolicitud/{id}(id=${proveedor.id.toString()})}" >
+                                    <a href="" >
                                     <!-- <a th:href="@{/contratar/solicitud/__${proveedor.id.toString}__}" target="_blank"> -->
                                         <button><h5>Contratar</h5></button>
                                     </a>
