@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import grupo_app_servicios.appservicios.Dto.ServicioDTO;
 import grupo_app_servicios.appservicios.servicios.ServicioServicio;
@@ -33,9 +34,9 @@ public class ServicioControlador {
     } */
     
     @PostMapping("")
-    public String registrarServicioAccion(@ModelAttribute ServicioDTO servicioDTO, Model model) {
+    public String registrarServicioAccion(@ModelAttribute ServicioDTO servicioDTO, MultipartFile imagen, Model model) {
         try {
-            sServicio.crearServicio(servicioDTO);
+            sServicio.crearServicio(servicioDTO, imagen);
             model.addAttribute("mensaje", "Servicio " + servicioDTO.getNombre() + " creado exitosamente.");
             return "index.html"; // cambiar por panel de admin
         } catch (Exception e) {
