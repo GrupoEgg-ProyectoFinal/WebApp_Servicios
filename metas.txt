@@ -19,34 +19,35 @@ REALIZADO:
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 FALTANTE:
+Los ⚠️ son los requeridos del proyecto por el cliente, ya sea como caso de uso o como requerimiento técnico
 
 ADIMN:
-● Un ADMIN puede otorgar permisos,eliminar/censurar comentarios ofensivos, pero dejando la calificación.
-● Poder borrar servicio.
+● ⚠️ Un ADMIN puede otorgar permisos,eliminar/censurar comentarios ofensivos, pero dejando la calificación.
+● ⚠️ Poder borrar servicio.
 SUPER-ADMIN:
 ● Utilizar atributos booleanos de alta y baja de usuarios (y poder modificarlos).
 
 
 SOLICITUD:
-● El proveedor puede aceptar un trabajo o cancelarlo. También puede marcarlo como finalizado una vez que el trabajo haya sido aceptado.
-● El usuario puede pedir un servicio o cancelarlo. Una vez aceptado el trabajo puede cancelarlo o darlo por finalizado.
-● Una vez que el trabajo fue finalizado el usuario está habilitado a calificar el servicio, calificación que se agregará al perfil del proveedor.
-● El usuario puede contactar al proveedor, calcular un estimativo de los honorarios del proveedor por horas y calificarlo luego de prestado el servicio.
-● Cada PROVEEDOR puede ser calificado por quienes hayan utilizado su servicio.
-● Un USER puede acceder a la app, navegar en los servicios que quiera, y seleccionar a un proveedor de servicios para contactarlo o para calificarlo.
+● ⚠️ El proveedor puede aceptar un trabajo o cancelarlo. También puede marcarlo como finalizado una vez que el trabajo haya sido aceptado.
+● ⚠️ El usuario puede pedir un servicio o cancelarlo. Una vez aceptado el trabajo puede cancelarlo o darlo por finalizado.
+● ⚠️ Una vez que el trabajo fue finalizado el usuario está habilitado a calificar el servicio, calificación que se agregará al perfil del proveedor.
+● ⚠️ El usuario puede contactar al proveedor, calcular un estimativo de los honorarios del proveedor por horas y calificarlo luego de prestado el servicio.
+● ⚠️ Cada PROVEEDOR puede ser calificado por quienes hayan utilizado su servicio.
+● ⚠️ Un USER puede acceder a la app, navegar en los servicios que quiera, y seleccionar a un proveedor de servicios para contactarlo o para calificarlo.
 
 
 MODIFICACIONES DE USUARIO/PROVEEDORES:
 ● Actualización de imagen.(carga de imagen por defecto)
 ● Tabla con opciones de agregar / modificar y eliminar registros.(***Consultar***)
-● Opcionalmente un USER puede elegir pasar su perfil a PROVEEDOR.
+● ⚠️ Opcionalmente un USER puede elegir pasar su perfil a PROVEEDOR.
 (Plantearlo en el formulario de modificacion/o manejarlo en un boton que lleve a otro formulario de proveedor).
 
 
 BUSQUEDA Y FILTROS:
 ● Motor de búsqueda.
 ● Listado en tabla por filtro (por nombre, fechas, altas o bajas, etc).
-● Los USER deben poder encontrar fácilmente a un proveedor por rubro y ordenarlo bajo distintos criterios.
+● ⚠️ Los USER deben poder encontrar fácilmente a un proveedor por rubro y ordenarlo bajo distintos criterios.
 
 
 
@@ -55,7 +56,7 @@ LIMPIEZA:
 
 
 INFO. A MOSTRAR: 
-● Mostrar cada perfil con la cantidad de usuarios que lo contactaron y la cantidad de reseñas/puntaje/calificación que corresponde.
+● ⚠️ Mostrar cada perfil con la cantidad de usuarios que lo contactaron y la cantidad de reseñas/puntaje/calificación que corresponde.
 ● Listar proveedores (servicio, calificacion, cantidad solicitudes).
 
 
