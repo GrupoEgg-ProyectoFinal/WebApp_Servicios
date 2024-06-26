@@ -7,38 +7,26 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 import grupo_app_servicios.appservicios.Dto.ServicioDTO;
+import grupo_app_servicios.appservicios.entidades.ImagenProvEntidad;
 import grupo_app_servicios.appservicios.entidades.ServicioEntidad;
+import grupo_app_servicios.appservicios.excepciones.MiExcepcion;
 import grupo_app_servicios.appservicios.repositorios.ServicioRepositorio;
+import grupo_app_servicios.appservicios.utilidades.MapeadorDtoAEntidad;
+import grupo_app_servicios.appservicios.utilidades.MapeadorEntidadADto;
 
 @Service
 public class ServicioServicio {
     @Autowired
     ServicioRepositorio sRepositorio;
-
-    // UTILIDADES DE LA CLASE
-    private ServicioEntidad mapearDTOEntidad(ServicioDTO dtoAMapear) {
-        ServicioEntidad entidadMapeada = new ServicioEntidad();
-        entidadMapeada.setId(dtoAMapear.getId());
-        entidadMapeada.setNombre(dtoAMapear.getNombre());
-        entidadMapeada.setEstado(dtoAMapear.getEstado());
-
-        return entidadMapeada;
-    }
-
-    private ServicioDTO mapearEntidadDTO(ServicioEntidad entidadAMapear) {
-        ServicioDTO dtoMapeado = new ServicioDTO();
-        dtoMapeado.setId(entidadAMapear.getId());
-        dtoMapeado.setNombre(entidadAMapear.getNombre());
-        dtoMapeado.setEstado(entidadAMapear.getEstado());
-
-        return dtoMapeado;
-    }
+    @Autowired
+    ImagenProvServicio imgServicio;
 
     private List<ServicioDTO> mapearListaEntidadesDTO(List<ServicioEntidad> listaAMapear) {
         List<ServicioDTO> listaMapeada = listaAMapear.stream().map(
-            this::mapearEntidadDTO
+            servicio -> MapeadorEntidadADto.mapearServicio(servicio)
         ).collect(Collectors.toList());
 
         return listaMapeada;
@@ -66,14 +54,18 @@ public class ServicioServicio {
             () -> new RuntimeException("No se encontró un servicio con la id " + id.toString())
         );
 
-        return mapearEntidadDTO(servicio);
+        return MapeadorEntidadADto.mapearServicio(servicio);
     }
 
     // CREACIÓN
     @Transactional
-    public void crearServicio(ServicioDTO servicio) {
+    public void crearServicio(ServicioDTO servicio, MultipartFile imagen) throws MiExcepcion {
         servicio.setEstado(true);
-        sRepositorio.save(mapearDTOEntidad(servicio));
+        if (imagen != null) {
+            ImagenProvEntidad imagenEntidad = imgServicio.guardar(imagen);
+            servicio.setImagen(MapeadorEntidadADto.mapearImagenProveedor(imagenEntidad));
+        }
+        sRepositorio.save(MapeadorDtoAEntidad.mapearServicio(servicio));
     }
     
     // MODIFICACIÓN
@@ -83,7 +75,7 @@ public class ServicioServicio {
             () -> new RuntimeException("No se encontró un servicio con la id " + servicio.getId().toString())
         );
 
-        sRepositorio.save(mapearDTOEntidad(servicio));
+        sRepositorio.save(MapeadorDtoAEntidad.mapearServicio(servicio));
     }
 
     // DAR DE BAJA Y ELIMINAR
@@ -96,7 +88,7 @@ public class ServicioServicio {
 
         sRepositorio.save(servicio);
 
-        return mapearEntidadDTO(servicio);
+        return MapeadorEntidadADto.mapearServicio(servicio);
     }
 
     @Transactional

@@ -8,5 +8,7 @@ import lombok.Data;
 public class ServicioDTO {
     private UUID id;
     private String nombre;
+    private String descripcion;
     private Boolean estado;
+    private ImagenProvDTO imagen;
 }

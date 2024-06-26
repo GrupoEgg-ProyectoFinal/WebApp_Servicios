@@ -26,6 +26,7 @@ import grupo_app_servicios.appservicios.repositorios.ProveedorRepositorio;
 import grupo_app_servicios.appservicios.repositorios.ServicioRepositorio;
 import grupo_app_servicios.appservicios.repositorios.SolicitudRepositorio;
 import grupo_app_servicios.appservicios.repositorios.UsuarioRepositorio;
+import grupo_app_servicios.appservicios.utilidades.MapeadorDtoAEntidad;
 import grupo_app_servicios.appservicios.utilidades.MapeadorEntidadADto;
 
 //Metodos
@@ -57,19 +58,17 @@ public class ProveedorServicio2 {
             ProveedorEntidad proveedor = new ProveedorEntidad();
             
             // Obtiene el usuarioDTO que se le asignó desde el controlador y el front,
-            // y después mapea un usuarioEntidad en base a ese
+            // y después mapea un usuarioEntidad en base a ese. Se le setean los atributos necesarios antes del mapeo;
+            // los demás atributos que no están mencionados aquí se mapean directamente cuando se llama al Mapeador
             UsuarioDTO usuarioDTO = proveedorDTO.getUsuario();
-            UsuarioEntidad datosDeUsuario = new UsuarioEntidad();
-            datosDeUsuario.setNombre(usuarioDTO.getNombre());
-            datosDeUsuario.setApellido(usuarioDTO.getApellido());
-            datosDeUsuario.setTelefono(usuarioDTO.getTelefono());
-            datosDeUsuario.setEmail(usuarioDTO.getEmail());
-            datosDeUsuario.setContrasena(new BCryptPasswordEncoder().encode(usuarioDTO.getContrasena()));
-            datosDeUsuario.setRol(Rol.PROVEEDOR);
-            datosDeUsuario.setBarrios(Barrios.PROVEEDOR);
-            datosDeUsuario.setEstado(true);
+            usuarioDTO.setContrasena(new BCryptPasswordEncoder().encode(usuarioDTO.getContrasena()));
+            usuarioDTO.setRol(Rol.PROVEEDOR);
+            usuarioDTO.setBarrios(Barrios.PROVEEDOR);
+            usuarioDTO.setEstado(true);
 
-            //guarda esta entidad de usuario y despues lo setea en la entidad de proveedor que se está haciendo
+            UsuarioEntidad datosDeUsuario = MapeadorDtoAEntidad.mapearUsuario(usuarioDTO);
+
+            // guarda esta entidad de usuario y despues lo setea en la entidad de proveedor que se está haciendo
             uRepositorio.save(datosDeUsuario);
             proveedor.setUsuario(datosDeUsuario);
 

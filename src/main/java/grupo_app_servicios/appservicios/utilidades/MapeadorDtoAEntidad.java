@@ -78,7 +78,9 @@ public class MapeadorDtoAEntidad {
         ServicioEntidad servicioMapeado = new ServicioEntidad();
         servicioMapeado.setId(servicioDTO.getId());
         servicioMapeado.setNombre(servicioDTO.getNombre());
+        servicioMapeado.setDescripcion(servicioDTO.getDescripcion());
         servicioMapeado.setEstado(servicioDTO.getEstado());
+        servicioMapeado.setImagen(mapearImagenProveedor(servicioDTO.getImagen()));
 
         return servicioMapeado;
     }
