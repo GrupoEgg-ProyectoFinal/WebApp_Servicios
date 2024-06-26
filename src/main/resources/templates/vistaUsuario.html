@@ -15,8 +15,8 @@
         <!-- PÁGINA 1 'INICIO SESION'-->
         <section id="vistaUsuario">
             <h3></h3>
-            <div class="proveedores-container" th:each="servicio : ${servicios}">
-                <div class="proveedor-card">
+            <div class="proveedores-container">
+                <div class="proveedor-card" th:each="servicio : ${servicios}">
                     <h2 class="titulo-lista"><strong th:text="${'PROVEEDORES DEL SERVICIO ' + servicio.nombre.toUpperCase()}"></strong></h2>
                     <div class="contenido">
                         <div class="lista-proveedores">
