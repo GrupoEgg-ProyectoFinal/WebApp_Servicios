@@ -120,9 +120,11 @@ public class PortalControlador {
         // Por cada servicio de la lista se crea en el modelo que se le pasa al front una lista de proveedores que estén asociados a ese servicio
         servicios.forEach(servicio -> {
             // la lista que contendrá los proveedores tendrá el nombre del servicio con el prefijo de "proveedores_". Ej: proveedores_plomeria
-            modelo.addAttribute("proveedores_" + servicio.getNombre(), pServicio.listarProveedoresSegunServicio(servicio.getNombre()));
+            List<ProveedorDTO> listaProveedor = pServicio.listarProveedoresSegunServicio(servicio.getNombre());
+            modelo.addAttribute("proveedores_" + servicio.getNombre(), listaProveedor);
         });
-
+        System.out.println(modelo.toString());
+        
         if (role.equals("ADMIN")) {
             return "redirect:/dashboard";
         }
