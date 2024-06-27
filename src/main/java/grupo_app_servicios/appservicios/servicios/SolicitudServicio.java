@@ -107,20 +107,22 @@ public class SolicitudServicio {
 
     // Modificar ESTADO solicitud (ACEPTADO/RECHAZADO/PENDIENTE/FINALIZADO)
     @Transactional
-    public void modificarEstadoSolicitud(SolicitudDTO solicitudDTO) {
+    public void modificarEstadoSolicitud(UUID id, Estados estado) {
         // Se buscar por id y se guarda en un optional
-        Optional<SolicitudEntidad> respuesta = sRepositorio.findById(solicitudDTO.getId());
+        Optional<SolicitudEntidad> respuesta = sRepositorio.findById(id);
 
         // Si el opctional tiene presente un resultado
         if (respuesta.isPresent()) {
             // Guardamos el resultado de la solicitud existente
             SolicitudEntidad solicitudExistente = respuesta.get();
             // Se settea el nuevo estado enviado por dto
-            solicitudExistente.setEstado(solicitudDTO.getEstado());
+            solicitudExistente.setEstado(estado);
             // Se persiste en la bdd
             sRepositorio.save(solicitudExistente);
         }
     }
+
+
 
     @Transactional
     public void eliminarSolicitud(UUID id) {

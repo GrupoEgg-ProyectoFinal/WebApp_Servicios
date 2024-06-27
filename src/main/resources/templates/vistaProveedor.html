@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/styles/styleFooter.css">
 
 </head>
+
 <body>
     <header th:replace="~{/fragments/_navbar :: Navbar}"></header>
     <main>
@@ -36,8 +37,9 @@
                                     <td th:text="${pendientes.idUsuario.telefono}">2948737238</td>
                                     <td th:text="${pendientes.idUsuario.barrios}">NORTE</td>
                                     <td>
-                                        <button class="aceptar">Aceptar</button>
-                                        <button class="rechazar">Rechazar</button>
+                                        <a th:href="@{contratar/modificarEstado/{id}/{estado}(id=${pendientes.id.toString()}, estado='ACEPTADO')}"><button>Aceptar</button></a>
+
+                                        <a th:href="@{contratar/modificarEstado/{id}/{estado}(id=${pendientes.id.toString()}, estado='CANCELADO')}"><button class="rechazar">Rechazar</button></a>
                                     </td>
                                 </tr>
                             </tbody>
@@ -98,10 +100,8 @@
         </section>
     </main>
     <footer th:replace="~{/fragments/footer :: footerFragment}">
-        
+
     </footer>
 </body>
 
 </html>
-
-
