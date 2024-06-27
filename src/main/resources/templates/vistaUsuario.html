@@ -38,8 +38,7 @@
                                     ⭐⭐⭐⭐⭐
                                 </div>
                                 <div class="col-contratar">                                    
-                                    <a href="" >
-                                    <!-- <a th:href="@{/contratar/solicitud/__${proveedor.id.toString}__}" target="_blank"> -->
+                                    <a th:href="@{/contratar/crearSolicitud/{id}(id=${proveedor.id.toString()})}" >
                                         <button><h5>Contratar</h5></button>
                                     </a>
                                 </div>
