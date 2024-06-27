@@ -38,14 +38,14 @@
             </div>
             <div class="proveedores-right">
                 <h1><strong>SERVICIOS</strong>
-                <div class="proveedores-container" th:each="servicio : ${servicios}">
+                <div class="proveedores-container">
                     <!-- <h2 class="seleccion">SELECCIONA EL SERVICIO QUE LE INTERESA CONTRATAR</h2> -->
-                    <div class="proveedor-card">
-                        <div class="izquierda">
+                    <div class="proveedor-card"  th:each="servicio : ${servicios}">
+                        <div class="izquierda centro">
                             <img 
-                                th:src="${servicio.rutaImagen != null} 
-                                    ? ${servicio.rutaImagen}
-                                    : @{/imagen/servicio/__${servicio.id.toString()}__}"
+                                th:src="${servicio.imagen != null} 
+                                    ? @{/imagen/servicio/__${servicio.id.toString()}__}
+                                    : ${servicio.rutaImagen}"
                                 alt="Imagen del proveedor"
                             >
                         </div>
