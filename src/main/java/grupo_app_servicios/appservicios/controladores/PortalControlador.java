@@ -15,11 +15,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
 import grupo_app_servicios.appservicios.Dto.ServicioDTO;
+import grupo_app_servicios.appservicios.Dto.SolicitudDTO;
 import grupo_app_servicios.appservicios.Dto.UsuarioDTO;
 import grupo_app_servicios.appservicios.entidades.UsuarioEntidad;
+import grupo_app_servicios.appservicios.enumeraciones.Estados;
 import grupo_app_servicios.appservicios.excepciones.MiExcepcion;
 import grupo_app_servicios.appservicios.servicios.ProveedorServicio2;
 import grupo_app_servicios.appservicios.servicios.ServicioServicio;
+import grupo_app_servicios.appservicios.servicios.SolicitudServicio;
 import grupo_app_servicios.appservicios.servicios.UsuarioServicio;
 import jakarta.servlet.http.HttpSession;
 
@@ -33,6 +36,8 @@ public class PortalControlador {
     UsuarioServicio uServicio;
     @Autowired
     ServicioServicio sServicio;
+    @Autowired
+    SolicitudServicio solServicio;
 
     // @Autowired
     // ProveedorServicio pServicio;
@@ -70,7 +75,8 @@ public class PortalControlador {
 
         List<ServicioDTO> listaDeServicios = sServicio.listarServicios();
         // Agrega el objeto proveedorDTO al modelo,
-        // junto con la lista de servicios disponibles para que se pueda asignar uno desde el front
+        // junto con la lista de servicios disponibles para que se pueda asignar uno
+        // desde el front
         model.addAttribute("proveedorDTO", proveedorDTO);
         model.addAttribute("servicios", listaDeServicios);
         return "registroProveedor.html";
@@ -126,20 +132,27 @@ public class PortalControlador {
         if (role.equals("ADMIN")) {
             return "redirect:/dashboard";
         }
-        
-        if (role.equals("PROVEEDOR")) {
 
-            
+        if (role.equals("PROVEEDOR")) {
+            ProveedorDTO newProveedor = pServicio.buscarPorIdUsuario(loguedUser.getId());        
+            List<SolicitudDTO> pendientes = solServicio.listarPorEstado(Estados.PENDIENTE,newProveedor.getId());
+            List<SolicitudDTO> aceptados = solServicio.listarPorEstado(Estados.ACEPTADO,newProveedor.getId());
+            List<SolicitudDTO> finalizados = solServicio.listarPorEstado(Estados.FINALIZADO,newProveedor.getId());
+            List<SolicitudDTO> cancelados = solServicio.listarPorEstado(Estados.CANCELADO,newProveedor.getId());
+            modelo.addAttribute("pendientes", pendientes);
+            modelo.addAttribute("aceptados", aceptados);
+            modelo.addAttribute("finalizados", finalizados);
+            modelo.addAttribute("cancelados", cancelados);
+
             return "vistaProveedor.html";
         }
 
         return "vistaUsuario.html"; // después cambiarlo por la vista de perfil de usuario
     }
 
-
     @GetMapping("/dashboard")
     @PreAuthorize("hasAnyRol('ROL_ADMIN')")
-    public String panelAdministrativo(HttpSession session,Model modelo) {
+    public String panelAdministrativo(HttpSession session, Model modelo) {
         List<ProveedorDTO> proveedores2 = pServicio.listarProveedores();
         modelo.addAttribute("proveedores", proveedores2);
 
@@ -155,9 +168,9 @@ public class PortalControlador {
         return "conocenos.html";
     }
 
-    //AYUDA
+    // AYUDA
     @GetMapping("/ayuda")
-    public String ayuda(){
+    public String ayuda() {
         return "ayuda.html";
     }
 }

@@ -61,10 +61,21 @@ public class SolicitudServicio {
 
         sRepositorio.save(newSolicitud);
     }
-
+    
+    //LISTAR SOLICITUDES 
     @Transactional(readOnly = true)
     public List<SolicitudDTO> listarTodas() {
         List<SolicitudEntidad> list = sRepositorio.findAll();
+        return list.stream().map(
+            solicitudEntidad -> MapeadorEntidadADto.mapearSolicitud(solicitudEntidad)
+        ).toList();
+    }
+   
+
+    //LISTAR SOLICITUD POR ESTADO
+    @Transactional(readOnly = true)
+    public List<SolicitudDTO> listarPorEstado(Estados estado, UUID idProveedor) {
+        List<SolicitudEntidad> list = sRepositorio.buscarSolicitudPorEstado(estado,idProveedor);
         return list.stream().map(
             solicitudEntidad -> MapeadorEntidadADto.mapearSolicitud(solicitudEntidad)
         ).toList();
@@ -115,6 +126,8 @@ public class SolicitudServicio {
     public void eliminarSolicitud(UUID id) {
         sRepositorio.deleteById(id);
     }
+
+
 }
 
 
