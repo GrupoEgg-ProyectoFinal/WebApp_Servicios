@@ -24,7 +24,7 @@ public class MapeadorEntidadADto {
 
     public static UsuarioDTO mapearUsuario(UsuarioEntidad usuarioEntidad) {
         UsuarioDTO usuarioMapeado = new UsuarioDTO();
-        usuarioEntidad.setId(usuarioEntidad.getId());
+        usuarioMapeado.setId(usuarioEntidad.getId());
         usuarioMapeado.setNombre(usuarioEntidad.getNombre());
         usuarioMapeado.setApellido(usuarioEntidad.getApellido());
         usuarioMapeado.setTelefono(usuarioEntidad.getTelefono());
@@ -58,6 +58,7 @@ public class MapeadorEntidadADto {
             List<SolicitudDTO> listaSolicitudes = proveedorEntidad.getSolicitudes().stream().map(
                 solicitudEntidad -> mapearSolicitud(solicitudEntidad)
             ).toList();
+            
             proveedorMapeado.setSolicitudes(listaSolicitudes);
         }
 
@@ -106,8 +107,7 @@ public class MapeadorEntidadADto {
             solicitudMapeada.setIdUsuario(usuario);
         }
         if (solicitudEntidad.getIdProveedor() != null) {
-            ProveedorDTO proveedor = mapearProveedor(solicitudEntidad.getIdProveedor());
-            solicitudMapeada.setIdProveedor(proveedor);
+            solicitudMapeada.setIdProveedor(solicitudEntidad.getIdProveedor().getId());
         }
 
         return solicitudMapeada;

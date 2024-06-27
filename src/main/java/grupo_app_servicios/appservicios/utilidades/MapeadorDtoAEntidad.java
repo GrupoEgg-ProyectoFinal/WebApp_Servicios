@@ -105,10 +105,9 @@ public class MapeadorDtoAEntidad {
             UsuarioEntidad usuario = mapearUsuario(solicitudDTO.getIdUsuario());
             solicitudMapeada.setIdUsuario(usuario);
         }
-        if (solicitudDTO.getIdProveedor() != null) {
-            ProveedorEntidad proveedor = mapearProveedor(solicitudDTO.getIdProveedor());
-            solicitudMapeada.setIdProveedor(proveedor);
-        }
+        // if (solicitudDTO.getIdProveedor() != null) {
+        //     solicitudMapeada.setIdProveedor(solicitudDTO.getIdProveedor());
+        // }
 
         return solicitudMapeada;
     }
