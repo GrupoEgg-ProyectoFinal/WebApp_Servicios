@@ -72,7 +72,7 @@
                                     ⭐⭐⭐⭐☆
                                 </div>
                                 <div class="col-contratar">
-                                    <a href="contratar" target="_blank">
+                                    <a th:href="@{/contratar/crearSolicitud/{id}(id=${plomero.id.toString()})}">
                                         <button><h5>Contratar ➝</h5></button>
                                     </a>
                                 </div>
@@ -103,8 +103,9 @@
                                 <div class="col-puntuacion">
                                     ⭐⭐⭐☆☆
                                 </div>
+                            
                                 <div class="col-contratar">
-                                    <a href="contratar" target="_blank">
+                                    <a th:href="@{/contratar/crearSolicitud/{id}(id=${electricista.id.toString()})}">
                                         <button><h5>Contratar ➝</h5></button>
                                     </a>
                                 </div>

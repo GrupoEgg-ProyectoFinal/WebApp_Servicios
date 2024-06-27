@@ -11,6 +11,6 @@ public class SolicitudDTO {
     private String comentario;
     private Estados estado;
     private ValoracionDTO idValoracion;
-    private ProveedorDTO idProveedor;
+    private UUID idProveedor;
     private UsuarioDTO idUsuario;
 }

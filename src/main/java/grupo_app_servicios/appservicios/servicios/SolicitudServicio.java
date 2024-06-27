@@ -48,9 +48,9 @@ public class SolicitudServicio {
         // }
 
         if (solicitudDTO.getIdProveedor() != null) {
-            ProveedorEntidad proveedor = pRepositorio.findById(solicitudDTO.getIdProveedor().getId())
+            ProveedorEntidad proveedor = pRepositorio.findById(solicitudDTO.getIdProveedor())
                     .orElseThrow(() -> new RuntimeException(
-                            "Proveedor no encontrado con ID: " + solicitudDTO.getIdProveedor().getId()));
+                            "Proveedor no encontrado con ID: " + solicitudDTO.getIdProveedor()));
             newSolicitud.setIdProveedor(proveedor);
         }
         if (solicitudDTO.getIdUsuario() != null) {

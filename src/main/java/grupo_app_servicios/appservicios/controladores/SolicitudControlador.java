@@ -57,76 +57,78 @@ public class SolicitudControlador {
     public String guardarSolicitud(@PathVariable("proveedorId") String proveedorId,
             @ModelAttribute("solicitudDTO") SolicitudDTO solicitudDTO, @AuthenticationPrincipal UserDetails userDetails,
             Model modelo) {
-        try {
-            if (userDetails != null) {
+        // try {
+        //     if (userDetails != null) {
                 // Verificar que userDetails no sea nulo antes de acceder a su propiedad
                 UsuarioDTO usuarioDTO = uServicio.buscarPorEmail(userDetails.getUsername());
                 solicitudDTO.setIdUsuario(usuarioDTO);
 
                 ProveedorDTO proveedorDTO = pServicio.buscaProveedorId(UUID.fromString(proveedorId));
-                solicitudDTO.setIdProveedor(proveedorDTO);
-
+                solicitudDTO.setIdProveedor(proveedorDTO.getId());
+                System.out.println("--------------------------------"); 
+                System.out.println(usuarioDTO.toString()); 
+              
                 sServicio.crearSolicitud(solicitudDTO);
-
-                return "redirect:../perfil";
-            } else {
-                // Manejar el caso cuando userDetails es nulo
-                modelo.addAttribute("error", "Error: usuario no identificado.");
-                return "solicitudformulario";
-            }
-        } catch (Exception e) {
-            modelo.addAttribute("error", "Ocurrió un error al intentar crear la solicitud.");
-            return "solicitudformulario";
-        }
+                
+                return "redirect:../../perfil";
+            // } else {
+            //     // Manejar el caso cuando userDetails es nulo
+            //     modelo.addAttribute("error", "Error: usuario no identificado.");
+            //     return "solicitudformulario";
+            // }
+        // } catch (Exception e) {
+        //     modelo.addAttribute("error", "Ocurrió un error al intentar crear la solicitud.");
+        //     return "solicitudformulario";
+        // }
     }
 
-    @GetMapping("/modificarSolicitud/{id}")
-    public String modificarSolicitud_Vista(@PathVariable String id, Model modelo) {
-        ProveedorDTO proveedorDTO = pServicio.buscaProveedorId(UUID.fromString(id)); // Convertir String a UUID
-        // Suponiendo que tienes un método getNombreCompleto() en ProveedorDTO
-        modelo.addAttribute("proveedorNombre", proveedorDTO.getUsuario().getNombre()); 
-        modelo.addAttribute("proveedorId", id); // Agregar el ID del proveedor para usarlo en el formulario
-        modelo.addAttribute("SolicitudDTO", new SolicitudDTO());
+    // @GetMapping("/modificarSolicitud/{id}")
+    // public String modificarSolicitud_Vista(@PathVariable String id, Model modelo) {
+    //     ProveedorDTO proveedorDTO = pServicio.buscaProveedorId(UUID.fromString(id)); // Convertir String a UUID
+    //     // Suponiendo que tienes un método getNombreCompleto() en ProveedorDTO
+    //     modelo.addAttribute("proveedorNombre", proveedorDTO.getUsuario().getNombre()); 
+    //     modelo.addAttribute("proveedorId", id); // Agregar el ID del proveedor para usarlo en el formulario
+    //     modelo.addAttribute("SolicitudDTO", new SolicitudDTO());
 
-        return "vista de modificación";
-    }
+    //     return "vista de modificación";
+    // }
     
-    @PutMapping("/modificarSolicitud/{id}")
-    public String modificarSolicitud_Accion(@PathVariable String id,
-    @ModelAttribute("solicitudDTO") SolicitudDTO solicitudDTO, @AuthenticationPrincipal UserDetails userDetails,
-    Model modelo) {
-        try {
-            if (userDetails != null) {
-                // Verificar que userDetails no sea nulo antes de acceder a su propiedad
-                UsuarioDTO usuarioDTO = uServicio.buscarPorEmail(userDetails.getUsername());
-                solicitudDTO.setIdUsuario(usuarioDTO);
+    // @PutMapping("/modificarSolicitud/{id}")
+    // public String modificarSolicitud_Accion(@PathVariable String id,
+    // @ModelAttribute("solicitudDTO") SolicitudDTO solicitudDTO, @AuthenticationPrincipal UserDetails userDetails,
+    // Model modelo) {
+    //     try {
+    //         if (userDetails != null) {
+    //             // Verificar que userDetails no sea nulo antes de acceder a su propiedad
+    //             UsuarioDTO usuarioDTO = uServicio.buscarPorEmail(userDetails.getUsername());
+    //             solicitudDTO.setIdUsuario(usuarioDTO);
 
-                ProveedorDTO proveedorDTO = pServicio.buscaProveedorId(UUID.fromString(id));
-                solicitudDTO.setIdProveedor(proveedorDTO);
+    //             ProveedorDTO proveedorDTO = pServicio.buscaProveedorId(UUID.fromString(id));
+    //             solicitudDTO.setIdProveedor(proveedorDTO);
 
-                sServicio.modificarComentarioSolicitud(solicitudDTO);
+    //             sServicio.modificarComentarioSolicitud(solicitudDTO);
 
-                return "redirect:../perfil";
-            } else {
-                // Manejar el caso cuando userDetails es nulo
-                modelo.addAttribute("error", "Error: usuario no identificado.");
-                return "solicitudformulario";
-            }
-        } catch (Exception e) {
-            modelo.addAttribute("error", "Ocurrió un error al intentar crear la solicitud.");
-            return "solicitudformulario";
-        }
-    }
+    //             return "redirect:../perfil";
+    //         } else {
+    //             // Manejar el caso cuando userDetails es nulo
+    //             modelo.addAttribute("error", "Error: usuario no identificado.");
+    //             return "solicitudformulario";
+    //         }
+    //     } catch (Exception e) {
+    //         modelo.addAttribute("error", "Ocurrió un error al intentar crear la solicitud.");
+    //         return "solicitudformulario";
+    //     }
+    // }
 
-    @DeleteMapping("/borrarSolicitud")
-    public String eliminarSolicitud(@RequestParam String id) {
-        try {
-            sServicio.eliminarSolicitud(UUID.fromString(id));
-        } catch (Exception e) {
-            System.out.println("error: " + e.getMessage());
-        }
-        return "redirect:../perfil";
-    }
+    // @DeleteMapping("/borrarSolicitud")
+    // public String eliminarSolicitud(@RequestParam String id) {
+    //     try {
+    //         sServicio.eliminarSolicitud(UUID.fromString(id));
+    //     } catch (Exception e) {
+    //         System.out.println("error: " + e.getMessage());
+    //     }
+    //     return "redirect:../perfil";
+    // }
 }
 
 // @PostMapping("/guardarSolicitud/{proveedorId}")
