@@ -17,7 +17,7 @@
                 <div class="admin-row">
                     <!-- Pedidos de Trabajo -->
                     <div class="admin-column">
-                        <h2>PEDIDOS DE TRABAJO</h2>
+                        <h2>PEDIDOS DE TRABAJOS PENDIENTES</h2>
                         <table id="pedidosTable">
                             <thead>
                                 <tr>
@@ -30,11 +30,11 @@
                             </thead>
                             <tbody>
                                 <!-- Aquí va la iteración de los pedidos de trabajo -->
-                                <tr th:each="pedido : ${pedidos}">
-                                    <td th:text="${pedido.nombre}">Alejandro</td>
-                                    <td th:text="${pedido.apellido}">Perez</td>
-                                    <td th:text="${pedido.telefono}">2948737238</td>
-                                    <td th:text="${pedido.barrio}">NORTE</td>
+                                <tr th:each="pendientes : ${pendientes}">
+                                    <td th:text="${pendientes.idUsuario.nombre}">Alejandro</td>
+                                    <td th:text="${pendientes.idUsuario.apellido}">Perez</td>
+                                    <td th:text="${pendientes.idUsuario.telefono}">2948737238</td>
+                                    <td th:text="${pendientes.idUsuario.barrios}">NORTE</td>
                                     <td>
                                         <button class="aceptar">Aceptar</button>
                                         <button class="rechazar">Rechazar</button>
@@ -45,7 +45,7 @@
                     </div>
                     <!-- Trabajos en Curso -->
                     <div class="admin-column">
-                        <h2>TRABAJOS EN CURSO</h2>
+                        <h2>TRABAJOS EN CURSO (ACEPTADOS)</h2>
                         <table id="cursosTable">
                             <thead>
                                 <tr>
@@ -58,11 +58,11 @@
                             </thead>
                             <tbody>
                                 <!-- Aquí va la iteración de los trabajos en curso -->
-                                <tr th:each="trabajo : ${trabajosCurso}">
-                                    <td th:text="${trabajo.nombre}">Juan</td>
-                                    <td th:text="${trabajo.apellido}">López</td>
-                                    <td th:text="${trabajo.telefono}">2987654321</td>
-                                    <td th:text="${trabajo.barrio}">SUR</td>
+                                <tr th:each="aceptados : ${aceptados}">
+                                    <td th:text="${aceptados.idUsuario.nombre}">Juan</td>
+                                    <td th:text="${aceptados.idUsuario.apellido}">López</td>
+                                    <td th:text="${aceptados.idUsuario.telefono}">2987654321</td>
+                                    <td th:text="${aceptados.idUsuario.barrios}">SUR</td>
                                     <td>EN CURSO</td>
                                 </tr>
                             </tbody>
@@ -83,11 +83,11 @@
                             </thead>
                             <tbody>
                                 <!-- Aquí va la iteración de los trabajos finalizados -->
-                                <tr th:each="trabajo : ${trabajosFinalizados}">
-                                    <td th:text="${trabajo.nombre}">María</td>
-                                    <td th:text="${trabajo.apellido}">Gómez</td>
-                                    <td th:text="${trabajo.telefono}">2955555555</td>
-                                    <td th:text="${trabajo.barrio}">CENTRO</td>
+                                <tr th:each="finalizados : ${finalizados}">
+                                    <td th:text="${finalizados.idUsuario.nombre}">María</td>
+                                    <td th:text="${finalizados.idUsuario.apellido}">Gómez</td>
+                                    <td th:text="${finalizados.idUsuario.telefono}">2955555555</td>
+                                    <td th:text="${finalizados.idUsuario.barrios}">CENTRO</td>
                                     <td>FINALIZADO</td>
                                 </tr>
                             </tbody>

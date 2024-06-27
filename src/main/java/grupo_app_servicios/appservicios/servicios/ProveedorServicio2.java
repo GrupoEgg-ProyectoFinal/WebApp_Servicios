@@ -184,4 +184,10 @@ public class ProveedorServicio2 {
             throw new RuntimeException("Imagen no encontrada para el proveedor con id: " + id);
         }
     }
+
+    public ProveedorDTO buscarPorIdUsuario(UUID idUsuario){
+             return MapeadorEntidadADto.mapearProveedor(pRepositorio.buscarPorIdUsuario(idUsuario));
+
+    }
+    
 }

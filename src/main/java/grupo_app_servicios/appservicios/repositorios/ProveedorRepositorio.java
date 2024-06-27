@@ -31,5 +31,7 @@ public interface ProveedorRepositorio extends JpaRepository<ProveedorEntidad, UU
     public ProveedorEntidad buscarPorEmail(@Param("email") String email);
 
     @Query("select p from ProveedorEntidad p where p.usuario.id = :idUsuario")
-    public ProveedorEntidad buscarPorIdUsuario(@Param("idUsuario") UUID id);
+    ProveedorEntidad buscarPorIdUsuario(@Param("idUsuario") UUID idUsuario);
 }
+
+
