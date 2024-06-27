@@ -2,6 +2,8 @@ package grupo_app_servicios.appservicios.utilidades;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import grupo_app_servicios.appservicios.Dto.ImagenProvDTO;
 import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
 import grupo_app_servicios.appservicios.Dto.ServicioDTO;
@@ -14,6 +16,7 @@ import grupo_app_servicios.appservicios.entidades.ServicioEntidad;
 import grupo_app_servicios.appservicios.entidades.SolicitudEntidad;
 import grupo_app_servicios.appservicios.entidades.UsuarioEntidad;
 import grupo_app_servicios.appservicios.entidades.ValoracionEntidad;
+import grupo_app_servicios.appservicios.repositorios.ProveedorRepositorio;
 
 /* 
  * Esta clase contiene métodos que deben ser estáticos y públicos, para poder ser usados solo los que se necesiten
@@ -21,6 +24,8 @@ import grupo_app_servicios.appservicios.entidades.ValoracionEntidad;
  * Sirve para mapear los DTO y retornar la entidad que corresponda.
 */
 public class MapeadorDtoAEntidad {
+    @Autowired
+    static ProveedorRepositorio pRepositorio;
 
     public static UsuarioEntidad mapearUsuario(UsuarioDTO usuarioDTO) {
         UsuarioEntidad usuarioMapeado = new UsuarioEntidad();
@@ -80,6 +85,7 @@ public class MapeadorDtoAEntidad {
         servicioMapeado.setNombre(servicioDTO.getNombre());
         servicioMapeado.setDescripcion(servicioDTO.getDescripcion());
         servicioMapeado.setEstado(servicioDTO.getEstado());
+        servicioMapeado.setRutaImagen(servicioDTO.getRutaImagen());
         servicioMapeado.setImagen(mapearImagenProveedor(servicioDTO.getImagen()));
 
         return servicioMapeado;
@@ -107,9 +113,12 @@ public class MapeadorDtoAEntidad {
             UsuarioEntidad usuario = mapearUsuario(solicitudDTO.getIdUsuario());
             solicitudMapeada.setIdUsuario(usuario);
         }
-        // if (solicitudDTO.getIdProveedor() != null) {
-        //     solicitudMapeada.setIdProveedor(solicitudDTO.getIdProveedor());
-        // }
+        if (solicitudDTO.getIdProveedor() != null) {
+            // La validación de que este proveedor exista se haría en el servicio que invoca este método de mapeo
+            // (para que el método no haga tantas cosas y solo se dedique al mapeo)
+            ProveedorEntidad proveedorDeLaSolicitud = pRepositorio.findById(solicitudDTO.getIdProveedor()).get();
+            solicitudMapeada.setIdProveedor(proveedorDeLaSolicitud);
+        }
 
         return solicitudMapeada;
     }

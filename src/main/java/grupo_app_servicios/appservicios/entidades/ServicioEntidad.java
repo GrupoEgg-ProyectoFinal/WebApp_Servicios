@@ -26,6 +26,9 @@ public class ServicioEntidad {
     private String descripcion;
     private Boolean estado;
 
+    // La rutaImagen se usaría en los servicios que vienen por defecto y su imagen está dentro de la carpeta src/resources/static..
+    // La imagen como entidad está para cuando un admin quiera agregar un nuevo servicio
+    private String rutaImagen;
     @OneToOne
     private ImagenProvEntidad imagen;
 }

@@ -10,5 +10,6 @@ public class ServicioDTO {
     private String nombre;
     private String descripcion;
     private Boolean estado;
+    private String rutaImagen;
     private ImagenProvDTO imagen;
 }

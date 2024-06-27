@@ -81,6 +81,7 @@ public class MapeadorEntidadADto {
         servicioMapeado.setNombre(servicioEntidad.getNombre());
         servicioMapeado.setDescripcion(servicioEntidad.getDescripcion());
         servicioMapeado.setEstado(servicioEntidad.getEstado());
+        servicioMapeado.setRutaImagen(servicioEntidad.getRutaImagen());
         servicioMapeado.setImagen(mapearImagenProveedor(servicioEntidad.getImagen()));
 
         return servicioMapeado;
