@@ -46,7 +46,7 @@ public class PortalControlador {
 
     @GetMapping("/") // Acá es donde realizamos el mapeo
     public String index(Model modelo) {
-        modelo.addAttribute("servicioDTO", new ServicioDTO());
+        modelo.addAttribute("servicios", sServicio.listarServicios());
         return "index.html"; // Acá es que retornamos con el método.
     }
 
