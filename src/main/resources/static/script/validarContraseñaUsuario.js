@@ -9,6 +9,7 @@ document.getElementById('formularioUsuario').addEventListener('submit', function
         event.preventDefault(); // Evita el envío del formulario
         mensajeError.textContent = "Las contraseñas no coinciden.";
     } else {
+        mensajeError.textContent = "";
         alert("¡Su cuenta ha sido creada con éxito!");
     }
 });
