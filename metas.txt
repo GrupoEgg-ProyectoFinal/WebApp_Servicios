@@ -103,6 +103,7 @@ Back:
 ● Registro Proveedor:
 Front:
 - Doble factor de autenticacion de contraseña.
+(AGREGAR linea 57: th:field="*{confirmarContrasena}" ).
 
 Back:
 - Modificar servicios para que pueda recibir imagen y cargar una predefinida en caso de ser null.

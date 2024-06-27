@@ -285,7 +285,7 @@ input:focus::placeholder, select:focus::placeholder, textarea:focus::placeholder
     font-weight: 400;
 }
 
-h2 {
+h3 {
     color: var(--titulo-pintado);
 }
 
