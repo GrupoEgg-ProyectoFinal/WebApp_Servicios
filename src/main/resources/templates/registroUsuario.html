@@ -43,6 +43,17 @@
                             <div class="form-group">
                                 <input type="password" id="contrasena" name="contrasena" th:field="*{contrasena}" placeholder="Ingrese su contraseña" required>
                             </div>
+                            <div class="form-group">
+                                <input type="password" id="confirmarContrasena" name="confirmarContrasena" placeholder="Confirme su contraseña" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-column">
+                            <div class="form-group">
+                                <label for="imagenPerfil"><h3>Cargar imagen de perfil:</h3></label>
+                                <input type="file" id="imagenPerfil" name="imagenPerfil" accept="image/*" required>
+                            </div>
                         </div>
                     </div>
                     <div class="form-row full-width center-content">
@@ -63,8 +74,7 @@
         </section>        
     </main>
     <footer th:replace="~{/fragments/footer :: footerFragment}">
-        
     </footer>
+    <script src="/script/script.js"></script>
 </body>
-
 </html>

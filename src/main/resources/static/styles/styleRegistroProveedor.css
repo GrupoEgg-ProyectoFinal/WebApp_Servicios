@@ -207,13 +207,13 @@ ul.nav-list {
 #form {
     background-color: var(--color);
     opacity: 0.99;
-    padding: 24px 36px;
-    gap: 24px;
+    padding: 12px 24px;
+    gap: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
     border: 2px solid #ccc;
-    width: 60%;
+    width: 75%;
     height: auto;
     border-radius: 50px;
     background-color: var(--color-trasparente);
@@ -228,13 +228,13 @@ ul.nav-list {
     display: flex;
     flex-direction: column;
     width: 100%;
-    gap: 24px;
+    gap: 12px;
 }
 
 .form-row {
     display: flex;
     width: 100%;
-    gap: 24px;
+    gap: 12px;
     flex-wrap: wrap;
 }
 
@@ -289,7 +289,7 @@ textarea {
     height: 100px;
 }
 
-h2 {
+h3 {
     color: var(--titulo-pintado);
 }
 
