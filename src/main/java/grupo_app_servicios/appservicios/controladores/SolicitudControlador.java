@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
 import grupo_app_servicios.appservicios.Dto.SolicitudDTO;
 import grupo_app_servicios.appservicios.Dto.UsuarioDTO;
+import grupo_app_servicios.appservicios.enumeraciones.Estados;
 import grupo_app_servicios.appservicios.servicios.ProveedorServicio2;
 import grupo_app_servicios.appservicios.servicios.SolicitudServicio;
 import grupo_app_servicios.appservicios.servicios.UsuarioServicio;
@@ -82,6 +83,17 @@ public class SolicitudControlador {
         // }
     }
 
+    @GetMapping("/modificarEstado/{id}/{estado}")
+    public String cambiareEstado(@PathVariable String id,@PathVariable String estado) {
+        sServicio.modificarEstadoSolicitud(UUID.fromString(id),Estados.valueOf(estado));
+        return "redirect:/perfil";
+    }
+
+
+
+
+
+
     // @GetMapping("/modificarSolicitud/{id}")
     // public String modificarSolicitud_Vista(@PathVariable String id, Model modelo) {
     //     ProveedorDTO proveedorDTO = pServicio.buscaProveedorId(UUID.fromString(id)); // Convertir String a UUID
@@ -130,57 +142,3 @@ public class SolicitudControlador {
     //     return "redirect:../perfil";
     // }
 }
-
-// @PostMapping("/guardarSolicitud/{proveedorId}")
-// public String guardarSolicitud(@PathVariable("proveedorId") UUID proveedorId,
-// @ModelAttribute("solicitudDTO") SolicitudDTO solicitudDTO,
-// @AuthenticationPrincipal UserDetails userDetails, Model modelo) {
-// try {
-// ProveedorDTO proveedorDTO = pServicio.buscaProveedorId(proveedorId);
-// UsuarioDTO usuarioDTO = uServicio.buscarPorEmail(userDetails.getUsername());
-
-// solicitudDTO.setIdUsuario(usuarioDTO); // Cambio de setIdUsuario(UUID) a
-// setIdUsuario(UsuarioDTO)
-// solicitudDTO.setIdProveedor(proveedorDTO); // Cambio de setIdProveedor(UUID)
-// a setIdProveedor(ProveedorDTO)
-
-// sServicio.crearSolicitud(solicitudDTO);
-
-// return "vistaUsuario.html";
-// } catch (Exception e) {
-// modelo.addAttribute("error", "Ocurrió un error al intentar crear la
-// solicitud.");
-// return "solicitudformulario";
-// }
-// }
-
-// @PostMapping("/guardarSolicitud/{proveedorId}")
-// public String guardarSolicitud(@PathVariable UUID proveedorId,
-// @ModelAttribute SolicitudDTO solicitudDTO, @AuthenticationPrincipal
-// UserDetails userDetails, Model modelo) {
-// try {
-// // UsuarioDTO usuarioDTO =
-// uServicio.buscarPorEmail(userDetails.getUsername());
-// // solicitudDTO.setId(usuarioDTO.getId());
-// // solicitudDTO.setIdProveedor(pServicio.buscaProveedorId(proveedorId));
-// // sServicio.crearSolicitud(solicitudDTO);
-// // Buscar y mapear el proveedor a DTO
-// ProveedorDTO proveedorDTO = pServicio.buscaProveedorId(proveedorId);
-
-// // Buscar y mapear el usuario a DTO
-// UsuarioDTO usuarioDTO = uServicio.buscarPorEmail(userDetails.getUsername());
-
-// // Establecer los IDs correspondientes en solicitudDTO
-// solicitudDTO.setIdUsuario(usuarioDTO);
-// solicitudDTO.setIdProveedor(proveedorDTO);
-
-// // Crear la solicitud
-// sServicio.crearSolicitud(solicitudDTO);
-
-// return "redirect:/vistaUsuario";
-// } catch (Exception e) {
-// modelo.addAttribute("error", "Ocurrió un error al intentar crear la
-// solicitud.");
-// return "solicitudformulario";
-// }
-// }
