@@ -111,7 +111,10 @@
                     <form th:action="@{/servicio}" method="post" th:object="${servicioDTO}">INGRESE NOMBRE DEL SERVICIO
                         A CARGAR:
                         <input type="text" name="nombre" placeholder="Ingrese el nombre del servicio">
+                        <textarea name="descripcion" placeholder="Ingrese la descripcion de este servicio. Esta se mostrará en la página de inicio"></textarea>
+                        <input type="file" name="imagen" accept="image/*">
                         <button type="submit">Enviar</button>
+                    </form>
                 </section>
 
             </div>

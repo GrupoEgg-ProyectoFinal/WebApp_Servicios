@@ -17,8 +17,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
+import grupo_app_servicios.appservicios.Dto.ServicioDTO;
 import grupo_app_servicios.appservicios.servicios.ImagenProvServicio;
 import grupo_app_servicios.appservicios.servicios.ProveedorServicio2;
+import grupo_app_servicios.appservicios.servicios.ServicioServicio;
 
 @Controller
 @RequestMapping("/imagen")
@@ -26,6 +28,10 @@ public class ImagenProvControlador {
 
     @Autowired
     private ImagenProvServicio imagenServicio;
+    @Autowired
+    ProveedorServicio2 pServicio;
+    @Autowired
+    ServicioServicio sServicio;
 
     @PostMapping("/subir")
     public String subirImagen(@RequestParam("archivo") MultipartFile archivo, Model model) {
@@ -38,12 +44,8 @@ public class ImagenProvControlador {
         return "resultadoImagen";
     }
 
-    @Autowired
-    ProveedorServicio2 pServicio;
-
     @GetMapping("/perfil/{id}")
     public ResponseEntity<byte[]> imagenUsuario(@PathVariable String id) {
-
         ProveedorDTO proveedor = pServicio.buscaProveedorId(UUID.fromString(id));
         // para mostrarlo hay que guardarlo en un arreglo de bytes
         byte[] imagen = proveedor.getFoto().getContenido();
@@ -58,5 +60,19 @@ public class ImagenProvControlador {
         return new ResponseEntity<>(imagen,headers,HttpStatus.OK);
     }
 
-    
+    @GetMapping("/servicio/{id}")
+    public ResponseEntity<byte[]> imagenServicio(@PathVariable String id) {
+        ServicioDTO servicio = sServicio.buscarServicioPorId(UUID.fromString(id));
+        // para mostrarlo hay que guardarlo en un arreglo de bytes
+        byte[] imagen = servicio.getImagen().getContenido();
+
+        //Cabezera del pedido le dice al navegador que lo que estamos devolviendo es una imagen.
+        HttpHeaders headers = new HttpHeaders();
+        //Hay que setearle el contenido y el tipo con el MediaType
+        headers.setContentType(MediaType.IMAGE_PNG);
+        //Estado en el que termina el proceso (404,200,500) para devolverlo
+        //HttpStatus.OK = 200
+        //Respondemos el REntity con esos tres parametros.
+        return new ResponseEntity<>(imagen,headers,HttpStatus.OK);
+    }
 }

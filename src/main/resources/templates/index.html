@@ -38,20 +38,24 @@
             </div>
             <div class="proveedores-right">
                 <h1><strong>SERVICIOS</strong>
-                <div class="proveedores-container">
+                <div class="proveedores-container" th:each="servicio : ${servicios}">
                     <!-- <h2 class="seleccion">SELECCIONA EL SERVICIO QUE LE INTERESA CONTRATAR</h2> -->
                     <div class="proveedor-card">
                         <div class="izquierda">
-                            <img src="/img/gasistaLogo2.PNG" alt="Imagen del proveedor Gasista">
+                            <img 
+                                th:src="${servicio.rutaImagen != null} 
+                                    ? ${servicio.rutaImagen}
+                                    : @{/imagen/servicio/__${servicio.id.toString()}__}"
+                                alt="Imagen del proveedor"
+                            >
                         </div>
                         <div class="derecha">
                             <div class="dosPalabras">
                                 <h2 class="tituloPintado">SERVICIO:</h2> 
-                                <h2>GAS</h2>
+                                <h2 th:text="${servicio.nombre.toUpperCase()}"></h2>
                             </div>
                             <h4 class="tituloPintado">DESCRIPCIÓN:</h4>
-                            <h5><strong>Gasistas Profesionales</strong> certificados para instalar, mantener y reparar sistemas 
-                            de gas, asegurando su seguridad y eficiencia.</h5>
+                            <h5 th:text="${servicio.descripcion}"></h5>
                             <div class="saber-mas-btn">
                                 <a th:href="@{/login}" >
                                     <h5>Saber más ➝</h5>
@@ -59,46 +63,12 @@
                             </div>
                         </div>
                     </div>
-            
-                    <div class="proveedor-card">
-                        <div class="izquierda centro">
-                            <img src="/img/plomeroLogo2.png" alt="Imagen del proveedor Plomero">
-                        </div>
-                        <div class="derecha">
-                            <div class="dosPalabras">
-                                <h2 class="tituloPintado">SERVICIO:</h2> 
-                                <h2>PLOMERÍA</h2>
-                            </div>
-                            <h4 class="tituloPintado">DESCRIPCIÓN:</h4>
-                            <h5><strong>Electricistas Expertos</strong> en instalaciones eléctricas, mantenimiento y resolución de problemas, 
-                                garantizando un suministro eléctrico seguro y confiable.</h5>
-                            <div class="saber-mas-btn">
-                                <a th:href="@{/login}" >
-                                    <h5>Saber más ➝</h5>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-            
-                    <div class="proveedor-card">
-                        <div class="izquierda derecha">
-                            <img src="/img/electricistaLogoblanco2.png" alt="Imagen del proveedor Electricista">
-                        </div>
-                        <div class="derecha">
-                            <div class="dosPalabras">
-                                <h2 class="tituloPintado">SERVICIO:</h2> 
-                                <h2>ELECTRICIDAD</h2>
-                            </div>
-                            <h4 class="tituloPintado">DESCRIPCIÓN:</h4>
-                            <h5><strong>Plomeros Matriculados</strong> cualificados para solucionar cualquier necesidad de plomería, desde 
-                                instalaciones y reparaciones hasta emergencias imprevistas.</h5>
-                            <div class="saber-mas-btn">
-                                <a th:href="@{/login}">
-                                    <h5>Saber más ➝</h5>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- <h5><strong>Gasistas Profesionales</strong> certificados para instalar, mantener y reparar sistemas 
+                        de gas, asegurando su seguridad y eficiencia.</h5>
+                    <h5><strong>Electricistas Expertos</strong> en instalaciones eléctricas, mantenimiento y resolución de problemas, 
+                        garantizando un suministro eléctrico seguro y confiable.</h5>            
+                    <h5><strong>Plomeros Matriculados</strong> cualificados para solucionar cualquier necesidad de plomería, desde 
+                        instalaciones y reparaciones hasta emergencias imprevistas.</h5> -->
                 </div>               
         </section>
     </main>
