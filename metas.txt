@@ -86,6 +86,7 @@ VISTAS:
 Front:
 - Eliminar boton (SERVICIOS SOLO VISTA USUARIO).
 - Modificar (NUESTROS PROVEEDORES) por SERVICIOS.
+(DONE)
 
 Back:
 - Linkear enlaces del footer.
@@ -93,7 +94,8 @@ Back:
 ● Registrar Usuario:
 Front:
 - Agregar boton de carga de imagen.
-- Doble factor de autenticacion de contraseña.
+- Doble factor de autenticacion de contraseña. (AGREGAR linea 47: th:field="*{confirmarContrasena}" ).
+(DONE)
 
 Back:
 - Modificar servicios para que pueda recibir imagen y cargar una predefinida en caso de ser null.
