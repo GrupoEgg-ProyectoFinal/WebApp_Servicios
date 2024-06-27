@@ -10,6 +10,8 @@ document.getElementById('formularioProveedor').addEventListener('submit', functi
         mensajeError.textContent = "Las contraseñas no coinciden.";
     } else {
         mensajeError.textContent = "";
-        alert("¡Su cuenta ha sido creada con éxito!");
+        setTimeout(() => {
+            alert("¡Su cuenta ha sido creada con éxito!");
+        }, 0);
     }
 });
