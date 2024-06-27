@@ -7,11 +7,9 @@ document.getElementById('formularioProveedor').addEventListener('submit', functi
 
     if (contrasena !== confirmarContrasena) {
         event.preventDefault(); // Evita el envío del formulario
-        mensajeError.textContent = "Las contraseñas no coinciden.";
-    } else {
-        mensajeError.textContent = "";
-        setTimeout(() => {
-            alert("¡Su cuenta ha sido creada con éxito!");
-        }, 0);
-    }
+        alert("Las contraseñas no coinciden.");
+        }   else {
+                mensajeError.textContent = ""; // Limpia el mensaje de error
+                alert("¡Su cuenta ha sido creada con éxito!");
+            }
 });
