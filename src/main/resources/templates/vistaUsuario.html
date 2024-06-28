@@ -12,13 +12,23 @@
 <body>
     <header th:replace="~{/fragments/_navbar :: Navbar}"></header>
     <main>
-        <!-- PÁGINA 1 'INICIO SESION'-->
         <section id="vistaUsuario">
-            <h3>Proveedores Registrados</h3>
+            <h2>PROVEEDORES REGISTRADOS</h2>
+            <form id="filtroProveedores" action="#" method="get">
+                <label for="tipoServicio"><h3>Filtrar por servicio:</h3></label>
+                <select id="tipoServicio" name="tipoServicio">
+                    <option value="Todos">Todos</option>
+                    <option value="Gasista">Gasista</option>
+                    <option value="Plomero">Plomero</option>
+                    <option value="Electricista">Electricista</option>
+                </select>
+                <button type="submit">Aplicar Filtro</button>
+            </form>
+
             <div class="proveedores-container">
                 <div class="lista-proveedores">
                     <div class="column-header">
-                        <div class="col-avatar"><h3>Foto de perfil</h3></div>
+                        <div class="col-avatar"><h3>Foto</h3></div>
                         <div class="col-nombre"><h3>Nombre y apellido</h3></div>
                         <div class="col-matricula"><h3>Matrícula</h3></div>
                         <div class="col-servicio"><h3>Servicio</h3></div>
@@ -35,16 +45,16 @@
                             <h4 th:text="${proveedor.usuario.nombre} + ' ' + ${proveedor.usuario.apellido}">Nombre Proveedor</h4>
                         </div>
                         <div class="col-matricula">
-                            <h4 th:text="${proveedor.matricula}">12345</h4>
+                            <h4 th:text="${proveedor.matricula}"></h4>
                         </div>
                         <div class="col-servicio">
-                            <p th:text="${proveedor.servicio}">Gasista</p>
+                            <h4 th:text="${proveedor.servicio.nombre}"></h4>
                         </div>
                         <div class="col-promedio">
-                            <p th:text="${proveedor.promedio}">⭐⭐⭐⭐⭐</p>
+                            <p>⭐⭐⭐⭐⭐</p>
                         </div>
                         <div class="col-descripcion">
-                            <p th:text="${proveedor.descripcion}">Descripción del proveedor</p>
+                            <h4 th:text="${proveedor.descripcion}">Descripción del proveedor</h4>
                         </div>
                         <div class="col-contratar">
                             <a th:href="@{/contratar/crearSolicitud/{id}(id=${proveedor.id.toString()})}">
