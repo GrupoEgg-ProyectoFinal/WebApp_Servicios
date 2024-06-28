@@ -11,3 +11,5 @@ SELECT * FROM
 DROP DATABASE appservicios;
 
 DROP TABLE servicio_entidad;
+
+UPDATE usuario_entidad SET rol = 'ADMIN' WHERE email = 'fedepeche27@gmail.com';
