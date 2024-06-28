@@ -21,6 +21,11 @@ REALIZADO:
 FALTANTE:
 Los ⚠️ son los requeridos del proyecto por el cliente, ya sea como caso de uso o como requerimiento técnico
 
+EXTRA a definir xd:
+* Que el usuario pueda abrir solicitudes sin un proveedor asignado. Y que en la navbar del proveedor haya una sección de Buscar solicitudes o algo así,
+para que el proveedor pueda elegir si las quiere. El usuario acepta si ese proveedor puede tomar la solicitud o no
+
+
 ADIMN:
 ● ⚠️ Un ADMIN puede otorgar permisos,eliminar/censurar comentarios ofensivos, pero dejando la calificación.
 ● ⚠️ Poder borrar servicio.
