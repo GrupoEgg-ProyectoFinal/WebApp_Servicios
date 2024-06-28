@@ -127,6 +127,7 @@ Front:
 
  - Lista de valoraciones.(con promedio).
 
+
 Back: 
   - Mostrar lista.
   - Cambiar mediante boton de acptar el estado de la solicitud.

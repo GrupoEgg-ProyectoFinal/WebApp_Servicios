@@ -25,20 +25,21 @@ public class ProveedorControlador {
 
 
 
-    // @GetMapping("/modificar")
-    // public String modificarVista(Model model) {
-    //     model.addAttribute("proveedorDTO", new ProveedorDTO());
-    //     return "perfilProveedor";
-    // }
+    @GetMapping("/modificar")
+    public String modificarVista(Model model) {
+        model.addAttribute("proveedorDTO", new ProveedorDTO());
+        return "perfilProveedor";
+    }
 
 
-    // @GetMapping("/eliminar/{id}")
-    // public String eliminarProveedor(@PathVariable String id) {
-    //     try {
-    //         pServicio.eliminarProveedorPorIdDeUsuario(UUID.fromString(id));
-    //     } catch (Exception e) {
-    //         System.out.println(e.getLocalizedMessage());
-    //     }
-    //     return "redirect:/dashboard";
+    @GetMapping("/eliminar/{id}")
+    public String eliminarProveedor(@PathVariable String id) {
+        try {
+            pServicio.eliminarProveedorPorIdDeUsuario(UUID.fromString(id));
+        } catch (Exception e) {
+            System.out.println(e.getLocalizedMessage());
+        }
+        return "redirect:/dashboard";
     // }
+}
 }
