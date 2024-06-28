@@ -114,7 +114,7 @@ public class PortalControlador {
 
     // PERFIL USUARIO
     @GetMapping("/perfil")
-    @PreAuthorize("hasAnyRol('ROL_USER', 'ROL_PROVEEDOR','ROL_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROL_USER', 'ROL_PROVEEDOR','ROL_ADMIN')")
     public String inicio(HttpSession session, Model modelo) {
         UsuarioEntidad loguedUser = (UsuarioEntidad) session.getAttribute("usuarioEnSesion");
         // Ver cómo hacer para que tambien se aplique en el proveedor tambien
@@ -122,12 +122,8 @@ public class PortalControlador {
         // proveedor y reveer el tema de inicio de sesion)
 
         String role = loguedUser.getRol().toString();
-        List<ProveedorDTO> plomeros = pServicio.listarProveedoresSegunServicio("Plomeria");
-        List<ProveedorDTO> electricistas = pServicio.listarProveedoresSegunServicio("Electricista");
-        List<ProveedorDTO> gasistas = pServicio.listarProveedoresSegunServicio("Gasista");
-        modelo.addAttribute("plomeros", plomeros);
-        modelo.addAttribute("electricistas", electricistas);
-        modelo.addAttribute("gasistas", gasistas);
+        List<ProveedorDTO> proveedores = pServicio.listarProveedores();
+        modelo.addAttribute("proveedores", proveedores);
 
         if (role.equals("ADMIN")) {
             return "redirect:/dashboard";
@@ -151,7 +147,7 @@ public class PortalControlador {
     }
 
     @GetMapping("/dashboard")
-    @PreAuthorize("hasAnyRol('ROL_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROL_ADMIN')")
     public String panelAdministrativo(HttpSession session, Model modelo) {
         List<ProveedorDTO> proveedores2 = pServicio.listarProveedores();
         modelo.addAttribute("proveedores", proveedores2);

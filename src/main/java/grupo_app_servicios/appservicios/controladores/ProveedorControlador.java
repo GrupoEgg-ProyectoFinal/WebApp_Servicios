@@ -19,18 +19,11 @@ public class ProveedorControlador {
     @Autowired
     ProveedorServicio2 pServicio;
 
-
-    
-
-
-
-
     @GetMapping("/modificar")
     public String modificarVista(Model model) {
         model.addAttribute("proveedorDTO", new ProveedorDTO());
         return "perfilProveedor";
     }
-
 
     @GetMapping("/eliminar/{id}")
     public String eliminarProveedor(@PathVariable String id) {
@@ -40,6 +33,5 @@ public class ProveedorControlador {
             System.out.println(e.getLocalizedMessage());
         }
         return "redirect:/dashboard";
-    // }
-}
+    }
 }
