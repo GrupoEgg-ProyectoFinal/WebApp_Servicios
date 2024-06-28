@@ -114,7 +114,7 @@ public class PortalControlador {
 
     // PERFIL USUARIO
     @GetMapping("/perfil")
-    @PreAuthorize("hasAnyRol('ROL_USER', 'ROL_PROVEEDOR','ROL_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROL_USER', 'ROL_PROVEEDOR','ROL_ADMIN')")
     public String inicio(HttpSession session, Model modelo) {
         UsuarioEntidad loguedUser = (UsuarioEntidad) session.getAttribute("usuarioEnSesion");
         // Ver cómo hacer para que tambien se aplique en el proveedor tambien
@@ -151,7 +151,7 @@ public class PortalControlador {
     }
 
     @GetMapping("/dashboard")
-    @PreAuthorize("hasAnyRol('ROL_ADMIN')")
+    @PreAuthorize("hasAnyRole('ROL_ADMIN')")
     public String panelAdministrativo(HttpSession session, Model modelo) {
         List<ProveedorDTO> proveedores2 = pServicio.listarProveedores();
         modelo.addAttribute("proveedores", proveedores2);
