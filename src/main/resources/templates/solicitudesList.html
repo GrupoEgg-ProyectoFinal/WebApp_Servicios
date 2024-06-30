@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Solicitudes</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">TRABAJOS SOLICITADOS</h2>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Servicio</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Matricula</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="pendientes : ${pendientes}">
+                    <td th:text="${pendientes.idProveedor.servicio.nombre}">Servicio</td>
+                    <td th:text="${pendientes.idProveedor.usuario.nombre}">Nombre</td>
+                    <td th:text="${pendientes.idProveedor.usuario.apellido}">Apellido</td>
+                    <td th:text="${pendientes.idProveedor.matricula}">Matricula</td>
+                    <td th:text="${pendientes.estado}">Estado</td>
+                    <td>
+
+                        <a th:href="@{./modificarEstado/{id}/{estado}(id=${pendientes.id.toString()}, estado='CANCELADO')}"><button class="rechazar">CANCELAR</button></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="mb-4">TRABAJOS EN PROCESO</h2>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Servicio</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Matricula</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="aceptados : ${aceptados}">
+                    <td th:text="${aceptados.idProveedor.servicio.nombre}">Servicio</td>
+                    <td th:text="${aceptados.idProveedor.usuario.nombre}">Nombre</td>
+                    <td th:text="${aceptados.idProveedor.usuario.apellido}">Apellido</td>
+                    <td th:text="${aceptados.idProveedor.matricula}">Matricula</td>
+                    <td th:text="${aceptados.estado}">Estado</td>
+                    <td>
+                        <a th:href="@{./modificarEstado/{id}/{estado}(id=${aceptados.id.toString()}, estado='FINALIZADO')}"><button>FINALIZAR</button></a>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="mb-4">TRABAJOS FINALIZADOS</h2>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Servicio</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Matricula</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="finalizados : ${finalizados}">
+                    <td th:text="${finalizados.idProveedor.servicio.nombre}">Servicio</td>
+                    <td th:text="${finalizados.idProveedor.usuario.nombre}">Nombre</td>
+                    <td th:text="${finalizados.idProveedor.usuario.apellido}">Apellido</td>
+                    <td th:text="${finalizados.idProveedor.matricula}">Matricula</td>
+                    <td th:text="${finalizados.estado}">Estado</td>
+                    <td>
+                    <a  th:href="@{/valoraciones/calificar}">
+                        <button class="btn btn-primary">Calificar</button>
+                    </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2 class="mb-4">TRABAJOS CANCELADOS</h2>
+        <table class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Servicio</th>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Matricula</th>
+                    <th>Estado</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="cancelados : ${cancelados}">
+                    <td th:text="${cancelados.idProveedor.servicio.nombre}">Servicio</td>
+                    <td th:text="${cancelados.idProveedor.usuario.nombre}">Nombre</td>
+                    <td th:text="${cancelados.idProveedor.usuario.apellido}">Apellido</td>
+                    <td th:text="${cancelados.idProveedor.matricula}">Matricula</td>
+                    <td th:text="${cancelados.estado}">Estado</td>
+                    <td>
+                        <!-- No hay acciones disponibles para solicitudes canceladas -->
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

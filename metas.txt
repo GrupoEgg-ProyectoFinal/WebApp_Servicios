@@ -29,7 +29,7 @@ SUPER-ADMIN:
 
 
 SOLICITUD:
-● ⚠️ El proveedor puede aceptar un trabajo o cancelarlo. También puede marcarlo como finalizado una vez que el trabajo haya sido aceptado.
+☑ ⚠️ El proveedor puede aceptar un trabajo o cancelarlo. También puede marcarlo como finalizado una vez que el trabajo haya sido aceptado.
 ● ⚠️ El usuario puede pedir un servicio o cancelarlo. Una vez aceptado el trabajo puede cancelarlo o darlo por finalizado.
 ● ⚠️ Una vez que el trabajo fue finalizado el usuario está habilitado a calificar el servicio, calificación que se agregará al perfil del proveedor.
 ● ⚠️ El usuario puede contactar al proveedor, calcular un estimativo de los honorarios del proveedor por horas y calificarlo luego de prestado el servicio.
@@ -151,7 +151,7 @@ Back:
 MIERCOLES BACK:
 CREAR SOLICITUD Y CONTROLAR SOLICITUD POR PARTE DEL PROVEEDOR.
 
-
+IMPORTANTE!!!! SE PUEDE ENTRAR A /dashboard sin inicio de sesion y de eliminar users wtf?
 
 
 

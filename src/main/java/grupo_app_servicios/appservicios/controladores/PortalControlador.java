@@ -39,9 +39,7 @@ public class PortalControlador {
     @Autowired
     SolicitudServicio solServicio;
 
-    // @Autowired
-    // ProveedorServicio pServicio;
-
+    // INICIO
     @GetMapping("/") // Acá es donde realizamos el mapeo
     public String index(Model modelo) {
         modelo.addAttribute("servicioDTO", new ServicioDTO());
@@ -59,6 +57,7 @@ public class PortalControlador {
         return "registroUsuario.html";
     }
 
+   // REGISTRAR USUARIO
     @PostMapping("/guardarUsuario")
     public String guardarUsuario(@ModelAttribute UsuarioDTO usuarioDTO, String contrasena2) {
         uServicio.crearUsuario(usuarioDTO, contrasena2);
@@ -82,6 +81,7 @@ public class PortalControlador {
         return "registroProveedor.html";
     }
 
+   // REGISTRAR PROVEEDRO
     @PostMapping("/guardarProveedor")
     public String registrarProveedor(@ModelAttribute ProveedorDTO proveedorDTO, MultipartFile imagenFile, Model model,
             String idServicio) {
@@ -150,6 +150,7 @@ public class PortalControlador {
         return "vistaUsuario.html"; // después cambiarlo por la vista de perfil de usuario
     }
 
+    // VISTA ADMIN
     @GetMapping("/dashboard")
     @PreAuthorize("hasAnyRol('ROL_ADMIN')")
     public String panelAdministrativo(HttpSession session, Model modelo) {

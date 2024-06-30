@@ -36,7 +36,7 @@ public class MapeadorEntidadADto {
 
         return usuarioMapeado;
     }
-    
+
     public static ProveedorDTO mapearProveedor(ProveedorEntidad proveedorEntidad) {
         ProveedorDTO proveedorMapeado = new ProveedorDTO();
         proveedorMapeado.setId(proveedorEntidad.getId());
@@ -48,7 +48,7 @@ public class MapeadorEntidadADto {
         }
         if (proveedorEntidad.getFoto() != null) {
             ImagenProvDTO imagenProveedorDTO = mapearImagenProveedor(proveedorEntidad.getFoto());
-            proveedorMapeado.setFoto(imagenProveedorDTO); 
+            proveedorMapeado.setFoto(imagenProveedorDTO);
         }
         if (proveedorEntidad.getServicio() != null) {
             ServicioDTO servicio = mapearServicio(proveedorEntidad.getServicio());
@@ -56,9 +56,8 @@ public class MapeadorEntidadADto {
         }
         if (proveedorEntidad.getSolicitudes() != null) {
             List<SolicitudDTO> listaSolicitudes = proveedorEntidad.getSolicitudes().stream().map(
-                solicitudEntidad -> mapearSolicitud(solicitudEntidad)
-            ).toList();
-            
+                    solicitudEntidad -> mapearSolicitud(solicitudEntidad)).toList();
+
             proveedorMapeado.setSolicitudes(listaSolicitudes);
         }
 
@@ -73,7 +72,7 @@ public class MapeadorEntidadADto {
         imagenMapeada.setNombre(imagenProveedorEntidad.getNombre());
 
         return imagenMapeada;
-    } 
+    }
 
     public static ServicioDTO mapearServicio(ServicioEntidad servicioEntidad) {
         ServicioDTO servicioMapeado = new ServicioDTO();
@@ -107,9 +106,32 @@ public class MapeadorEntidadADto {
             solicitudMapeada.setIdUsuario(usuario);
         }
         if (solicitudEntidad.getIdProveedor() != null) {
-            solicitudMapeada.setIdProveedor(solicitudEntidad.getIdProveedor().getId());
+            solicitudMapeada.setIdProveedor(mapearSolicitudParaProveedor(solicitudEntidad.getIdProveedor()));
         }
 
         return solicitudMapeada;
     }
+
+    public static ProveedorDTO mapearSolicitudParaProveedor(ProveedorEntidad proveedorEntidad) {
+        ProveedorDTO proveedorMapeado = new ProveedorDTO();
+        proveedorMapeado.setId(proveedorEntidad.getId());
+        proveedorMapeado.setDescripcion(proveedorEntidad.getDescripcion());
+        proveedorMapeado.setMatricula(proveedorEntidad.getMatricula());
+
+        if (proveedorEntidad.getUsuario() != null) {
+            UsuarioDTO usuarioDTO = mapearUsuario(proveedorEntidad.getUsuario());
+            proveedorMapeado.setUsuario(usuarioDTO);
+        }
+        if (proveedorEntidad.getFoto() != null) {
+            ImagenProvDTO imagenProveedorDTO = mapearImagenProveedor(proveedorEntidad.getFoto());
+            proveedorMapeado.setFoto(imagenProveedorDTO);
+        }
+        if (proveedorEntidad.getServicio() != null) {
+            ServicioDTO servicio = mapearServicio(proveedorEntidad.getServicio());
+            proveedorMapeado.setServicio(servicio);
+        }
+
+        return proveedorMapeado;
+    }
+
 }
