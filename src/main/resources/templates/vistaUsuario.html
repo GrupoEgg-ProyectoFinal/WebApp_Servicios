@@ -12,110 +12,59 @@
 <body>
     <header th:replace="~{/fragments/_navbar :: Navbar}"></header>
     <main>
-        <!-- PÁGINA 1 'INICIO SESION'-->
         <section id="vistaUsuario">
-            <h3></h3>
-            <div class="proveedores-container">
-                <div class="proveedor-card" style="--bg-image: url('/img/Gasista.png');">
-                    <h2 class="titulo-lista"><strong>LISTA DE GASISTAS</strong></h2>
-                    <div class="contenido">
-                        <div class="lista-proveedores">
-                            <div class="column-header">
-                                <div class="col-avatar"></div>
-                                <div class="col-nombre"><h3>NOMBRE</h3></div>
-                                <div class="col-puntuacion"><h3>PUNTUACIÓN</h3></div>
-                                <div class="col-contratar"></div>
-                            </div>
-                            <!-- Aquí irán los nombres de los gasistas traídos desde la base de datos -->
-                            <div class="proveedor" th:each="gasista : ${gasistas}">
-                                <div class="col-avatar">
-                                    <img th:src="@{/imagen/perfil/__${gasista.id.toString}__}"  alt="Perfil de Gaston Estalla" class="avatar" height="50px" width="50px">
-                                </div>
-                                <div class="col-nombre">
-                                    <h4 th:text="${gasista.usuario.nombre} + ' ' + ${gasista.usuario.apellido}">Gaston Estalla</h4>
-                                </div>
-                                <div class="col-puntuacion">
-                                    ⭐⭐⭐⭐⭐
-                                </div>
-                                <div class="col-contratar">                                    
-                                    <a th:href="@{/contratar/crearSolicitud/{id}(id=${gasista.id.toString()})}" >
+            <h2>PROVEEDORES REGISTRADOS</h2>
+            <form id="filtroProveedores" action="#" method="get">
+                <label for="tipoServicio"><h3>Filtrar por servicio:</h3></label>
+                <select id="tipoServicio" name="tipoServicio">
+                    <option value="Todos">Todos</option>
+                    <option value="Gasista">Gasista</option>
+                    <option value="Plomero">Plomero</option>
+                    <option value="Electricista">Electricista</option>
+                </select>
+                <button type="submit">Aplicar Filtro</button>
+            </form>
 
-                                    <!-- <a th:href="@{/contratar/solicitud/__${gasista.id.toString}__}" target="_blank"> -->
-                                        <button><h5>Contratar</h5></button>
-                                    </a>
-                                </div>
-                            </div>
-                            <!-- Añadir más gasistas aquí -->
-                        </div>
+            <div class="proveedores-container">
+                <div class="lista-proveedores">
+                    <div class="column-header">
+                        <div class="col-avatar"><h3>Foto</h3></div>
+                        <div class="col-nombre"><h3>Nombre y apellido</h3></div>
+                        <div class="col-matricula"><h3>Matrícula</h3></div>
+                        <div class="col-servicio"><h3>Servicio</h3></div>
+                        <div class="col-promedio"><h3>Puntuación</h3></div>
+                        <div class="col-descripcion"><h3>Descripción</h3></div>
+                        <div class="col-contratar"></div>
                     </div>
-                </div>
-        
-                <!-- Repite la misma estructura para plomeros y electricistas -->
-                <div class="proveedor-card" style="--bg-image: url('/img/Plomero.png');">
-                    <h2 class="titulo-lista"><strong>LISTA DE PLOMEROS</strong></h2>
-                    <div class="contenido">
-                        <div class="lista-proveedores">
-                            <div class="column-header">
-                                <div class="col-avatar"></div>
-                                <div class="col-nombre"><h3>NOMBRE</h3></div>
-                                <div class="col-puntuacion"><h3>PUNTUACIÓN</h3></div>
-                                <div class="col-contratar"></div>
-                            </div>
-                            <div class="proveedor"  th:each="plomero : ${plomeros}">
-                                <div class="col-avatar">
-                                    <img th:src="@{/imagen/perfil/__${plomero.id.toString}__}" alt="Perfil de Pedro PicaPiedra" class="avatar" height="50px" width="50px">
-                                </div>
-                                <div class="col-nombre">
-                                <h4 th:text="${plomero.usuario.nombre} + ' ' + ${plomero.usuario.apellido}">Pedro PicaPiedra</h4>
-                                </div>
-                                <div class="col-puntuacion">
-                                    ⭐⭐⭐⭐☆
-                                </div>
-                                <div class="col-contratar">
-                                    <a th:href="@{/contratar/crearSolicitud/{id}(id=${plomero.id.toString()})}">
-                                        <button><h5>Contratar</h5></button>
-                                    </a>
-                                </div>
-                            </div>
-                            <!-- Añadir más plomeros aquí -->
+                    <!-- Proveedores -->
+                    <div class="proveedor" th:each="proveedor : ${proveedores}">
+                        <div class="col-avatar">
+                            <img th:src="@{/imagen/perfil/__${proveedor.id.toString}__}" alt="Perfil de Proveedor" class="avatar" height="50px" width="50px">
                         </div>
-                    </div>
-                </div>
-        
-                <div class="proveedor-card" style="--bg-image: url('/img/Electricista.png');">
-                    <h2 class="titulo-lista"><strong>LISTA DE ELECTRICISTAS</strong></h2>
-                    <div class="contenido">
-                        <div class="lista-proveedores">
-                            <div class="column-header">
-                                <div class="col-avatar"></div>
-                                <div class="col-nombre"><h3>NOMBRE</h3></div>
-                                <div class="col-puntuacion"><h3>PUNTUACIÓN</h3></div>
-                                <div class="col-contratar"></div>
-                            </div>
-                            <div class="proveedor"  th:each="electricista : ${electricistas}">
-                                <div class="col-avatar">
-                                    <!-- th:src="@{/imagen/perfil/__${electricista.id.toString}__}" -->
-                                    <img th:src="@{/imagen/perfil/__${electricista.id.toString}__}" alt="Perfil de Elena Chispa" class="avatar" height="50px" width="50px">
-                                </div>
-                                <div class="col-nombre">
-                                    <h4 th:text="${electricista.usuario.nombre} + ' ' + ${electricista.usuario.apellido}">Elena Chispa</h4>
-                                </div>
-                                <div class="col-puntuacion">
-                                    ⭐⭐⭐☆☆
-                                </div>
-                            
-                                <div class="col-contratar">
-                                    <a th:href="@{/contratar/crearSolicitud/{id}(id=${electricista.id.toString()})}">
-                                        <button><h5>Contratar</h5></button>
-                                    </a>
-                                </div>
-                            </div>
-                            <!-- Añadir más electricistas aquí -->
+                        <div class="col-nombre">
+                            <h4 th:text="${proveedor.usuario.nombre} + ' ' + ${proveedor.usuario.apellido}">Nombre Proveedor</h4>
+                        </div>
+                        <div class="col-matricula">
+                            <h4 th:text="${proveedor.matricula}"></h4>
+                        </div>
+                        <div class="col-servicio">
+                            <h4 th:text="${proveedor.servicio.nombre}"></h4>
+                        </div>
+                        <div class="col-promedio">
+                            <p>⭐⭐⭐⭐⭐</p>
+                        </div>
+                        <div class="col-descripcion">
+                            <h4 th:text="${proveedor.descripcion}">Descripción del proveedor</h4>
+                        </div>
+                        <div class="col-contratar">
+                            <a th:href="@{/contratar/crearSolicitud/{id}(id=${proveedor.id.toString()})}">
+                                <button><h5>Contratar</h5></button>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
+        </section>        
     </main>
 
     <footer th:replace="~{/fragments/footer :: footerFragment}">
