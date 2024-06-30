@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Formulario de Valoración</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        .rating {
+            unicode-bidi: bidi-override;
+            direction: rtl;
+            display: inline-block;
+            position: relative;
+            color: #f1c40f;
+        }
+        .rating > label {
+            float: right;
+            display: inline;
+            padding: 0;
+            margin: 0;
+            position: relative;
+            width: 1.1em;
+            cursor: pointer;
+        }
+        .rating > label::before {
+            content: "\2605";
+            position: absolute;
+            opacity: 0;
+        }
+        .rating > label:hover:before,
+        .rating > label:hover ~ label:before,
+        .rating > input:checked ~ label:before {
+            opacity: 1;
+        }
+        .rating > input:checked ~ label:before {
+            color: #f1c40f;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Formulario de Valoración</h2>
+        <form action="@{valoraciones/calificar/{id}(id=${solicitud.id.toString()})}" method="post">
+            <div class="form-group">
+                <label for="comentario">Comentario</label>
+                <textarea id="comentario" name="comentario" class="form-control"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="puntaje">Puntaje</label>
+                <div class="rating">
+                    <input type="radio" id="star5" name="puntaje" value="5" /><label for="star5" title="Excelente">5 stars</label>
+                    <input type="radio" id="star4" name="puntaje" value="4" /><label for="star4" title="Muy Bueno">4 stars</label>
+                    <input type="radio" id="star3" name="puntaje" value="3" /><label for="star3" title="Bueno">3 stars</label>
+                    <input type="radio" id="star2" name="puntaje" value="2" /><label for="star2" title="Regular">2 stars</label>
+                    <input type="radio" id="star1" name="puntaje" value="1" /><label for="star1" title="Malo">1 star</label>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar Valoración</button>
+        </form>
+    </div>
+</body>
+</html>

@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
 import grupo_app_servicios.appservicios.Dto.UsuarioDTO;
 import grupo_app_servicios.appservicios.excepciones.MiExcepcion;
 import grupo_app_servicios.appservicios.servicios.UsuarioServicio;
+import grupo_app_servicios.appservicios.utilidades.MapeadorEntidadADto;
 
 @Controller
 public class UsuarioController {
@@ -64,6 +66,7 @@ public class UsuarioController {
         usuarioServicio.cambiarRol(UUID.fromString(id));
         return "redirect:/dashboard";
     }
+
 
 
 
