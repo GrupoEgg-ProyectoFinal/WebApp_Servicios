@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -42,7 +42,7 @@
                             <thead>
                                 <tr>
                                     <th>NOMBRE Y APELLIDO</th>
-                                    <!-- <th>FOTO DE PERFIL</th> -->
+                                    <th>EMAIL</th>
                                     <th>ROL</th>
                                     <th>ACCIONES</th>
                                 </tr>
@@ -56,21 +56,21 @@
                                     <td th:text="${usuario.email}">Avergaspar@gmail.com</td>
                                     <td th:text="${usuario.rol}">USUARIO</td>
                                     <td>
-                                        <!-- <button class="modificar">Modificar</button> -->
-                                        <a th:href="@{/modificarUsuarioS/__${usuario.id.toString()}__}" th:if="${usuario.rol.toString() != 'ADMIN'}"><button
-                                                class="fas fa-feather-alt">Modificar</button></a>
-<!-- 
-                                        <a th:href="@{/modificarRol/__${usuario.id.toString()}__}"  th:if="${usuario.rol.toString() != 'ADMIN'}"> <button
-                                                class="modificar-rol">Modificar Rol</button></a> -->
 
-                                        <a th:if="${usuario.rol.toString() == 'USER'}"
+                                        <a th:href="@{/modificarUsuarioS/__${usuario.id.toString()}__}"
+                                            th:if="${usuario.rol.toString() != 'SUPER'}"><button
+                                                class="fas fa-feather-alt">Modificar</button></a>
+
+                                        <a sec:authorize="hasRole ('SUPER')"
+                                            th:href="@{/modificarRol/__${usuario.id.toString()}__}"
+                                            th:if="${usuario.rol.toString() != 'SUPER'}"> <button
+                                                class="modificar-rol">Modificar Rol</button></a>
+
+                                        <a sec:authorize="hasRole ('SUPER')" th:if="${usuario.rol.toString() == 'USER'}"
                                             th:href="@{/eliminarUsuario/__${usuario.id.toString()}__}">
                                             <button class="eliminar">Eliminar</button>
                                         </a>
-                                        <a th:if="${usuario.rol.toString() == 'PROVEEDOR'}"
-                                            th:href="@{/proveedor/eliminar/__${usuario.id.toString()}__}">
-                                            <button class="eliminar">Eliminar</button>
-                                        </a>
+
                                     </td>
                                 </tr>
                             </tbody>
@@ -90,9 +90,11 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                 <!-- th:if="${usuario.rol.toString() == 'USER'}" -->
-                                <tr th:each="proveedor : ${proveedores}"   th:if="${proveedor.usuario.rol.toString() == 'PROVEEDOR'}">
-                                    <td th:text="${proveedor.usuario.nombre+' '+proveedor.usuario.apellido}">Aver Gaspar</td>
+                                <!-- th:if="${usuario.rol.toString() == 'USER'}" -->
+                                <tr th:each="proveedor : ${proveedores}"
+                                    th:if="${proveedor.usuario.rol.toString() == 'PROVEEDOR'}">
+                                    <td th:text="${proveedor.usuario.nombre+' '+proveedor.usuario.apellido}">Aver Gaspar
+                                    </td>
                                     <!-- <td>
                                         <img th:src="@{${usuario.fotoPerfil}}" alt="Foto de perfil" width="50" height="50" src="/img/usuarioLogo.png">
                                     </td> -->
@@ -103,14 +105,11 @@
                                         <a th:href="@{/modificarUsuarioS/__${proveedor.usuario.id.toString()}__}"><button
                                                 class="fas fa-feather-alt">Modificar</button></a>
 
-                                        <!-- <a th:href="@{/modificarRol/__${proveedor.usuario.id.toString()}__}"> <button
-                                                class="modificar-rol">Modificar Rol</button></a> -->
+                                        <a sec:authorize="hasRole ('SUPER')"
+                                            th:href="@{/modificarRol/__${proveedor.usuario.id.toString()}__}"> <button
+                                                class="modificar-rol">Modificar Rol</button></a>
 
-                                        <!-- <a th:if="${usuario.rol.toString() == 'USER'}"
-                                            th:href="@{/eliminarUsuario/__${usuario.id.toString()}__}">
-                                            <button class="eliminar">Eliminar</button>
-                                        </a> -->
-                                        <a th:if="${proveedor.usuario.rol.toString() == 'PROVEEDOR'}"
+                                        <a sec:authorize="hasRole ('SUPER')" th:if="${proveedor.usuario.rol.toString() == 'PROVEEDOR'}"
                                             th:href="@{/proveedor/eliminar/__${proveedor.usuario.id.toString()}__}">
                                             <button class="eliminar">Eliminar</button>
                                         </a>
