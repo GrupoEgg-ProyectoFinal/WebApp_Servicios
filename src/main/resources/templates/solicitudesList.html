@@ -3,117 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <title>Lista de Solicitudes</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/styleFooter.css">
+    <link rel="stylesheet" href="/styles/styleSolicitudesList.css">
 </head>
 <body>
-    <div class="container mt-5">
-        <h2 class="mb-4">TRABAJOS SOLICITADOS</h2>
-        <table class="table table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Servicio</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Matricula</th>
-                    <th>Estado</th>
-                    <th>Acción</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="pendientes : ${pendientes}">
-                    <td th:text="${pendientes.idProveedor.servicio.nombre}">Servicio</td>
-                    <td th:text="${pendientes.idProveedor.usuario.nombre}">Nombre</td>
-                    <td th:text="${pendientes.idProveedor.usuario.apellido}">Apellido</td>
-                    <td th:text="${pendientes.idProveedor.matricula}">Matricula</td>
-                    <td th:text="${pendientes.estado}">Estado</td>
-                    <td>
-
-                        <a th:href="@{./modificarEstado/{id}/{estado}(id=${pendientes.id.toString()}, estado='CANCELADO')}"><button class="rechazar">CANCELAR</button></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h2 class="mb-4">TRABAJOS EN PROCESO</h2>
-        <table class="table table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Servicio</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Matricula</th>
-                    <th>Estado</th>
-                    <th>Acción</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="aceptados : ${aceptados}">
-                    <td th:text="${aceptados.idProveedor.servicio.nombre}">Servicio</td>
-                    <td th:text="${aceptados.idProveedor.usuario.nombre}">Nombre</td>
-                    <td th:text="${aceptados.idProveedor.usuario.apellido}">Apellido</td>
-                    <td th:text="${aceptados.idProveedor.matricula}">Matricula</td>
-                    <td th:text="${aceptados.estado}">Estado</td>
-                    <td>
-                        <a th:href="@{./modificarEstado/{id}/{estado}(id=${aceptados.id.toString()}, estado='FINALIZADO')}"><button>FINALIZAR</button></a>
-
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h2 class="mb-4">TRABAJOS FINALIZADOS</h2>
-        <table class="table table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Servicio</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Matricula</th>
-                    <th>Estado</th>
-                    <th>Acción</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="finalizados : ${finalizados}" >
-                    <td th:text="${finalizados.idProveedor.servicio.nombre}">Servicio</td>
-                    <td th:text="${finalizados.idProveedor.usuario.nombre}">Nombre</td>
-                    <td th:text="${finalizados.idProveedor.usuario.apellido}">Apellido</td>
-                    <td th:text="${finalizados.idProveedor.matricula}">Matricula</td>
-                    <td th:text="${finalizados.estado}">Estado</td>
-                    <td>
-                    <a  th:href="@{/valoraciones/calificar/{id}(id=${finalizados.id.toString()})}" th:if="${finalizados.idValoracion == null}">
-                        <button class="btn btn-primary">Calificar</button>
-                    </a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h2 class="mb-4">TRABAJOS CANCELADOS</h2>
-        <table class="table table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Servicio</th>
-                    <th>Nombre</th>
-                    <th>Apellido</th>
-                    <th>Matricula</th>
-                    <th>Estado</th>
-                    <th>Acción</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="cancelados : ${cancelados}">
-                    <td th:text="${cancelados.idProveedor.servicio.nombre}">Servicio</td>
-                    <td th:text="${cancelados.idProveedor.usuario.nombre}">Nombre</td>
-                    <td th:text="${cancelados.idProveedor.usuario.apellido}">Apellido</td>
-                    <td th:text="${cancelados.idProveedor.matricula}">Matricula</td>
-                    <td th:text="${cancelados.estado}">Estado</td>
-                    <td>
-                        <!-- No hay acciones disponibles para solicitudes canceladas -->
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <header th:replace="~{/fragments/_navbar :: Navbar}"></header>
+    <div>
+        <main id="vistaSolicitudes">
+            <section>
+                <h2>TRABAJOS SOLICITADOS</h2>
+                <div class="solicitudes-container">
+                    <div class="lista-solicitudes">
+                        <div class="column-header">
+                            <div class="col-servicio"><h3>Servicio</h3></div>
+                            <div class="col-nombre"><h3>Nombre</h3></div>
+                            <div class="col-apellido"><h3>Apellido</h3></div>
+                            <div class="col-matricula"><h3>Matricula</h3></div>
+                            <div class="col-estado"><h3>Estado</h3></div>
+                            <div class="col-accion"><h3>Acción</h3></div>
+                        </div>
+                        <div class="solicitud" th:each="pendientes : ${pendientes}">
+                            <div class="col-servicio"><h4 th:text="${pendientes.idProveedor.servicio.nombre}">Servicio</h4></div>
+                            <div class="col-nombre"><h4 th:text="${pendientes.idProveedor.usuario.nombre}">Nombre</h4></div>
+                            <div class="col-apellido"><h4 th:text="${pendientes.idProveedor.usuario.apellido}">Apellido</h4></div>
+                            <div class="col-matricula"><h4 th:text="${pendientes.idProveedor.matricula}">Matricula</h4></div>
+                            <div class="col-estado"><h4 th:text="${pendientes.estado}">Estado</h4></div>
+                            <div class="col-accion">
+                                <a th:href="@{./modificarEstado/{id}/{estado}(id=${pendientes.id.toString()}, estado='CANCELADO')}">
+                                    <button><h5>CANCELAR</h5></button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <section>
+                <h2>TRABAJOS EN PROCESO</h2>
+                <div class="solicitudes-container">
+                    <div class="lista-solicitudes">
+                        <div class="column-header">
+                            <div class="col-servicio"><h3>Servicio</h3></div>
+                            <div class="col-nombre"><h3>Nombre</h3></div>
+                            <div class="col-apellido"><h3>Apellido</h3></div>
+                            <div class="col-matricula"><h3>Matricula</h3></div>
+                            <div class="col-estado"><h3>Estado</h3></div>
+                            <div class="col-accion"><h3>Acción</h3></div>
+                        </div>
+                        <div class="solicitud" th:each="aceptados : ${aceptados}">
+                            <div class="col-servicio"><h4 th:text="${aceptados.idProveedor.servicio.nombre}">Servicio</h4></div>
+                            <div class="col-nombre"><h4 th:text="${aceptados.idProveedor.usuario.nombre}">Nombre</h4></div>
+                            <div class="col-apellido"><h4 th:text="${aceptados.idProveedor.usuario.apellido}">Apellido</h4></div>
+                            <div class="col-matricula"><h4 th:text="${aceptados.idProveedor.matricula}">Matricula</h4></div>
+                            <div class="col-estado"><h4 th:text="${aceptados.estado}">Estado</h4></div>
+                            <div class="col-accion">
+                                <a th:href="@{./modificarEstado/{id}/{estado}(id=${aceptados.id.toString()}, estado='FINALIZADO')}">
+                                    <button><h5>FINALIZAR</h5></button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <section>
+                <h2>TRABAJOS FINALIZADOS</h2>
+                <div class="solicitudes-container">
+                    <div class="lista-solicitudes">
+                        <div class="column-header">
+                            <div class="col-servicio"><h3>Servicio</h3></div>
+                            <div class="col-nombre"><h3>Nombre</h3></div>
+                            <div class="col-apellido"><h3>Apellido</h3></div>
+                            <div class="col-matricula"><h3>Matricula</h3></div>
+                            <div class="col-estado"><h3>Estado</h3></div>
+                            <div class="col-accion"><h3>Acción</h3></div>
+                        </div>
+                        <div class="solicitud" th:each="finalizados : ${finalizados}">
+                            <div class="col-servicio"><h4 th:text="${finalizados.idProveedor.servicio.nombre}">Servicio</h4></div>
+                            <div class="col-nombre"><h4 th:text="${finalizados.idProveedor.usuario.nombre}">Nombre</h4></div>
+                            <div class="col-apellido"><h4 th:text="${finalizados.idProveedor.usuario.apellido}">Apellido</h4></div>
+                            <div class="col-matricula"><h4 th:text="${finalizados.idProveedor.matricula}">Matricula</h4></div>
+                            <div class="col-estado"><h4 th:text="${finalizados.estado}">Estado</h4></div>
+                            <div class="col-accion">
+                                <a th:href="@{/valoraciones/calificar}">
+                                    <button><h5>Calificar</h5></button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+    
+            <section>
+                <h2>TRABAJOS CANCELADOS</h2>
+                <div class="solicitudes-container">
+                    <div class="lista-solicitudes">
+                        <div class="column-header">
+                            <div class="col-servicio"><h3>Servicio</h3></div>
+                            <div class="col-nombre"><h3>Nombre</h3></div>
+                            <div class="col-apellido"><h3>Apellido</h3></div>
+                            <div class="col-matricula"><h3>Matricula</h3></div>
+                            <div class="col-estado"><h3>Estado</h3></div>
+                        </div>
+                        <div class="solicitud" th:each="cancelados : ${cancelados}">
+                            <div class="col-servicio"><h4 th:text="${cancelados.idProveedor.servicio.nombre}">Servicio</h4></div>
+                            <div class="col-nombre"><h4 th:text="${cancelados.idProveedor.usuario.nombre}">Nombre</h4></div>
+                            <div class="col-apellido"><h4 th:text="${cancelados.idProveedor.usuario.apellido}">Apellido</h4></div>
+                            <div class="col-matricula"><h4 th:text="${cancelados.idProveedor.matricula}">Matricula</h4></div>
+                            <div class="col-estado"><h4 th:text="${cancelados.estado}">Estado</h4></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    <footer th:replace="~{/fragments/footer :: footerFragment}"></footer>
 </body>
 </html>
+

@@ -127,7 +127,7 @@ Back:
 
 ● Vista Proveedor:
 Front:
- - Mostrar listas horizontalmente de SOLICITU DE TRABAJO.
+ - Mostrar listas horizontalmente de SOLICITUD DE TRABAJO.
  - Columnas (Nombre y apellido(usuario), Barrio, descripción, contacto(tel), Estado, ACEPTAR(Si el estado es pendiente))
  - Columnas (Nombre y apellido(usuario), Barrio, descripción, contacto(tel), Estado,CANCELAR(Si el estado es aceptado))
 
@@ -142,7 +142,7 @@ Back:
 ● Vista Admin:
 Front: 
  - Confirmacion de boton eliminar("Seguro que desea elemenar el usuario/proveedor").
- Nav: VISTAS (USUARIOS / SERVICIOS / COMENTRAIOS)
+ Nav: VISTAS (USUARIOS / SERVICIOS / COMENTARIOS)
  Usuarios: enlace de la vista principal.
  Servicios: Muestra una lista de servicios con el boton "Eliminar" y debajo el formulario para poder crearlos(ingresando nombre del servicio).
  Comentarios: Lista de comentarios de valoraciones con "Nombre y apellido del usuario" y una seccion de comentario con un boton "Eliminar".
