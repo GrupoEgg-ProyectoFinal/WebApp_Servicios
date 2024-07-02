@@ -1,5 +1,6 @@
 package grupo_app_servicios.appservicios.controladores;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.hibernate.mapping.Map;
@@ -45,6 +46,21 @@ public class ValoracionControlador {
       solicitudServicio.cargarValoracion(UUID.fromString(id), valoracionDTO);
       
       return "redirect:../../contratar/lista";
+
+   }
+
+   //LISTAR VALORACIONES
+   @GetMapping("/listaValoraciones")
+   public String listarValoraciones(Model model) {
+       List<SolicitudDTO> solicitudes = solicitudServicio.listarPorValoracion();
+       model.addAttribute("solicitudes", solicitudes);
+       return "comentariosAdmin.html";
+   }
+
+   @PostMapping("/eliminar/{id}")
+   public String eliminarComentario(@PathVariable String id){
+      valoracionServicio.eliminarComnetario(UUID.fromString(id));
+      return "redirect:../listaValoraciones";
 
    }
 

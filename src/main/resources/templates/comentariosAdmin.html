@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Valoraciones</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Lista de Valoraciones</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Usuario</th>
+                    <th>Proveedor</th>
+                    <th>Servicio</th>
+                    <th>Comentario</th>
+                    <th>Puntaje</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="solicitud : ${solicitudes}">
+                    <td th:text="${solicitud.idUsuario.nombre + ' ' + solicitud.idUsuario.apellido}">Nombre Usuario</td>
+                    <td th:text="${solicitud.idProveedor.usuario.nombre + ' ' + solicitud.idProveedor.usuario.apellido}">Nombre Proveedor</td>
+                    <td th:text="${solicitud.idProveedor.servicio.nombre}">Barrio</td>
+                    <td th:text="${solicitud.idValoracion.comentario}">Comentario</td>
+                    <td th:text="${solicitud.idValoracion.puntaje}">Puntaje</td>
+                    <td>
+                        <form th:action="@{/valoraciones/eliminar/{id}(id=${solicitud.idValoracion.id.toString()})}" method="post">
+                            <button type="submit" class="btn btn-danger">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
