@@ -13,8 +13,8 @@
             </li>
             <li><a th:href="@{/conocenos}">CONOCENOS</a></li>
             <li><a th:href="@{/ayuda}">AYUDA</a></li>
-            <li><a class="target" th:href="@{/contratar/lista}">MIS SOLICITUDES</a>
-            <li><a class="target" th:href="@{/proveedor/misValoraciones}">MIS VALORACIONES</a>
+            <li><a class="target" th:href="@{/contratar/lista}" sec:authorize="hasRole ('USER')">MIS SOLICITUDES</a>
+            <li><a class="target" th:href="@{/proveedor/misValoraciones}" sec:authorize="hasRole ('PROVEEDOR')">MIS VALORACIONES</a>
         </ul>
 
         <ul id="sesion">
