@@ -21,6 +21,8 @@
 
             <ul class="nav-list">
                 <li><a class="target" th:href="@{/dashboard}">PANEL DE ADMINISTRACION</a></li>
+                <li><a class="target" th:href="@{/}">SERVICIOS</a></li>
+                <li><a class="target" th:href="@{/valoraciones/listaValoraciones}">VALORACIONES</a></li>
             </ul>
 
             <ul id="sesion">
@@ -39,15 +41,14 @@
                         <table id="usuariosTable">
                             <thead>
                                 <tr>
-                                    <th>NOMBRE</th>
+                                    <th>NOMBRE Y APELLIDO</th>
                                     <!-- <th>FOTO DE PERFIL</th> -->
-                                    <th>E-MAIL</th>
                                     <th>ROL</th>
                                     <th>ACCIONES</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:each="usuario : ${usuarios}">
+                                <tr th:each="usuario : ${usuarios}" th:if="${usuario.rol.toString() != 'PROVEEDOR'}">
                                     <td th:text="${usuario.nombre+' '+usuario.apellido}">Aver Gaspar</td>
                                     <!-- <td>
                                         <img th:src="@{${usuario.fotoPerfil}}" alt="Foto de perfil" width="50" height="50" src="/img/usuarioLogo.png">
@@ -56,11 +57,11 @@
                                     <td th:text="${usuario.rol}">USUARIO</td>
                                     <td>
                                         <!-- <button class="modificar">Modificar</button> -->
-                                        <a th:href="@{/modificarUsuarioS/__${usuario.id.toString()}__}"><button
+                                        <a th:href="@{/modificarUsuarioS/__${usuario.id.toString()}__}" th:if="${usuario.rol.toString() != 'ADMIN'}"><button
                                                 class="fas fa-feather-alt">Modificar</button></a>
-
-                                        <a th:href="@{/modificarRol/__${usuario.id.toString()}__}"> <button
-                                                class="modificar-rol">Modificar Rol</button></a>
+<!-- 
+                                        <a th:href="@{/modificarRol/__${usuario.id.toString()}__}"  th:if="${usuario.rol.toString() != 'ADMIN'}"> <button
+                                                class="modificar-rol">Modificar Rol</button></a> -->
 
                                         <a th:if="${usuario.rol.toString() == 'USER'}"
                                             th:href="@{/eliminarUsuario/__${usuario.id.toString()}__}">
@@ -89,19 +90,32 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- <tr th:each="usuario : ${usuarios}">
-                                    <td th:text="${usuario.nombre}">Señor Solución</td>
+                                 <!-- th:if="${usuario.rol.toString() == 'USER'}" -->
+                                <tr th:each="proveedor : ${proveedores}"   th:if="${proveedor.usuario.rol.toString() == 'PROVEEDOR'}">
+                                    <td th:text="${proveedor.usuario.nombre+' '+proveedor.usuario.apellido}">Aver Gaspar</td>
+                                    <!-- <td>
+                                        <img th:src="@{${usuario.fotoPerfil}}" alt="Foto de perfil" width="50" height="50" src="/img/usuarioLogo.png">
+                                    </td> -->
+                                    <td th:text="${proveedor.usuario.email}">Avergaspar@gmail.com</td>
+                                    <td th:text="${proveedor.usuario.rol}">USUARIO</td>
                                     <td>
-                                        <img th:src="@{${usuario.fotoPerfil}}" alt="Foto de perfil" width="50" height="50" src="/img/plomero1.png">
+                                        <!-- <button class="modificar">Modificar</button> -->
+                                        <a th:href="@{/modificarUsuarioS/__${proveedor.usuario.id.toString()}__}"><button
+                                                class="fas fa-feather-alt">Modificar</button></a>
+
+                                        <!-- <a th:href="@{/modificarRol/__${proveedor.usuario.id.toString()}__}"> <button
+                                                class="modificar-rol">Modificar Rol</button></a> -->
+
+                                        <!-- <a th:if="${usuario.rol.toString() == 'USER'}"
+                                            th:href="@{/eliminarUsuario/__${usuario.id.toString()}__}">
+                                            <button class="eliminar">Eliminar</button>
+                                        </a> -->
+                                        <a th:if="${proveedor.usuario.rol.toString() == 'PROVEEDOR'}"
+                                            th:href="@{/proveedor/eliminar/__${proveedor.usuario.id.toString()}__}">
+                                            <button class="eliminar">Eliminar</button>
+                                        </a>
                                     </td>
-                                    <td th:text="${usuario.email}">Tedestapo24-7@gmail.com</td>
-                                    <td th:text="${usuario.rol}">PLOMERIA</td>
-                                    <td>
-                                        <button class="modificar">Modificar</button>
-                                        <button class="modificar-rol">Modificar Rol</button>
-                                        <button class="eliminar">Eliminar</button>
-                                    </td>
-                                </tr> -->
+                                </tr>
                             </tbody>
                         </table>
                     </div>

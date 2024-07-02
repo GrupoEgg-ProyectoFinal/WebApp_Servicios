@@ -26,4 +26,8 @@ public interface SolicitudRepositorio extends JpaRepository<SolicitudEntidad, UU
   @Query("SELECT se FROM SolicitudEntidad se WHERE se.idProveedor.id = ?1 AND se.idValoracion IS NOT NULL")
   public List<SolicitudEntidad> buscarSolicitudesCalificadasPorProveedor(UUID idProveedor);
 
+  @Query("SELECT se FROM SolicitudEntidad se WHERE se.idValoracion IS NOT NULL")
+  public List<SolicitudEntidad> listarPorValoracion();
+
+
 }

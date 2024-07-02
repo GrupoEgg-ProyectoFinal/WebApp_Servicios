@@ -90,6 +90,15 @@ public class SolicitudServicio {
                 solicitudEntidad -> MapeadorEntidadADto.mapearSolicitud(solicitudEntidad)).toList();
     }
 
+    // LISTAR POR VALORACION
+    @Transactional(readOnly = true)
+    public List<SolicitudDTO> listarPorValoracion() {
+        List<SolicitudDTO> lista = sRepositorio.listarPorValoracion().stream()
+                .map(solicitudEntidad -> MapeadorEntidadADto.mapearSolicitud(solicitudEntidad)).toList();
+        ;
+        return lista;
+    }
+
     // BUSCAR SOLICITUD POR ID
     @Transactional(readOnly = true)
     public SolicitudEntidad buscarSolicitud(UUID id) {
@@ -141,8 +150,8 @@ public class SolicitudServicio {
     public List<SolicitudDTO> listarSoliConValoracion(UUID id) {
         List<SolicitudDTO> solicitudes = sRepositorio.buscarSolicitudesCalificadasPorProveedor(id).stream()
                 .map(solicitud -> MapeadorEntidadADto.mapearSolicitud(solicitud)).collect(Collectors.toList());
-     
-                return solicitudes;
+
+        return solicitudes;
     }
 
 }
