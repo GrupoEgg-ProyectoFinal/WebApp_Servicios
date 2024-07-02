@@ -135,7 +135,7 @@ p {
 ul.nav-list {
     min-width: 600px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
 }
 
@@ -185,93 +185,138 @@ ul.nav-list {
     background-color: var(--color-oscurecido);
 }
 
-#sesion {
+ul.registro {
     display: flex;
-    gap: 24px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    gap: 16px;
     justify-content: flex-end;
     align-items: center;
 }
 
-/* ESTILOS PAGINA - VISTA SOLICITUDES */
-#vistaSolicitudes {
-    background-color: var(--color-medio);
-    color: white;
-    border-top: 2px solid white;
-}   
-
-#vistaSolicitudes h2 {
-    color: var(--titulo-pintado);
-    padding: 15px;
+ul.registro li {
+    display: flex;
+    align-items: center;
 }
 
-.solicitudes-container {
-    background: radial-gradient(circle, rgba(26, 26, 26, 0.75) 0%, rgba(10, 10, 10, 0.75) 66%);
+ul.registro a {
+    padding: 8px 16px;
+    text-decoration: none;
+    color: white;
+    background-color: var(--color-oscurecido);
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+ul.registro a:hover {
+    background-color: var(--color);
+}
+
+ul.registro {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+}
+
+
+/* ESTILOS PAGINA - VALORACIONES */
+main {
+    background: rgb(26, 26, 26);
+    background: radial-gradient(
+        circle,
+        rgba(26, 26, 26, 1) 0%,
+        rgba(10, 10, 10, 1) 66%
+    );
+    background-image: url("../img/background2.png");
+    height: calc(100vh - 80px);
+    border-top: 1px solid white;
+    justify-content: center;
+}
+
+h2 {
+    color: var(--titulo-pintado);
+}
+
+.valoraciones-container {
     width: 90%;
-    max-height: 80vh; 
+    height: 85vh;
     overflow-y: auto;
     padding: 16px;
     border: 2px solid #ccc;
     border-radius: 12px;
-    margin-bottom: 20px;
+    background-color: rgba(0, 0, 0, 0.75);
+    margin: 0 auto;
 }
 
-.lista-solicitudes {
+.valoraciones {
     display: flex;
     flex-direction: column;
     width: 100%;
-}
-
-.column-header, .solicitud {
-    display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    margin-bottom: 10px;
 }
 
-.column-header {
-    border-bottom: 2px solid #e4e299;
-    padding-bottom: 10px;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+}
+
+thead {
+    background-color: var(--color-oscurecido);
     color: var(--titulo-pintado);
 }
 
-.solicitud {
-    border-bottom: 1px solid #ccc;
-    padding: 10px 0;
-}
-
-.column-header > div, .solicitud > div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    min-height: 50px;
-}
-
-.col-servicio, .col-nombre, .col-apellido, .col-matricula, .col-estado, .col-accion {
-    flex: 2;
-    padding: 0 10px;
+thead th {
+    color: var(--titulo-pintado);
+    padding: 16px;
+    font-size: 16px;
     text-align: center;
+    border-bottom: 2px solid #e4e299;
 }
 
-.col-accion {
-    flex: 1;
+tbody td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ccc;
+}
+
+tbody tr:nth-child(even) {
+    background-color: var(--color);
 }
 
 button {
     padding: 8px 12px;
+    margin: 0 4px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    background-color: var(--titulo-pintado);
-    color: #000;
-    transition: background-color 0.5s;
+    transition: background-color 0.3s;
 }
 
-button:hover {
-    background-color: #fcfcfc;
-    color: var(--color);
+button.modificar-rol, button.eliminar {
+    background-color: var(--color-oscurecido);
+    color: white;
 }
 
-button:hover h5 {
-    cursor: pointer;
+button.fas.fa-feather-alt {
+    background-color: var(--color-oscurecido);
+    color: white;
+}
+
+button.fas.fa-feather-alt:hover, button.modificar-rol:hover {
+    background-color: white;
+    color: var(--color-oscurecido);
+}
+
+button.eliminar {
+    background-color: red;
+    color: white;
+}
+
+button.eliminar:hover {
+    background-color: white;
+    color: red;
 }

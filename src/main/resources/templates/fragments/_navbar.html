@@ -17,19 +17,16 @@
             <li><a class="target" th:href="@{/proveedor/misValoraciones}" sec:authorize="hasRole ('PROVEEDOR')">MIS VALORACIONES</a>
         </ul>
 
-        <ul id="sesion">
-            <!-- <li class="cerrarSesion">
-            <li sec:authorize="hasAnyRole('ROL_USER', 'ROL_PROVEEDOR', 'ROL_ADMIN')"><a href="/logout">CERRAR SESIÓN</a>
+        <ul class="nav-list registro">
+            <li>
+                <a th:href="@{/perfil}" class="buttonPerfil">MI PERFIL</a>
             </li>
-            </li> -->
-            <ul class="registro">
-                <li th:if="${session.usuarioEnSesion == null}">
-                    <a th:href="@{/login}" class="dropbtn">INICIAR SESIÓN</a>
-                </li>
-                <li th:if="${session.usuarioEnSesion != null}">
-                    <a th:href="@{/logout}" class="dropbtn">CERRAR SESIÓN</a>
-                </li>
-            </ul>
+            <li th:if="${session.usuarioEnSesion == null}">
+                <a th:href="@{/login}" class="dropbtn">INICIAR SESIÓN</a>
+            </li>
+            <li th:if="${session.usuarioEnSesion != null}">
+                <a th:href="@{/logout}" class="dropbtn">CERRAR SESIÓN</a>
+            </li>
             <li class="desplegable" th:if="${session.usuarioEnSesion == null}">
                 <a href="javascript:void(0)" class="dropbtn">REGISTRARSE</a>
                 <div class="desplegable-content">
@@ -37,5 +34,6 @@
                     <a th:href="@{/registrarProveedor}">PROVEEDOR</a>
                 </div>
             </li>
+        </ul>                
     </nav>
 </header>

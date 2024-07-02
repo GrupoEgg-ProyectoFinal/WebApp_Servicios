@@ -3,33 +3,15 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Trabajos Finalizados</title>
-    <style>
-        .admin-column {
-            width: 100%;
-            padding: 20px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th,
-        td {
-            padding: 10px;
-            text-align: left;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #f2f2f2;
-        }
-    </style>
+    <title>Valoraciones clientes</title>
+    <link rel="stylesheet" href="/styles/styleValoraciones.css">
+    <link rel="stylesheet" href="/styles/styleFooter.css">
 </head>
 
 <body>
-    <div class="admin-column">
+    <header th:replace="~{/fragments/_navbar :: Navbar}"></header>
+    <main>
+    <div class="valoraciones">
         <h2>TRABAJOS FINALIZADOS</h2>
         <table id="finalizadosTable">
             <thead>
@@ -67,6 +49,8 @@
             </tbody>
         </table>
     </div>
+    </main>
+    <footer th:replace="~{/fragments/footer :: footerFragment}"></footer>
 </body>
 
 </html>

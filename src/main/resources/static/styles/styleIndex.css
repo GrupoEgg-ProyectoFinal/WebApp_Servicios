@@ -138,6 +138,10 @@ ul.nav-list {
     align-items: center;
 }
 
+.nav-list.registro {
+    justify-content: flex-end;
+}
+
 .account-options {
     display: flex;
     gap: 24px;
