@@ -120,7 +120,7 @@ public class UsuarioServicio implements UserDetailsService {
         if (user == null) return null;
 
         List<GrantedAuthority> permisos = new ArrayList<GrantedAuthority>();
-        GrantedAuthority perms = new SimpleGrantedAuthority("ROL_" + user.getRol().toString());
+        GrantedAuthority perms = new SimpleGrantedAuthority("ROLE_" + user.getRol().toString());
 
         permisos.add(perms);
 
