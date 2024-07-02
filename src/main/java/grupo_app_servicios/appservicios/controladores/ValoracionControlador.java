@@ -2,7 +2,9 @@ package grupo_app_servicios.appservicios.controladores;
 
 import java.util.UUID;
 
+import org.hibernate.mapping.Map;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,7 +20,7 @@ import grupo_app_servicios.appservicios.servicios.ValoracionServicio;
 import grupo_app_servicios.appservicios.utilidades.MapeadorEntidadADto;
 import jakarta.servlet.http.HttpSession;
 
-@RestController
+@Controller
 @RequestMapping("/valoraciones")
 public class ValoracionControlador {
 
@@ -28,17 +30,21 @@ public class ValoracionControlador {
    private SolicitudServicio solicitudServicio;
 
    // CALIFICAR FORMULARIO
-   @GetMapping("/calificar")
-   public String calificar() {
+   @GetMapping("/calificar/{id}")
+   public String calificar(@PathVariable String id, Model modelo) {
+      SolicitudDTO solicitud = MapeadorEntidadADto.mapearSolicitud(solicitudServicio.buscarSolicitud(UUID.fromString(id)));
+      modelo.addAttribute("solicitud", solicitud);
+      modelo.addAttribute("valoracionDTO", new ValoracionDTO());
       return "calificar.html";
    }
 
+
    // CARGAR CALIFICACION
-   @PostMapping("/calificar/{id}")
-   public String cargaCalificacion(@PathVariable String id,
-         @ModelAttribute("valoracionDTO") ValoracionDTO valoracionDTO, Model modelo) {
+   @PostMapping("/calificarS/{id}")
+   public String cargaCalificacion(@PathVariable String id,@ModelAttribute("valoracionDTO") ValoracionDTO valoracionDTO, Model modelo) {
       solicitudServicio.cargarValoracion(UUID.fromString(id), valoracionDTO);
-      return "redirect:../contratar/lista";
+      
+      return "redirect:../../contratar/lista";
 
    }
 

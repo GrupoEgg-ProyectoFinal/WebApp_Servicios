@@ -74,14 +74,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="finalizados : ${finalizados}">
+                <tr th:each="finalizados : ${finalizados}" >
                     <td th:text="${finalizados.idProveedor.servicio.nombre}">Servicio</td>
                     <td th:text="${finalizados.idProveedor.usuario.nombre}">Nombre</td>
                     <td th:text="${finalizados.idProveedor.usuario.apellido}">Apellido</td>
                     <td th:text="${finalizados.idProveedor.matricula}">Matricula</td>
                     <td th:text="${finalizados.estado}">Estado</td>
                     <td>
-                    <a  th:href="@{/valoraciones/calificar}">
+                    <a  th:href="@{/valoraciones/calificar/{id}(id=${finalizados.id.toString()})}" th:if="${finalizados.idValoracion == null}">
                         <button class="btn btn-primary">Calificar</button>
                     </a>
                     </td>

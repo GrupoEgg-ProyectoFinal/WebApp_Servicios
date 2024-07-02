@@ -19,11 +19,11 @@ REALIZADO:
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 FALTANTE:
-Los ⚠️ son los requeridos del proyecto por el cliente, ya sea como caso de uso o como requerimiento técnico
+Los ⚠️ son los requeridos del proyecto por el cliente, ya sea como caso de uso o como requerimiento técnico.
 
 EXTRA a definir xd:
 * Que el usuario pueda abrir solicitudes sin un proveedor asignado. Y que en la navbar del proveedor haya una sección de Buscar solicitudes o algo así,
-para que el proveedor pueda elegir si las quiere. El usuario acepta si ese proveedor puede tomar la solicitud o no
+para que el proveedor pueda elegir si las quiere. El usuario acepta si ese proveedor puede tomar la solicitud o no.
 
 
 ADIMN:
@@ -33,13 +33,14 @@ SUPER-ADMIN:
 ● Utilizar atributos booleanos de alta y baja de usuarios (y poder modificarlos).
 
 
+
 SOLICITUD:
 ☑ ⚠️ El proveedor puede aceptar un trabajo o cancelarlo. También puede marcarlo como finalizado una vez que el trabajo haya sido aceptado.
-● ⚠️ El usuario puede pedir un servicio o cancelarlo. Una vez aceptado el trabajo puede cancelarlo o darlo por finalizado.
-● ⚠️ Una vez que el trabajo fue finalizado el usuario está habilitado a calificar el servicio, calificación que se agregará al perfil del proveedor.
-● ⚠️ El usuario puede contactar al proveedor, calcular un estimativo de los honorarios del proveedor por horas y calificarlo luego de prestado el servicio.
-● ⚠️ Cada PROVEEDOR puede ser calificado por quienes hayan utilizado su servicio.
-● ⚠️ Un USER puede acceder a la app, navegar en los servicios que quiera, y seleccionar a un proveedor de servicios para contactarlo o para calificarlo.
+☑ ⚠️ El usuario puede pedir un servicio o cancelarlo. Una vez aceptado el trabajo puede cancelarlo o darlo por finalizado.
+☑ ⚠️ Una vez que el trabajo fue finalizado el usuario está habilitado a calificar el servicio, calificación que se agregará al perfil del proveedor.
+● ⚠️ Calcular un estimativo de los honorarios del proveedor por horas.
+☑⚠️ Cada PROVEEDOR puede ser calificado por quienes hayan utilizado su servicio.
+
 
 
 MODIFICACIONES DE USUARIO/PROVEEDORES:
@@ -143,7 +144,7 @@ Front:
  - Confirmacion de boton eliminar("Seguro que desea elemenar el usuario/proveedor").
  Nav: VISTAS (USUARIOS / SERVICIOS / COMENTRAIOS)
  Usuarios: enlace de la vista principal.
- Servicios: Muestra una lista de servicios con el boton "Elimiar" y debajo el formulario para poder crearlos(ingresando nombre del servicio).
+ Servicios: Muestra una lista de servicios con el boton "Eliminar" y debajo el formulario para poder crearlos(ingresando nombre del servicio).
  Comentarios: Lista de comentarios de valoraciones con "Nombre y apellido del usuario" y una seccion de comentario con un boton "Eliminar".
 
 Back:

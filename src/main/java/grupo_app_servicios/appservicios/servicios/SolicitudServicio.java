@@ -3,6 +3,7 @@ package grupo_app_servicios.appservicios.servicios;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -133,6 +134,15 @@ public class SolicitudServicio {
     @Transactional
     public void eliminarSolicitud(UUID id) {
         sRepositorio.deleteById(id);
+    }
+
+    // LISTAR SOLICITUDES CON VALORACION
+    @Transactional(readOnly = true)
+    public List<SolicitudDTO> listarSoliConValoracion(UUID id) {
+        List<SolicitudDTO> solicitudes = sRepositorio.buscarSolicitudesCalificadasPorProveedor(id).stream()
+                .map(solicitud -> MapeadorEntidadADto.mapearSolicitud(solicitud)).collect(Collectors.toList());
+     
+                return solicitudes;
     }
 
 }
