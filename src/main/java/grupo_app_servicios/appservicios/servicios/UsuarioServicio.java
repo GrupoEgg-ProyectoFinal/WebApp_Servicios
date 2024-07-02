@@ -1,8 +1,8 @@
 package grupo_app_servicios.appservicios.servicios;
 
-
 import grupo_app_servicios.appservicios.Dto.UsuarioDTO;
 import grupo_app_servicios.appservicios.entidades.UsuarioEntidad;
+import grupo_app_servicios.appservicios.enumeraciones.Barrios;
 import grupo_app_servicios.appservicios.enumeraciones.Rol;
 import grupo_app_servicios.appservicios.excepciones.MiExcepcion;
 import grupo_app_servicios.appservicios.repositorios.UsuarioRepositorio;
@@ -33,8 +33,8 @@ import java.util.stream.Collectors;
 public class UsuarioServicio implements UserDetailsService {
     @Autowired
     UsuarioRepositorio usuarioRepositorio;
-    
-    // UTILIDADES DE LA CLASE 
+
+    // UTILIDADES DE LA CLASE
     private void validar(String nombre, String email) throws MiExcepcion {
         if (nombre == null || nombre.isEmpty()) {
             throw new MiExcepcion("El nombre no puede estar vacío");
@@ -61,9 +61,9 @@ public class UsuarioServicio implements UserDetailsService {
 
     // MÉTODO CREAR
     @Transactional
-    public void  crearUsuario(UsuarioDTO usuarioDTO, String contrasena2){
-        //validar que las contraseñas sean iguales 
-        
+    public void crearUsuario(UsuarioDTO usuarioDTO, String contrasena2) {
+        // validar que las contraseñas sean iguales
+
         UsuarioEntidad usuario = new UsuarioEntidad();
         usuario.setNombre(usuarioDTO.getNombre());
         usuario.setApellido(usuarioDTO.getApellido());
@@ -92,8 +92,7 @@ public class UsuarioServicio implements UserDetailsService {
         validar(usuarioDTO.getNombre(), usuarioDTO.getEmail());
 
         UsuarioEntidad usuario = usuarioRepositorio.findById(usuarioDTO.getId()).orElseThrow(
-            () -> new MiExcepcion("No se encontró el usuario con el id ingresado.")
-        );
+                () -> new MiExcepcion("No se encontró el usuario con el id ingresado."));
 
         usuario.setNombre(usuarioDTO.getNombre());
         usuario.setApellido(usuarioDTO.getApellido());
@@ -117,7 +116,8 @@ public class UsuarioServicio implements UserDetailsService {
     public UserDetails loadUserByUsername(String emailUsuario) throws UsernameNotFoundException {
         UsuarioEntidad user = usuarioRepositorio.buscarPorEmail(emailUsuario);
 
-        if (user == null) return null;
+        if (user == null)
+            return null;
 
         List<GrantedAuthority> permisos = new ArrayList<GrantedAuthority>();
         GrantedAuthority perms = new SimpleGrantedAuthority("ROLE_" + user.getRol().toString());
@@ -131,11 +131,11 @@ public class UsuarioServicio implements UserDetailsService {
         return new User(user.getEmail(), user.getContrasena(), permisos);
     }
 
-    //BUSCAR POR MAIL 
+    // BUSCAR POR MAIL
     // Método para buscar usuario por email
     public UsuarioDTO buscarPorEmail(String email) {
         return MapeadorEntidadADto.mapearUsuario(usuarioRepositorio.buscarPorEmail(email));
-    } 
+    }
 
     // CAMBIAR ROL
     @Transactional
@@ -145,10 +145,15 @@ public class UsuarioServicio implements UserDetailsService {
 
         if (usuario.isPresent()) {
             UsuarioEntidad respuestaUsuario = usuario.get();
-            if (respuestaUsuario.getRol().equals(Rol.USER)) {
-                respuestaUsuario.setRol(Rol.PROVEEDOR);
-            } else if (respuestaUsuario.getRol().equals(Rol.PROVEEDOR)) {
-                respuestaUsuario.setRol(Rol.USER);
+            if (respuestaUsuario.getRol().equals(Rol.USER) || respuestaUsuario.getRol().equals(Rol.PROVEEDOR)) {
+                respuestaUsuario.setRol(Rol.ADMIN);
+            } else if (respuestaUsuario.getRol().equals(Rol.ADMIN)) {
+                if (respuestaUsuario.getBarrios().equals(Barrios.PROVEEDOR)) {
+                    respuestaUsuario.setRol(Rol.PROVEEDOR);
+                } else {
+                    respuestaUsuario.setRol(Rol.USER);
+                }
+
             }
 
             usuarioRepositorio.save(respuestaUsuario);

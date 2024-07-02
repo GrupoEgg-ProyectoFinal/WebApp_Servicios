@@ -15,7 +15,7 @@ public class SeguridadWeb {
         http
             .authorizeHttpRequests(
                 (authorize) -> authorize
-                    .requestMatchers("/dashboard").hasRole("ADMIN")
+                    .requestMatchers("/dashboard").hasAnyRole("ADMIN","SUPER")
                     .requestMatchers("/css/", "/js/", "/img/", "/**").permitAll()
                     .anyRequest().permitAll()
             )
