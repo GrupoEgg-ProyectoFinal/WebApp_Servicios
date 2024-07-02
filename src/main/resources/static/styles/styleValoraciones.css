@@ -135,7 +135,7 @@ p {
 ul.nav-list {
     min-width: 600px;
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
     align-items: center;
 }
 
@@ -185,12 +185,41 @@ ul.nav-list {
     background-color: var(--color-oscurecido);
 }
 
-#sesion {
+ul.registro {
     display: flex;
-    gap: 24px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    gap: 16px;
     justify-content: flex-end;
     align-items: center;
 }
+
+ul.registro li {
+    display: flex;
+    align-items: center;
+}
+
+ul.registro a {
+    padding: 8px 16px;
+    text-decoration: none;
+    color: white;
+    background-color: var(--color-oscurecido);
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+ul.registro a:hover {
+    background-color: var(--color);
+}
+
+ul.registro {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+}
+
 
 /* ESTILOS PAGINA - VALORACIONES */
 main {
