@@ -39,7 +39,7 @@
 <body>
     <div class="container mt-5">
         <h2>Formulario de Valoración</h2>
-        <form action="@{valoraciones/calificar/{id}(id=${solicitud.id.toString()})}" method="post">
+        <form th:action="@{/valoraciones/calificarS/{Id}(Id=${solicitud.id})}" method="post"  th:object="${valoracionDTO}">
             <div class="form-group">
                 <label for="comentario">Comentario</label>
                 <textarea id="comentario" name="comentario" class="form-control"></textarea>

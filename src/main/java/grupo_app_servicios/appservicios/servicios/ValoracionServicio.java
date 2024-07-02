@@ -1,10 +1,14 @@
 package grupo_app_servicios.appservicios.servicios;
 
+import grupo_app_servicios.appservicios.Dto.SolicitudDTO;
 import grupo_app_servicios.appservicios.Dto.ValoracionDTO;
 import grupo_app_servicios.appservicios.entidades.ValoracionEntidad;
+import grupo_app_servicios.appservicios.repositorios.SolicitudRepositorio;
 import grupo_app_servicios.appservicios.repositorios.ValoracionRepositorio;
+import grupo_app_servicios.appservicios.utilidades.MapeadorEntidadADto;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,12 +20,12 @@ public class ValoracionServicio {
 
     @Autowired
     private ValoracionRepositorio valoracionRepositorio;
+    @Autowired
+    private SolicitudRepositorio solicitudRepositorio;
 
     // LISTAR TODAS LAS VALORACIONES DE LA BDD
     public List<ValoracionDTO> obtenerTodasLasValoraciones() {
-        return valoracionRepositorio.findAll().stream()
-                .map(this::convertirADTO)
-                .collect(Collectors.toList());
+        return valoracionRepositorio.findAll().stream().map(this::convertirADTO).collect(Collectors.toList());
     }
 
     // OBTENER VALORACION POR ID
@@ -75,4 +79,17 @@ public class ValoracionServicio {
         valoracionRepositorio.save(entidad);
         return convertirADTO(entidad);
     }
+
+    //LISTAR VALORACIONES POR PROVEEDOR
+    public List<ValoracionDTO> listarPorProveedor(UUID id){
+       List<SolicitudDTO> solicitudes = solicitudRepositorio.buscarSolicitudesCalificadasPorProveedor(id).stream().map(solicitud->MapeadorEntidadADto.mapearSolicitud(solicitud)).collect(Collectors.toList());
+        
+       List<ValoracionDTO> valoraciones = solicitudes.stream().map(solicitud -> solicitud.getIdValoracion()).collect(Collectors.toList());
+
+       return valoraciones;
+    }
+
+
+
+
 }
