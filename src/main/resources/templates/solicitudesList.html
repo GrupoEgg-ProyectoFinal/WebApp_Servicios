@@ -85,7 +85,7 @@
                             <div class="col-matricula"><h4 th:text="${finalizados.idProveedor.matricula}">Matricula</h4></div>
                             <div class="col-estado"><h4 th:text="${finalizados.estado}">Estado</h4></div>
                             <div class="col-accion">
-                                <a th:href="@{/valoraciones/calificar}">
+                                <a th:href="@{/valoraciones/calificar/{id}(id=${finalizados.id.toString()})}" th:if="${finalizados.idValoracion == null}">
                                     <button><h5>Calificar</h5></button>
                                 </a>
                             </div>
