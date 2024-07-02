@@ -26,7 +26,9 @@ public class ImagenProvControlador {
 
     @Autowired
     private ImagenProvServicio imagenServicio;
-
+    @Autowired
+    ProveedorServicio2 pServicio;
+    // CARGAR IMAGEN
     @PostMapping("/subir")
     public String subirImagen(@RequestParam("archivo") MultipartFile archivo, Model model) {
         try {
@@ -38,9 +40,8 @@ public class ImagenProvControlador {
         return "resultadoImagen";
     }
 
-    @Autowired
-    ProveedorServicio2 pServicio;
-
+   
+    // MOSTRAR IMAGEN
     @GetMapping("/perfil/{id}")
     public ResponseEntity<byte[]> imagenUsuario(@PathVariable String id) {
 
