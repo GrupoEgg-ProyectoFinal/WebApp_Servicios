@@ -242,6 +242,7 @@ ul.nav-list {
 .valoracion {
     border-bottom: 1px solid #ccc;
     padding: 10px 0;
+    font-size: 20px;
 }
 
 .column-header > div, .valoracion > div {
