@@ -15,6 +15,7 @@
             <li><a th:href="@{/ayuda}">AYUDA</a></li>
             <li><a class="target" th:href="@{/contratar/lista}" sec:authorize="hasRole ('USER')">MIS SOLICITUDES</a>
             <li><a class="target" th:href="@{/proveedor/misValoraciones}" sec:authorize="hasRole ('PROVEEDOR')">MIS VALORACIONES</a>
+            <li><a class="target" th:href="@{/cambio}" sec:authorize="hasRole ('USER')">TRABAJA CON NOSOTROS!</a>
         </ul>
 
         <ul class="nav-list registro">

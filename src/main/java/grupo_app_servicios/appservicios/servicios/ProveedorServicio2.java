@@ -56,7 +56,7 @@ public class ProveedorServicio2 {
         try {
             // Crear una nueva instancia de Proveedor a partir de ProveedorDTO
             ProveedorEntidad proveedor = new ProveedorEntidad();
-            
+
             // Obtiene el usuarioDTO que se le asignó desde el controlador y el front,
             // y después mapea un usuarioEntidad en base a ese
             UsuarioDTO usuarioDTO = proveedorDTO.getUsuario();
@@ -70,7 +70,8 @@ public class ProveedorServicio2 {
             datosDeUsuario.setBarrios(Barrios.PROVEEDOR);
             datosDeUsuario.setEstado(true);
 
-            //guarda esta entidad de usuario y despues lo setea en la entidad de proveedor que se está haciendo
+            // guarda esta entidad de usuario y despues lo setea en la entidad de proveedor
+            // que se está haciendo
             uRepositorio.save(datosDeUsuario);
             proveedor.setUsuario(datosDeUsuario);
 
@@ -80,9 +81,11 @@ public class ProveedorServicio2 {
             if (imagenFile != null && !imagenFile.isEmpty()) {
                 ImagenProvEntidad imagen = imgServicio.guardar(imagenFile);
                 proveedor.setFoto(imagen);
-                // <img th:src="@{'/imagen/perfil/' + *{id.toString()}}" alt="Foto del proveedor">
-            }else {
-                // Cargar la imagen predeterminada desde el sistema de archivos o un recurso fijo
+                // <img th:src="@{'/imagen/perfil/' + *{id.toString()}}" alt="Foto del
+                // proveedor">
+            } else {
+                // Cargar la imagen predeterminada desde el sistema de archivos o un recurso
+                // fijo
                 ImagenProvEntidad imagenPredeterminada = imgServicio.guardarImagenPredeterminada();
                 proveedor.setFoto(imagenPredeterminada);
             }
@@ -110,8 +113,7 @@ public class ProveedorServicio2 {
         proveedores = pRepositorio.findAll();
 
         return proveedores.stream().map(
-            proveedor -> MapeadorEntidadADto.mapearProveedor(proveedor)
-        ).toList();
+                proveedor -> MapeadorEntidadADto.mapearProveedor(proveedor)).toList();
     }
 
     // LISTAR SEGÚN SERVICIO
@@ -122,8 +124,7 @@ public class ProveedorServicio2 {
         proveedores = pRepositorio.buscarProveedoresPorServicio(nombreServicio);
 
         return proveedores.stream().map(
-            proveedor -> MapeadorEntidadADto.mapearProveedor(proveedor)
-        ).toList();
+                proveedor -> MapeadorEntidadADto.mapearProveedor(proveedor)).toList();
     }
 
     // BUSCAR PROVEEDOR POR ID
@@ -135,7 +136,8 @@ public class ProveedorServicio2 {
     //
     // MODIFICAR PROVEEDOR
     @Transactional
-    public void modificarProveedor(ProveedorDTO proveedorDTO, UsuarioDTO usuarioDTO, MultipartFile imagenFile) throws MiExcepcion {
+    public void modificarProveedor(ProveedorDTO proveedorDTO, UsuarioDTO usuarioDTO, MultipartFile imagenFile)
+            throws MiExcepcion {
         // Se buscar por id y se guarda en un optional
         ProveedorEntidad proveedor = pRepositorio.findById(proveedorDTO.getId()).orElse(null);
         UsuarioEntidad datosDeUsuario = new UsuarioEntidad();
@@ -172,8 +174,8 @@ public class ProveedorServicio2 {
         pRepositorio.deleteById(proveedor.getId());
     }
 
-
-    // metodo que por el momento no se utiliza (cuándo se pueda aplicar la visualizacion de imagenes ver si hace falta)
+    // metodo que por el momento no se utiliza (cuándo se pueda aplicar la
+    // visualizacion de imagenes ver si hace falta)
     public ImagenProvDTO obtenerImagenPorId(UUID id) {
         Optional<ProveedorEntidad> proveedorOptional = pRepositorio.findById(id);
         if (proveedorOptional.isPresent()) {
@@ -190,9 +192,47 @@ public class ProveedorServicio2 {
         }
     }
 
-    public ProveedorDTO buscarPorIdUsuario(UUID idUsuario){
-             return MapeadorEntidadADto.mapearProveedor(pRepositorio.buscarPorIdUsuario(idUsuario));
+    public ProveedorDTO buscarPorIdUsuario(UUID idUsuario) {
+        return MapeadorEntidadADto.mapearProveedor(pRepositorio.buscarPorIdUsuario(idUsuario));
 
     }
-    
+
+    @Transactional
+    public void crearProveedorPorUsuario(UUID id, ProveedorDTO proveedorDTO, MultipartFile imagenFile) throws MiExcepcion {
+        try {
+            UsuarioEntidad usuario = uRepositorio.findById(id).orElse(null);
+            usuario.setRol(Rol.PROVEEDOR);
+            uRepositorio.save(usuario);
+            ProveedorEntidad proveedor = new ProveedorEntidad();
+            proveedor.setUsuario(usuario);
+
+            proveedor.setMatricula(proveedorDTO.getMatricula());
+            proveedor.setDescripcion(proveedorDTO.getDescripcion());
+            // Asignar la imagen al proveedor si se proporcionó una en el formulario
+            if (imagenFile != null && !imagenFile.isEmpty()) {
+                ImagenProvEntidad imagen = imgServicio.guardar(imagenFile);
+                proveedor.setFoto(imagen);
+                // <img th:src="@{'/imagen/perfil/' + *{id.toString()}}" alt="Foto del
+                // proveedor">
+            } else {
+                // Cargar la imagen predeterminada desde el sistema de archivos o un recurso
+                // fijo
+                ImagenProvEntidad imagenPredeterminada = imgServicio.guardarImagenPredeterminada();
+                proveedor.setFoto(imagenPredeterminada);
+            }
+            // Asignar servicio si está presente en el DTO
+            if (proveedorDTO.getServicio() != null) {
+                ServicioEntidad servicio = sRepositorio.findById(proveedorDTO.getServicio().getId())
+                        .orElseThrow(() -> new RuntimeException(
+                                "Servicio no encontrado con ID: " + proveedorDTO.getServicio().getId()));
+                proveedor.setServicio(servicio);
+            }
+
+            // Guardar el proveedor en la base de datos
+            pRepositorio.save(proveedor);
+        } catch (MiExcepcion e) {
+            throw new MiExcepcion("Error al guardar la imagen: " + e.getMessage());
+        }
+
+    }
 }
