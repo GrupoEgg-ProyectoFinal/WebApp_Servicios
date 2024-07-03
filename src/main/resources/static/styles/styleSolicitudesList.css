@@ -117,6 +117,43 @@ p {
 }
 
 /*NAVEGACIÓN*/
+.navbar {
+    width: 100%;
+    min-height: 80px;
+    padding: 0 96px;
+    background-color: rgb(0, 0, 0);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo-contenedor {
+    display: flex;
+    align-items: center;
+}
+
+.logo-contenedor a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    height: 84px;
+}
+
+.nombreEmpresa {
+    color: rgb(241, 241, 124);
+    text-shadow: 0 0 20px rgba(241, 241, 107, 0.8);
+    font-size: 36px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/*NAVEGACIÓN*/
 .nav-list {
     display: flex;
     gap: 22px;
@@ -137,6 +174,10 @@ ul.nav-list {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.nav-list.registro {
+    justify-content: flex-end;
 }
 
 .account-options {
