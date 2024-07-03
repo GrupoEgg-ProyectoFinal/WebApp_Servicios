@@ -20,7 +20,7 @@
 
         <ul class="nav-list registro">
             <li>
-                <a th:href="@{/perfil}" class="buttonPerfil">MI PERFIL</a>
+                <a th:href="@{/perfil}" class="buttonPerfil" sec:authorize="hasAnyRole ('USER','PROVEEDOR')">MI PERFIL</a>
             </li>
             <li th:if="${session.usuarioEnSesion == null}">
                 <a th:href="@{/login}" class="dropbtn">INICIAR SESIÓN</a>

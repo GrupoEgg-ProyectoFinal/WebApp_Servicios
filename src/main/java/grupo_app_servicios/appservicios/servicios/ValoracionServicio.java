@@ -75,7 +75,7 @@ public class ValoracionServicio {
     public ValoracionDTO eliminarComnetario(UUID id) {
         ValoracionEntidad entidad = valoracionRepositorio.findById(id).orElse(null);
 
-        entidad.setComentario("Su comentario ha sido eliminado por infrigir las normas de la plataforma.");
+        entidad.setComentario("El comentario ha sido eliminado por infrigir las normas de la plataforma.");
         valoracionRepositorio.save(entidad);
         return convertirADTO(entidad);
     }
