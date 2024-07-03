@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio Sesión Usuario</title>
+    <link rel="stylesheet" href="/styles/styleSesionUsuario&Proveedor.css">
+    <link rel="stylesheet" href="/styles/styleFooter.css">
+</head>
+
+
+<body>
+    <header th:replace="~{/fragments/_navbar :: Navbar}"></header>
+
+    <header class="header">
+        <section class="contenedorMain">
+            <div class="tituloBiblioteca">
+                <a class="navbar-brand" th:text="'Error ' + ${codigo} "></a>
+                <p class="tituloLibros" th:text="${mensaje}"></p>
+            </div>
+
+        </section>
+    </header>
+
+    <footer th:replace="~{/fragments/footer :: footerFragment}"></footer>
+
+
+
+
+
+</body>
+
+</html>
