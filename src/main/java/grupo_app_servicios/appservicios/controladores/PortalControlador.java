@@ -49,6 +49,7 @@ public class PortalControlador {
     // REGISTRO DE USUARIO
     @GetMapping("/registrarUsuario")
     public String registrar(Model model) {
+
         // Inicializa un nuevo objeto UsuarioDTO
         UsuarioDTO usuarioDTO = new UsuarioDTO();
         // Agrega el objeto usuarioDTO al modelo
@@ -59,9 +60,15 @@ public class PortalControlador {
 
    // REGISTRAR USUARIO
     @PostMapping("/guardarUsuario")
-    public String guardarUsuario(@ModelAttribute UsuarioDTO usuarioDTO, String contrasena2) {
-        uServicio.crearUsuario(usuarioDTO, contrasena2);
-        return "redirect:/";
+    public String guardarUsuario(@ModelAttribute UsuarioDTO usuarioDTO, String contrasena2,Model modelo) throws MiExcepcion {
+        try {
+            uServicio.crearUsuario(usuarioDTO, contrasena2);
+            return "redirect:/";
+        } catch(MiExcepcion ex) {
+            modelo.addAttribute("error", ex.getMessage());
+            return "redirect:/registrarUsuario";
+        }
+       
     }
 
     // REGISTRO DE PROVEEDOR
@@ -83,18 +90,16 @@ public class PortalControlador {
 
    // REGISTRAR PROVEEDRO
     @PostMapping("/guardarProveedor")
-    public String registrarProveedor(@ModelAttribute ProveedorDTO proveedorDTO, MultipartFile imagenFile, Model model,
-            String idServicio) {
-        // System.out.println(proveedorDTO.toString());
+    public String registrarProveedor(@ModelAttribute ProveedorDTO proveedorDTO, MultipartFile imagenFile, Model modelo,
+            String idServicio)  throws MiExcepcion {
         try {
             // busca el servicio seleccionado y se asigno al proveedor DTO
             proveedorDTO.setServicio(sServicio.buscarServicioPorId(UUID.fromString(idServicio)));
 
             pServicio.crearProveedor(proveedorDTO, imagenFile);
-            model.addAttribute("mensaje", "Proveedor registrado exitosamente");
-        } catch (MiExcepcion e) {
-            model.addAttribute("error", e.getMessage());
-            System.out.println(e.getMessage());
+            modelo.addAttribute("mensaje", "Proveedor registrado exitosamente");
+        } catch (MiExcepcion ex) {
+            modelo.addAttribute("error", ex.getMessage());
             return "redirect:/registrarProveedor";
         }
         return "index.html";

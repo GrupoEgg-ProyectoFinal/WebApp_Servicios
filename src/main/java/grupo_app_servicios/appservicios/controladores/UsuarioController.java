@@ -49,14 +49,15 @@ public class UsuarioController {
 
     // MODIFICAR USUARIO POST
     @PostMapping("/modificarUsuario/{id}")
-    public String modificarUsuario(@PathVariable String id, @ModelAttribute UsuarioDTO usuarioDTO) {
+    public String modificarUsuario(@PathVariable String id, @ModelAttribute UsuarioDTO usuarioDTO, Model modelo)
+            throws MiExcepcion {
         try {
             usuarioDTO.setId(UUID.fromString(id));
             usuarioServicio.modificarUsuario(usuarioDTO);
             return "redirect:/dashboard";
-        } catch (MiExcepcion e) {
-            // Manejo de excepción si es necesario
-            return "redirect:/error"; // Redirigir a una página de error
+        } catch (MiExcepcion ex) {
+            modelo.addAttribute("error", ex.getMessage());
+            return "redirect:/modificarUsuarioS/{id}"; // Redirigir a una página de error
         }
     }
 
@@ -75,9 +76,15 @@ public class UsuarioController {
 
     // MODIFICAR ROL
     @GetMapping("/modificarRol/{id}")
-    public String cambiarRol(@PathVariable String id) {
-        usuarioServicio.cambiarRol(UUID.fromString(id));
-        return "redirect:/dashboard";
+    public String cambiarRol(@PathVariable String id, Model modelo) throws MiExcepcion {
+        try {
+            usuarioServicio.cambiarRol(UUID.fromString(id));
+            return "redirect:/dashboard";
+        } catch (MiExcepcion ex) {
+            modelo.addAttribute("error", ex.getMessage());
+            return "redirect:/dashboard";
+        }
+
     }
 
     // CAMBIAR USUARIO A PROVEEDOR
@@ -98,16 +105,23 @@ public class UsuarioController {
 
     @PostMapping("/guardarUproveedor/{id}")
     public String guardarUproveedor(@PathVariable String id, @ModelAttribute ProveedorDTO proveedorDTO,
-            MultipartFile imagenFile, String idServicio,HttpSession session) throws MiExcepcion {
-        proveedorDTO.setServicio(sServicio.buscarServicioPorId(UUID.fromString(idServicio)));
-        pServicio.crearProveedorPorUsuario(UUID.fromString(id), proveedorDTO, imagenFile);
-        // Actualizar la sesión del usuario después de cambiar el rol
-        // Método para convertir DTO a entidad
-        UsuarioEntidad usuarioActualizado = MapeadorDtoAEntidad.mapearUsuario(usuarioServicio.encontrarPorId(UUID.fromString(id)));
-        session.setAttribute("usuarioEnSesion", usuarioActualizado);
+            MultipartFile imagenFile, String idServicio, HttpSession session, Model modelo) throws MiExcepcion {
 
-        return "redirect:/perfil";
+        try {
+            proveedorDTO.setServicio(sServicio.buscarServicioPorId(UUID.fromString(idServicio)));
+            pServicio.crearProveedorPorUsuario(UUID.fromString(id), proveedorDTO, imagenFile);
+            // Actualizar la sesión del usuario después de cambiar el rol
+            // Método para convertir DTO a entidad
+            UsuarioEntidad usuarioActualizado = MapeadorDtoAEntidad
+                    .mapearUsuario(usuarioServicio.encontrarPorId(UUID.fromString(id)));
+            session.setAttribute("usuarioEnSesion", usuarioActualizado);
 
+            return "redirect:/perfil";
+        } catch (MiExcepcion ex) {
+            modelo.addAttribute("error", ex.getMessage());
+            return "redirect:/cambio";
+
+        }
     }
 
 }

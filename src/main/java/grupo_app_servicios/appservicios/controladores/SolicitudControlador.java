@@ -23,6 +23,7 @@ import grupo_app_servicios.appservicios.Dto.SolicitudDTO;
 import grupo_app_servicios.appservicios.Dto.UsuarioDTO;
 import grupo_app_servicios.appservicios.entidades.UsuarioEntidad;
 import grupo_app_servicios.appservicios.enumeraciones.Estados;
+import grupo_app_servicios.appservicios.excepciones.MiExcepcion;
 import grupo_app_servicios.appservicios.servicios.ProveedorServicio2;
 import grupo_app_servicios.appservicios.servicios.SolicitudServicio;
 import grupo_app_servicios.appservicios.servicios.UsuarioServicio;
@@ -58,46 +59,40 @@ public class SolicitudControlador {
     @PostMapping("/guardarSolicitud/{proveedorId}")
     public String guardarSolicitud(@PathVariable("proveedorId") String proveedorId,
             @ModelAttribute("solicitudDTO") SolicitudDTO solicitudDTO, @AuthenticationPrincipal UserDetails userDetails,
-            Model modelo) {
-        // try {
-        // if (userDetails != null) {
-        // Verificar que userDetails no sea nulo antes de acceder a su propiedad
-        UsuarioDTO usuarioDTO = uServicio.buscarPorEmail(userDetails.getUsername());
-        solicitudDTO.setIdUsuario(usuarioDTO);
+            Model modelo) throws MiExcepcion {
+        try {
+            // if (userDetails != null) {
+            // Verificar que userDetails no sea nulo antes de acceder a su propiedad
+            UsuarioDTO usuarioDTO = uServicio.buscarPorEmail(userDetails.getUsername());
+            solicitudDTO.setIdUsuario(usuarioDTO);
 
-        ProveedorDTO proveedorDTO = pServicio.buscaProveedorId(UUID.fromString(proveedorId));
-        solicitudDTO.setIdProveedor(proveedorDTO);
-        System.out.println("--------------------------------");
-        System.out.println(usuarioDTO.toString());
+            ProveedorDTO proveedorDTO = pServicio.buscaProveedorId(UUID.fromString(proveedorId));
+            solicitudDTO.setIdProveedor(proveedorDTO);
+            System.out.println("--------------------------------");
+            System.out.println(usuarioDTO.toString());
 
-        solServicio.crearSolicitud(solicitudDTO);
+            solServicio.crearSolicitud(solicitudDTO);
 
-        return "redirect:../../perfil";
-        // } else {
-        // // Manejar el caso cuando userDetails es nulo
-        // modelo.addAttribute("error", "Error: usuario no identificado.");
-        // return "solicitudformulario";
-        // }
-        // } catch (Exception e) {
-        // modelo.addAttribute("error", "Ocurrió un error al intentar crear la
-        // solicitud.");
-        // return "solicitudformulario";
-        // }
-    }
+            return "redirect:../../perfil";
+        } catch (MiExcepcion ex) {
+            modelo.addAttribute("error", ex.getMessage());
+            return "redirect:/crearSolicitud/{id}";
+        }
+
+        }
 
     // MODIFICAR ESTADO
     @GetMapping("/modificarEstado/{id}/{estado}")
-    public String cambiareEstado(@PathVariable String id, @PathVariable String estado, HttpSession session) {
+    public String cambiareEstado(@PathVariable String id, @PathVariable String estado, HttpSession session)throws MiExcepcion {
         UsuarioEntidad loguedUser = (UsuarioEntidad) session.getAttribute("usuarioEnSesion");
         String role = loguedUser.getRol().toString();
-   
 
         solServicio.modificarEstadoSolicitud(UUID.fromString(id), Estados.valueOf(estado));
 
         if (role.equals("USER")) {
             return "redirect:/contratar/lista";
         }
-         
+
         return "redirect:/perfil";
     }
 
@@ -118,12 +113,10 @@ public class SolicitudControlador {
         return "solicitudesList.html";
     }
 
-
-
     // CALIFICAR
     @GetMapping("/calificar")
-    public String calificar(HttpSession session, Model modelo){
-       return "calificar.html";
+    public String calificar(HttpSession session, Model modelo) {
+        return "calificar.html";
     }
 
     // @GetMapping("/modificarSolicitud/{id}")
