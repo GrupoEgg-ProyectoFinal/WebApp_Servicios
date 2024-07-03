@@ -15,7 +15,7 @@ body {
     font-weight: 700;
     text-align: center;
     letter-spacing: -0.5px;
-    color: rgb(7, 7, 7);
+    color: white;
     scroll-behavior: smooth;
     height: -webkit-fill-available;
     min-height: 100vh;
@@ -23,8 +23,7 @@ body {
 
 /* ESTILOS PARA LAS DISTINTAS SECCIONES */
 section {
-    background-color: var(--color-oscurecido);
-    height: auto;
+    height: calc(100vh - 104px);
     font-weight: 700;
     display: flex;
     align-items: center;
@@ -80,6 +79,7 @@ p {
     --titulo-pintado: #e4e299;
 }
 
+/*NAVEGACIÓN*/
 .navbar {
     width: 100%;
     min-height: 80px;
@@ -116,7 +116,6 @@ p {
     cursor: pointer;
 }
 
-/*NAVEGACIÓN*/
 .nav-list {
     display: flex;
     gap: 22px;
@@ -135,8 +134,12 @@ p {
 ul.nav-list {
     min-width: 600px;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
+}
+
+.nav-list.registro {
+    justify-content: flex-end;
 }
 
 .account-options {
@@ -185,80 +188,46 @@ ul.nav-list {
     background-color: var(--color-oscurecido);
 }
 
-ul.registro {
+#sesion {
     display: flex;
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    gap: 16px;
+    gap: 24px;
     justify-content: flex-end;
     align-items: center;
-}
-
-ul.registro li {
-    display: flex;
-    align-items: center;
-}
-
-ul.registro a {
-    padding: 8px 16px;
-    text-decoration: none;
-    color: white;
-    background-color: var(--color-oscurecido);
-    border-radius: 4px;
-    transition: background-color 0.3s;
-}
-
-ul.registro a:hover {
-    background-color: var(--color);
-}
-
-ul.registro {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 16px;
 }
 
 
 /* ESTILOS PAGINA - VALORACIONES */
 main {
-    background: rgb(26, 26, 26);
-    background: radial-gradient(
-        circle,
-        rgba(26, 26, 26, 1) 0%,
-        rgba(10, 10, 10, 1) 66%
-    );
+    width: 100%;
+    min-height: calc(100vh - 80px);
     background-image: url("../img/background2.png");
-    height: calc(100vh - 80px);
-    border-top: 1px solid white;
-    justify-content: center;
+    background-size: cover;
+    background-position: center; 
+    background-repeat: no-repeat;
 }
 
 h2 {
     color: var(--titulo-pintado);
 }
 
-.valoraciones-container {
-    width: 90%;
-    height: 85vh;
+.valoraciones {
+    width: 80%;
+    max-height: 80vh;
     overflow-y: auto;
     padding: 16px;
     border: 2px solid #ccc;
     border-radius: 12px;
     background-color: rgba(0, 0, 0, 0.75);
-    margin: 0 auto;
-}
-
-.valoraciones {
+    margin: 100px auto;
     display: flex;
     flex-direction: column;
-    width: 100%;
     justify-content: center;
     align-items: center;
+    gap: 24px;
 }
 
 table {
+    border: 2px solid #ccc;
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 24px;
@@ -284,8 +253,14 @@ tbody td {
 }
 
 tbody tr:nth-child(even) {
-    background-color: var(--color);
+    background-color: var(--color-medio);
 }
+
+.promedio-row {
+    background-color: var(--titulo-pintado) !important;
+    color: black;
+}
+
 
 button {
     padding: 8px 12px;

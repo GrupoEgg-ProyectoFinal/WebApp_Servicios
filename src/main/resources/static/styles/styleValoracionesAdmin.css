@@ -79,6 +79,7 @@ p {
     --titulo-pintado: #e4e299;
 }
 
+/*NAVEGACIÓN*/
 .navbar {
     width: 100%;
     min-height: 80px;
@@ -115,7 +116,6 @@ p {
     cursor: pointer;
 }
 
-/*NAVEGACIÓN*/
 .nav-list {
     display: flex;
     gap: 22px;
@@ -211,12 +211,13 @@ ul.nav-list {
 }
 
 .valoraciones-container {
-    width: 100%;
+    width: 80%;
     max-height: 80vh;
     overflow-y: auto;
     border: 2px solid #ccc;
     border-radius: 12px;
     background-color: rgba(0, 0, 0, 0.85);
+    margin: 0 auto;
 }
 
 .lista-valoraciones {

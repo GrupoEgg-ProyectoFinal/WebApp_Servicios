@@ -79,6 +79,7 @@ p {
     --titulo-pintado: #e4e299;
 }
 
+/*NAVEGACIÓN*/
 .navbar {
     width: 100%;
     min-height: 80px;
@@ -115,7 +116,6 @@ p {
     cursor: pointer;
 }
 
-/*NAVEGACIÓN*/
 .nav-list {
     display: flex;
     gap: 22px;
@@ -136,6 +136,10 @@ ul.nav-list {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.nav-list.registro {
+    justify-content: flex-end;
 }
 
 .account-options {
