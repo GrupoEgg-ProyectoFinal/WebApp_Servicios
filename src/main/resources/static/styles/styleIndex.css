@@ -79,6 +79,7 @@ p {
     --titulo-pintado: #e4e299;
 }
 
+/*NAVEGACIÓN*/
 .navbar {
     width: 100%;
     min-height: 80px;
@@ -115,7 +116,6 @@ p {
     cursor: pointer;
 }
 
-/*NAVEGACIÓN*/
 .nav-list {
     display: flex;
     gap: 22px;
@@ -204,6 +204,7 @@ ul.nav-list {
         rgba(10, 10, 10, 1) 66%
     );
     background-image: url('../img/background2.png');
+    height: 100vh;
 }
 
 /* ESTILOS CONTENEDOR Y TARJETA PROVEEDORES */
