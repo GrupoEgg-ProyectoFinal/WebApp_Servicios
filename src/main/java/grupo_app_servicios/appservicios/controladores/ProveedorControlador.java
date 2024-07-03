@@ -15,6 +15,7 @@ import grupo_app_servicios.appservicios.Dto.SolicitudDTO;
 import grupo_app_servicios.appservicios.Dto.UsuarioDTO;
 import grupo_app_servicios.appservicios.Dto.ValoracionDTO;
 import grupo_app_servicios.appservicios.entidades.UsuarioEntidad;
+import grupo_app_servicios.appservicios.excepciones.MiExcepcion;
 import grupo_app_servicios.appservicios.servicios.ProveedorServicio2;
 import grupo_app_servicios.appservicios.servicios.SolicitudServicio;
 import grupo_app_servicios.appservicios.servicios.ValoracionServicio;
@@ -37,13 +38,15 @@ public class ProveedorControlador {
     }
 
     @GetMapping("/eliminar/{id}")
-    public String eliminarProveedor(@PathVariable String id) {
+    public String eliminarProveedor(@PathVariable String id,Model modelo)  throws MiExcepcion  {
         try {
             pServicio.eliminarProveedorPorIdDeUsuario(UUID.fromString(id));
-        } catch (Exception e) {
-            System.out.println(e.getLocalizedMessage());
+            return "redirect:/dashboard";
+        } catch(MiExcepcion ex) {
+            modelo.addAttribute("error", ex.getMessage());
+            return "redirect:/dashboard";
         }
-        return "redirect:/dashboard";
+       
     }
 
     @GetMapping("/misValoraciones")

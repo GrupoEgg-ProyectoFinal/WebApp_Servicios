@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import grupo_app_servicios.appservicios.Dto.ServicioDTO;
+import grupo_app_servicios.appservicios.excepciones.MiExcepcion;
 import grupo_app_servicios.appservicios.servicios.ServicioServicio;
 
 @Controller
@@ -19,27 +20,14 @@ public class ServicioControlador {
     @Autowired
     ServicioServicio sServicio;
 
-    @GetMapping("/listar")
-    public String listarServiciosVista(ModelMap map) {
-        map.put("servicios", sServicio.listarServicios());
-
-        return "(ruta de la vista de listado)";
-    }
-    
-    /* @GetMapping("/registrar") 
-    public String registrarServicioVista(Model map) {
-        map.addAttribute("servicioDTO", new ServicioDTO());
-        return "(ruta de la vista de creacion)";
-    } */
-    
     @PostMapping("")
-    public String registrarServicioAccion(@ModelAttribute ServicioDTO servicioDTO, Model model) {
+    public String registrarServicioAccion(@ModelAttribute ServicioDTO servicioDTO, Model modelo) throws MiExcepcion  {
         try {
             sServicio.crearServicio(servicioDTO);
-            model.addAttribute("mensaje", "Servicio " + servicioDTO.getNombre() + " creado exitosamente.");
+            modelo.addAttribute("mensaje", "Servicio " + servicioDTO.getNombre() + " creado exitosamente.");
             return "index.html"; // cambiar por panel de admin
-        } catch (Exception e) {
-            model.addAttribute("error", "Ocurrió un error al intentar crear el servicio.");
+        } catch (MiExcepcion ex) {
+            modelo.addAttribute("error", ex.getMessage());
             return "redirect:/registrar";
         }
     }
@@ -51,13 +39,13 @@ public class ServicioControlador {
     }
 
     @PutMapping("modificarAccion")
-    public String modificarServicioAccion(@ModelAttribute ServicioDTO servicioDTO, Model model) {
+    public String modificarServicioAccion(@ModelAttribute ServicioDTO servicioDTO, Model modelo) throws MiExcepcion {
         try {
             sServicio.modificarServicio(servicioDTO);
-            model.addAttribute("mensaje", "Servicio " + servicioDTO.getNombre() + " creado exitosamente.");
+            modelo.addAttribute("mensaje", "Servicio " + servicioDTO.getNombre() + " creado exitosamente.");
             return "(ruta del panel de admin)";
-        } catch (Exception e) {
-            model.addAttribute("error", "Ocurrió un error al intentar crear el servicio.");
+        } catch(MiExcepcion ex) {
+            modelo.addAttribute("error", ex.getMessage());
             return "redirect:/registrar";
         }
     }
