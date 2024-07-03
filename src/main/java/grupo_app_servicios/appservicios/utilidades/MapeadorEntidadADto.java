@@ -2,6 +2,8 @@ package grupo_app_servicios.appservicios.utilidades;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import grupo_app_servicios.appservicios.Dto.ImagenProvDTO;
 import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
 import grupo_app_servicios.appservicios.Dto.ServicioDTO;
@@ -14,6 +16,7 @@ import grupo_app_servicios.appservicios.entidades.ServicioEntidad;
 import grupo_app_servicios.appservicios.entidades.SolicitudEntidad;
 import grupo_app_servicios.appservicios.entidades.UsuarioEntidad;
 import grupo_app_servicios.appservicios.entidades.ValoracionEntidad;
+import grupo_app_servicios.appservicios.servicios.ValoracionServicio;
 
 /* 
  * Esta clase contiene métodos que deben ser estáticos y públicos, para poder ser usados solo los que se necesiten
@@ -21,6 +24,8 @@ import grupo_app_servicios.appservicios.entidades.ValoracionEntidad;
  * Sirve para mapear las entidades y retornar el DTO que corresponda.
 */
 public class MapeadorEntidadADto {
+    @Autowired
+    static ValoracionServicio vServicio;
 
     public static UsuarioDTO mapearUsuario(UsuarioEntidad usuarioEntidad) {
         UsuarioDTO usuarioMapeado = new UsuarioDTO();
@@ -59,6 +64,27 @@ public class MapeadorEntidadADto {
                     solicitudEntidad -> mapearSolicitud(solicitudEntidad)).toList();
 
             proveedorMapeado.setSolicitudes(listaSolicitudes);
+
+            // List<ValoracionDTO> valoraciones =
+            // vServicio.listarPorProveedor(proveedorEntidad.getId());
+            // System.out.println(valoraciones.toString());
+            // PROMEDIO
+            double promedio;
+            double valor = 0;
+            Integer i = 0;
+            for (SolicitudDTO solicitudes : listaSolicitudes) {
+                if (solicitudes.getIdValoracion() != null) {
+                    valor = valor + solicitudes.getIdValoracion().getPuntaje();
+                    i++;
+                }
+            }
+
+            if (valor == 0) {
+                promedio = 1;
+            } else {
+                promedio = valor / i;
+            }
+            proveedorMapeado.setPromedio(promedio);
         }
 
         return proveedorMapeado;

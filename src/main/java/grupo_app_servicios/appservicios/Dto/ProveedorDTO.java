@@ -12,7 +12,7 @@ public class ProveedorDTO {
     private String descripcion;
     private UsuarioDTO usuario;
     private ImagenProvDTO foto;
-
+    private Double promedio;
     private ServicioDTO servicio;
     private List<SolicitudDTO> solicitudes;
 }
