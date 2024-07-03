@@ -138,6 +138,10 @@ ul.nav-list {
     align-items: center;
 }
 
+.nav-list.registro {
+    justify-content: flex-end;
+}
+
 .account-options {
     display: flex;
     gap: 24px;
@@ -191,167 +195,84 @@ ul.nav-list {
     align-items: center;
 }
 
-/* ESTILOS PAGINA - REGISTRO */
-#registro {
+/* ESTILOS VISTA VALORACIONES */
+#vistaValoraciones {
     background: rgb(26, 26, 26);
-    background: radial-gradient(
-        circle,
-        rgba(26, 26, 26, 1) 0%,
-        rgba(10, 10, 10, 1) 66%
-    );
+    background: radial-gradient(circle, rgba(26, 26, 26, 1) 0%, rgba(10, 10, 10, 1) 66%);
     background-image: url("../img/background2.png");
+    padding: 20px;
+    color: white;
+    height: 100vh;
 }
 
-/*FORMULARIO DE CONTACTO */
-
-#form {
-    background-color: var(--color);
-    opacity: 0.99;
-    padding: 12px 24px;
-    gap: 12px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border: 2px solid #ccc;
-    width: 75%;
-    height: auto;
-    border-radius: 50px;
-    background-color: var(--color-trasparente);
-    box-shadow: 0 4px 24px 0px rgba(216, 208, 97, 0.5);
-}
-
-#form:hover {
-    background-color: var(--color-medio);
-}
-
-#formularioProveedor {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 12px;
-}
-
-.form-row {
-    display: flex;
-    width: 100%;
-    gap: 12px;
-    flex-wrap: wrap;
-}
-
-.form-column {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    gap: 24px;
-}
-
-.full-width {
-    flex-direction: column;
-    width: 100%;
-}
-
-.center-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-}
-
-input, select, textarea {
-    font-family: "Roboto Condensed", sans-serif;
-    width: 100%;
-    padding: 12px;
-    border-radius: 8px;
-    box-sizing: border-box;
-    font-size: 16px;
-    border: none;
-    outline: none;
-    transition: border 0.3s;
-}
-
-input::placeholder, select::placeholder, textarea::placeholder {
-    color: black;
-    font-weight: 300;
-}
-
-input:focus::placeholder, select:focus::placeholder, textarea:focus::placeholder {
-    color: var(--color);
-    font-weight: 400;
-}
-
-textarea {
-    resize: none;
-    height: 100px;
-}
-
-h3 {
+#vistaValoraciones h2 {
     color: var(--titulo-pintado);
+    margin-bottom: 20px;
 }
 
-#enviarBtn {
-    font-family: "Roboto Condensed", sans-serif;
-    width: 50%;
-    margin-left: 25%;
-    height: 64px;
-    background-color: var(--color);
-    color: #fff;
+.valoraciones-container {
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
     border: 2px solid #ccc;
-    border-radius: 8px;
-    transition: background-color 0.3s;
+    border-radius: 12px;
+    background-color: rgba(0, 0, 0, 0.85);
+}
+
+.lista-valoraciones {
     display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.column-header, .valoracion {
+    display: flex;
+    justify-content: space-between;
     align-items: center;
+    margin-bottom: 10px;
+}
+
+.column-header {
+    border-bottom: 2px solid #e4e299;
+    padding-bottom: 10px;
+    color: var(--titulo-pintado);
+    background-color: black;
+}
+
+.valoracion {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+.column-header > div, .valoracion > div {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    min-height: 50px;
+}
+
+.col-usuario, .col-proveedor, .col-servicio, .col-comentario, .col-puntaje, .col-acciones {
+    flex: 1;
+    padding: 0 10px;
+    text-align: center;
+}
+
+button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
     cursor: pointer;
+    background-color: var(--titulo-pintado);
+    color: #000;
+    transition: background-color 0.5s;
 }
 
-#enviarBtn h3 {
-    cursor: pointer;
-}
-
-#enviarBtn:hover {
-    background-color: white;
-}
-
-#enviarBtn:hover h3 {
+button:hover {
+    background-color: #fcfcfc;
     color: var(--color);
 }
 
-#estado {
+button:hover h5 {
     cursor: pointer;
-    width: 50px;
-    height: 50px;
-    margin-left: 36%; 
-}
-
-#registrarBtn {
-    font-family: "Roboto Condensed", sans-serif;
-    width: 50%;
-    margin-left: 25%;
-    height: 64px;
-    background-color: var(--color);
-    color: #fff;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    transition: background-color 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-}
-
-#registrarBtn h3 {
-    cursor: pointer;
-}
-
-#registrarBtn:hover {
-    background-color: white;
-}
-
-#registrarBtn:hover h3 {
-    color: var(--color);
 }

@@ -126,7 +126,7 @@ p {
     flex-grow: 1;
 }
 .nav-list a:hover {
-    transform: scale(1.5);
+    transform: scale(1.05);
 }
 .nav-list li a.active {
     color: var(--color);
