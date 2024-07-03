@@ -5,19 +5,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vista PROVEEDOR</title>
-    <link rel="stylesheet" href="/styles/styleVistaAdmin.css">
+    <link rel="stylesheet" href="/styles/styleVistaProveedor.css">
     <link rel="stylesheet" href="/styles/styleFooter.css">
 
 </head>
 
 <body>
     <header th:replace="~{/fragments/_navbar :: Navbar}"></header>
-    <main>
-        <section id="admin-vista">
-            <div id="admin-contenedor">
-                <div class="admin-row">
+    <main id="proveedor-vista">
+        <section>
+            <div id="proveedor-contenedor">
+                <div class="proveedor-row">
                     <!-- Pedidos de Trabajo -->
-                    <div class="admin-column">
+                    <div class="proveedor-column">
                         <h2>PEDIDOS DE TRABAJOS PENDIENTES</h2>
                         <table id="pedidosTable">
                             <thead>
@@ -37,16 +37,19 @@
                                     <td th:text="${pendientes.idUsuario.telefono}">2948737238</td>
                                     <td th:text="${pendientes.idUsuario.barrios}">NORTE</td>
                                     <td>
-                                        <a th:href="@{contratar/modificarEstado/{id}/{estado}(id=${pendientes.id.toString()}, estado='ACEPTADO')}"><button>Aceptar</button></a>
-
-                                        <a th:href="@{contratar/modificarEstado/{id}/{estado}(id=${pendientes.id.toString()}, estado='CANCELADO')}"><button class="rechazar">Rechazar</button></a>
+                                        <a th:href="@{contratar/modificarEstado/{id}/{estado}(id=${pendientes.id.toString()}, estado='ACEPTADO')}">
+                                            <button>Aceptar</button>
+                                        </a>
+                                        <a th:href="@{contratar/modificarEstado/{id}/{estado}(id=${pendientes.id.toString()}, estado='CANCELADO')}">
+                                            <button class="rechazar">Rechazar</button>
+                                        </a>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                     <!-- Trabajos en Curso -->
-                    <div class="admin-column">
+                    <div class="proveedor-column">
                         <h2>TRABAJOS EN CURSO (ACEPTADOS)</h2>
                         <table id="cursosTable">
                             <thead>
@@ -71,7 +74,7 @@
                         </table>
                     </div>
                     <!-- Trabajos Finalizados -->
-                    <div class="admin-column">
+                    <div class="proveedor-column">
                         <h2>TRABAJOS FINALIZADOS</h2>
                         <table id="finalizadosTable">
                             <thead>
@@ -98,7 +101,7 @@
                 </div>
             </div>
         </section>
-    </main>
+    </main>    
     <footer th:replace="~{/fragments/footer :: footerFragment}">
 
     </footer>

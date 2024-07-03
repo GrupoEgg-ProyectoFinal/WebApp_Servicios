@@ -9,14 +9,11 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
 import grupo_app_servicios.appservicios.Dto.SolicitudDTO;
@@ -43,7 +40,7 @@ public class SolicitudControlador {
     ValoracionServicio vServicio;
 
     @GetMapping("/crearSolicitud/{id}")
-    public String crearSolicitud(@PathVariable String id, Model modelo) {
+    public String crearSolicitud(@PathVariable String id, Model modelo) throws MiExcepcion {
         // modelo.addAttribute("SolicitudDTO", new SolicitudDTO());
         // modelo.addAttribute("proveedores", pServicio.listarProveedores());
         // modelo.addAttribute("usuarios", uServicio.listarUsuarios());
@@ -53,7 +50,7 @@ public class SolicitudControlador {
         modelo.addAttribute("proveedorId", id); // Agregar el ID del proveedor para usarlo en el formulario
         modelo.addAttribute("SolicitudDTO", new SolicitudDTO());
 
-        return "solicitudformulario.html";
+        return "contratarFormulario.html";
     }
 
     @PostMapping("/guardarSolicitud/{proveedorId}")
@@ -98,7 +95,7 @@ public class SolicitudControlador {
 
     // LISTA SOLICITUDES
     @GetMapping("/lista")
-    public String listarSolicitudes(HttpSession session, Model modelo) {
+    public String listarSolicitudes(HttpSession session, Model modelo) throws MiExcepcion {
         UsuarioEntidad loguedUser = (UsuarioEntidad) session.getAttribute("usuarioEnSesion");
         UsuarioDTO usuarioDTO = uServicio.encontrarPorId(loguedUser.getId());
         List<SolicitudDTO> pendientes = solServicio.listarPorEstadoUsuario(Estados.PENDIENTE, usuarioDTO.getId());

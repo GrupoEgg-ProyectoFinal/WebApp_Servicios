@@ -121,7 +121,7 @@ public class PortalControlador {
     // PERFIL USUARIO
     @GetMapping("/perfil")
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_PROVEEDOR','ROLE_ADMIN','ROLE_SUPER')")
-    public String inicio(@RequestParam(value = "tipoServicio", required = false, defaultValue = "Todos") String tipoServicio,HttpSession session,Model modelo) {
+    public String inicio(@RequestParam(value = "tipoServicio", required = false, defaultValue = "Todos") String tipoServicio,HttpSession session,Model modelo) throws MiExcepcion {
         UsuarioEntidad loguedUser = (UsuarioEntidad) session.getAttribute("usuarioEnSesion");
         String role = loguedUser.getRol().toString();
 

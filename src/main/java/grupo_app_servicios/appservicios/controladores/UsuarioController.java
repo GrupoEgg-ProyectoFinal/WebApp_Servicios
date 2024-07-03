@@ -22,7 +22,6 @@ import grupo_app_servicios.appservicios.servicios.ProveedorServicio2;
 import grupo_app_servicios.appservicios.servicios.ServicioServicio;
 import grupo_app_servicios.appservicios.servicios.UsuarioServicio;
 import grupo_app_servicios.appservicios.utilidades.MapeadorDtoAEntidad;
-import grupo_app_servicios.appservicios.utilidades.MapeadorEntidadADto;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -37,7 +36,7 @@ public class UsuarioController {
 
     // MODIFICAR USUARIO GET
     @GetMapping("/modificarUsuarioS/{id}")
-    public String modificarUsuario(@PathVariable String id, Model modelo) {
+    public String modificarUsuario(@PathVariable String id, Model modelo) throws MiExcepcion {
         /*
          * UsuarioDTO usuarioDTO = new UsuarioDTO();
          * usuarioDTO.setId(UUID.fromString(id));
@@ -62,7 +61,7 @@ public class UsuarioController {
     }
 
     @GetMapping("/eliminarUsuario/{id}")
-    public String eliminarUsuario(@PathVariable String id) {
+    public String eliminarUsuario(@PathVariable String id) throws MiExcepcion {
         usuarioServicio.eliminarUsuario(UUID.fromString(id));
         return "redirect:/dashboard";
     }
@@ -89,7 +88,7 @@ public class UsuarioController {
 
     // CAMBIAR USUARIO A PROVEEDOR
     @GetMapping("/cambio")
-    public String cambio(HttpSession session, Model modelo) {
+    public String cambio(HttpSession session, Model modelo) throws MiExcepcion {
         UsuarioEntidad loguedUser = (UsuarioEntidad) session.getAttribute("usuarioEnSesion");
         ProveedorDTO proveedorDTO = new ProveedorDTO();
         UsuarioDTO usuario = usuarioServicio.encontrarPorId(loguedUser.getId());
