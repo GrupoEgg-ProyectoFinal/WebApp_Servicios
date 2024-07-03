@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
@@ -57,7 +58,7 @@ public class PortalControlador {
         return "registroUsuario.html";
     }
 
-   // REGISTRAR USUARIO
+    // REGISTRAR USUARIO
     @PostMapping("/guardarUsuario")
     public String guardarUsuario(@ModelAttribute UsuarioDTO usuarioDTO, String contrasena2) {
         uServicio.crearUsuario(usuarioDTO, contrasena2);
@@ -81,7 +82,7 @@ public class PortalControlador {
         return "registroProveedor.html";
     }
 
-   // REGISTRAR PROVEEDRO
+    // REGISTRAR PROVEEDRO
     @PostMapping("/guardarProveedor")
     public String registrarProveedor(@ModelAttribute ProveedorDTO proveedorDTO, MultipartFile imagenFile, Model model,
             String idServicio) {
@@ -115,26 +116,29 @@ public class PortalControlador {
     // PERFIL USUARIO
     @GetMapping("/perfil")
     @PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_PROVEEDOR','ROLE_ADMIN','ROLE_SUPER')")
-    public String inicio(HttpSession session, Model modelo) {
+    public String inicio(@RequestParam(value = "tipoServicio", required = false, defaultValue = "Todos") String tipoServicio,HttpSession session,Model modelo) {
         UsuarioEntidad loguedUser = (UsuarioEntidad) session.getAttribute("usuarioEnSesion");
-        // Ver cómo hacer para que tambien se aplique en el proveedor tambien
-        // ej: con el rol de proveedor en usuario. (Habria que modificar la entidad de
-        // proveedor y reveer el tema de inicio de sesion)
-
         String role = loguedUser.getRol().toString();
-        List<ProveedorDTO> proveedores = pServicio.listarProveedores();
+
+        // List<ProveedorDTO> proveedores = pServicio.listarProveedores();
+        List<ProveedorDTO> proveedores;
+        if (tipoServicio.equals("Todos")) {
+            proveedores = pServicio.listarProveedores();
+        } else {
+            proveedores = pServicio.listarProveedoresSegunServicio(tipoServicio);
+        }
         modelo.addAttribute("proveedores", proveedores);
 
-        if (role.equals("ADMIN")|| role.equals("SUPER")) {
+        if (role.equals("ADMIN") || role.equals("SUPER")) {
             return "redirect:/dashboard";
         }
 
         if (role.equals("PROVEEDOR")) {
-            ProveedorDTO newProveedor = pServicio.buscarPorIdUsuario(loguedUser.getId());        
-            List<SolicitudDTO> pendientes = solServicio.listarPorEstado(Estados.PENDIENTE,newProveedor.getId());
-            List<SolicitudDTO> aceptados = solServicio.listarPorEstado(Estados.ACEPTADO,newProveedor.getId());
-            List<SolicitudDTO> finalizados = solServicio.listarPorEstado(Estados.FINALIZADO,newProveedor.getId());
-            List<SolicitudDTO> cancelados = solServicio.listarPorEstado(Estados.CANCELADO,newProveedor.getId());
+            ProveedorDTO newProveedor = pServicio.buscarPorIdUsuario(loguedUser.getId());
+            List<SolicitudDTO> pendientes = solServicio.listarPorEstado(Estados.PENDIENTE, newProveedor.getId());
+            List<SolicitudDTO> aceptados = solServicio.listarPorEstado(Estados.ACEPTADO, newProveedor.getId());
+            List<SolicitudDTO> finalizados = solServicio.listarPorEstado(Estados.FINALIZADO, newProveedor.getId());
+            List<SolicitudDTO> cancelados = solServicio.listarPorEstado(Estados.CANCELADO, newProveedor.getId());
             modelo.addAttribute("pendientes", pendientes);
             modelo.addAttribute("aceptados", aceptados);
             modelo.addAttribute("finalizados", finalizados);

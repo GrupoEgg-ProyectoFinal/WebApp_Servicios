@@ -14,13 +14,13 @@
     <main>
         <section id="vistaUsuario">
             <h2>PROVEEDORES REGISTRADOS</h2>
-            <form id="filtroProveedores" action="#" method="get">
+            <form id="filtroProveedores" th:action="@{/perfil}" method="get">
                 <label for="tipoServicio"><h3>Filtrar por servicio:</h3></label>
-                <select id="tipoServicio" name="tipoServicio">
-                    <option value="Todos">Todos</option>
-                    <option value="Gasista">Gasista</option>
-                    <option value="Plomero">Plomero</option>
-                    <option value="Electricista">Electricista</option>
+                <select id="tipoServicio" name="tipoServicio" th:value="${tipoServicio}">
+                    <option value="Todos" th:selected="${tipoServicio} == 'Todos'">Todos</option>
+                    <option value="Gasista" th:selected="${tipoServicio} == 'Gasista'">Gasista</option>
+                    <option value="Plomeria" th:selected="${tipoServicio} == 'Plomeria'">Plomeria</option>
+                    <option value="Electricista" th:selected="${tipoServicio} == 'Electricista'">Electricista</option>
                 </select>
                 <button type="submit">Aplicar Filtro</button>
             </form>
@@ -66,8 +66,80 @@
             </div>
         </section>        
     </main>
+    <footer th:replace="~{/fragments/footer :: footerFragment}"></footer>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuario</title>
+    <link rel="stylesheet" href="/styles/styleVistaUsuario.css">
+    <link rel="stylesheet" href="/styles/styleFooter.css">
+</head>
+
+<body>
+    <header th:replace="~{/fragments/_navbar :: Navbar}"></header>
+    <main>
+        <section id="vistaUsuario">
+            <h2>PROVEEDORES REGISTRADOS</h2>
+            <form id="filtroProveedores" action="#" method="get">
+                <label for="tipoServicio"><h3>Filtrar por servicio:</h3></label>
+                <select id="tipoServicio" name="tipoServicio">
+                    <option value="Todos">Todos</option>
+                    <option value="Gasista">Gasista</option>
+                    <option value="Plomero">Plomero</option>
+                    <option value="Electricista">Electricista</option>
+                </select>
+                <button type="submit">Aplicar Filtro</button>
+            </form>
+
+            <div class="proveedores-container">
+                <div class="lista-proveedores">
+                    <div class="column-header">
+                        <div class="col-avatar"><h3>Foto</h3></div>
+                        <div class="col-nombre"><h3>Nombre y apellido</h3></div>
+                        <div class="col-matricula"><h3>Matrícula</h3></div>
+                        <div class="col-servicio"><h3>Servicio</h3></div>
+                        <div class="col-promedio"><h3>Promedio</h3></div>
+                        <div class="col-descripcion"><h3>Descripción</h3></div>
+                        <div class="col-contratar"></div>
+                    </div>
+                   
+                    <div class="proveedor" th:each="proveedor : ${proveedores}">
+                        <div class="col-avatar">
+                            <img th:src="@{/imagen/perfil/__${proveedor.id.toString}__}" alt="Perfil de Proveedor" class="avatar" height="50px" width="50px">
+                        </div>
+                        <div class="col-nombre">
+                            <h4 th:text="${proveedor.usuario.nombre} + ' ' + ${proveedor.usuario.apellido}">Nombre Proveedor</h4>
+                        </div>
+                        <div class="col-matricula">
+                            <h4 th:text="${proveedor.matricula}"></h4>
+                        </div>
+                        <div class="col-servicio">
+                            <h4 th:text="${proveedor.servicio.nombre}"></h4>
+                        </div>
+                        <div class="col-promedio">
+                            <p th:text="${proveedor.promedio}">⭐⭐⭐⭐⭐</p>
+                        </div>
+                        <div class="col-descripcion">
+                            <h4 th:text="${proveedor.descripcion}">Descripción del proveedor</h4>
+                        </div>
+                        <div class="col-contratar">
+                            <a th:href="@{/contratar/crearSolicitud/{id}(id=${proveedor.id.toString()})}">
+                                <button><h5>Contratar</h5></button>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>        
+    </main>
     <footer th:replace="~{/fragments/footer :: footerFragment}">
     </footer>
     <!--correr spring terminal   ./mvnw spring-boot:run  -->
 </body>
-</html>
+</html> -->
