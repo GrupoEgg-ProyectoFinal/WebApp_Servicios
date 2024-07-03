@@ -9,24 +9,26 @@
 </head>
 <body>
     <header th:replace="~{/fragments/_navbar :: Navbar}"></header>
-    <div class="container">
-        <h2>Crear Solicitud</h2>
-        <h3 th:text="'Proveedor: ' + ${proveedorNombre}"></h3>
-
-        <!-- Formulario con la acción corregida -->
-        <form th:action="@{/contratar/guardarSolicitud/{proveedorId}(proveedorId=${proveedorId})}" method="post">
-            <div class="form-group">
-                <label for="comentario">Descripción del trabajo a realizar:</label>
-                <textarea id="comentario" class="form-control" name="comentario" required></textarea>
-            </div>
-            <div class="form-group">
-                <label for="horas">Horas estimadas:</label>
-                <input type="number" id="horas" class="form-control" name="horas" min="1" required oninput="calcularHonorarios()">
-            </div>
-            <p id="honorariosEstimados"></p>
-            <button type="submit" class="btn btn-primary">Crear Solicitud</button>
-        </form>
-    </div>
+    <main class="contratar">
+        <div class="container">
+            <h2>CONTRATAR SOLICITUD</h2>
+            <h3 th:text="'Proveedor: ' + ${proveedorNombre}"></h3>
+    
+            <!-- Formulario con la acción corregida -->
+            <form th:action="@{/contratar/guardarSolicitud/{proveedorId}(proveedorId=${proveedorId})}" method="post">
+                <div class="form-group">
+                    <label for="comentario"><h3>Descripción del trabajo a realizar:</h3></label>
+                    <textarea id="comentario" class="form-control" name="comentario" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="horas"><h3>Horas estimadas:</h3></label>
+                    <input type="number" id="horas" class="form-control" name="horas" min="1" required oninput="calcularHonorarios()">
+                </div>
+                <p id="honorariosEstimados"></p>
+                <button type="submit" class="btn btn-primary"><h4>Crear solicitud</h4></button>
+            </form>
+        </div>
+    </main>    
     <footer th:replace="~{/fragments/footer :: footerFragment}"></footer>
     <script src="/script/honorarios.js"></script>
 </body>
