@@ -43,6 +43,10 @@
                             <div class="form-group">
                                 <input type="password" id="contrasena" name="contrasena" th:field="*{contrasena}" placeholder="Ingrese su contraseña" required>
                             </div>
+                            <div class="form-group">
+                                <input type="password" id="confirmarContrasena" name="confirmarContrasena" placeholder="Confirme su contraseña" required>
+                                <span id="mensajeError" class="error"></span>
+                            </div>
                         </div>
                     </div>
                     <div class="form-row full-width center-content">
@@ -65,6 +69,7 @@
     <footer th:replace="~{/fragments/footer :: footerFragment}">
         
     </footer>
+    <script src="/script/validarContraseñaUsuario.js"></script>
 </body>
 
 </html>
