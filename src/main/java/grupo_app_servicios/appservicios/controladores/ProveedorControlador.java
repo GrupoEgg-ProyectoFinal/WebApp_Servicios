@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
 import grupo_app_servicios.appservicios.Dto.SolicitudDTO;
-import grupo_app_servicios.appservicios.Dto.UsuarioDTO;
 import grupo_app_servicios.appservicios.Dto.ValoracionDTO;
 import grupo_app_servicios.appservicios.entidades.UsuarioEntidad;
 import grupo_app_servicios.appservicios.excepciones.MiExcepcion;
@@ -50,7 +49,7 @@ public class ProveedorControlador {
     }
 
     @GetMapping("/misValoraciones")
-    public String listarValoraciones(HttpSession session, Model modelo) {
+    public String listarValoraciones(HttpSession session, Model modelo) throws MiExcepcion {
         UsuarioEntidad loguedUser = (UsuarioEntidad) session.getAttribute("usuarioEnSesion");
         ProveedorDTO proveedor = pServicio.buscarPorIdUsuario(loguedUser.getId());
         System.out.println(loguedUser.getApellido());

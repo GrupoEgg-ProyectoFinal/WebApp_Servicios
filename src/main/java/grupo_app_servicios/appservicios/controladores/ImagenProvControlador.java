@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import grupo_app_servicios.appservicios.Dto.ProveedorDTO;
+import grupo_app_servicios.appservicios.excepciones.MiExcepcion;
 import grupo_app_servicios.appservicios.servicios.ImagenProvServicio;
 import grupo_app_servicios.appservicios.servicios.ProveedorServicio2;
 
@@ -43,7 +44,7 @@ public class ImagenProvControlador {
    
     // MOSTRAR IMAGEN
     @GetMapping("/perfil/{id}")
-    public ResponseEntity<byte[]> imagenUsuario(@PathVariable String id) {
+    public ResponseEntity<byte[]> imagenUsuario(@PathVariable String id) throws MiExcepcion {
 
         ProveedorDTO proveedor = pServicio.buscaProveedorId(UUID.fromString(id));
         // para mostrarlo hay que guardarlo en un arreglo de bytes
