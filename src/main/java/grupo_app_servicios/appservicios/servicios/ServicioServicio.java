@@ -10,7 +10,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import grupo_app_servicios.appservicios.Dto.ServicioDTO;
 import grupo_app_servicios.appservicios.entidades.ServicioEntidad;
+import grupo_app_servicios.appservicios.excepciones.MiExcepcion;
 import grupo_app_servicios.appservicios.repositorios.ServicioRepositorio;
+import grupo_app_servicios.appservicios.utilidades.Validaciones;
 
 @Service
 public class ServicioServicio {
@@ -51,19 +53,25 @@ public class ServicioServicio {
     }
 
     @Transactional(readOnly = true)
-    public List<ServicioDTO> listarServiciosPorNombre(String nombre) {
+    public List<ServicioDTO> listarServiciosPorNombre(String nombre) throws MiExcepcion {
+        Validaciones.validarSiCampoEsNulo(nombre, "nombre del servicio");
+
         return mapearListaEntidadesDTO(sRepositorio.buscarPorNombre(nombre));
     }
 
     @Transactional(readOnly = true)
-    public List<ServicioDTO> listarServiciosPorEstadoDeAlta(Boolean valor) {
+    public List<ServicioDTO> listarServiciosPorEstadoDeAlta(Boolean valor) throws MiExcepcion {
+        Validaciones.validarSiCampoEsNulo(valor, "estado de alta");
+
         return mapearListaEntidadesDTO(sRepositorio.buscarPorEstadoDeAlta(valor));
     }
 
     @Transactional(readOnly = true)
-    public ServicioDTO buscarServicioPorId(UUID id) {
+    public ServicioDTO buscarServicioPorId(UUID id) throws MiExcepcion {
+        Validaciones.validarSiCampoEsNulo(id, "id del servicio");
+
         ServicioEntidad servicio = sRepositorio.findById(id).orElseThrow(
-            () -> new RuntimeException("No se encontró un servicio con la id " + id.toString())
+            () -> new MiExcepcion("No se encontró un servicio con la id " + id.toString())
         );
 
         return mapearEntidadDTO(servicio);
@@ -71,16 +79,21 @@ public class ServicioServicio {
 
     // CREACIÓN
     @Transactional
-    public void crearServicio(ServicioDTO servicio) {
+    public void crearServicio(ServicioDTO servicio) throws MiExcepcion {
+        Validaciones.validarSiCampoEsNulo(servicio.getNombre(), "nombre");
+
         servicio.setEstado(true);
         sRepositorio.save(mapearDTOEntidad(servicio));
     }
     
     // MODIFICACIÓN
     @Transactional
-    public void modificarServicio(ServicioDTO servicio) {
+    public void modificarServicio(ServicioDTO servicio) throws MiExcepcion {
+        Validaciones.validarSiCampoEsNulo(servicio.getNombre(), "nombre");
+        Validaciones.validarSiCampoEsNulo(servicio.getId(), "id");
+
         sRepositorio.findById(servicio.getId()).orElseThrow(
-            () -> new RuntimeException("No se encontró un servicio con la id " + servicio.getId().toString())
+            () -> new MiExcepcion("No se encontró un servicio con la id " + servicio.getId().toString())
         );
 
         sRepositorio.save(mapearDTOEntidad(servicio));
@@ -88,9 +101,11 @@ public class ServicioServicio {
 
     // DAR DE BAJA Y ELIMINAR
     @Transactional
-    public ServicioDTO cambiarEstadoDeAlta(Boolean valor, UUID id) {
+    public ServicioDTO cambiarEstadoDeAlta(Boolean valor, UUID id) throws MiExcepcion {
+        Validaciones.validarVariosCampos(new String[]{"estado de alta", "id del servicio"}, valor, id);
+
         ServicioEntidad servicio = sRepositorio.findById(id).orElseThrow(
-            () -> new RuntimeException("No se encontró un servicio con la id " + id.toString())
+            () -> new MiExcepcion("No se encontró un servicio con la id " + id.toString())
         );
         servicio.setEstado(valor);
 
@@ -100,9 +115,11 @@ public class ServicioServicio {
     }
 
     @Transactional
-    public void eliminarServicio(UUID id) {
+    public void eliminarServicio(UUID id) throws MiExcepcion {
+        Validaciones.validarSiCampoEsNulo(id, "id del servicio");
+
         sRepositorio.findById(id).orElseThrow(
-            () -> new RuntimeException("No se encontró un servicio con la id " + id.toString())
+            () -> new MiExcepcion("No se encontró un servicio con la id " + id.toString())
         );
 
         sRepositorio.deleteById(id);

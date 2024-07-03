@@ -2,8 +2,6 @@ package grupo_app_servicios.appservicios.servicios;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -75,40 +73,22 @@ public class ImagenProvServicio {
 
 
     public ImagenProvEntidad guardarImagenPredeterminada() throws MiExcepcion {
-          try {
-        // Cargar la imagen desde el classpath
-        ClassPathResource resource = new ClassPathResource("static/img/usuarioLogo.png");
-        
-        // Obtener el contenido de la imagen como un array de bytes
-        byte[] contenido = Files.readAllBytes(resource.getFile().toPath());
+        try {
+            // Cargar la imagen desde el classpath
+            ClassPathResource resource = new ClassPathResource("static/img/usuarioLogo.png");
+            
+            // Obtener el contenido de la imagen como un array de bytes
+            byte[] contenido = Files.readAllBytes(resource.getFile().toPath());
 
-        ImagenProvEntidad imagen = new ImagenProvEntidad();
-        imagen.setNombre("imagen_predeterminada.jpg");
-        imagen.setMime("image/jpeg"); // Cambia esto según el formato de tu imagen
-        imagen.setContenido(contenido);
+            ImagenProvEntidad imagen = new ImagenProvEntidad();
+            imagen.setNombre("imagen_predeterminada.jpg");
+            imagen.setMime("image/jpeg"); // Cambia esto según el formato de tu imagen
+            imagen.setContenido(contenido);
 
-        return imgRepositorio.save(imagen);
-    } catch (IOException e) {
-        throw new MiExcepcion("Error al cargar la imagen predeterminada: " + e.getMessage());
-    }
-        // try {
-        
-        //     // Ruta de la imagen predeterminada
-        //     String rutaImagenPredeterminada = "/img/usuarioLogo.png";
-
-        //     // Cargar la imagen desde el sistema de archivos
-        //     Path ruta = Paths.get(rutaImagenPredeterminada);
-        //     byte[] contenido = Files.readAllBytes(ruta);
-
-        //     ImagenProvEntidad imagen = new ImagenProvEntidad();
-        //     imagen.setNombre("imagen_predeterminada.jpg");
-        //     imagen.setMime("image/jpeg"); // Cambia esto según el formato de tu imagen
-        //     imagen.setContenido(contenido);
-
-        //     return imgRepositorio.save(imagen);
-        // } catch (IOException e) {
-        //     throw new MiExcepcion("Error al cargar la imagen predeterminada: " + e.getMessage());
-        // }
+            return imgRepositorio.save(imagen);
+        } catch (IOException e) {
+            throw new MiExcepcion("Error al cargar la imagen predeterminada: " + e.getMessage());
+        }
     }
 
 }

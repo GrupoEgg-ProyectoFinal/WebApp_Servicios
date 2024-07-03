@@ -1,19 +1,15 @@
 package grupo_app_servicios.appservicios.servicios;
 
-import grupo_app_servicios.appservicios.Dto.UsuarioDTO;
-import grupo_app_servicios.appservicios.entidades.UsuarioEntidad;
-import grupo_app_servicios.appservicios.enumeraciones.Barrios;
-import grupo_app_servicios.appservicios.enumeraciones.Rol;
-import grupo_app_servicios.appservicios.excepciones.MiExcepcion;
-import grupo_app_servicios.appservicios.repositorios.UsuarioRepositorio;
-import grupo_app_servicios.appservicios.utilidades.MapeadorEntidadADto;
-import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,46 +19,36 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
-import java.util.stream.Collectors;
+import grupo_app_servicios.appservicios.Dto.UsuarioDTO;
+import grupo_app_servicios.appservicios.entidades.UsuarioEntidad;
+import grupo_app_servicios.appservicios.enumeraciones.Barrios;
+import grupo_app_servicios.appservicios.enumeraciones.Rol;
+import grupo_app_servicios.appservicios.excepciones.MiExcepcion;
+import grupo_app_servicios.appservicios.repositorios.UsuarioRepositorio;
+import grupo_app_servicios.appservicios.utilidades.MapeadorEntidadADto;
+import grupo_app_servicios.appservicios.utilidades.Validaciones;
+import jakarta.servlet.http.HttpSession;
 
 @Service
 public class UsuarioServicio implements UserDetailsService {
     @Autowired
     UsuarioRepositorio usuarioRepositorio;
 
-    // UTILIDADES DE LA CLASE
-    private void validar(String nombre, String email) throws MiExcepcion {
-        if (nombre == null || nombre.isEmpty()) {
-            throw new MiExcepcion("El nombre no puede estar vacío");
-        }
-
-        if (email == null || email.isEmpty()) {
-            throw new MiExcepcion("El email no puede estar vacío");
-        }
-    }
-
-    private UsuarioDTO convertirADTO(UsuarioEntidad usuario) {
-        UsuarioDTO dto = new UsuarioDTO();
-        dto.setId(usuario.getId());
-        dto.setNombre(usuario.getNombre());
-        dto.setApellido(usuario.getApellido());
-        dto.setEmail(usuario.getEmail());
-        dto.setContrasena(usuario.getContrasena());
-        dto.setBarrios(usuario.getBarrios());
-        dto.setTelefono(usuario.getTelefono());
-        dto.setEstado(usuario.getEstado());
-        dto.setRol(usuario.getRol());
-        return dto;
-    }
-
     // MÉTODO CREAR
     @Transactional
-    public void crearUsuario(UsuarioDTO usuarioDTO, String contrasena2) {
-        // validar que las contraseñas sean iguales
+    public void crearUsuario(UsuarioDTO usuarioDTO, String contrasena2) throws MiExcepcion {
+        Validaciones.validarVariosCampos(
+            new String[]{"nombre", "apellido", "email", "contraseña", "repetición de contraseña", "teléfono", "barrio"},
+            usuarioDTO.getNombre(), usuarioDTO.getApellido(), usuarioDTO.getEmail(), usuarioDTO.getContrasena(), contrasena2, 
+            usuarioDTO.getTelefono(), usuarioDTO.getBarrios()
+        );
+        if (!usuarioDTO.getContrasena().equals(contrasena2)) {
+            throw new MiExcepcion("Las contraseñas deben ser iguales");
+        }
+        UsuarioEntidad usuarioConMismoEmail = usuarioRepositorio.buscarPorEmail(usuarioDTO.getEmail()).orElse(null);
+        if (usuarioConMismoEmail != null) {
+            throw new MiExcepcion("Ya existe un usuario registrado con este email");
+        }
 
         UsuarioEntidad usuario = new UsuarioEntidad();
         usuario.setNombre(usuarioDTO.getNombre());
@@ -81,15 +67,19 @@ public class UsuarioServicio implements UserDetailsService {
     @Transactional(readOnly = true)
     public List<UsuarioDTO> listarUsuarios() {
         List<UsuarioEntidad> usuarios = usuarioRepositorio.findAll();
-        return usuarios.stream()
-                .map(this::convertirADTO)
-                .collect(Collectors.toList());
+        return usuarios.stream().map(
+            usuarioEntidad -> MapeadorEntidadADto.mapearUsuario(usuarioEntidad)
+        ).toList();
     }
 
     // MÉTODO MODIFICAR
     @Transactional
     public void modificarUsuario(UsuarioDTO usuarioDTO) throws MiExcepcion {
-        validar(usuarioDTO.getNombre(), usuarioDTO.getEmail());
+        Validaciones.validarVariosCampos(
+            new String[]{"nombre", "apellido", "email", "contraseña", "teléfono", "barrio"},
+            usuarioDTO.getNombre(), usuarioDTO.getApellido(), usuarioDTO.getEmail(), usuarioDTO.getContrasena(), 
+            usuarioDTO.getTelefono(), usuarioDTO.getBarrios()
+        );
 
         UsuarioEntidad usuario = usuarioRepositorio.findById(usuarioDTO.getId()).orElseThrow(
                 () -> new MiExcepcion("No se encontró el usuario con el id ingresado."));
@@ -107,17 +97,17 @@ public class UsuarioServicio implements UserDetailsService {
 
     // MÉTODO ELIMINAR
     @Transactional
-    public void eliminarUsuario(UUID id) {
+    public void eliminarUsuario(UUID id) throws MiExcepcion {
+        Validaciones.validarSiCampoEsNulo(id, "id");
         usuarioRepositorio.deleteById(id);
     }
 
     // MÉTODO PARA CARGAR USUARIO EN SESIÓN
     @Override
     public UserDetails loadUserByUsername(String emailUsuario) throws UsernameNotFoundException {
-        UsuarioEntidad user = usuarioRepositorio.buscarPorEmail(emailUsuario);
+        UsuarioEntidad user = usuarioRepositorio.buscarPorEmail(emailUsuario).orElse(null);
 
-        if (user == null)
-            return null;
+        if (user == null) return null;
 
         List<GrantedAuthority> permisos = new ArrayList<GrantedAuthority>();
         GrantedAuthority perms = new SimpleGrantedAuthority("ROLE_" + user.getRol().toString());
@@ -133,13 +123,18 @@ public class UsuarioServicio implements UserDetailsService {
 
     // BUSCAR POR MAIL
     // Método para buscar usuario por email
-    public UsuarioDTO buscarPorEmail(String email) {
-        return MapeadorEntidadADto.mapearUsuario(usuarioRepositorio.buscarPorEmail(email));
+    public UsuarioDTO buscarPorEmail(String email) throws MiExcepcion {
+        Validaciones.validarSiCampoEsNulo(email, "email del usuario");
+    
+        return MapeadorEntidadADto.mapearUsuario(usuarioRepositorio.buscarPorEmail(email).orElseThrow(
+            () -> new MiExcepcion("No existe un usuario con el email dado.")
+        ));
     }
 
     // CAMBIAR ROL
     @Transactional
-    public void cambiarRol(@PathVariable UUID id) {
+    public void cambiarRol(@PathVariable UUID id) throws MiExcepcion {
+        Validaciones.validarSiCampoEsNulo(id, "id del usuario");
 
         Optional<UsuarioEntidad> usuario = usuarioRepositorio.findById(id);
 
@@ -157,11 +152,17 @@ public class UsuarioServicio implements UserDetailsService {
             }
 
             usuarioRepositorio.save(respuestaUsuario);
+        } else {
+            throw new MiExcepcion("No se encontró un usuario con la id enviada");
         }
     }
 
     @Transactional
-    public UsuarioDTO encontrarPorId(UUID id) {
-        return convertirADTO(usuarioRepositorio.findById(id).orElse(null));
+    public UsuarioDTO encontrarPorId(UUID id) throws MiExcepcion {
+        Validaciones.validarSiCampoEsNulo(id, "id del usuario");
+
+        return MapeadorEntidadADto.mapearUsuario(usuarioRepositorio.findById(id).orElseThrow(
+            () -> new MiExcepcion("No se encontró un usuario con la id enviada")
+        ));
     }
 }

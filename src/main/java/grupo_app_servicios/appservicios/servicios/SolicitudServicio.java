@@ -15,12 +15,14 @@ import grupo_app_servicios.appservicios.entidades.ProveedorEntidad;
 import grupo_app_servicios.appservicios.entidades.SolicitudEntidad;
 import grupo_app_servicios.appservicios.entidades.UsuarioEntidad;
 import grupo_app_servicios.appservicios.enumeraciones.Estados;
+import grupo_app_servicios.appservicios.excepciones.MiExcepcion;
 import grupo_app_servicios.appservicios.repositorios.ProveedorRepositorio;
 import grupo_app_servicios.appservicios.repositorios.SolicitudRepositorio;
 import grupo_app_servicios.appservicios.repositorios.UsuarioRepositorio;
 import grupo_app_servicios.appservicios.repositorios.ValoracionRepositorio;
 import grupo_app_servicios.appservicios.utilidades.MapeadorDtoAEntidad;
 import grupo_app_servicios.appservicios.utilidades.MapeadorEntidadADto;
+import grupo_app_servicios.appservicios.utilidades.Validaciones;
 
 @Service
 public class SolicitudServicio {
@@ -36,7 +38,12 @@ public class SolicitudServicio {
     ValoracionServicio valoracionServicio;
 
     // CREAR SOLICITUD
-    public void crearSolicitud(SolicitudDTO solicitudDTO) {
+    public void crearSolicitud(SolicitudDTO solicitudDTO) throws MiExcepcion {
+        Validaciones.validarVariosCampos(
+            new String[]{"proveedor asociado", "usuario asociado"}, 
+            solicitudDTO.getIdProveedor(), solicitudDTO.getIdUsuario()
+        );
+
         SolicitudEntidad newSolicitud = new SolicitudEntidad();
 
         newSolicitud.setComentario(solicitudDTO.getComentario());
@@ -44,13 +51,13 @@ public class SolicitudServicio {
 
         if (solicitudDTO.getIdProveedor() != null) {
             ProveedorEntidad proveedor = pRepositorio.findById(solicitudDTO.getIdProveedor().getId())
-                    .orElseThrow(() -> new RuntimeException(
+                    .orElseThrow(() -> new MiExcepcion(
                             "Proveedor no encontrado con ID: " + solicitudDTO.getIdProveedor()));
             newSolicitud.setIdProveedor(proveedor);
         }
         if (solicitudDTO.getIdUsuario() != null) {
             UsuarioEntidad usuario = uRepositorio.findById(solicitudDTO.getIdUsuario().getId()).orElseThrow(
-                    () -> new RuntimeException("Usuario no encontrado con ID: " + solicitudDTO.getIdUsuario().getId()));
+                    () -> new MiExcepcion("Usuario no encontrado con ID: " + solicitudDTO.getIdUsuario().getId()));
             newSolicitud.setIdUsuario(usuario);
         }
 
@@ -59,7 +66,9 @@ public class SolicitudServicio {
 
     // CARGAR VALORACION A LA SOLICITUD
     @Transactional
-    public void cargarValoracion(UUID id, ValoracionDTO valoracionDTO) {
+    public void guardarValoracionEnSolicitud(UUID id, ValoracionDTO valoracionDTO) throws MiExcepcion {
+        Validaciones.validarVariosCampos(new String[]{"id de la solicitud", "valoración a asociar"}, id, valoracionDTO);
+
         ValoracionDTO valoracion = valoracionServicio.crearValoracion(valoracionDTO);
         SolicitudEntidad solicitud = buscarSolicitud(id);
         solicitud.setIdValoracion(MapeadorDtoAEntidad.mapearValoracion(valoracion));
@@ -76,7 +85,9 @@ public class SolicitudServicio {
 
     // LISTAR SOLICITUD POR ESTADO (para proveedor)
     @Transactional(readOnly = true)
-    public List<SolicitudDTO> listarPorEstado(Estados estado, UUID idProveedor) {
+    public List<SolicitudDTO> listarPorEstado(Estados estado, UUID idProveedor) throws MiExcepcion {
+        Validaciones.validarVariosCampos(new String[]{"estado de solicitud", "id del proveedor asociado"}, estado, idProveedor);
+
         List<SolicitudEntidad> list = sRepositorio.buscarSolicitudPorEstado(estado, idProveedor);
         return list.stream().map(
                 solicitudEntidad -> MapeadorEntidadADto.mapearSolicitud(solicitudEntidad)).toList();
@@ -84,7 +95,9 @@ public class SolicitudServicio {
 
     // LISTAR SOLICITUD POR ESTADO (para usuario)
     @Transactional(readOnly = true)
-    public List<SolicitudDTO> listarPorEstadoUsuario(Estados estado, UUID idUsuario) {
+    public List<SolicitudDTO> listarPorEstadoUsuario(Estados estado, UUID idUsuario) throws MiExcepcion {
+        Validaciones.validarVariosCampos(new String[]{"estado de solicitud", "id del usuario asociado"}, estado, idUsuario);
+
         List<SolicitudEntidad> list = sRepositorio.buscarSolicitudPorEstadoUsuario(estado, idUsuario);
         return list.stream().map(
                 solicitudEntidad -> MapeadorEntidadADto.mapearSolicitud(solicitudEntidad)).toList();
@@ -101,8 +114,12 @@ public class SolicitudServicio {
 
     // BUSCAR SOLICITUD POR ID
     @Transactional(readOnly = true)
-    public SolicitudEntidad buscarSolicitud(UUID id) {
-        return sRepositorio.findById(id).orElse(null);
+    public SolicitudEntidad buscarSolicitud(UUID id) throws MiExcepcion {
+        Validaciones.validarSiCampoEsNulo(id, "id de la solicitud");
+
+        return sRepositorio.findById(id).orElseThrow(
+            () -> new MiExcepcion("No se encontró la solicitud con el id envíado")
+        );
     }
 
     // MODIFICAR COMENTARIO DE SOLICITUD
@@ -119,13 +136,14 @@ public class SolicitudServicio {
             solicitudExistente.setComentario(solicitudDTO.getComentario());
             // Se persiste en la bdd
             sRepositorio.save(solicitudExistente);
-
         }
     }
 
     // Modificar ESTADO solicitud (ACEPTADO/RECHAZADO/PENDIENTE/FINALIZADO)
     @Transactional
-    public void modificarEstadoSolicitud(UUID id, Estados estado) {
+    public void modificarEstadoSolicitud(UUID id, Estados estado) throws MiExcepcion {
+        Validaciones.validarVariosCampos(new String[]{"id de la valoración", "estado de la valoración"}, id, estado);
+
         // Se buscar por id y se guarda en un optional
         Optional<SolicitudEntidad> respuesta = sRepositorio.findById(id);
 
@@ -137,34 +155,27 @@ public class SolicitudServicio {
             solicitudExistente.setEstado(estado);
             // Se persiste en la bdd
             sRepositorio.save(solicitudExistente);
+        } else {
+            throw new MiExcepcion("No se ha encontrado una solicitud con el id enviado.");
         }
     }
 
     @Transactional
-    public void eliminarSolicitud(UUID id) {
+    public void eliminarSolicitud(UUID id) throws MiExcepcion {
+        Validaciones.validarSiCampoEsNulo(id, "id de la solicitud");
+
         sRepositorio.deleteById(id);
     }
 
     // LISTAR SOLICITUDES CON VALORACION
     @Transactional(readOnly = true)
-    public List<SolicitudDTO> listarSoliConValoracion(UUID id) {
-        List<SolicitudDTO> solicitudes = sRepositorio.buscarSolicitudesCalificadasPorProveedor(id).stream()
+    public List<SolicitudDTO> listarSoliConValoracion(UUID idProveedor) throws MiExcepcion {
+        Validaciones.validarSiCampoEsNulo(idProveedor, "id del proveedor asociado");
+
+        List<SolicitudDTO> solicitudes = sRepositorio.buscarSolicitudesCalificadasPorProveedor(idProveedor).stream()
                 .map(solicitud -> MapeadorEntidadADto.mapearSolicitud(solicitud)).collect(Collectors.toList());
 
         return solicitudes;
     }
 
 }
-
-// Buscar por id Utilizando como metodo de retorno un DTO
-// @Transactional
-// public EditorialCreateDTO buscar(String id) {
-// Editorial respuesta = editorialRepositorio.getById(id);
-// EditorialCreateDTO editorialDTO = new EditorialCreateDTO();
-// editorialDTO.setId(respuesta.getId());
-// editorialDTO.setNombre(respuesta.getNombre());
-// editorialDTO.setAlta(respuesta.isAlta());
-
-// return editorialDTO;
-
-// }
