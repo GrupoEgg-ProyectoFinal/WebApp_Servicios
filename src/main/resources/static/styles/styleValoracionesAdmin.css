@@ -195,182 +195,85 @@ ul.nav-list {
     align-items: center;
 }
 
-/* ESTILOS PAGINA 1 - INICIO */
-#inicio {
+/* ESTILOS VISTA VALORACIONES */
+#vistaValoraciones {
     background: rgb(26, 26, 26);
-    background: radial-gradient(
-        circle,
-        rgba(26, 26, 26, 1) 0%,
-        rgba(10, 10, 10, 1) 66%
-    );
-    background-image: url('../img/background2.png');
+    background: radial-gradient(circle, rgba(26, 26, 26, 1) 0%, rgba(10, 10, 10, 1) 66%);
+    background-image: url("../img/background2.png");
+    padding: 20px;
+    color: white;
+    height: 100vh;
 }
 
-/* ESTILOS CONTENEDOR Y TARJETA PROVEEDORES */
-
-#inicio {
-    display: column;
-    flex-direction: row;
-    height: calc(100vh - 80px);
-}
-
-#inicio h2, h1 {
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.75);
-}
-
-.proveedores-left {
-    width: 100%;
-    height: calc(100vh - 104px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
- 
-}
-
-/*SECCION IZQUIERDA */
-
-.textoConocenos {
-    width: 80%;
-    height: auto;
-    background-color: rgb(3, 41, 58, 0.8); 
-    box-shadow: 4px 4px 24px 4px rgba(0, 0, 0, 0.8);
-    border: 1px solid #020202;
-    border-radius: 24px; 
-    padding: 36px;
-    display: column;
-    justify-content: center;
-    align-items: center; 
-}
-
-.textoConocenos h4 {
-    text-align: left; 
-    color: white; 
-    text-shadow: 2px 4px 12px rgba(0, 0, 0, 0.7);
-}
-
-.textoConocenos strong {
+#vistaValoraciones h2 {
     color: var(--titulo-pintado);
+    margin-bottom: 20px;
 }
 
-.textoConocenos:hover {
-    transform: scale(1.1);
-    background-color: var(--color-oscurecido);
-    transition: transform 0.5s ease, background-color 0.5s ease;
-    box-shadow: 0 0 20px var(--titulo-pintado);
-}
-
-.proveedores-right {
-    margin-top: 100px;
+.valoraciones-container {
     width: 100%;
-    height: calc(100vh - 80px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.proveedores-right strong {
-    color: var(--titulo-pintado);
-}
-
-.proveedores-container {
-    height: calc(100vh - 104px);
-    display: column;
-    gap: 48px;
-    justify-content: center;
-    align-items: center;
-}
-
-/*TODO PROVEEDOR CARD */
-
-.proveedor-card {
-    display: flex;
-    border: 2px solid var(--color-oscurecido);
+    max-height: 80vh;
+    overflow-y: auto;
+    border: 2px solid #ccc;
     border-radius: 12px;
-    overflow: hidden;
-    width: 100%;
-    margin-top: 5%;
-    max-width: 550px;
-    background-color: rgb(3, 41, 58, 0.8);
-    box-shadow: 4px 4px 24px 4px rgba(0, 0, 0, 0.8);
-    border: 2px solid black;
-    transition: transform 0.3s ease;
+    background-color: rgba(0, 0, 0, 0.85);
 }
 
-.proveedor-card:hover {
-    transform: scale(1.15);
-    cursor: pointer;
-    box-shadow: 0 0 20px var(--titulo-pintado);
-    background-color: var(--color-medio);
-}
-
-.izquierda {
-    flex: 1;
-    max-width: 250px;
-}
-
-.izquierda img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.proveedor-card:hover .izquierda img {
-    content: url("../img/GasistaLogoBlanco.png");
-}
-
-.proveedor-card:hover .centro img {
-    content: url("../img/plomeroLogoBlanco.png");
-}
-
-.proveedor-card:hover .derecha img {
-    content: url("../img/electricistaLogoBlanco.png");
-}
-
-.derecha {
-    flex: 2;
-    padding: 16px;
+.lista-valoraciones {
     display: flex;
-    gap: 10px;
     flex-direction: column;
-    justify-content: flex-start; 
-    align-items: flex-start; 
+    width: 100%;
 }
 
-.derecha h3 {
-    margin: 0 0 8px;
-}
-
-.dosPalabras {
+.column-header, .valoracion {
     display: flex;
-    gap: 8px;
-}
-
-.tituloPintado {
-    color: var(--titulo-pintado);
-}
-
-.saber-mas-btn {
-    text-decoration: none;
-    align-self: flex-end;
+    justify-content: space-between;
     align-items: center;
+    margin-bottom: 10px;
+}
+
+.column-header {
+    border-bottom: 2px solid #e4e299;
+    padding-bottom: 10px;
+    color: var(--titulo-pintado);
+    background-color: black;
+}
+
+.valoracion {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+    font-size: 20px;
+}
+
+.column-header > div, .valoracion > div {
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    padding: 6px;
+    align-items: center;
+    min-height: 50px;
+}
+
+.col-usuario, .col-proveedor, .col-servicio, .col-comentario, .col-puntaje, .col-acciones {
+    flex: 1;
+    padding: 0 10px;
+    text-align: center;
+}
+
+button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
     background-color: var(--titulo-pintado);
-    border-radius: 12px;
-    transition: background-color 0.3s ease;
+    color: #000;
+    transition: background-color 0.5s;
+}
+
+button:hover {
+    background-color: #fcfcfc;
+    color: var(--color);
+}
+
+button:hover h5 {
     cursor: pointer;
 }
-
-.saber-mas-btn h5{
-    cursor: pointer;
-    color: rgb(0, 0, 0);
-    text-shadow: none;
-}
-
-.saber-mas-btn:hover {
-    color: black;
-    background-color: white;
-}
-
-

@@ -3,37 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Lista de Valoraciones</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/styles/styleFooter.css">
+    <link rel="stylesheet" href="/styles/styleValoracionesAdmin.css">
 </head>
 <body>
-    <div class="container mt-5">
-        <h2>Lista de Valoraciones</h2>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Usuario</th>
-                    <th>Proveedor</th>
-                    <th>Servicio</th>
-                    <th>Comentario</th>
-                    <th>Puntaje</th>
-                    <th>Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="solicitud : ${solicitudes}">
-                    <td th:text="${solicitud.idUsuario.nombre + ' ' + solicitud.idUsuario.apellido}">Nombre Usuario</td>
-                    <td th:text="${solicitud.idProveedor.usuario.nombre + ' ' + solicitud.idProveedor.usuario.apellido}">Nombre Proveedor</td>
-                    <td th:text="${solicitud.idProveedor.servicio.nombre}">Barrio</td>
-                    <td th:text="${solicitud.idValoracion.comentario}">Comentario</td>
-                    <td th:text="${solicitud.idValoracion.puntaje}">Puntaje</td>
-                    <td>
-                        <form th:action="@{/valoraciones/eliminar/{id}(id=${solicitud.idValoracion.id.toString()})}" method="post">
-                            <button type="submit" class="btn btn-danger">Eliminar</button>
-                        </form>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+    <header th:replace="~{/fragments/_navbar :: Navbar}"></header>
+    <main id="vistaValoraciones">
+        <div>
+            <h2>Lista de Valoraciones</h2>
+            <div class="valoraciones-container">
+                <div class="lista-valoraciones">
+                    <div class="column-header">
+                        <div class="col-usuario"><h3>Usuario</h3></div>
+                        <div class="col-proveedor"><h3>Proveedor</h3></div>
+                        <div class="col-servicio"><h3>Servicio</h3></div>
+                        <div class="col-comentario"><h3>Comentario</h3></div>
+                        <div class="col-puntaje"><h3>Puntaje</h3></div>
+                        <div class="col-acciones"><h3>Acciones</h3></div>
+                    </div>
+                    <div class="valoracion" th:each="solicitud : ${solicitudes}">
+                        <div class="col-usuario" th:text="${solicitud.idUsuario.nombre + ' ' + solicitud.idUsuario.apellido}">Nombre Usuario</div>
+                        <div class="col-proveedor" th:text="${solicitud.idProveedor.usuario.nombre + ' ' + solicitud.idProveedor.usuario.apellido}">Nombre Proveedor</div>
+                        <div class="col-servicio" th:text="${solicitud.idProveedor.servicio.nombre}">Servicio</div>
+                        <div class="col-comentario" th:text="${solicitud.idValoracion.comentario}">Comentario</div>
+                        <div class="col-puntaje" th:text="${solicitud.idValoracion.puntaje}">Puntaje</div>
+                        <div class="col-acciones">
+                            <form th:action="@{/valoraciones/eliminar/{id}(id=${solicitud.idValoracion.id.toString()})}" method="post">
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer th:replace="~{/fragments/footer :: footerFragment}"></footer>
 </body>
 </html>
