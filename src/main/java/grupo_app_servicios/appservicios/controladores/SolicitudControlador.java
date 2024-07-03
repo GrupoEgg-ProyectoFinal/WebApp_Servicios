@@ -50,7 +50,7 @@ public class SolicitudControlador {
         modelo.addAttribute("proveedorId", id); // Agregar el ID del proveedor para usarlo en el formulario
         modelo.addAttribute("SolicitudDTO", new SolicitudDTO());
 
-        return "solicitudformulario.html";
+        return "contratarFormulario.html";
     }
 
     @PostMapping("/guardarSolicitud/{proveedorId}")
