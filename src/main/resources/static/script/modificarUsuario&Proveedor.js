@@ -6,10 +6,10 @@ document.getElementById('formularioUsuario').addEventListener('submit', function
     const mensajeError = document.getElementById('mensajeError');
 
     if (contrasena !== confirmarContrasena) {
-        event.preventDefault();
+        event.preventDefault(); 
         alert("Las contraseñas no coinciden.");
             } else {
-                mensajeError.textContent = "";
-                alert("¡Su cuenta ha sido creada con éxito!");
+                mensajeError.textContent = ""; 
+                alert("¡Cuenta modificada con éxito!");
         }
 });
