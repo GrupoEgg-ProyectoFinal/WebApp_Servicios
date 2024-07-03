@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.slf4j.IMarkerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -80,6 +81,10 @@ public class ProveedorServicio2 {
                 ImagenProvEntidad imagen = imgServicio.guardar(imagenFile);
                 proveedor.setFoto(imagen);
                 // <img th:src="@{'/imagen/perfil/' + *{id.toString()}}" alt="Foto del proveedor">
+            }else {
+                // Cargar la imagen predeterminada desde el sistema de archivos o un recurso fijo
+                ImagenProvEntidad imagenPredeterminada = imgServicio.guardarImagenPredeterminada();
+                proveedor.setFoto(imagenPredeterminada);
             }
             // Asignar servicio si está presente en el DTO
             if (proveedorDTO.getServicio() != null) {
