@@ -26,7 +26,7 @@ public class ProveedorEntidad {
     private UUID id;
 
     // Campos que no deben ser nulos
-    @Column(unique = true)
+    @Column
     private Integer matricula;
     private String descripcion;
 
