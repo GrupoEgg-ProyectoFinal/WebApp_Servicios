@@ -147,6 +147,11 @@ Front:
  Servicios: Muestra una lista de servicios con el boton "Eliminar" y debajo el formulario para poder crearlos(ingresando nombre del servicio).
  Comentarios: Lista de comentarios de valoraciones con "Nombre y apellido del usuario" y una seccion de comentario con un boton "Eliminar".
 
+valoraciones dentro de calificar el trabajo finalizado.
+cuando el usuario contrata. 
+
+
+
 Back:
  - Confirmar eliminacion.
  - Mapear vistas (Lista de usarios y lista de proovedores).
