@@ -32,7 +32,7 @@
                         <div class="col-nombre"><h3>Nombre y apellido</h3></div>
                         <div class="col-matricula"><h3>Matrícula</h3></div>
                         <div class="col-servicio"><h3>Servicio</h3></div>
-                        <div class="col-promedio"><h3>Puntuación</h3></div>
+                        <div class="col-promedio"><h3>Promedio</h3></div>
                         <div class="col-descripcion"><h3>Descripción</h3></div>
                         <div class="col-contratar"></div>
                     </div>
@@ -51,7 +51,7 @@
                             <h4 th:text="${proveedor.servicio.nombre}"></h4>
                         </div>
                         <div class="col-promedio">
-                            <p>⭐⭐⭐⭐⭐</p>
+                            <p th:text="${proveedor.promedio}">⭐⭐⭐⭐⭐</p>
                         </div>
                         <div class="col-descripcion">
                             <h4 th:text="${proveedor.descripcion}">Descripción del proveedor</h4>

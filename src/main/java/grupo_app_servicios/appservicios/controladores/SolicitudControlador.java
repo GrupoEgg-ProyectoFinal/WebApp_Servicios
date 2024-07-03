@@ -48,7 +48,7 @@ public class SolicitudControlador {
         // modelo.addAttribute("usuarios", uServicio.listarUsuarios());
         ProveedorDTO proveedorDTO = pServicio.buscaProveedorId(UUID.fromString(id)); // Convertir String a UUID
         // Suponiendo que tienes un método getNombreCompleto() en ProveedorDTO
-        modelo.addAttribute("proveedorNombre", proveedorDTO.getUsuario().getNombre());
+        modelo.addAttribute("proveedor", proveedorDTO);
         modelo.addAttribute("proveedorId", id); // Agregar el ID del proveedor para usarlo en el formulario
         modelo.addAttribute("SolicitudDTO", new SolicitudDTO());
 

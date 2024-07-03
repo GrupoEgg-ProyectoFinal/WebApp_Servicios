@@ -18,7 +18,10 @@
 <body>
     <div class="container">
         <h2>Crear Solicitud</h2>
-        <h3 th:text="'Proveedor: ' + ${proveedorNombre}"></h3>
+        <h3 th:text="'Proveedor: ' + ${proveedor.usuario.apellido + ' ' + proveedor.usuario.nombre}"></h3>
+        <h2 th:text="'Servicio: ' + ${proveedor.servicio.nombre}"></h2>
+        
+
 
         <!-- Formulario con la acción corregida -->
         <form th:action="@{/contratar/guardarSolicitud/{proveedorId}(proveedorId=${proveedorId})}" method="post">
