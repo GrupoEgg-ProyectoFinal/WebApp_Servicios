@@ -1,0 +1,308 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap");
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    list-style: none;
+    text-decoration: none;
+    transition: 0.5s ease;
+}
+
+html, body {
+    font-family: "Roboto Condensed", sans-serif;
+    font-weight: 700;
+    text-align: center;
+    letter-spacing: -0.5px;
+    color: white;
+    scroll-behavior: smooth;
+    height: -webkit-fill-available;
+    min-height: 100vh;
+}
+
+/*Títulos*/
+h1 {
+    font-size: 48px;
+    cursor: default;
+    transition: none;
+}
+
+h2 {
+    font-size: 32px;
+    cursor: default;
+    transition: none;
+}
+
+h3 {
+    font-size: 24px;
+    cursor: default;
+    transition: none;
+}
+
+h4 {
+    font-size: 20px;
+    cursor: default;
+    transition: none;
+}
+
+h5 {
+    font-size: 16px;
+    cursor: default;
+    font-weight: 400;
+    transition: none;
+}
+
+a {
+    color: white;
+    font-size: 20px;
+    transition: none;
+}
+
+p {
+    font-size: 20px;
+    cursor: default;
+    font-weight: 400;
+    transition: none;
+}
+
+/*Colores*/
+:root {
+    --color: #06608a;
+    --color-medio: #05435f;
+    --color-oscurecido: rgb(3, 41, 58);
+    --color-trasparente: rgb(6, 96, 138, 0.9);
+    --titulo-pintado: #e4e299;
+}
+
+/*NAVEGACIÓN*/
+.navbar {
+    width: 100%;
+    min-height: 80px;
+    padding: 0 96px;
+    background-color: rgb(0, 0, 0);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo-contenedor {
+    display: flex;
+    align-items: center;
+}
+
+.logo-contenedor a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    height: 84px;
+}
+
+.nombreEmpresa {
+    color: rgb(241, 241, 124);
+    text-shadow: 0 0 20px rgba(241, 241, 107, 0.8);
+    font-size: 36px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.nav-list {
+    display: flex;
+    gap: 22px;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer;
+    flex-grow: 1;
+}
+
+.nav-list a:hover {
+    transform: scale(1.05);
+}
+
+.nav-list li a.active {
+    color: var(--color);
+}
+
+ul.nav-list {
+    min-width: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-list.registro {
+    justify-content: flex-end;
+}
+
+.account-options {
+    display: flex;
+    gap: 24px;
+    margin-right: 20px;
+}
+
+.account-options .desplegable {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.desplegable-content {
+    display: none;
+    position: absolute;
+    margin-top: -30px;
+    background-color: var(--titulo-pintado);
+    z-index: 1;
+    max-width: 124px;
+    top: 100%;
+    box-shadow: 0 4px 24px 0px rgba(5, 5, 5, 0.5);
+    border-radius: 12px;
+}
+
+.desplegable-content a {
+    border-radius: 10px;
+    color: black;
+    padding: 12px;
+    width: 100%;
+    display: inline-block;
+    transition: background-color 0.5s ease;
+}
+
+.desplegable-content a:hover {
+    background-color: black;
+    color: white;
+}
+
+.desplegable:hover .desplegable-content {
+    display: block;
+}
+
+.desplegable:hover .desplegable {
+    background-color: var(--color-oscurecido);
+}
+
+#sesion {
+    display: flex;
+    gap: 24px;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+main {
+    background: radial-gradient(circle, rgba(26, 26, 26, 1) 0%, rgba(10, 10, 10, 1) 66%);
+    background-image: url("../img/background2.png");
+    padding: 20px;
+    color: white;
+    min-height: calc(100vh - 80px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    max-width: 600px;
+    margin: 0 auto;
+    gap: 24px;
+    padding: 24px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    background-color: rgba(5, 5, 5, 0.75);
+    box-shadow: 0 4px 24px 0px rgba(248, 248, 248, 0.5);
+}
+
+.card h2 {
+    color: var(--titulo-pintado);
+    text-align: center;
+}
+
+.card form {
+    gap: 24px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card form input{
+    font-size: 24px;
+    height: 50px;
+}
+
+.card::placeholder {
+    font: 12px;
+}
+
+.service-list {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 24px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    background-color: rgba(5, 5, 5, 0.75);
+    box-shadow: 0 4px 24px 0px rgba(248, 248, 248, 0.5);
+}
+
+.service-list table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.service-list th,
+.service-list td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.service-list th {
+    background-color: #f2f2f2;
+    background: rgb(26, 26, 26);
+}
+
+.service-list h2 {
+    color: var(--titulo-pintado);
+}
+
+button[type="submit"] {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: var(--titulo-pintado);
+    color: #000;
+    transition: background-color 0.5s;
+    display: block;
+    margin: 0 auto;
+}
+
+button[type="submit"]:hover {
+    cursor: pointer;
+    background-color: #fcfcfc;
+    color: var(--color);
+}
+
+button[type="submit"]:hover h4{
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+    .contratar .container {
+        width: 80%;
+    }
+
+    .form-control {
+        width: 70%;
+    }
+}
+
+@media (max-width: 480px) {
+    .contratar .container {
+        width: 100%;
+    }
+
+    .form-control {
+        width: 90%;
+    }
+}
