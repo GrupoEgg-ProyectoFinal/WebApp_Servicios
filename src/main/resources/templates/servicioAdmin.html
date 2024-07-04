@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio Sesión Usuario</title>
+    <link rel="stylesheet" href="/styles/styleSesionUsuario&Proveedor.css">
+    <link rel="stylesheet" href="/styles/styleFooter.css">
+    <style>
+        .card {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            background-color: #000000;
+        }
+        .card h1 {
+            text-align: center;
+        }
+        .card form {
+            display: flex;
+            flex-direction: column;
+        }
+        .card form input,
+        .card form button {
+            margin: 0.5rem 0;
+        }
+        .service-list {
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 1rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            background-color: #070707;
+        }
+        .service-list table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .service-list th,
+        .service-list td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .service-list th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+
+<body>
+    <header th:replace="~{/fragments/_navbar :: Navbar}"></header>
+    
+    <section class="card">
+        <h1>CARGA DE SERVICIOS DEV:</h1>
+        <form th:action="@{/servicio}" method="post" th:object="${servicioDTO}">
+            <label for="nombre">INGRESE NOMBRE DEL SERVICIO A CARGAR:</label>
+            <input type="text" id="nombre" name="nombre" placeholder="Ingrese el nombre del servicio">
+            <button type="submit">Enviar</button>
+        </form>
+    </section>
+    
+    <section class="service-list">
+        <h2>Servicios Existentes</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Nombre del Servicio</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="servicio : ${servicios}">
+                    <td th:text="${servicio.nombre}"></td>
+                    <td>
+                        <form th:action="@{/servicio/eliminar/{id}(id=${servicio.id.toString()})}" method="post">
+                            <input type="hidden" name="id" th:value="${servicio.id}" />
+                            <button type="submit">Eliminar</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer th:replace="~{/fragments/footer :: footerFragment}"></footer>
+</body>
+
+</html>
