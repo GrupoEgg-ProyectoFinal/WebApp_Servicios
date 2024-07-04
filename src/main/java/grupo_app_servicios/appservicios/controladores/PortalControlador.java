@@ -62,13 +62,13 @@ public class PortalControlador {
     // REGISTRAR USUARIO
     @PostMapping("/guardarUsuario")
     public String guardarUsuario(@ModelAttribute UsuarioDTO usuarioDTO, String contrasena2,Model modelo) throws MiExcepcion {
-        // try {
+        try {
             uServicio.crearUsuario(usuarioDTO, contrasena2);
             return "redirect:/";
-        // } catch(MiExcepcion ex) {
-        //     modelo.addAttribute("error", ex.getMessage());
-        //     return "redirect:/registrarUsuario";
-        // }
+        } catch(MiExcepcion ex) {
+            modelo.addAttribute("error", ex.getMessage());
+            return "redirect:/registrarUsuario";
+        }
        
     }
 
