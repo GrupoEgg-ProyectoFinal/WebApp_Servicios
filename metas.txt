@@ -168,7 +168,13 @@ IMPORTANTE!!!! SE PUEDE ENTRAR A /dashboard sin inicio de sesion y de eliminar u
 
 
 
-
+VIDEO: 
+4 minutos
+-
+1 min. inicio(enlaces, incio de sesiones y registro)
+1 min. usuario(pantalla de usuario y acciones)
+1 min. proveedor(pantalla de proveedor y acciones)
+1 min. admin-Superadmin(pantalla admin/super y acciones)
 
 
 
