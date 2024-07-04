@@ -27,10 +27,10 @@ para que el proveedor pueda elegir si las quiere. El usuario acepta si ese prove
 
 
 ADIMN:
-● ⚠️ Un ADMIN puede otorgar permisos,eliminar/censurar comentarios ofensivos, pero dejando la calificación.
+☑ ⚠️ Un ADMIN puede otorgar permisos,eliminar/censurar comentarios ofensivos, pero dejando la calificación.
 ● ⚠️ Poder borrar servicio.
 SUPER-ADMIN:
-● Utilizar atributos booleanos de alta y baja de usuarios (y poder modificarlos).
+☑ Utilizar atributos booleanos de alta y baja de usuarios (y poder modificarlos).
 
 
 
@@ -38,22 +38,22 @@ SOLICITUD:
 ☑ ⚠️ El proveedor puede aceptar un trabajo o cancelarlo. También puede marcarlo como finalizado una vez que el trabajo haya sido aceptado.
 ☑ ⚠️ El usuario puede pedir un servicio o cancelarlo. Una vez aceptado el trabajo puede cancelarlo o darlo por finalizado.
 ☑ ⚠️ Una vez que el trabajo fue finalizado el usuario está habilitado a calificar el servicio, calificación que se agregará al perfil del proveedor.
-● ⚠️ Calcular un estimativo de los honorarios del proveedor por horas.
+☑⚠️ Calcular un estimativo de los honorarios del proveedor por horas.
 ☑⚠️ Cada PROVEEDOR puede ser calificado por quienes hayan utilizado su servicio.
 
 
 
 MODIFICACIONES DE USUARIO/PROVEEDORES:
-● Actualización de imagen.(carga de imagen por defecto)
+☑Actualización de imagen.(carga de imagen por defecto)
 ● Tabla con opciones de agregar / modificar y eliminar registros.(***Consultar***)
-● ⚠️ Opcionalmente un USER puede elegir pasar su perfil a PROVEEDOR.
+☑ ⚠️ Opcionalmente un USER puede elegir pasar su perfil a PROVEEDOR.
 (Plantearlo en el formulario de modificacion/o manejarlo en un boton que lleve a otro formulario de proveedor).
 
 
 BUSQUEDA Y FILTROS:
 ● Motor de búsqueda.
-● Listado en tabla por filtro (por nombre, fechas, altas o bajas, etc).
-● ⚠️ Los USER deben poder encontrar fácilmente a un proveedor por rubro y ordenarlo bajo distintos criterios.
+☑ Listado en tabla por filtro (por nombre, fechas, altas o bajas, etc).
+☑ ⚠️ Los USER deben poder encontrar fácilmente a un proveedor por rubro y ordenarlo bajo distintos criterios.
 
 
 
@@ -63,14 +63,14 @@ LIMPIEZA:
 
 INFO. A MOSTRAR: 
 ● ⚠️ Mostrar cada perfil con la cantidad de usuarios que lo contactaron y la cantidad de reseñas/puntaje/calificación que corresponde.
-● Listar proveedores (servicio, calificacion, cantidad solicitudes).
+☑Listar proveedores (servicio, calificacion, cantidad solicitudes).
 
 
 DEVOLUCIONES DE LA DEMO:
-● Interfaz solicitud proveedor.
-● Mostrar tickets de solicitudes de trabajo.
-● Lista de proveedores en ADMIN.
-● Verificacion de cambio de contraseña.()
+☑Interfaz solicitud proveedor.
+☑ Mostrar tickets de solicitudes de trabajo.
+☑ Lista de proveedores en ADMIN.
+☑Verificacion de cambio de contraseña.()
 
 
 

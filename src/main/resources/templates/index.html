@@ -50,7 +50,7 @@
                             <h5><strong>Gasistas Profesionales</strong> certificados para instalar, mantener y reparar sistemas 
                             de gas, asegurando su seguridad y eficiencia.</h5>
                             <div class="saber-mas-btn">
-                                <a th:href="@{/login}" >
+                                <a th:href="@{/login}"   sec:authorize="isAnonymous()">
                                     <h5>Saber más ➝</h5>
                                 </a>
                             </div>
@@ -70,7 +70,7 @@
                             <h5><strong>Electricistas Expertos</strong> en instalaciones eléctricas, mantenimiento y resolución de problemas, 
                                 garantizando un suministro eléctrico seguro y confiable.</h5>
                             <div class="saber-mas-btn">
-                                <a th:href="@{/login}" >
+                                <a th:href="@{/login}" sec:authorize="isAnonymous()">
                                     <h5>Saber más ➝</h5>
                                 </a>
                             </div>
@@ -90,7 +90,7 @@
                             <h5><strong>Plomeros Matriculados</strong> cualificados para solucionar cualquier necesidad de plomería, desde 
                                 instalaciones y reparaciones hasta emergencias imprevistas.</h5>
                             <div class="saber-mas-btn">
-                                <a th:href="@{/login}">
+                                <a th:href="@{/login}" sec:authorize="isAnonymous()">
                                     <h5>Saber más ➝</h5>
                                 </a>
                             </div>
