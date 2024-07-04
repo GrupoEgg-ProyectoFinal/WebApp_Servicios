@@ -257,6 +257,7 @@ main {
 }
 
 table {
+    border: 1px solid white;
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 24px;
